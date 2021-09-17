@@ -10,11 +10,39 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@psycho/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@psycho/features": [
+        "libs/features/src/index.ts"
+      ],
+      "@psycho/scss": [
+        "libs/scss/src/index.ts"
+      ],
+      "@psycho/utils": [
+        "libs/utils/src/index.ts"
+      ],
+      "@psycho/web/core": [
+        "libs/web/core/src/index.ts"
+      ],
+      "@psycho/web/features": [
+        "libs/web/features/src/index.ts"
+      ],
+      "@psycho/web/scss": [
+        "libs/web/scss/src/index.ts"
+      ]
+    }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

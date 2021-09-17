@@ -1,6 +1,195 @@
 {
   "version": 1,
   "projects": {
+    "core": {
+      "projectType": "library",
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/core"
+          ],
+          "options": {
+            "jestConfig": "libs/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/src/**/*.ts",
+              "libs/core/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "features": {
+      "projectType": "library",
+      "root": "libs/features",
+      "sourceRoot": "libs/features/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/features"
+          ],
+          "options": {
+            "jestConfig": "libs/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/src/**/*.ts",
+              "libs/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "scss": {
+      "projectType": "library",
+      "root": "libs/scss",
+      "sourceRoot": "libs/scss/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/scss"
+          ],
+          "options": {
+            "jestConfig": "libs/scss/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/scss/src/**/*.ts",
+              "libs/scss/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "utils": {
+      "projectType": "library",
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/utils"
+          ],
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/utils/src/**/*.ts",
+              "libs/utils/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-core": {
+      "projectType": "library",
+      "root": "libs/web/core",
+      "sourceRoot": "libs/web/core/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/web/core"
+          ],
+          "options": {
+            "jestConfig": "libs/web/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/core/src/**/*.ts",
+              "libs/web/core/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-features": {
+      "projectType": "library",
+      "root": "libs/web/features",
+      "sourceRoot": "libs/web/features/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/web/features"
+          ],
+          "options": {
+            "jestConfig": "libs/web/features/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/features/src/**/*.ts",
+              "libs/web/features/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-scss": {
+      "projectType": "library",
+      "root": "libs/web/scss",
+      "sourceRoot": "libs/web/scss/src",
+      "prefix": "psycho",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/web/scss"
+          ],
+          "options": {
+            "jestConfig": "libs/web/scss/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/scss/src/**/*.ts",
+              "libs/web/scss/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "website": {
       "projectType": "application",
       "root": "apps/website",
@@ -9,7 +198,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/website",
             "index": "apps/website/src/index.html",
@@ -19,9 +210,23 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "apps/website/src/favicon.ico",
-              "apps/website/src/assets"
+              "apps/website/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./libs/assets",
+                "output": "./assets"
+              }
             ],
-            "styles": ["apps/website/src/styles.scss"],
+            "styles": [
+              "apps/website/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "apps/website/src/scss",
+                "libs/scss/src"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -86,7 +291,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/website"],
+          "outputs": [
+            "coverage/apps/website"
+          ],
           "options": {
             "jestConfig": "apps/website/jest.config.js",
             "passWithNoTests": true
@@ -114,9 +321,13 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/website-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/website-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -150,7 +361,10 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "skipTests": true,
+      "displayBlock": true,
+      "changeDetection": "OnPush"
     }
   },
   "defaultProject": "website"
