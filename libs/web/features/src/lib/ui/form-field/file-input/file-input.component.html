@@ -1,0 +1,29 @@
+<mat-form-field  [class.has-label]="label" [class.placeholder-instead-label]="!label && placeholder">
+    <mat-label *ngIf="label">
+      {{label}}
+      <span *ngIf="isRequired" class="required-mark">*</span>
+      <span *ngIf="labelHint" class="label-hint">{{labelHint}}</span>
+      <mat-icon *ngIf="labelTooltip" [matTooltip]="labelTooltip" class="label-tooltip" svgIcon="label-tooltip"></mat-icon>
+      <mat-icon 
+        *ngIf="labelTooltipCustom" 
+        pbTooltip 
+        eventType="click"
+        class="label-tooltip" 
+        svgIcon="label-tooltip"></mat-icon>
+    </mat-label>
+    <input disabled matInput type="text"  [value]="fileName">
+    <input class="file-input" #fileInput [accept]="accept" (change)="onFileChange($event)" type="file">
+    
+    <div matSuffix>
+        <button  *ngIf="!control.value;else deleteBtn" (click)="fileInput.click()" type="button" mat-icon-button class="upload-btn">
+            <mat-icon svgIcon="camera"></mat-icon>
+        </button>
+    </div>
+    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+    <div class="mat-error file-error" *ngFor="let error of errors">{{error.message}}</div>
+</mat-form-field>
+  <ng-template #deleteBtn>
+    <button (click)="removeFile()" type="button" mat-icon-button class="upload-btn">
+        <mat-icon svgIcon="delete"></mat-icon>
+    </button>
+  </ng-template>

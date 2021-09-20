@@ -1,3 +1,3 @@
-export const environment = {
-  production: true,
-};
+import { environmentProd } from '@psycho/core';
+
+export const environment = environmentProd;

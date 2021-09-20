@@ -3,3 +3,4 @@ export * from './objects';
 export * from './platform';
 export * from './common.utils';
 export * from './validators.utils';
+export * from './destroy.util';

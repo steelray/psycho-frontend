@@ -1,0 +1,19 @@
+<mat-form-field [class.has-label]="label" [class.placeholder-instead-label]="!label && placeholder">
+  <mat-label *ngIf="label">
+    {{label}}
+    <span *ngIf="isRequired" class="required-mark">*</span>
+    <mat-icon *ngIf="labelTooltip" [matTooltip]="labelTooltip" class="label-tooltip" svgIcon="label-tooltip"></mat-icon>
+    <mat-icon 
+        *ngIf="labelTooltipCustom" 
+        pbTooltip
+        eventType="click"
+        class="label-tooltip" 
+        svgIcon="label-tooltip"></mat-icon>
+  </mat-label>
+  <input type="text" disabled matInput>
+  <ng2-flatpickr [formControl]="control" [config]="options"></ng2-flatpickr>
+
+  <mat-datepicker-toggle matSuffix>
+  </mat-datepicker-toggle>
+  
+</mat-form-field>

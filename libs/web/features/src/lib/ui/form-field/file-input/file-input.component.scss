@@ -1,0 +1,15 @@
+.upload-btn {
+  border-radius: var(--default-border-radius);
+  width: 36px;
+  height: 36px;
+  margin-right: -13px;
+}
+.file-input {
+  display: none;
+}
+
+.file-error {
+  font-size: 75%;
+  position: absolute;
+  top: calc(100% - 1.25em);
+}

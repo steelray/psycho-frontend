@@ -1,0 +1,36 @@
+<mat-form-field [class.has-label]="label" [class.placeholder-instead-label]="!label && placeholder">
+    <mat-label *ngIf="label">
+        {{label}}
+        <span *ngIf="isRequired" class="required-mark">*</span>
+        <mat-icon *ngIf="labelTooltip" [matTooltip]="labelTooltip" class="label-tooltip" svgIcon="label-tooltip"></mat-icon>
+        <mat-icon 
+            *ngIf="labelTooltipCustom" 
+            pbTooltip 
+            
+            eventType="click"
+            class="label-tooltip" 
+            svgIcon="label-tooltip"></mat-icon>
+    </mat-label>
+    <mat-select [placeholder]="placeholder" [formControl]="control" [value]="control.value" (selectionChange)="onSelect($event)">
+        <mat-option *ngIf="prompt">{{prompt}}</mat-option>
+        <mat-option 
+            *ngFor="let option of options;trackBy: trackByFn" 
+            [value]="option.value">
+            {{translateOptions ? (option.title) : option.title}}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngFor="let error of (control.errors | controlErrors)">
+        {{error.message}}
+    </mat-error>
+    <ng-content></ng-content>
+    <div
+        matPrefix 
+        *ngIf="prefix"
+        [ngTemplateOutlet]="prefix"></div>
+    <div 
+        matSuffix
+        *ngIf="suffix"
+        [ngTemplateOutlet]="suffix"></div>
+    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+
+</mat-form-field>

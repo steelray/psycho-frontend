@@ -1,1 +1,2 @@
-export * from './lib/web-features.module';
+export * from './lib/ui';
+export * from './lib/directives';

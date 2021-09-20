@@ -1,0 +1,19 @@
+pb-range-datepicker {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  mat-form-field {
+    flex: 1;
+  }
+  .__btn {
+    margin-left: 24px;
+    margin-bottom: calc(1.25em + 14px);
+    mat-icon {
+      color: var(--na-font-color);
+    }
+  }
+  .mat-calendar-body-preview-end > .mat-calendar-body-cell-content {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+}

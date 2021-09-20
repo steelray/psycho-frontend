@@ -1,4 +1,4 @@
-export const defaultValidatorMessages = {
+export const defaultValidatorMessages: any = {
   alpha: 'Разрешены только буквы',
   allOf: 'Ошибка "allOf"',
   alphaNumeric: 'Разрешены только цифры и буквы',
