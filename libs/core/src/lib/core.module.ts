@@ -12,10 +12,9 @@ import { throwIfAlreadyLoaded } from '@psycho/utils';
 // app
 import { LogService } from './services/shared/log.service';
 import { WindowService } from './services/shared/window.service';
-import { CoreSharedModules } from './modules';
 
 @NgModule({
-  imports: [CoreSharedModules],
+  imports: [],
 })
 export class CoreModule {
   // configuredProviders: *required to configure WindowService and others per platform

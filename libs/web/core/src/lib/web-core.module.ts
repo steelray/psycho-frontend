@@ -25,9 +25,7 @@ function winFactory(): any {
 
 @NgModule({
   imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
+
     CoreModule.forRoot([
       {
         provide: PlatformWindowToken,

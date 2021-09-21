@@ -1,0 +1,130 @@
+:host {
+  display: block;
+}
+.__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  min-height: 896px;
+  overflow: hidden;
+  font-size: 16px;
+  &::before {
+    height: 588px;
+    width: 500px;
+    background: url(/assets/img/wave-1.png) no-repeat center center / 100% 100%;
+    display: block;
+    position: absolute;
+    top: -150px;
+    left: 0;
+    content: "";
+  }
+  &::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: url(/assets/img/entire-block-bg.png) no-repeat right 0 / auto 100%;
+    content: "";
+  }
+  .container {
+    width: 100%;
+  }
+  .__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+  }
+}
+
+.__mb-1 {
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+}
+.__card {
+  width: 462px;
+  border-radius: 6px;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+  background: var(--accent-bg-light);
+  margin-bottom: 35px;
+  font-size: 18px;
+  &-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 19px;
+    line-height: 1.1;
+    min-height: 84px;
+  }
+  &-price {
+    position: absolute;
+    width: 167px;
+    height: 167px;
+    right: -60px;
+    top: -60px;
+    border-radius: 50%;
+    background: var(--accent-bg-medium);
+    padding-left: 30px;
+    line-height: 1;
+    padding-top: 95px;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--white);
+    &.__with-time {
+      padding-left: 25px;
+      padding-top: 50px;
+      width: 128px;
+      height: 128px;
+      right: -20px;
+      top: -30px;
+    }
+  }
+  &-time {
+    width: 72px;
+    height: 72px;
+    line-height: 72px;
+    border-radius: 50%;
+    background-color: var(--accent-bold);
+    text-align: center;
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 600;
+    position: absolute;
+    top: 55px;
+    right: -4px;
+  }
+  p {
+    margin-top: auto;
+  }
+}
+.__btn {
+  margin-bottom: 70px;
+}
+.__note {
+  font-size: 18px;
+  padding-right: 200px;
+  text-align: right;
+}
+
+.__footer {
+  z-index: 2;
+  left: 0;
+  background: url(/assets/img/wave-2.png) no-repeat 0 top / 100% auto;
+  height: 170px;
+  margin-top: -45px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 30px;
+  .container {
+    width: 100%;
+  }
+}

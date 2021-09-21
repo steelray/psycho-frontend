@@ -1,23 +1,47 @@
 :root {
   --base-font-family: "Open Sans", sans-serif;
+  --base-font-size: 20px;
+  --base-font-color: #2b2a2a;
+  --main-color: #7660dc;
+  --main-color-light: #e3ddff;
+  --accent: #2e0079;
+  --accent-light: #440aa3;
+  --accent-bold: #220059;
+  --accent-bg-light: #f1eeff;
+  --accent-bg-medium: #b6bdf0;
+  --white: #ffffff;
+  --black: #000000;
 }
 
 $psycho-palette: (
-  50: #7660dc,
-  100: #7660dc,
-  200: #7660dc,
-  300: #7660dc,
-  400: #7660dc,
-  500: #7660dc,
-  600: #7660dc,
-  700: #7660dc,
-  800: #7660dc,
-  900: #7660dc,
+  50: var(--accent-bg-light),
+  100: #c5cae9,
+  200: var(--accent-bg-medium),
+  300: #7986cb,
+  400: #5c6bc0,
+  500: var(--main-color),
+  600: #3949ab,
+  700: #303f9f,
+  800: #283593,
+  900: #1a237e,
+  A100: var(--accent-light),
+  A200: var(--accent),
+  A400: var(--accent-bold),
+  A700: #304ffe,
   contrast: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
     300: white,
-    // ... continues to 900
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
   ),
 );

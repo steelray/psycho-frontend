@@ -1,0 +1,24 @@
+button,
+a {
+  &.mat-button {
+    border: 1px solid var(--main-color);
+    border-radius: 6px;
+    padding: 15px 30px;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  &.bold {
+    font-weight: 700;
+  }
+  &.mat-raised-button {
+    padding: 15px 20px;
+    line-height: 1;
+  }
+  &[size="large"] {
+    padding: 32px 50px;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+}
