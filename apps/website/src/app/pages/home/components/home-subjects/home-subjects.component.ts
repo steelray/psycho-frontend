@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ISubject } from '@psycho/web/core';
+import { ISubject } from '@psycho/core';
 
 const SUBJECTS: ISubject[] = [
   {

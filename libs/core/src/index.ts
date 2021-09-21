@@ -7,3 +7,4 @@ export * from './lib/environments';
 export * from './lib/models';
 export * from './lib/services';
 export * from './lib/modules';
+export * from './lib/interfaces';
