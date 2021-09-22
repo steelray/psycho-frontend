@@ -1,4 +1,4 @@
-export * from './api/api.service';
+export * from './api';
 export * from './shared';
 export * from './guards';
 export * from './interceptors';

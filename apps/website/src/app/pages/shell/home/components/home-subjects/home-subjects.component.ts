@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ISubject } from '@psycho/core';
 
-const SUBJECTS: ISubject[] = [
+const SUBJECTS_MOCK: ISubject[] = [
   {
     title: 'Отношения в семье',
     image: '/assets/img/cat-1.png'
@@ -59,7 +59,7 @@ const SUBJECTS: ISubject[] = [
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeSubjectsComponent implements OnInit {
-  @Input() subjects: ISubject[] = [];
+  @Input() subjects!: ISubject[] | null;
   constructor() { }
 
   ngOnInit(): void {
