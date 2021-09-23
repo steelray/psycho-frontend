@@ -1,0 +1,27 @@
+<div class="spec-item" *ngFor="let spec of specialists">
+  <div class="__img">
+    <img [src]="spec.avatar" alt="">
+  </div>
+  <psycho-rating-stars [value]="spec.rating"></psycho-rating-stars>
+  <div class="__name">{{spec | fio}}</div>
+  <div class="__slogan">“
+    {{spec.slogan}}”</div>
+  <div class="__details d-flex justify-content-between align-items-center">
+    <span class="d-flex align-items-center">
+      <mat-icon svgIcon="experience"></mat-icon>
+      Опыт работы 5 лет
+    </span>
+    <span class="d-flex align-items-center">
+      <mat-icon svgIcon="degree"></mat-icon>
+      Диплом
+    </span>
+  </div>
+  
+  <div class="__subtitle">Основные навыки</div>
+  <div class="__subjects">
+    <span>Раздражительность</span>
+    <span>Отношения с подростками</span>
+    <span>Депрессия</span>
+    <span>Панически атаки</span>
+  </div>
+</div>

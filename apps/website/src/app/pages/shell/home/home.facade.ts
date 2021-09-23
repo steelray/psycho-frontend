@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ISubject, SubjectApiService } from '@psycho/core';
+import { IPsychologist, ISubject, PsychologistApiService, SubjectApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
 @Injectable()
 export class HomeFacade {
   private _subjects$!: Observable<ISubject[]>;
+  private _specialists$!: Observable<IPsychologist[]>;
+
   constructor(
-    private subjectApiService: SubjectApiService
+    private subjectApiService: SubjectApiService,
+    private psychologistApiService: PsychologistApiService
   ) { }
 
   get subjects$(): Observable<ISubject[]> {
@@ -17,6 +20,15 @@ export class HomeFacade {
       );
     }
     return this._subjects$;
+  }
+
+  get specialists$(): Observable<IPsychologist[]> {
+    if (!this._specialists$) {
+      this._specialists$ = this.psychologistApiService.fetchAll({ limit: 3 }).pipe(
+        shareReplay()
+      );
+    }
+    return this._specialists$;
   }
 
 }

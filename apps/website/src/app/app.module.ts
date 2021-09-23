@@ -14,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     CoreSharedModules,
     AppRoutingModule,
+
   ],
   providers: [
     {

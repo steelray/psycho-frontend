@@ -1,5 +1,7 @@
-<div class="__title">{{subject?.title}}</div>
-<div class="__image" *ngIf="subject?.image; else iconTemp"></div>
+<div class="__title" [innerHTML]="subject?.title | safe:'html'"></div>
+<div class="__image" *ngIf="subject?.image; else iconTemp">
+  <img [src]="subject.image" alt="">
+</div>
 <ng-template #iconTemp>
   <mat-icon   *ngIf="subject?.icon as icon" [svgIcon]="icon"></mat-icon>
 </ng-template>

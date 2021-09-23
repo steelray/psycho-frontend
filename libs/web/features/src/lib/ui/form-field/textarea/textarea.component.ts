@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 
 @Component({
-  selector: 'pb-textarea',
+  selector: 'psycho-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,7 +5,7 @@ import { defaultValidatorMessages } from '@psycho/core';
 })
 export class ControlErrorsPipe implements PipeTransform {
 
-  transform(controlErrors: any, errorMessageParamsNames: string[]): any[] {
+  transform(controlErrors: any): any[] {
     const errors = [];
     if (controlErrors) {
 

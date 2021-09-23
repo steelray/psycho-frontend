@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 
 @Component({
-  selector: 'pb-input',
+  selector: 'psycho-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

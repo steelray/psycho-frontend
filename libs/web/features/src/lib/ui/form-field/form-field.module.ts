@@ -25,7 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RangeDatepickerMaxRangeDirective } from './range-datepicker/range-datepicker-max-range.directive';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { CoreSharedModules } from '@psycho/core';
-import { PipesModule } from '../../pipes';
+import { PipesModule } from '@psycho/features';
 const compoments = [
   DatepickerComponent,
   DatetimepickerComponent,

@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  background: var(--accent-bg-light);
+  position: relative;
+  min-height: 600px;
+  &::before {
+    height: 100%;
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: -70px;
+    right: 0;
+    background: url(/assets/img/wave-3.png) no-repeat center 0;
+  }
+  &::after {
+    height: 50%;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    right: -50vw;
+    left: -50vw;
+    content: "";
+    z-index: 1;
+  }
+}
+.container {
+  position: relative;
+  z-index: 2;
+  &::after {
+    height: 100%;
+    width: 50vw;
+    top: -70px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: calc(100% + 158px);
+    content: "";
+    z-index: 1;
+  }
+}
+
+.__img {
+  width: 990px;
+}
+.__desc {
+  margin-left: -250px;
+  flex: 1;
+  min-width: 0;
+  margin-top: 180px;
+}
+
+.title-1 {
+  margin-bottom: 48px;
+}
+
+.radio-list {
+  li {
+    margin-bottom: 50px;
+  }
+}

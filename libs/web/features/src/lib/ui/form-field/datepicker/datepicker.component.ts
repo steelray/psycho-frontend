@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 
 @Component({
-  selector: 'pb-datepicker',
+  selector: 'psycho-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

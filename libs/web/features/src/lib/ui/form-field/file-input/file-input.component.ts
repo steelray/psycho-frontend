@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { sizeInMb } from '@psycho/utils';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 
 @Component({
-  selector: 'pb-file-input',
+  selector: 'psycho-file-input',
   templateUrl: './file-input.component.html',
   styleUrls: ['./file-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,7 +22,7 @@ export class FileInputComponent extends BaseFormFieldComponent implements OnInit
     }
   }
 
-  onFileChange(event: InputEvent): void {
+  onFileChange(event: any): void {
 
     const target = event.target as any;
 

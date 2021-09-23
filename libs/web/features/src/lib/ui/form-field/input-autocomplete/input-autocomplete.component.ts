@@ -1,12 +1,13 @@
 import { Component, ChangeDetectionStrategy, Input, AfterViewInit, ElementRef, ViewChild, Self, Output, EventEmitter } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BaseFormFieldComponent, ISelectOption } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';
 import { fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ISelectOption } from '@psycho/core';
 
 @Component({
-  selector: 'pb-input-autocomplete',
+  selector: 'psycho-input-autocomplete',
   templateUrl: './input-autocomplete.component.html',
   styleUrls: ['./input-autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

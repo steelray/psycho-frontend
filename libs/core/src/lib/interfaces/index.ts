@@ -6,3 +6,4 @@ export * from './seo.interface';
 export * from './video.interface';
 export * from './subject.interface';
 export * from './select-option.interface';
+export * from './psychologist.interface';

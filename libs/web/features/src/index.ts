@@ -1,2 +1,2 @@
 export * from './lib/ui';
-export * from './lib/directives';
+export * from '../../../features/src/lib/directives';

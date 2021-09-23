@@ -1,7 +1,7 @@
 import { ComponentFactoryResolver, Directive, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { SpinnerComponent } from './spinner.component';
 import { NgxSpinnerService, Size } from 'ngx-spinner';
-import { SPINNER_TYPE } from '@pb/xplat/core';
+import { SPINNER_TYPE } from './spinner-types.enum';
 
 // This directive places an overlay with a loading spinner over its host element
 // if isLoading equals to true and hides the overlay when isLoading becomes false.
@@ -10,7 +10,7 @@ import { SPINNER_TYPE } from '@pb/xplat/core';
   selector: '[spinner]'
 })
 export class SpinnerDirective implements OnInit, OnChanges {
-  @Input('spinner') isLoading: boolean;
+  @Input('spinner') isLoading!: boolean;
   @Input('spinnerType') type: SPINNER_TYPE = SPINNER_TYPE.BALL_FUSSION;
   @Input('spinnerColor') color = 'var(--main-color)';
   // tslint:disable-next-line:no-input-rename

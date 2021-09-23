@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 import { combineLatest } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 
 
 @Component({
-  selector: 'pb-range-datepicker',
+  selector: 'psycho-range-datepicker',
   templateUrl: './range-datepicker.component.html',
   styleUrls: ['./range-datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

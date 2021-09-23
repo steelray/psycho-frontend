@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ControlErrorsPipe } from './control-errors.pipe';
+import { FIOPipe } from './fio.pipe';
 import { IsExpiredPipe } from './is-expired.pipe';
 import { LocalizedDatePipe } from './localized-date.pipe';
 import { PhonePipe } from './phone.pipe';
@@ -13,6 +14,7 @@ const PIPES = [
   IsExpiredPipe,
   PhonePipe,
   LocalizedDatePipe,
+  FIOPipe
 ];
 
 @NgModule({

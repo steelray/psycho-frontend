@@ -22,7 +22,7 @@
     <mat-hint *ngIf="hint">{{hint}}</mat-hint>
     
     <mat-error *ngFor="let error of (control.errors | controlErrors)">
-        {{error.message | translate}}
+        {{error.message}}
     </mat-error>
     <ng-content></ng-content>
 </mat-form-field>

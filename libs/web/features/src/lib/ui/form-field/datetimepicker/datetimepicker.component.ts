@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { FlatpickrOptions } from 'ng2-flatpickr';
-import { BaseFormFieldComponent } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';;
 import Russian from 'flatpickr/dist/l10n/ru.js';
 import { FormControl } from '@angular/forms';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'pb-datetimepicker',
+  selector: 'psycho-datetimepicker',
   templateUrl: './datetimepicker.component.html',
   styleUrls: ['./datetimepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

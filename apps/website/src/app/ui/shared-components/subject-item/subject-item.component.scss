@@ -1,8 +1,43 @@
 :host {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 6px;
   background: var(--accent-bg-medium);
   padding: 25px;
   color: var(--white);
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  .__image {
+    max-width: 55%;
+  }
+  &.__item {
+    &-4 {
+      .__image {
+        margin-top: -8px;
+      }
+    }
+    &-5 {
+      .__image {
+        margin-right: -27px;
+      }
+    }
+    &-6 {
+      .__image {
+        margin-top: -8px;
+        margin-right: 30px;
+      }
+    }
+    &-13 {
+      .__image {
+        margin-top: -13px;
+      }
+    }
+    &-14,
+    &-12 {
+      .__image {
+        margin-right: 30px;
+      }
+    }
+  }
 }

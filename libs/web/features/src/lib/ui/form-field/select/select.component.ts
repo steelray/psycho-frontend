@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { ISelectOption } from '@psycho/core';
 import { compareArrays } from '@psycho/utils';
-import { BaseFormFieldComponent, ISelectOption } from '@psycho/web/core';
+import { BaseFormFieldComponent } from '../../../base';
 
 @Component({
-  selector: 'pb-select',
+  selector: 'psycho-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
