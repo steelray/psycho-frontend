@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+  background: var(--light-gray-bg);
+
+  .title-2 {
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+}
+.__top-wave {
+  position: absolute;
+  bottom: 100%;
+  width: 1920px;
+  left: calc(50% - 960px);
+  height: 150px;
+  background: url(/assets/img/wave-5.png) no-repeat;
+  &::before,
+  &::after {
+    content: "";
+    background: var(--light-gray-bg);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  &::before {
+    right: 100%;
+    height: 146px;
+  }
+  &::after {
+    left: 100%;
+    height: 134px;
+  }
+}
+
+.prices-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 34px;
+}
+
+.__price-block {
+  border-radius: 6px;
+  background: var(--accent-bg-light);
+  padding: 20px 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  &.__accent-bg-medium {
+    background: var(--accent-bg-medium);
+    color: var(--white);
+  }
+  .__price {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 9px;
+  }
+  .__title {
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .__desc {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  .__time {
+    width: 155px;
+    height: 155px;
+    font-weight: 600;
+    font-size: 24px;
+    border-radius: 50%;
+    right: -23px;
+    top: -17px;
+    position: absolute;
+    background: var(--accent-bg-light);
+    color: var(--base-font-color);
+    padding: 60px 0 0 28px;
+  }
+}
