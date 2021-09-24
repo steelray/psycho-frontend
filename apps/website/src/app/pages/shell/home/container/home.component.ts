@@ -10,7 +10,7 @@ import { HomeFacade } from '../home.facade';
 })
 export class HomeComponent implements OnInit {
   readonly subjects$ = this.facade.subjects$;
-  readonly specialists$ = this.facade.specialists$;
+  readonly psychologists$ = this.facade.psychologists$;
 
   constructor(
     @Self() private facade: HomeFacade

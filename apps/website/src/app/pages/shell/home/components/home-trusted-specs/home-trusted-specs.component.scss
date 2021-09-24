@@ -4,34 +4,11 @@
   background: var(--accent-bg-light);
   position: relative;
   z-index: 2;
-  &::before {
-    height: 100%;
-    width: 100%;
-    content: "";
-    background: url(/assets/img/wave-4.png) no-repeat center top;
-    position: absolute;
-    top: -100px;
-  }
-  .spec-item {
-    width: calc(33.33% - 20px);
-  }
+  padding-bottom: 100px;
 }
 
-.spec-item {
-  background: var(--white);
-  padding: 17px;
-  border-radius: 6px;
-  .__img {
-    position: relative;
-    margin-bottom: 12px;
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: top;
-    }
-  }
+.psychologists-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 37px;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { IPsychologist } from '@psycho/core';
 
 @Component({
@@ -7,11 +7,6 @@ import { IPsychologist } from '@psycho/core';
   styleUrls: ['./home-trusted-specs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeTrustedSpecsComponent implements OnInit {
-  @Input() specialists: IPsychologist[] = [];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class HomeTrustedSpecsComponent {
+  @Input() psychologists: IPsychologist[] = [];
 }

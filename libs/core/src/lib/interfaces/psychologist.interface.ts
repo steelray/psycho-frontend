@@ -19,4 +19,5 @@ export interface IPsychologist {
 export interface IPsychologistSearchParams {
   limit?: number;
   fio?: string;
+  top?: 1 | 0;
 }

@@ -5,10 +5,12 @@ import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { PipesModule } from '@psycho/features';
 import { RatingModule } from 'ng-starrating';
 import { RatingStarsComponent } from './rating-stars/rating-stars.component';
+import { PsychologistItemComponent } from './psychologist-item/psychologist-item.component';
 
 const COMPONENTS = [
   SubjectItemComponent,
-  RatingStarsComponent
+  RatingStarsComponent,
+  PsychologistItemComponent
 ];
 
 @NgModule({

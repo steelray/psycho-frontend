@@ -6,7 +6,7 @@ import { shareReplay } from 'rxjs/operators';
 @Injectable()
 export class HomeFacade {
   private _subjects$!: Observable<ISubject[]>;
-  private _specialists$!: Observable<IPsychologist[]>;
+  private _psychologists$!: Observable<IPsychologist[]>;
 
   constructor(
     private subjectApiService: SubjectApiService,
@@ -22,13 +22,13 @@ export class HomeFacade {
     return this._subjects$;
   }
 
-  get specialists$(): Observable<IPsychologist[]> {
-    if (!this._specialists$) {
-      this._specialists$ = this.psychologistApiService.fetchAll({ limit: 3 }).pipe(
+  get psychologists$(): Observable<IPsychologist[]> {
+    if (!this._psychologists$) {
+      this._psychologists$ = this.psychologistApiService.fetchAll({ limit: 3 }).pipe(
         shareReplay()
       );
     }
-    return this._specialists$;
+    return this._psychologists$;
   }
 
 }

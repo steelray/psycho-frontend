@@ -9,7 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 export class RatingStarsComponent {
   @Input() value: number = 0;
   @Input() totalStars = 5;
-  @Input() size = '26px';
+  @Input() size = '30px';
   @Input() readonly = true;
   @Output() rated = new EventEmitter();
 

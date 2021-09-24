@@ -1,13 +1,13 @@
 psycho-root {
   overflow-x: hidden;
+  min-width: 1600px;
 }
 
 .container {
-  max-width: 1600px;
+  width: 1600px;
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
-  min-width: 1280px;
 }
 .radio-list {
   list-style: none;
