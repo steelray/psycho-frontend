@@ -35,6 +35,9 @@ $website-theme: mat.define-light-theme(
 // that you are using.
 @include mat.all-component-themes($website-theme);
 
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+
 /* You can add global styles to this file, and also import other style files */
 @import "base.scss";
 @import "btn.scss";

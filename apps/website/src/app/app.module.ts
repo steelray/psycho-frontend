@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { WebCoreModule } from '@psycho/web/core';
@@ -14,7 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     CoreSharedModules,
     AppRoutingModule,
-
+    BrowserAnimationsModule
   ],
   providers: [
     {

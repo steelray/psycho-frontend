@@ -58,3 +58,9 @@ psycho-root {
   font-weight: 600;
   text-transform: uppercase;
 }
+
+.wave-bg {
+  position: absolute;
+  width: 1920px;
+  left: calc(50% - 960px);
+}

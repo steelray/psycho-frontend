@@ -1,0 +1,145 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin-top: 250px;
+  background-color: var(--accent-bg-light);
+  ::ng-deep {
+    .owl {
+      &-dots {
+        position: absolute;
+        top: 192px;
+        left: 252px;
+        width: 126px;
+        .owl-dot {
+          margin: 0 4px;
+          span {
+            width: 11px;
+            height: 11px;
+            background: var(--light-gray-medium-bg);
+            padding: 0;
+            margin: 0;
+            transition: background-color 0.3s;
+          }
+          &.active {
+            span {
+              background: var(--main-color);
+            }
+          }
+        }
+      }
+      &-nav {
+        position: absolute;
+        top: 165px;
+        left: 165px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        width: 300px;
+        justify-content: space-between;
+        .owl {
+          &-prev,
+          &-next {
+            height: 88px;
+            width: 88px;
+            background: var(--main-color);
+            border-radius: 50%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s, background-color 0.3s;
+            &.disabled {
+              transform: scale(0.7);
+              background: var(--white);
+              opacity: 1;
+              &::before {
+                border-color: var(--black);
+              }
+            }
+            &::before {
+              height: 15px;
+              width: 15px;
+              border: {
+                top: 2px solid var(--white);
+                right: 2px solid var(--white);
+              }
+              content: "";
+            }
+          }
+          &-prev {
+            &::before {
+              transform: rotate(-140deg);
+            }
+          }
+          &-next {
+            &::before {
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.__top-wave {
+  height: 250px;
+  background: url(/assets/img/wave-6.png) no-repeat;
+  bottom: 100%;
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    width: 100%;
+    background-color: var(--accent-bg-light);
+  }
+  &::before {
+    right: 100%;
+    height: 246px;
+  }
+  &::after {
+    left: 100%;
+    height: 157px;
+  }
+}
+
+.title-2 {
+  margin-bottom: 35px;
+}
+
+.__slider {
+  position: relative;
+}
+.slides-desc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  font-size: 24px;
+  width: 600px;
+  .__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.3s;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
+  }
+  .__number {
+    height: 156px;
+    width: 156px;
+    margin-right: 26px;
+    background: var(--main-color);
+    line-height: 156px;
+    text-align: center;
+    font-size: 120px;
+    font-weight: 600;
+    color: var(--white);
+    border-radius: 50%;
+  }
+}

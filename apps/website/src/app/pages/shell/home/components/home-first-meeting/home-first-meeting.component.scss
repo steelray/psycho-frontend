@@ -1,3 +1,42 @@
 :host {
   display: block;
+  position: relative;
+  z-index: 2;
+}
+.__title {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+.__top-wave {
+  height: 120px;
+  background: url(/assets/img/wave-meeting.png) no-repeat 0 0;
+  bottom: 100%;
+  &::before {
+    height: 55px;
+    background-color: var(--white);
+    position: absolute;
+    width: 100%;
+    right: 100%;
+    content: "";
+    bottom: 0;
+  }
+}
+
+.__meeting-item {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  &:first-child {
+    margin-top: -30px;
+  }
+  &:nth-child(3) {
+    margin-top: -55px;
+    img {
+      margin-bottom: 10px;
+    }
+  }
+  img {
+    display: block;
+    margin: 0 auto 22px;
+  }
 }

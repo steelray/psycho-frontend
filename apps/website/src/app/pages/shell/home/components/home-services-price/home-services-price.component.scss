@@ -4,6 +4,7 @@
   z-index: 2;
   margin-top: 20px;
   background: var(--light-gray-bg);
+  padding-bottom: 170px;
 
   .title-2 {
     margin-bottom: 20px;
@@ -16,8 +17,6 @@
 .__top-wave {
   position: absolute;
   bottom: 100%;
-  width: 1920px;
-  left: calc(50% - 960px);
   height: 150px;
   background: url(/assets/img/wave-5.png) no-repeat;
   &::before,
