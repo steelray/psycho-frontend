@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+  background: var(--accent-bg-light);
+  min-height: 200px;
+  padding-bottom: 400px;
+}
+.__bottom-wave {
+  position: absolute;
+  bottom: 0;
+  height: 1064px;
+  background: url(/assets/img/wave-9.png) no-repeat center top;
+  &::after {
+    height: 100%;
+    background: var(--light-gray-bg);
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 100vw;
+  }
+}
+
+.title-1 {
+  margin-bottom: 40px;
+}
+
+mat-accordion {
+  max-width: 800px;
+  display: block;
+  mat-expansion-panel {
+    background: none;
+    box-shadow: none;
+    border-bottom: 1px solid var(--accent-bg-medium);
+    mat-expansion-panel-header {
+      padding: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .panel-text {
+    font-size: 18px;
+    margin: 0 -24px;
+  }
+}

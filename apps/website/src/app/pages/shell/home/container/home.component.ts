@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Self } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Self } from '@angular/core';
 import { HomeFacade } from '../home.facade';
 
 @Component({
@@ -8,15 +8,12 @@ import { HomeFacade } from '../home.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [HomeFacade]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   readonly subjects$ = this.facade.subjects$;
   readonly psychologists$ = this.facade.psychologists$;
+  readonly faq$ = this.facade.faq$;
 
   constructor(
     @Self() private facade: HomeFacade
   ) { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -5,6 +5,9 @@ import { PipesModule } from '@psycho/features';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedComponentsModule } from '../../../../ui/shared-components/shared-components.module';
+import { HomeChatOptionsComponent } from './home-chat-options/home-chat-options.component';
+import { HomeChoosePsychologistComponent } from './home-choose-psychologist/home-choose-psychologist.component';
+import { HomeFaqComponent } from './home-faq/home-faq.component';
 import { HomeFirstMeetingComponent } from './home-first-meeting/home-first-meeting.component';
 import { HomeGreetingsBlockComponent } from './home-greetings-block/home-greetings-block.component';
 import { HomeHowItWorksComponent } from './home-how-it-works/home-how-it-works.component';
@@ -12,6 +15,8 @@ import { HomeServicesPriceComponent } from './home-services-price/home-services-
 import { HomeSubjectsComponent } from './home-subjects/home-subjects.component';
 import { HomeTrustedSpecDescComponent } from './home-trusted-spec-desc/home-trusted-spec-desc.component';
 import { HomeTrustedSpecsComponent } from './home-trusted-specs/home-trusted-specs.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRippleModule } from '@angular/material/core';
 
 const COMPONENTS = [
   HomeGreetingsBlockComponent,
@@ -20,7 +25,10 @@ const COMPONENTS = [
   HomeTrustedSpecsComponent,
   HomeServicesPriceComponent,
   HomeFirstMeetingComponent,
-  HomeHowItWorksComponent
+  HomeHowItWorksComponent,
+  HomeChatOptionsComponent,
+  HomeChoosePsychologistComponent,
+  HomeFaqComponent
 ];
 
 @NgModule({
@@ -32,7 +40,9 @@ const COMPONENTS = [
     SharedComponentsModule,
     MaterialIconCustomizeModule,
     PipesModule,
-    CarouselModule
+    CarouselModule,
+    MatExpansionModule,
+    MatRippleModule
   ]
 })
 export class HomeComponentsModule { }

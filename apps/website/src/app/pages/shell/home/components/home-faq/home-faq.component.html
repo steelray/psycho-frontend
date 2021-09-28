@@ -1,0 +1,22 @@
+<div class="__bottom-wave wave-bg"></div>
+<div class="container">
+  <h3 class="title-1">Ответы на популярные<br> вопросы</h3>
+  <mat-accordion>
+    <mat-expansion-panel 
+      *ngFor="let item of faq; let i = index" 
+      mat-ripple hideToggle
+      (afterExpand)="onPanelExpand(i)"
+      (afterCollapse)="onPanelCollapse()">
+      <mat-expansion-panel-header>
+        <div class="d-flex align-items-center justify-content-between flex-1">
+          <mat-panel-title>
+            {{item.title}}
+          </mat-panel-title>
+          <mat-icon *ngIf="openedPanel !== i">add</mat-icon>
+          <mat-icon *ngIf="openedPanel === i">remove</mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+      <div class="panel-text" [innerHTML]="item.content"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

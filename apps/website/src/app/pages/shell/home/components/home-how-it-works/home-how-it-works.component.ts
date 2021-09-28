@@ -37,8 +37,8 @@ export class HomeHowItWorksComponent {
   readonly customOptions: OwlOptions = {
     items: 1,
     loop: false,
-    mouseDrag: true,
-    touchDrag: true,
+    mouseDrag: false,
+    touchDrag: false,
     pullDrag: false,
     dots: true,
     navSpeed: 700,

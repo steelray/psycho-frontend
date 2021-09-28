@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  padding-top: 60px;
+  padding-bottom: 200px;
+}
+.title-2 {
+  font-size: 40px;
+  margin-bottom: 165px;
+}
+img {
+  margin: 0 auto;
+  display: block;
+}
+
+.__top-wave {
+  background: url(/assets/img/wave-7.png) no-repeat;
+  height: 550px;
+  bottom: 100%;
+}
+
+.online-chat {
+  position: relative;
+  .__option {
+    position: absolute;
+    width: 365px;
+    font-size: 24px;
+    line-height: 1.2;
+    &.__chat {
+      left: 150px;
+    }
+    &.__video {
+      width: 470px;
+      bottom: calc(100% + 40px);
+      right: 130px;
+    }
+    .__title {
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+  }
+}

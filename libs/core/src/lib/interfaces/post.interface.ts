@@ -1,11 +1,11 @@
 export interface IPost {
-  slug: string;
+  slug?: string;
   title: string;
   sub_title?: string;
   author?: IPostAuthor;
   tags?: IPostTag[];
-  pictures: string[];
-  published_at: number;
+  pictures?: string[];
+  published_at?: number;
   description?: string;
   content?: string;
 }
@@ -24,4 +24,5 @@ export interface IPostQueryParams {
   q?: string;
   page?: number;
   limit?: number;
+  category_slug?: string;
 }
