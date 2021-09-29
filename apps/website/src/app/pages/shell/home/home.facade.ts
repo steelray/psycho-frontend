@@ -35,7 +35,7 @@ export class HomeFacade {
 
   get faq$(): Observable<IPost[] | null> {
     if (!this._faq$) {
-      this._faq$ = this.postApiService.fetchAll({ category_slug: 'faq' }).pipe(
+      this._faq$ = this.postApiService.fetchAll({ category_slug: 'faq', expand: 'content' }).pipe(
         map(res => res.body)
       );
     }

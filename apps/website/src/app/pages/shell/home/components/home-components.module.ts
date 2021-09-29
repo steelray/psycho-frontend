@@ -17,6 +17,7 @@ import { HomeTrustedSpecDescComponent } from './home-trusted-spec-desc/home-trus
 import { HomeTrustedSpecsComponent } from './home-trusted-specs/home-trusted-specs.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRippleModule } from '@angular/material/core';
+import { HomeFeedbackComponent } from './home-feedback/home-feedback.component';
 
 const COMPONENTS = [
   HomeGreetingsBlockComponent,
@@ -28,7 +29,8 @@ const COMPONENTS = [
   HomeHowItWorksComponent,
   HomeChatOptionsComponent,
   HomeChoosePsychologistComponent,
-  HomeFaqComponent
+  HomeFaqComponent,
+  HomeFeedbackComponent
 ];
 
 @NgModule({

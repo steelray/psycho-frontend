@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+  background: var(--light-gray-bg);
+}
+
+.__header {
+  margin-top: -465px;
+  max-width: 466px;
+  float: right;
+  .title-1 {
+    margin-bottom: 40px;
+  }
+  .__btns {
+    > * {
+      width: 312px;
+      text-align: center;
+      margin-bottom: 30px;
+      display: block;
+      padding-top: 19.5px;
+      padding-bottom: 19.5px;
+    }
+  }
+}
+
+.__body {
+  .flex-1 {
+    min-width: 529px;
+    padding-top: 150px;
+    button,
+    a {
+      margin-left: 70px;
+      width: 360px;
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+  img {
+    margin-top: -240px;
+    transform: translate(50px, 0);
+  }
+}
+
+.__calmness {
+  width: 529px;
+  height: 329px;
+  background: url(/assets/img/wave-10.png) no-repeat;
+  display: flex;
+  align-items: flex-end;
+  font-size: 32px;
+  font-weight: 600;
+  padding: 0 0 50px 70px;
+  margin-bottom: 47px;
+}

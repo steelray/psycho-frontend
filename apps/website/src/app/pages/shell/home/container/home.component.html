@@ -1,5 +1,5 @@
 <psycho-home-greetings-block></psycho-home-greetings-block>
-<psycho-home-subjects *ngIf="subjects$ | async as subjects" [subjects]="subjects$ | async"></psycho-home-subjects>
+<psycho-home-subjects *ngIf="subjects$ | async as subjects" [subjects]="subjects"></psycho-home-subjects>
 <psycho-home-trusted-spec-desc></psycho-home-trusted-spec-desc>
 <psycho-home-trusted-specs *ngIf="psychologists$ | async as psychologists" [psychologists]="psychologists"></psycho-home-trusted-specs>
 <psycho-home-services-price></psycho-home-services-price>
@@ -7,4 +7,5 @@
 <psycho-home-how-it-works></psycho-home-how-it-works>
 <psycho-home-chat-options></psycho-home-chat-options>
 <psycho-home-choose-psychologist></psycho-home-choose-psychologist>
-<psycho-home-faq *ngIf="faq$ | async as faq" [faq]="faq"></psycho-home-faq>
+<psycho-home-faq *ngIf="faq$ | async as faq" [faq]="faq"></psycho-home-faq> 
+<psycho-home-feedback></psycho-home-feedback>

@@ -33,9 +33,11 @@ mat-accordion {
     box-shadow: none;
     border-bottom: 1px solid var(--accent-bg-medium);
     mat-expansion-panel-header {
-      padding: 0;
+      padding: 10px 0;
       font-size: 24px;
       font-weight: 600;
+      height: auto;
+      line-height: 1.2;
     }
   }
   .panel-text {

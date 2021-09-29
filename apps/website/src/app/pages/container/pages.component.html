@@ -1,2 +1,3 @@
 <psycho-header *ngIf="mainMenu$ | async as mainMenu" [menuItems]="mainMenu"></psycho-header>
 <router-outlet></router-outlet>
+<psycho-footer *ngIf="mainMenu$ | async as mainMenu" [menuItems]="mainMenu"></psycho-footer>

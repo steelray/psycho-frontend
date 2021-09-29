@@ -1,0 +1,45 @@
+<div class="footer__top">
+  <div class="container d-flex">
+    <div class="footer__nav">
+      <a *ngFor="let item of menuItems" [routerLink]="item.url">{{item.label}}</a>
+    </div>
+    <div class="footer__nets">
+      <p>Мы в соцсетях</p>
+      <div class="d-flex">
+        <a href="#">
+          <mat-icon svgIcon="fb"></mat-icon>
+        </a>
+        <a href="#">
+          <mat-icon svgIcon="vk"></mat-icon>
+        </a>
+        <a href="#">
+          <mat-icon svgIcon="twitter"></mat-icon>
+        </a>
+        <a href="#">
+          <mat-icon svgIcon="tg"></mat-icon>
+        </a>
+        <a href="#">
+          <mat-icon svgIcon="instagram"></mat-icon>
+        </a>
+      </div>
+      <a href="#" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
+    </div>
+    <div class="footer__note">
+      <p>Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: срочная психологическая помощь.</p>
+      <div class="text-right">
+        <a href="#" mat-button size="medium">Написать в техподдержку</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer__bottom">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="copyright">
+      &copy; 2021 Корпорация Психологии: консультации психолога онлайн
+    </div>
+    <div class="__links">
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Пользовательское соглашение </a>
+    </div>
+  </div>
+</div>

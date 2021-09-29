@@ -25,4 +25,5 @@ export interface IPostQueryParams {
   page?: number;
   limit?: number;
   category_slug?: string;
+  expand?: string;
 }

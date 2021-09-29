@@ -2,7 +2,6 @@
   display: block;
   position: relative;
   background: var(--light-gray-bg);
-  z-index: 2;
   padding-bottom: 200px;
   img {
     display: block;
@@ -11,7 +10,7 @@
 }
 .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 .__top-wave {
   bottom: 100%;

@@ -21,4 +21,9 @@ a {
     font-size: 24px;
     font-weight: 600;
   }
+  &[size="medium"] {
+    padding: 23px 40px;
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
