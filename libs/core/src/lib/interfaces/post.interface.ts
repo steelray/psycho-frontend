@@ -27,3 +27,9 @@ export interface IPostQueryParams {
   category_slug?: string;
   expand?: string;
 }
+
+export interface IPostCategory {
+  title: string;
+  id: string;
+  slug: string;
+}
