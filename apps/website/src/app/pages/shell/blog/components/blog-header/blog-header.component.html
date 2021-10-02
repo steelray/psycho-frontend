@@ -1,0 +1,20 @@
+<div class="container d-flex align-items-center justify-content-between flex-wrap">
+  <nav class="blog-nav">
+    <ul class="d-flex">
+      <li *ngFor="let category of categories">
+        <a [routerLink]="['/blog', category.slug]">{{category.title}}</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="blog-nets">
+    <a mat-icon-button href="#">
+      <mat-icon svgIcon="fb"></mat-icon>
+    </a>
+    <a mat-icon-button href="#">
+      <mat-icon svgIcon="instagram"></mat-icon>
+    </a>
+    <a mat-icon-button href="#">
+      <mat-icon svgIcon="tg"></mat-icon>
+    </a>
+  </div>
+</div>

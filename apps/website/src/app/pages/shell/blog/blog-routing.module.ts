@@ -5,7 +5,21 @@ import { BlogComponent } from './container/blog.component';
 const routes: Routes = [
   {
     path: '',
-    component: BlogComponent
+    component: BlogComponent,
+    children: [
+      {
+        path: ':category/:post',
+        loadChildren: () => import('./shell/post/post.module').then(m => m.PostModule)
+      },
+      {
+        path: ':category',
+        loadChildren: () => import('./shell/blog-landing/blog-landing.module').then(m => m.BlogLandingModule)
+      },
+      {
+        path: '',
+        loadChildren: () => import('./shell/blog-landing/blog-landing.module').then(m => m.BlogLandingModule)
+      },
+    ]
   }
 ];
 

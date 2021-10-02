@@ -1,1 +1,7 @@
-<p>blog-landing works!</p>
+<ng-container *ngIf="posts$ | async as posts">
+
+  <psycho-post-item-primary 
+    *ngFor="let post of posts | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount };trackBy: trackByFn"
+    [post]="post"></psycho-post-item-primary>
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+</ng-container>

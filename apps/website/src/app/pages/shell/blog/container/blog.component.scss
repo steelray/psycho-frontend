@@ -1,3 +1,16 @@
 :host {
   display: block;
 }
+.blog {
+  &-content {
+    padding: 60px 0;
+    &__main {
+      flex: 1;
+      min-width: 0;
+    }
+    &__sidebar {
+      width: 410px;
+      margin-left: 66px;
+    }
+  }
+}

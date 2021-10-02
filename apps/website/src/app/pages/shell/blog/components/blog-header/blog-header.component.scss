@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  background: var(--medium-gray-bg);
+  padding: 24px 0;
+}
+
+.blog {
+  &-nets {
+    a {
+      margin-right: 3px;
+      text-decoration: none;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+nav {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin-left: 10px;
+  }
+  a {
+    display: block;
+    padding: 8px 19px;
+    border-radius: 6px;
+    color: var(--base-font-color);
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.4s;
+    &:hover,
+    &.active {
+      background: var(--main-color);
+      color: var(--white);
+    }
+  }
+}

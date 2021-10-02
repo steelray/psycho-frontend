@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './container/blog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CoreSharedModules } from '@psycho/core';
+import { MatButtonModule } from '@angular/material/button';
+import { BlogComponentsModule } from './components/blog-components.module';
 
 
 @NgModule({
@@ -10,8 +13,11 @@ import { BlogComponent } from './container/blog.component';
     BlogComponent
   ],
   imports: [
-    CommonModule,
-    BlogRoutingModule
+    CoreSharedModules,
+    BlogRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    BlogComponentsModule
   ]
 })
 export class BlogModule { }

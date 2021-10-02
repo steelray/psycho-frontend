@@ -1,0 +1,11 @@
+<psycho-blog-header *ngIf="categories$ |async as categories" [categories]="categories"></psycho-blog-header>
+<div class="blog-content">
+  <div class="container d-flex">
+    <div class="blog-content__main">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="blog-content__sidebar">
+      <psycho-blog-sidebar></psycho-blog-sidebar>
+    </div>
+  </div>
+</div>
