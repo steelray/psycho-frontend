@@ -1,13 +1,21 @@
 export interface IPost {
-  slug?: string;
+  slug: string;
   title: string;
   sub_title?: string;
   author?: IPostAuthor;
   tags?: IPostTag[];
-  pictures?: string[];
+  pictures?: IPostPictures;
   published_at?: number;
   description?: string;
   content?: string;
+  category?: IPostCategory;
+  views?: number;
+  related_posts?: IPost[];
+}
+
+export interface IPostPictures {
+  origin: string;
+  webp?: string;
 }
 
 export interface IPostAuthor {
@@ -26,6 +34,7 @@ export interface IPostQueryParams {
   limit?: number;
   category_slug?: string;
   expand?: string;
+  skipNew?: 1 | 0; // skips first 10 newest articles
 }
 
 export interface IPostCategory {

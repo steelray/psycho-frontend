@@ -1,0 +1,31 @@
+psycho-related-posts {
+  display: block;
+  .owl-item {
+    transition: transform 0.3s;
+    &:not(.center) {
+      transform: scale(0.9);
+    }
+    &.center {
+      transform: scale(1.1);
+    }
+  }
+
+  .owl-theme {
+    .owl-dots {
+      margin-top: 0;
+      .owl-dot {
+        margin: 0 4px;
+        span {
+          width: 22px;
+          height: 22px;
+          background: var(--light-gray-medium-bg);
+        }
+        &.active {
+          span {
+            background: var(--main-color);
+          }
+        }
+      }
+    }
+  }
+}

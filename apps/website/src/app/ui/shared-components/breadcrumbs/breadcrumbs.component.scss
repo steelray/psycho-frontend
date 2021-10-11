@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  font-size: 18px;
+  color: var(--na-font-color);
+  text-transform: uppercase;
+  a {
+    color: var(--na-font-color);
+    transition: color 0.3s;
+    text-decoration: none;
+    &:hover {
+      color: var(--base-font-color);
+    }
+  }
+  span {
+    color: var(--base-font-color);
+  }
+  li {
+    &:not(:last-child) {
+      &::after {
+        content: "/";
+        margin: 0 10px;
+      }
+    }
+  }
+}

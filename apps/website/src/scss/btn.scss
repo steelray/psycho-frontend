@@ -6,24 +6,24 @@ a {
     padding: 15px 30px;
     line-height: 1;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
   }
   &.bold {
     font-weight: 700;
   }
   &.mat-raised-button {
-    padding: 15px 20px;
+    padding: 13px 18px;
     line-height: 1;
     border-radius: 6px;
   }
   &[size="large"] {
-    padding: 32px 50px;
-    font-size: 24px;
-    font-weight: 600;
+    padding: 28px 45px;
+    font-size: 22px;
+    font-weight: 700;
   }
   &[size="medium"] {
-    padding: 23px 40px;
-    font-size: 20px;
-    font-weight: 600;
+    padding: 21px 35px;
+    font-size: 19px;
+    font-weight: 700;
   }
 }

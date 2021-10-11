@@ -2,13 +2,16 @@
   display: block;
 }
 .__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   position: relative;
-  min-height: 896px;
+  min-height: 620px;
+  height: calc(100vh - 150px);
   overflow: hidden;
   font-size: 16px;
+  .container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
   &::before {
     height: 588px;
     width: 500px;
@@ -31,7 +34,7 @@
   .__inner {
     position: relative;
     z-index: 1;
-    max-width: 960px;
+    width: 860px;
   }
 }
 
@@ -39,24 +42,24 @@
   margin-bottom: 10px;
 }
 h1 {
-  font-size: 52px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 35px;
   text-transform: uppercase;
 }
 .__card {
-  width: 462px;
+  width: 420px;
   border-radius: 6px;
-  padding: 24px;
+  padding: 22px;
   overflow: hidden;
   position: relative;
   background: var(--accent-bg-light);
   margin-bottom: 35px;
   font-size: 18px;
   &-title {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 700;
     margin-bottom: 19px;
     line-height: 1.1;
     min-height: 84px;
@@ -93,7 +96,7 @@ h1 {
     text-align: center;
     font-size: 16px;
     color: var(--white);
-    font-weight: 600;
+    font-weight: 700;
     position: absolute;
     top: 55px;
     right: -4px;

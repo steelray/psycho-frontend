@@ -13,12 +13,19 @@ export class PostApiService extends ApiService {
     return this.get(`${this.controller}`, { params, observe: HttpObserve.RESPONSE });
   }
 
-  fetchOne(slug: string): Observable<IPost> {
-    return this.get(`${this.controller}/${slug}`, { params: { expand: 'content' } });
+  fetchOne(slug: string, params?: { expand: string }): Observable<IPost> {
+    if (!params) {
+      params = { expand: 'content,category,related_posts' };
+    }
+    return this.get(`${this.controller}/${slug}`, { params });
   }
 
   getCategories(params?: { parent_id: number }): Observable<IPostCategory[]> {
     return this.get('categories', { params });
+  }
+
+  getCategory(slug: string): Observable<IPostCategory> {
+    return this.get(`categories/${slug}`);
   }
 
 }

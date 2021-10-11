@@ -76,3 +76,5 @@ export const CUSTOM_DATE_FORMATS: MatDateFormats = {
 };
 
 export const ionPhoneMask = '99 999 99 99';
+
+export const defaultImage = '/assets/img/photo.svg'; // default image for lazy load

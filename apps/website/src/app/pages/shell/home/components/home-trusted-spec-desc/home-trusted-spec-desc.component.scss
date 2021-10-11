@@ -34,29 +34,32 @@
     background: #fff;
     position: absolute;
     bottom: 0;
-    left: calc(100% + 158px);
+    left: calc(100% + 280px);
     content: "";
     z-index: 1;
   }
 }
 
 .__img {
-  width: 990px;
+  width: 930px;
+  display: flex;
+  align-items: flex-end;
 }
 .__desc {
-  margin-left: -250px;
+  margin-left: -200px;
   flex: 1;
   min-width: 0;
-  margin-top: 180px;
+  margin-top: 140px;
 }
 
 .title-1 {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
+  font-size: 30px;
 }
 
 .radio-list {
   li {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
 }
 

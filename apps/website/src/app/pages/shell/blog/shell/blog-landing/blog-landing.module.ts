@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BlogLandingRoutingModule } from './blog-landing-routing.module';
 import { BlogLandingComponent } from './container/blog-landing.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { BlogShellSharedModule } from '../shared/blog-shell-shared.module';
+import { BlogSharedComponentsModule } from '../../components/shared/blog-shared-components.module';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { BlogShellSharedModule } from '../shared/blog-shell-shared.module';
     CommonModule,
     BlogLandingRoutingModule,
     NgxPaginationModule,
-    BlogShellSharedModule
+    BlogSharedComponentsModule
   ]
 })
 export class BlogLandingModule { }

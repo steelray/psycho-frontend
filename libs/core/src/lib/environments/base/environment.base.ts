@@ -5,5 +5,5 @@ import { IEnvironment } from '../environment.interface';
  */
 export const environmentBase: IEnvironment = {
   production: false,
-  apiEndpoint: 'http://psycho.loc/api'
+  apiEndpoint: '/api'
 };

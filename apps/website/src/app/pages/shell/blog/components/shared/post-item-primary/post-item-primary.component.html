@@ -1,0 +1,31 @@
+<div class="post-inner d-flex flex-column">
+  <div class="post-header d-flex align-items-center justify-content-between">
+    <div class="post-category">{{post?.category?.title}}</div>
+    <ng-container *ngIf="size === 'default'">
+      <ng-container *ngTemplateOutlet="btn"></ng-container>
+    </ng-container>
+  </div>
+  <div class="post-title">
+    {{post.title}}
+  </div>
+  <div class="post-footer d-flex align-items-center justify-content-between">
+    <div class="d-flex">
+      <div class="post-date d-flex align-items-center">
+        <mat-icon svgIcon="datepicker"></mat-icon>
+        {{post.publishedAt}}
+      </div>
+      <div class="post-views d-flex align-items-center">
+        <mat-icon svgIcon="eye"></mat-icon>
+        {{post.views}}
+      </div>
+    </div>
+    <ng-container *ngIf="size === 'large'">
+      <ng-container *ngTemplateOutlet="btn"></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<psycho-picture [class]="size" [origin]="$any(post?.pictures?.origin)" [webp]="$any(post?.pictures?.webp)" [alt]="post.title"></psycho-picture>
+<ng-template #btn>
+  <a class="__btn" [routerLink]="post.slug" mat-button>Читать</a>
+</ng-template>

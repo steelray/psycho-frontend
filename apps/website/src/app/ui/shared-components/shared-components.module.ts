@@ -6,11 +6,14 @@ import { PipesModule } from '@psycho/features';
 import { RatingModule } from 'ng-starrating';
 import { RatingStarsComponent } from './rating-stars/rating-stars.component';
 import { PsychologistItemComponent } from './psychologist-item/psychologist-item.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { RouterModule } from '@angular/router';
 
 const COMPONENTS = [
   SubjectItemComponent,
   RatingStarsComponent,
-  PsychologistItemComponent
+  PsychologistItemComponent,
+  BreadcrumbsComponent
 ];
 
 @NgModule({
@@ -20,7 +23,8 @@ const COMPONENTS = [
     CoreSharedModules,
     MaterialIconCustomizeModule,
     PipesModule,
-    RatingModule
+    RatingModule,
+    RouterModule
   ]
 })
 export class SharedComponentsModule { }

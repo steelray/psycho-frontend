@@ -1,0 +1,5 @@
+<picture *ngIf="origin">
+  <source *ngIf="webp" [attr.defaultImage]="defaultImage" [attr.lazyLoad]="webp" type="image/webp">
+  <source [attr.lazyLoad]="origin" type="image/jpeg">
+  <img [defaultImage]="defaultImage" [lazyLoad]="origin" [alt]="alt">
+</picture>

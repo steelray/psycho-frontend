@@ -1,1 +1,57 @@
-<p>post works!</p>
+<ng-container *ngIf="post$ | async as post">
+  <psycho-breadcrumbs [items]="breadcrumbsItems$ | async"></psycho-breadcrumbs>
+
+  <h1 class="title-1">{{post.title}}</h1>
+
+  <div class="post-header">
+    <psycho-picture [origin]="$any(post.pictures?.origin)"[webp]="$any(post.pictures?.webp)" [alt]="post.title"></psycho-picture>
+    <div class="post-header__category" *ngIf="post.category as category">{{category?.title}}</div>
+    <div class="post-header__sidebar">
+      <div class="post-author" *ngIf="post.author">
+        <mat-icon svgIcon="author"></mat-icon>
+        <p>
+          Автор
+        </p>
+        {{post.author | fio}}
+      </div>
+      <div class="post-reading-time">
+        <mat-icon svgIcon="time"></mat-icon> 
+        <p>
+          На чтение
+        </p>
+        5 минут
+      </div>
+      <div class="post-views">
+        <mat-icon class="eye" svgIcon="eye"></mat-icon>
+        <p>
+          Просмотров
+        </p>
+        {{post.views}}
+      </div>
+      <div class="post-published-at">
+        <mat-icon svgIcon="datepicker"></mat-icon>
+        <p>
+          Опубликовано
+        </p>
+        {{post.publishedAt}}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="article-body" [innerHTML]="post.content | safe:'html'"></div>
+  <div class="post-share">
+    <div class="title-2">Поделиться</div>
+    <div class="d-flex">
+      <a mat-icon-button href="#">
+        <mat-icon svgIcon="fb"></mat-icon>
+      </a>
+      <a mat-icon-button href="#">
+        <mat-icon svgIcon="instagram"></mat-icon>
+      </a>
+      <a mat-icon-button href="#">
+        <mat-icon svgIcon="tg"></mat-icon>
+      </a>
+    </div>
+  </div>
+</ng-container>

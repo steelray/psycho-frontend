@@ -1,0 +1,13 @@
+<div class="flex-1">
+  <div class="__title">
+    <a [routerLink]="post.slug">{{post.title}}</a>
+  </div>
+  <p>{{post.description}}</p>
+</div>
+<a class="__img" [routerLink]="post.slug">
+  <psycho-picture 
+    *ngIf="post?.pictures as pictures"
+    [webp]="pictures?.webp" 
+    [origin]="pictures?.origin"
+    [alt]="post.title"></psycho-picture>
+</a>

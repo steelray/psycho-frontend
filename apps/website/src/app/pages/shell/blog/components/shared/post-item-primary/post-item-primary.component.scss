@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  position: relative;
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.post {
+  &-inner {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    padding: 22px 29px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    border-radius: 6px;
+  }
+  &-header {
+    margin-bottom: 26px;
+  }
+  &-category {
+    line-height: 35px;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 0 35px;
+    background: var(--main-color);
+    border-radius: 6px;
+  }
+  &-title {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  &-footer {
+    margin-top: auto;
+    font-size: 24px;
+  }
+  &-date {
+    margin-right: 33px;
+    mat-icon {
+      font-size: 27px;
+      width: 27px;
+      height: 30px;
+    }
+  }
+  &-views {
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 30px;
+    }
+  }
+}
+mat-icon {
+  color: var(--main-color);
+  margin-right: 12px;
+}
+
+psycho-picture {
+  border-radius: 6px;
+  overflow: hidden;
+  display: block;
+  &.default {
+    height: 428px;
+  }
+  &.large {
+    height: 453px;
+  }
+}
+
+.__btn {
+  border-color: var(--white);
+  padding: 12px 25px;
+}

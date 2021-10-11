@@ -26,7 +26,7 @@ export class HomeFacade {
 
   get psychologists$(): Observable<IPsychologist[]> {
     if (!this._psychologists$) {
-      this._psychologists$ = this.psychologistApiService.fetchAll({ limit: 3 }).pipe(
+      this._psychologists$ = this.psychologistApiService.fetchAll({ limit: 3, top: 1 }).pipe(
         shareReplay()
       );
     }

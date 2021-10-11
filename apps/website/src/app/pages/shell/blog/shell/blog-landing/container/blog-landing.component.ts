@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost } from '@psycho/core';
+import { IPost, IPostCategory, Post } from '@psycho/core';
 import { getTotalCountFromRes, WithDestroy } from '@psycho/utils';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { BlogLandingFacade } from '../blog-landiing.facade';
 
 @Component({
@@ -14,9 +14,10 @@ import { BlogLandingFacade } from '../blog-landiing.facade';
   providers: [BlogLandingFacade]
 })
 export class BlogLandingComponent extends WithDestroy() implements OnInit {
-  posts$!: Observable<IPost[] | null>;
-  totalCount!: number;
-  page = 1;
+  category$!: Observable<IPostCategory>; // current category title(if category param isset in route)
+  posts$: Observable<Post[] | null> = this.facade.posts$;
+  totalCount$ = this.facade.totalCount$;
+  page$ = this.facade.currentPage$;
   readonly limit = 13;
   readonly updateList$ = new BehaviorSubject<null>(null);
 
@@ -28,37 +29,24 @@ export class BlogLandingComponent extends WithDestroy() implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPosts();
+    this.category$ = this.activatedRoute.params.pipe(
+      map(params => params.category || 'blog'),
+      switchMap(category => {
+        return this.facade.getCategory(category);
+      }),
+      filter(res => !!res),
+      tap(category => this.facade.currentCategory$.next(category))
+    )
   }
 
-  onPageChange(page: number): void {
-    this.page = page;
-    this.updateList$.next(null);
+  onPageChange(page: any): void {
+    this.facade.currentPage$.next(page);
   }
 
   trackByFn(index: number): number {
     return index;
   }
 
-  private getPosts(): void {
-    this.posts$ = combineLatest([
-      this.activatedRoute.params,
-      this.updateList$
-    ]).pipe(
-      map(res => res[0]),
-      map(params => params?.category),
-      map(category => {
-        return category ? { category_slug: category } : {};
-      }),
-      map(params => ({ ...params, ...this.paginationParams, expand: 'category' })),
-      switchMap(params => this.facade.getPosts(params)),
-      tap(res => this.totalCount = getTotalCountFromRes(res.headers)),
-      map(res => res.body)
-    );
-  }
 
-  private get paginationParams(): { page: number, limit: number } {
-    return { page: this.page - 1, limit: this.limit }
-  }
 
 }

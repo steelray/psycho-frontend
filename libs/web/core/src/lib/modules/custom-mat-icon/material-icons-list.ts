@@ -37,6 +37,22 @@ const commonIcons: IMatIcon[] = [
   {
     name: 'twitter',
     src
+  },
+  {
+    name: 'datepicker',
+    src
+  },
+  {
+    name: 'eye',
+    src
+  },
+  {
+    name: 'author',
+    src
+  },
+  {
+    name: 'time',
+    src
   }
 ];
 export const MATERIAL_ICONS_LIST: IMatIcon[] = [...commonIcons];

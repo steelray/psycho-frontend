@@ -1,10 +1,11 @@
 psycho-root {
   overflow: hidden;
-  min-width: 1600px;
 }
 
 .container {
-  width: 1600px;
+  width: 1360px;
+  max-width: 100%;
+  min-width: 1200px;
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
@@ -14,8 +15,8 @@ psycho-root {
   margin: 0;
   padding: 0;
   > li {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     line-height: 1.3;
     position: relative;
     padding-left: 36px;
@@ -35,28 +36,33 @@ psycho-root {
   }
   &.__large {
     > li {
-      font-size: 24px;
-      padding-left: calc(57px + 43px);
+      font-size: 21px;
+      padding-left: calc(48px + 30px);
       font-weight: normal;
       &::before {
-        height: 57px;
-        width: 57px;
-        border-width: 16px;
+        height: 48px;
+        width: 48px;
+        border-width: 14px;
       }
     }
   }
 }
 
 .title-1 {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .title-2 {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.title-3 {
+  font-size: 29px;
+  font-weight: 600;
 }
 
 .wave-bg {
@@ -65,6 +71,162 @@ psycho-root {
   left: calc(50% - 960px);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
 .mat-expansion-panel-header {
   font-family: var(--base-font-family);
+}
+
+body {
+  pagination-controls {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  .ngx-pagination {
+    display: flex;
+    align-items: center;
+    li {
+      display: none;
+    }
+    .small-screen {
+      display: block;
+      margin: 0 17px;
+    }
+    .pagination {
+      &-previous,
+      &-next {
+        display: block;
+        position: relative;
+        &::before,
+        &::after {
+          display: none !important;
+        }
+        &.disabled {
+          span {
+            &::before,
+            &::after {
+              border-color: var(--base-font-color);
+            }
+          }
+        }
+        a,
+        > span {
+          width: 65px;
+          height: 65px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          line-height: 65px;
+          text-align: center;
+          padding: 0;
+          border-radius: 50%;
+          &::after {
+            display: none;
+          }
+          &::before {
+            width: 12px;
+            height: 12px;
+            content: "";
+            border-top: 1px solid var(--white);
+            border-right: 1px solid var(--white);
+            transform: rotate(45deg);
+          }
+        }
+        a {
+          background: var(--main-color);
+          color: var(--white);
+        }
+        > span {
+          background: var(--medium-gray-bg);
+        }
+      }
+      &-previous {
+        span,
+        a {
+          &::before {
+            transform: rotate(-140deg);
+            margin-left: 11px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.article-body {
+  font-size: 24px;
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 0;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  h4 {
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  h5 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  h6 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  .__accent-block {
+    background: var(--accent-bg-light) url(/assets/img/exclamation-circle.png) no-repeat 25px center;
+    padding: 35px 25px;
+    border-radius: 6px;
+    padding-left: 126px;
+    margin: 45px 0;
+  }
+  ul {
+    @extend .radio-list;
+    margin: 35px 0;
+    li {
+      &:not(:last-child) {
+        margin-bottom: 25px;
+      }
+    }
+  }
+  ol {
+    margin: 35px 0;
+    list-style: none;
+    padding: 0;
+    counter-reset: list 0;
+    li {
+      position: relative;
+      padding-left: 40px;
+      &:not(:last-child) {
+        margin-bottom: 25px;
+      }
+      &::before {
+        counter-increment: list;
+        content: counter(list);
+        font-weight: 700;
+        color: var(--main-color);
+        position: absolute;
+        top: 2px;
+        left: 0;
+      }
+    }
+  }
 }

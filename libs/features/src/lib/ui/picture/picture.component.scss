@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  picture {
+    width: 100%;
+    min-height: 100%;
+  }
+  img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

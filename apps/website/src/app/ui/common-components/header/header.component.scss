@@ -3,14 +3,18 @@
   border-bottom: 1px solid #7660dc;
 }
 .header {
-  padding: 20px 0 17px;
+  padding: 15px 0 17px;
   &__menu {
     a {
       color: var(--base-font-color);
       text-decoration: none;
       margin: 0 30px;
-      &:hover {
-        text-decoration: underline;
+      &:hover,
+      &.active {
+        color: var(--main-color);
+      }
+      &.active {
+        font-weight: 700;
       }
     }
   }

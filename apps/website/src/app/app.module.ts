@@ -7,6 +7,7 @@ import { CoreSharedModules, ENVIRONMENTS } from '@psycho/core';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     CoreSharedModules,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LazyLoadImageModule
   ],
   providers: [
     {
