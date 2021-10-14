@@ -25,7 +25,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RangeDatepickerMaxRangeDirective } from './range-datepicker/range-datepicker-max-range.directive';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { CoreSharedModules } from '@psycho/core';
-import { PipesModule } from '@psycho/features';
+import { PipesModule, UIModule } from '@psycho/features';
+import { TelInputComponent } from './tel-input/tel-input.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
 const compoments = [
   DatepickerComponent,
   DatetimepickerComponent,
@@ -34,10 +37,18 @@ const compoments = [
   InputAutocompleteComponent,
   RangeDatepickerComponent,
   SelectComponent,
-  TextareaComponent
+  TextareaComponent,
+  TelInputComponent
 ];
+const directives = [
+  RangeDatepickerMaxRangeDirective
+];
+
+
+const DECLARATIONS = [...compoments, directives];
+
 @NgModule({
-  declarations: [...compoments, RangeDatepickerMaxRangeDirective],
+  declarations: DECLARATIONS,
   imports: [
     CoreSharedModules,
     MatFormFieldModule,
@@ -58,7 +69,10 @@ const compoments = [
     ClipboardModule,
     MaterialIconCustomizeModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    UIModule,
+    NgxMaskModule,
+
   ],
   exports: compoments
 })

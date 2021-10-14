@@ -22,6 +22,10 @@ const ROUTES: Routes = [
       {
         path: 'contacts',
         loadChildren: () => import('./shell/contacts/contacts.module').then(m => m.ContactsModule)
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./shell/auth/auth.module').then(m => m.AuthModule)
       }
     ]
   }

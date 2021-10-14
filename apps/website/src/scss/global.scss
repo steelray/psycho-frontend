@@ -1,5 +1,6 @@
 psycho-root {
   overflow: hidden;
+  min-height: 100%;
 }
 
 .container {
@@ -49,13 +50,13 @@ psycho-root {
 }
 
 .title-1 {
-  font-size: 38px;
+  font-size: 36px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .title-2 {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -163,31 +164,31 @@ body {
 }
 
 .article-body {
-  font-size: 24px;
+  font-size: 18px;
   h2 {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     margin-bottom: 25px;
     margin-top: 0;
   }
   h3 {
     margin-top: 0;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 25px;
   }
   h4 {
-    font-size: 27px;
-    font-weight: 700;
-    margin-bottom: 25px;
-  }
-  h5 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 25px;
   }
+  h5 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
   h6 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 25px;
   }
@@ -202,6 +203,7 @@ body {
     @extend .radio-list;
     margin: 35px 0;
     li {
+      font-weight: 400;
       &:not(:last-child) {
         margin-bottom: 25px;
       }

@@ -9,7 +9,7 @@
 
 .post {
   &-inner {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     position: absolute;
     padding: 22px 29px;
     top: 0;
@@ -25,31 +25,31 @@
   &-category {
     line-height: 35px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     padding: 0 35px;
     background: var(--main-color);
     border-radius: 6px;
   }
   &-title {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
     line-height: 1.2;
   }
   &-footer {
     margin-top: auto;
-    font-size: 24px;
+    font-size: 22px;
   }
   &-date {
     margin-right: 33px;
     mat-icon {
-      font-size: 27px;
-      width: 27px;
-      height: 30px;
+      font-size: 24px;
+      width: 24px;
+      height: 27px;
     }
   }
   &-views {
     mat-icon {
-      font-size: 28px;
+      font-size: 26px;
       width: 28px;
       height: 30px;
     }

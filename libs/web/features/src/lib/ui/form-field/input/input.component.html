@@ -13,23 +13,23 @@
       svgIcon="label-tooltip"></mat-icon>
   </mat-label>
   <input 
-        [formControl]="control"
-        [placeholder]="placeholder"
-        [readonly]="readonly"
-        [type]="type"
-        [textMask]="mask || { mask: false }"
-        [autocomplete]="autocomplete"
-        matInput
-        (keyup)="onKeyUp($event)"
-        name="asd">
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [readonly]="readonly"
+    [type]="type"
+    [textMask]="mask || { mask: false }"
+    [autocomplete]="autocomplete"
+    matInput
+    (keyup)="onKeyUp($event)"
+    [name]="controlName">
   <div
     matPrefix 
     *ngIf="prefix"
     [ngTemplateOutlet]="prefix"></div>
   <div 
     matSuffix
-    *ngIf="suffix"
-    [ngTemplateOutlet]="suffix"></div>
+    *ngIf="suffix ||  passwordViewable"
+    [ngTemplateOutlet]="suffix || passwordShowBtn"></div>
   <mat-hint *ngIf="hint">{{hint}}</mat-hint>
   <mat-error *ngFor="let error of (control.errors | controlErrors)">
     {{ error.message }}
@@ -37,3 +37,9 @@
   </mat-error>
   <ng-content></ng-content>
 </mat-form-field>
+
+<ng-template #passwordShowBtn>
+  <button type="button" class="show-password" (click)="showHidePassword()" mat-icon-button>
+    <mat-icon svgIcon="eye"></mat-icon>
+  </button>
+</ng-template>

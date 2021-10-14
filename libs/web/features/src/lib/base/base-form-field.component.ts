@@ -59,4 +59,15 @@ export abstract class BaseFormFieldComponent extends WithDestroy() implements On
     }
     return false;
   }
+
+  get controlName(): string | null {
+    if (this.control && this.control.parent) {
+      return null;
+    }
+    const formGroup: any = this.control?.parent?.controls;
+    if (!formGroup) {
+      return null;
+    }
+    return Object.keys(formGroup).find(name => this.control === formGroup[name]) || null;
+  }
 }

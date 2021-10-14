@@ -8,6 +8,12 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { FormFieldModule } from '@psycho/web/features';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +23,10 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     CoreSharedModules,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    FormFieldModule,
+    NgxMaskModule.forRoot(maskConfig),
+
   ],
   providers: [
     {

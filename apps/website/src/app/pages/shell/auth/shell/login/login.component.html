@@ -1,0 +1,18 @@
+<h1 class="title-1">Вход в личный кабинет</h1>
+<form>
+  <psycho-input 
+    [control]="$any(controls.username)"
+    placeholder="Введите почту или номер телефона"></psycho-input>
+  <psycho-input
+    [control]="$any(controls.password)"
+    placeholder="Введите пароль" 
+    type="password" 
+    [passwordViewable]="true"></psycho-input>
+  <div class="d-flex align-items-end justify-content-between">
+    <button mat-raised-button color="primary">Войти</button>
+    <a [routerLink]="['/auth/reset-password']">Забыли пароль?</a>
+  </div>
+</form>
+<div class="text-center">
+  <a [routerLink]="['/auth/signup']">Зарегистрироваться</a>
+</div>

@@ -125,8 +125,8 @@
   top: 0;
   left: 0;
   z-index: 2;
-  font-size: 24px;
-  width: 600px;
+  font-size: 22px;
+  width: 580px;
   .__item {
     position: absolute;
     top: 0;
@@ -139,14 +139,14 @@
     }
   }
   .__number {
-    height: 156px;
-    width: 156px;
-    margin-right: 26px;
+    height: 136px;
+    width: 136px;
+    margin-right: 22px;
     background: var(--main-color);
-    line-height: 156px;
+    line-height: 136px;
     text-align: center;
-    font-size: 120px;
-    font-weight: 700;
+    font-size: 100px;
+    font-weight: 600;
     color: var(--white);
     border-radius: 50%;
   }

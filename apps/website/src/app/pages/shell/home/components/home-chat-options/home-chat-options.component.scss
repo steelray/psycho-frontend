@@ -19,6 +19,15 @@ img {
   background: url(/assets/img/wave-7.png) no-repeat;
   height: 550px;
   bottom: 100%;
+  &::after {
+    height: calc(100% - 145px);
+    left: 100%;
+    background: #fff;
+    content: "";
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
 }
 
 .online-chat {
@@ -26,10 +35,10 @@ img {
   .__option {
     position: absolute;
     width: 365px;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1.2;
     &.__chat {
-      left: 150px;
+      left: 56px;
     }
     &.__video {
       width: 470px;

@@ -8,12 +8,14 @@ import { RatingStarsComponent } from './rating-stars/rating-stars.component';
 import { PsychologistItemComponent } from './psychologist-item/psychologist-item.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
+import { GreetingBlockComponent } from './greeting-block/greeting-block.component';
 
 const COMPONENTS = [
   SubjectItemComponent,
   RatingStarsComponent,
   PsychologistItemComponent,
-  BreadcrumbsComponent
+  BreadcrumbsComponent,
+  GreetingBlockComponent
 ];
 
 @NgModule({

@@ -40,5 +40,6 @@ $website-theme: mat.define-light-theme(
 
 /* You can add global styles to this file, and also import other style files */
 @import "base.scss";
+@import "forms.scss";
 @import "btn.scss";
 @import "./scss/global.scss";

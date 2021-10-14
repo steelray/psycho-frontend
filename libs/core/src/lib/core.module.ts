@@ -13,9 +13,10 @@ import { throwIfAlreadyLoaded } from '@psycho/utils';
 import { LogService } from './services/shared/log.service';
 import { WindowService } from './services/shared/window.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, RxReactiveFormsModule],
 })
 export class CoreModule {
   // configuredProviders: *required to configure WindowService and others per platform

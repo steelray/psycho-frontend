@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+.__content {
+  position: relative;
+  min-height: 670px;
+  height: calc(100vh - 150px);
+  overflow: hidden;
+  font-size: 16px;
+  .container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  &::before {
+    height: 588px;
+    width: 500px;
+    background: url(/assets/img/wave-1.png) no-repeat center center / 100% 100%;
+    display: block;
+    position: absolute;
+    top: -150px;
+    left: 0;
+    content: "";
+  }
+  &::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: url(/assets/img/entire-block-bg.png) no-repeat right 0 / auto 100%;
+    content: "";
+  }
+  .__inner {
+    position: relative;
+    z-index: 1;
+    width: 860px;
+  }
+}

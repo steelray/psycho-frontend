@@ -7,7 +7,7 @@ psycho-breadcrumbs {
 }
 
 .post-header {
-  height: 467px;
+  height: 450px;
   position: relative;
   overflow: hidden;
   border-radius: 6px;
@@ -16,7 +16,7 @@ psycho-breadcrumbs {
     position: absolute;
     top: 25px;
     left: 19px;
-    font-size: 18px;
+    font-size: 16px;
     padding: 8px 35px;
     color: var(--white);
     font-weight: 700;
@@ -33,7 +33,7 @@ psycho-breadcrumbs {
     width: 321px;
     padding: 20px 15px;
     overflow-y: auto;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     display: flex;
     flex-direction: column;
@@ -52,7 +52,7 @@ psycho-breadcrumbs {
     p {
       font-weight: normal;
       margin-top: 0;
-      margin-bottom: 8px;
+      margin-bottom: 0;
       display: flex;
       align-items: center;
     }
@@ -73,19 +73,21 @@ psycho-breadcrumbs {
 
 .post-share {
   margin-bottom: 60px;
-  .title-2 {
+  .__title {
+    font-size: 22px;
     text-transform: none;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
+    font-weight: 600;
   }
   a {
-    width: 70px;
-    height: 70px;
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   mat-icon {
-    height: 45px;
-    width: 45px;
+    height: 30px;
+    width: 30px;
   }
 }

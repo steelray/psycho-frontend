@@ -20,10 +20,9 @@ export function cloneArrayOfObjects(array: any[]): any[] {
   return JSON.parse(JSON.stringify(array));
 }
 
-export function getFullNumber(phoneNumber: string): string {
+export function getFullNumber(phoneNumber: string, prefix: string | null = null): number {
   const trimedNumber = phoneNumber.replace(/ /g, '');
-  const prefix = phoneNumber.indexOf('998') === -1 && trimedNumber.length === 9 ? '998' : '';
-  return prefix + trimedNumber;
+  return +(prefix + trimedNumber);
 }
 
 

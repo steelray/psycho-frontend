@@ -1,0 +1,31 @@
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>{{label}}</mat-label>
+  <input matInput
+    aria-label="code"
+    #input
+    [matAutocomplete]="auto"
+    [mask]="$any((selectedCountry$ | async)?.mask)"
+    (keyup)="onKeyUp($event)">
+  <div
+    matPrefix 
+    [ngTemplateOutlet]="prefix"></div>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event)" [displayWith]="displayWithFn">
+    <mat-option *ngFor="let country of countries" [value]="country">
+      <div class="mat-option-inner d-flex align-items-center">
+        <psycho-picture *ngIf="showFlag" [origin]="country.flag"></psycho-picture>
+        <span>{{country.name}}</span>
+        <small>{{country.code}}</small>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+  <mat-error *ngFor="let error of (control.errors | controlErrors)">
+    {{ error.message }}
+  </mat-error>
+</mat-form-field>
+<ng-template #prefix>
+  <div class="__prefix d-flex align-items-center" *ngIf="selectedCountry$ | async as selectedCountry">
+    <psycho-picture *ngIf="selectedCountry && showFlag" [origin]="selectedCountry.flag"></psycho-picture>
+    <span>{{selectedCountry.code}}</span>
+  </div>
+</ng-template>

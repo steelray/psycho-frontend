@@ -6,6 +6,7 @@
   img {
     display: block;
     margin: 0 auto;
+    max-width: 720px;
   }
 }
 .container {
@@ -56,32 +57,32 @@
   height: 1px;
   li {
     position: absolute;
-    width: 520px;
+    width: 480px;
     padding-left: 75px;
-    font-size: 24px;
+    font-size: 22px;
     .__title {
-      font-size: 30px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 600;
       margin-bottom: 15px;
     }
     &:nth-child(1) {
-      left: 0;
+      left: -15px;
       top: 510px;
     }
     &:nth-child(2) {
-      left: 70px;
+      left: 60px;
       top: 230px;
     }
     &:nth-child(3) {
-      left: 530px;
-      top: 50px;
+      left: 500px;
+      top: 40px;
     }
     &:nth-child(4) {
-      right: 30px;
+      right: -80px;
       top: 230px;
     }
     &:nth-child(5) {
-      right: -160px;
+      right: -180px;
       top: 510px;
     }
   }

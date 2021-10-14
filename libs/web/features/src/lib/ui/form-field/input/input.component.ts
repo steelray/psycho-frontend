@@ -12,10 +12,14 @@ export class InputComponent extends BaseFormFieldComponent {
   @Input() readonly!: boolean;
   @Input() mask: any;
   @Input() autocomplete = 'off';
+  @Input() passwordViewable = false;
   @Output() keyUp = new EventEmitter();
-
 
   onKeyUp(event: KeyboardEvent): void {
     this.keyUp.emit(event);
+  }
+
+  showHidePassword(): void {
+    this.type = this.type === 'password' ? 'text' : 'password';
   }
 }

@@ -6,6 +6,6 @@
     <div *ngIf="menuItems" class="header__menu">
       <a *ngFor="let item of menuItems" [routerLink]="item.url" routerLinkActive="active">{{item.label}}</a>
     </div>
-    <button mat-button class="__bold">Войти</button>
+    <a [routerLink]="['/auth/login']" mat-button class="__bold">Войти</a>
   </div>
 </header>
