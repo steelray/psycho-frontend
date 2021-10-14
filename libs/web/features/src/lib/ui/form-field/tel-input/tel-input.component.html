@@ -4,8 +4,7 @@
     aria-label="code"
     #input
     [matAutocomplete]="auto"
-    [mask]="$any((selectedCountry$ | async)?.mask)"
-    (keyup)="onKeyUp($event)">
+    [mask]="$any((selectedCountry$ | async)?.mask)">
   <div
     matPrefix 
     [ngTemplateOutlet]="prefix"></div>

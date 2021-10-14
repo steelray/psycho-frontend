@@ -1,20 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BaseFormFieldComponent } from '@psycho/web/core';
 import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
-import { debounceTime, filter, map, startWith, tap } from 'rxjs/operators';
+import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
 import { ICountryPhoneData, countryPhoneData } from './tel-input-data';
-import { parsePhoneNumber, CountryCode } from 'libphonenumber-js'
-import { FormControl } from '@angular/forms';
+import { CountryCode } from 'libphonenumber-js'
 
-
-export enum FLAG_SIZE {
-  SIZE16 = '16',
-  SIZE24 = '24',
-  SIZE32 = '32',
-  SIZE48 = '48',
-  SIZE64 = '64',
-}
 
 @Component({
   selector: 'psycho-tel-input',
@@ -22,13 +13,10 @@ export enum FLAG_SIZE {
   styleUrls: ['./tel-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TelInputComponent extends BaseFormFieldComponent {
-  readonly flagsApi = 'https://countryflags.io/';
-
+export class TelInputComponent extends BaseFormFieldComponent implements AfterViewInit {
   @Input() countries: ICountryPhoneData[] = countryPhoneData;
   @Input() autocompletePlaceholder: string = 'search...';
   @Input() showFlag = true;
-  @Input() flagSize: FLAG_SIZE = FLAG_SIZE.SIZE48;
   @Input() selectedCountryCode: CountryCode = 'RU';
   @Input() preferedCountries: { iso: CountryCode, order: number }[] = [
     {
@@ -55,6 +43,8 @@ export class TelInputComponent extends BaseFormFieldComponent {
   filteredCountries$!: Observable<ICountryPhoneData[]>;
   selectedCountry$ = new BehaviorSubject<ICountryPhoneData | undefined>(this.getCountryByISO(this.selectedCountryCode));
 
+  @ViewChild('input', { static: false }) input!: ElementRef;
+
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -64,20 +54,27 @@ export class TelInputComponent extends BaseFormFieldComponent {
     }
   }
 
-  onKeyUp(e: any): void {
-    const value = e.target.value;
+  ngAfterViewInit(): void {
+    fromEvent(this.input.nativeElement, 'keyup').pipe(
+      debounceTime(200),
+      map((e: any) => e?.target?.value),
+      switchMap(value => this.selectedCountry$.pipe(
+        map(country => {
+          if (!value) {
+            return;
+          }
+          return `${country?.code}${value}`;
+        })
+      )),
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      const phoneNumber = res ? res.replace(/\D/g, '') : null;
+      this.control.setValue(phoneNumber);
+    })
   }
 
   onSelect(e: MatAutocompleteSelectedEvent): void {
     this.selectedCountry$.next(this.getCountryByISO(e.option.value.iso));
-  }
-
-  private getCountryByISO(iso: string): ICountryPhoneData | undefined {
-    const country = this.countries.find(country => country.iso === iso);
-    if (country) {
-      country.mask = Array.isArray(country.mask) ? country.mask.join('||') : country.mask;
-    }
-    return country;
   }
 
   displayWithFn(option: ICountryPhoneData): string {
@@ -86,6 +83,14 @@ export class TelInputComponent extends BaseFormFieldComponent {
 
   trackByFn(index: number): number {
     return index;
+  }
+
+  private getCountryByISO(iso: string): ICountryPhoneData | undefined {
+    const country = this.countries.find(country => country.iso === iso);
+    if (country) {
+      country.mask = Array.isArray(country.mask) ? country.mask.join('||') : country.mask;
+    }
+    return country;
   }
 
   private sortCountries(): void {
@@ -97,10 +102,6 @@ export class TelInputComponent extends BaseFormFieldComponent {
       }
       return country;
     }).sort((a: any, b: any) => a?.order - b?.order);
-
-
-    console.log(this.countries);
-
   }
 
 }
