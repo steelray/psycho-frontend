@@ -28,6 +28,14 @@ export class SignupComponent {
       return;
     }
 
+    console.log(phone);
+
+
+  }
+
+  onSubmit(): void {
+    const { phone } = this.form.value;
+
   }
 
 }

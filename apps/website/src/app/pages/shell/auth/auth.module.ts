@@ -9,6 +9,7 @@ import { CoreSharedModules } from '@psycho/core';
 import { FormFieldModule } from '@psycho/web/features';
 import { MatButtonModule } from '@angular/material/button';
 import { ResetPasswordComponent } from './shell/reset-password/reset-password.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ResetPasswordComponent } from './shell/reset-password/reset-password.co
     AuthRoutingModule,
     SharedComponentsModule,
     FormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

@@ -1,24 +1,23 @@
 <h1 class="title-1">Быстрая регистрация</h1>
-<div class="d-flex justify-content-between flex-wrap">
-  <form>
+<div class="d-flex justify-content-between flex-wrap reg-wrap">
+  <form [formGroup]="form" (ngSubmit)="sendSMS()">
     <p>Моментальная регистрация.
       Введите свой номер телефона</p>
-    <psycho-tel-input [control]="$any(controls.phone)"></psycho-tel-input>
-    <!-- <psycho-input
-      [control]="$any(controls.phone)"
-      placeholder="Введите номер телефона"></psycho-input>
-    <psycho-input
-      [control]="$any(controls.password)"
-      placeholder="Введите пароль" 
-      type="password" 
-      [passwordViewable]="true"></psycho-input> -->
-    <div class="d-flex align-items-end justify-content-between">
-      <button mat-raised-button color="primary">Войти</button>
-      <a [routerLink]="['/auth/reset-password']">Забыли пароль?</a>
+    <psycho-tel-input [control]="$any(controls.phone)"></psycho-tel-input> 
+    <div class="d-flex align-items-end justify-content-between __btns">
+      <button mat-raised-button color="primary">Получить код</button>
+      <a [routerLink]="['/auth/login']">Войти</a>
+    </div>
+    <div class="__note">
+      Вводя свой номер, вы принимаете <a href="#">условия пользовательского соглашения</a> , даете согласие на обработку персональных данных
     </div>
   </form>
-  
-</div>
-<div class="text-center">
-  <a [routerLink]="['/auth/signup']">Зарегистрироваться</a>
+  <div class="reg-desc">
+    <div class="__title">Подберем для вас специалиста за 3 простых шага</div>
+    <ul class="radio-list">
+      <li>Заполните анкету</li>
+      <li>Выберите терапевта из рекомендованных</li>
+      <li>Запишитесь на подходящее время</li>
+    </ul>
+  </div>
 </div>

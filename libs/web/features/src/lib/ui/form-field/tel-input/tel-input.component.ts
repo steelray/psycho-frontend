@@ -1,11 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BaseFormFieldComponent } from '@psycho/web/core';
 import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
-import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { ICountryPhoneData, countryPhoneData } from './tel-input-data';
-import { CountryCode } from 'libphonenumber-js'
-
+import { CountryCode, parsePhoneNumber } from 'libphonenumber-js'
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'psycho-tel-input',
@@ -46,8 +46,17 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
   @ViewChild('input', { static: false }) input!: ElementRef;
 
 
+  constructor(
+    private cdRef: ChangeDetectorRef
+  ) {
+    super();
+  }
+
+
   ngOnInit(): void {
     super.ngOnInit();
+
+    this.control.addValidators(this.phoneNumberValidate.bind(this));
 
     if (this.preferedCountries?.length) {
       this.sortCountries();
@@ -68,6 +77,7 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
       )),
       takeUntil(this.destroy$)
     ).subscribe(res => {
+      this.cdRef.markForCheck();
       const phoneNumber = res ? res.replace(/\D/g, '') : null;
       this.control.setValue(phoneNumber);
     })
@@ -102,6 +112,22 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
       }
       return country;
     }).sort((a: any, b: any) => a?.order - b?.order);
+  }
+
+  private phoneNumberValidate(control: AbstractControl): ValidationErrors | null {
+    const country = this.selectedCountry$.getValue();
+    if (country && control.value) {
+      const iso: any = country?.iso;
+      const phoneNumber = parsePhoneNumber(control.value, iso);
+      if (!phoneNumber.isValid()) {
+        return {
+          invalidPhoneNumber: {
+            message: 'Invalid Phone Number'
+          }
+        }
+      }
+    }
+    return null;
   }
 
 }

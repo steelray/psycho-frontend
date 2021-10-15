@@ -1,3 +1,43 @@
 :host {
   display: block;
 }
+
+.title-1 {
+  text-transform: none;
+  font-size: 35px;
+}
+
+.radio-list {
+  li {
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+}
+
+.reg-wrap {
+  > * {
+    width: 380px;
+  }
+}
+
+.__btns {
+  margin-bottom: 18px;
+}
+
+.__note {
+  a {
+    color: var(--main-color);
+    opacity: 0.8;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.reg-desc {
+  .__title {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+}
