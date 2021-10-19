@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+.profile {
+  &-sidebar {
+    width: 300px;
+    margin-right: 25px;
+    background: var(--accent-bg-light);
+    position: relative;
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 50vw;
+      background: var(--accent-bg-light);
+      content: "";
+    }
+  }
+  &-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 40px;
+  }
+}

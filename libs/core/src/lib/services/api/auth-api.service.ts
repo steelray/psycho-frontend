@@ -8,15 +8,17 @@ export class AuthApiService extends ApiService {
   private readonly controller = 'auth';
 
   login(phone: number, password: string): Observable<any> {
-    return this.post(`${this.controller}/login`, { phone, password });
+    return this.post(`${this.controller}/login`, { username: phone, password });
   }
 
-  sendSMS(phone: number): Observable<string> {
-    return this.post(`${this.controller}/auth`, { phone });
+  sendSMS(phone: number): Observable<boolean> {
+    return this.post(`${this.controller}/send-sms`, { phone });
   }
 
-  signup(code: string | number, password: string): Observable<any> {
-    return this.post(`${this.controller}/signup`, { code, password });
+  signup(body: {
+    phone: number, code: number, password: string, repeat_password: string
+  }): Observable<any> {
+    return this.post(`${this.controller}/signup`, body);
   }
 
   resetPassword(code: string | number, password: string): Observable<any> {

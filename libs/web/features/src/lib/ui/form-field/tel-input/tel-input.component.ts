@@ -80,6 +80,7 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
       this.cdRef.markForCheck();
       const phoneNumber = res ? res.replace(/\D/g, '') : null;
       this.control.setValue(phoneNumber);
+      this.control.markAsTouched();
     })
   }
 

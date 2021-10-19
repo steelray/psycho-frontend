@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { AuthService } from '@psycho/core';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class GuestGuardService implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService) { }
 
-  canActivate(): boolean {
-    const token = null;
-    if (token) {
-      this.router.navigate(['/']);
-      return false;
-    }
-    return true;
+  canActivate(): Observable<boolean> {
+    return this.authService.isAuthed$.pipe(
+      map(res => {
+        if (res) {
+          this.router.navigate(['/profile']);
+          return false;
+        }
+        return true;
+      })
+    )
   }
 }

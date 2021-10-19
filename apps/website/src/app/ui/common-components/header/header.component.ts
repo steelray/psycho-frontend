@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { IMenuItem } from '@psycho/core';
 
 @Component({
@@ -9,4 +9,10 @@ import { IMenuItem } from '@psycho/core';
 })
 export class HeaderComponent {
   @Input() menuItems!: IMenuItem[];
+  @Input() userData: any;
+  @Output() logout = new EventEmitter();
+
+  onLogout(): void {
+    this.logout.emit();
+  }
 }

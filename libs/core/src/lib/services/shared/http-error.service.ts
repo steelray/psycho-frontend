@@ -5,5 +5,5 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpErrorService {
-  error$ = new BehaviorSubject<string | { message: string, cssClass: string } | null>(null);
+  error$ = new BehaviorSubject<string | null>(null);
 }

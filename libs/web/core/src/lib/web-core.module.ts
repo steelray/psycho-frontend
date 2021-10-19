@@ -8,7 +8,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import localeRu from '@angular/common/locales/ru';
 import { registerLocaleData } from '@angular/common';
-import { PlatformWindowToken } from 'libs/core/src/lib/services/shared/tokens';
+import { PlatformWindowToken } from '@psycho/core';
 registerLocaleData(localeRu, 'ru');
 // bring in custom web services here...
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';

@@ -1,0 +1,8 @@
+<div class="container d-flex">
+  <div *ngIf="showSidebar" class="profile-sidebar">
+    <ng-content select="sidebar"></ng-content>
+  </div>
+  <div class="profile-content">
+    <ng-content></ng-content>
+  </div>
+</div>

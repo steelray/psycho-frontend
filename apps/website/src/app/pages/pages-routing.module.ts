@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard, GuestGuardService } from '@psycho/core';
 import { PagesComponent } from './container/pages.component';
 
 const ROUTES: Routes = [
@@ -25,7 +26,13 @@ const ROUTES: Routes = [
       },
       {
         path: 'auth',
-        loadChildren: () => import('./shell/auth/auth.module').then(m => m.AuthModule)
+        loadChildren: () => import('./shell/auth/auth.module').then(m => m.AuthModule),
+        canActivate: [GuestGuardService]
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./shell/profile/profile.module').then(m => m.ProfileModule),
+        canActivate: [AuthGuard]
       }
     ]
   }

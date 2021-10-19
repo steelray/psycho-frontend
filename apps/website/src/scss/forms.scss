@@ -150,13 +150,19 @@ body {
     }
 
     .mat-form-field-flex {
-      border: 1px solid var(--border-color-custom);
+      border: 1px solid transparent;
       background-color: var(--input-bg-color);
       padding: 0;
       height: 55px;
       align-items: center;
       border-radius: 4px;
       transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    &.is-invalid {
+      .mat-form-field-flex {
+        border-color: var(--danger);
+      }
     }
 
     &.mat-form-field-disabled {

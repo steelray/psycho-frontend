@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, InjectionToken, Type } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { inject, InjectionToken } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { IEnvironment } from '../../environments';

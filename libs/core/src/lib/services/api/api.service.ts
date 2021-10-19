@@ -32,23 +32,11 @@ export class ApiService {
 
   public post<Body, Response>(
     url: string,
-    body?: Body,
-    customUrl: string | null = null
+    body?: Body
   ): Observable<Response> {
-    const requestBody = {
-      method: url,
-      params: body
-    };
-    return this.makeRequest('post', url, { body: requestBody }, customUrl).pipe(
-      map(res => {
-        if (res.result) {
-          return res.result;
-        } else {
-          return null;
-        }
-      })
-    );
+    return this.makeRequest('post', url, { body });
   }
+
 
   public put<Body, Response>(
     url: string,

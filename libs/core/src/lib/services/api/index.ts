@@ -7,3 +7,4 @@ export * from './menu-api.service'
 export * from './subject-api.service';
 export * from './psychologist-api.service';
 export * from './auth-api.service';
+export * from './client-api.service';

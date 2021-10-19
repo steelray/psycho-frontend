@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://server.zarland.ru/api/",
+    "target": "http://psycho.loc/api/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": "true",

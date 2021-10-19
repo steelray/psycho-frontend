@@ -7,3 +7,5 @@ export * from './video.interface';
 export * from './subject.interface';
 export * from './select-option.interface';
 export * from './psychologist.interface';
+export * from './user.interface';
+export * from './client.interface';

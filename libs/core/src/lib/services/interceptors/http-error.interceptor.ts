@@ -34,7 +34,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             HTTP_CODES.INVALID_TOKEN_1,
             HTTP_CODES.INVALID_TOKEN_2
           ].includes(resp.body.error?.code)) {
-            this.logout();
             throwError(resp?.body?.error?.message);
           }
         }
@@ -51,7 +50,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             HTTP_CODES.NOT_AUTHED,
             HTTP_CODES.NOT_ALLOWED
           ].includes(error.status)) {
-            this.logout();
             return throwError(errorMessage);
           }
 
@@ -66,17 +64,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
       })
     );
-  }
-
-  private logout(): void {
-    this.ngZone.run(() => {
-      this.httpErrorService.error$.next({
-        message: 'Ваша сессия истекла',
-        cssClass: 'warning'
-      });
-      // TODO: logut|remove auth token
-      this.router.navigate(['/auth']);
-    });
   }
 
 }

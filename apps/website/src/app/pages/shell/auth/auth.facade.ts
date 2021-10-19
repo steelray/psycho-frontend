@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthApiService, AuthService } from '@psycho/core';
-import { getFullNumber } from '@psycho/utils';
+import { AuthApiService, AuthService, WindowService } from '@psycho/core';
 import { Observable, of } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
@@ -11,26 +10,37 @@ export class AuthFacade {
 
   constructor(
     private readonly authApiService: AuthApiService,
-    private readonly authService: AuthService
-  ) { }
+    private readonly authService: AuthService,
+
+    private windowService: WindowService
+  ) {
+
+  }
 
 
   login(): Observable<any> {
     if (this.loginForm.invalid) {
       return of(null);
     }
-
     const { phone, password } = this.loginForm.value;
-    const formatedPhoneNumber = getFullNumber(phone);
-
-    return this.authApiService.login(formatedPhoneNumber, password).pipe(
-      filter(token => !!token),
-      tap(token => this.authService.saveToken(token))
+    return this.authApiService.login(phone, password).pipe(
+      filter(data => !!data),
+      tap(data => this.authService.saveUserData(data))
     );
   }
 
-  sendSms(phone: number): Observable<string> {
+  sendSms(phone: number): Observable<boolean> {
     return this.authApiService.sendSMS(phone);
+  }
+
+  signup(): Observable<any> {
+    if (this.signupForm.invalid) {
+      return of(null);
+    }
+    return this.authApiService.signup(this.signupForm.value).pipe(
+      filter(data => !!data),
+      tap(data => this.authService.saveUserData(data))
+    );
   }
 
 

@@ -1,4 +1,4 @@
-<mat-form-field [class.is-invalid]="control.invalid" appearance="fill">
+<mat-form-field [class.is-invalid]="control.invalid && control.touched" appearance="fill">
   <mat-label>{{label}}</mat-label>
   <input matInput
     aria-label="code"
@@ -19,9 +19,9 @@
   </mat-autocomplete>
 
   <mat-hint *ngIf="hint">{{hint}}</mat-hint>
-  <mat-error *ngFor="let error of (control.errors | controlErrors)">
+  <!-- <mat-error *ngFor="let error of (control.errors | controlErrors)">
     {{ error.message }}
-  </mat-error>
+  </mat-error> -->
 </mat-form-field>
 <ng-template #prefix>
   <div class="__prefix d-flex align-items-center" *ngIf="selectedCountry$ | async as selectedCountry">

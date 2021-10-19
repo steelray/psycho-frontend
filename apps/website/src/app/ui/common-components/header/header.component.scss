@@ -19,3 +19,16 @@
     }
   }
 }
+
+.user-ava {
+  width: 60px;
+  height: 60px;
+  background: var(--main-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 26px;
+  font-weight: 700;
+}

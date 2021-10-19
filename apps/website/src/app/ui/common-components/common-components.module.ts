@@ -4,6 +4,8 @@ import { CoreSharedModules } from '@psycho/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
+import { MatRippleModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 const COMPONENTS = [
   HeaderComponent,
@@ -16,7 +18,9 @@ const COMPONENTS = [
   imports: [
     CoreSharedModules,
     MatButtonModule,
-    MaterialIconCustomizeModule
+    MaterialIconCustomizeModule,
+    MatRippleModule,
+    MatMenuModule
   ]
 })
 export class CommonComponentsModule { }

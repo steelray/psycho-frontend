@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { FormFieldModule } from '@psycho/web/features';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { WebsiteWidgetsModule } from './ui/widgets/website-widgets.module';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -26,6 +27,7 @@ const maskConfig: Partial<IConfig> = {
     LazyLoadImageModule,
     FormFieldModule,
     NgxMaskModule.forRoot(maskConfig),
+    WebsiteWidgetsModule
 
   ],
   providers: [

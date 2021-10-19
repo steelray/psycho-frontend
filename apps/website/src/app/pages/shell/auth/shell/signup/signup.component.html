@@ -1,6 +1,6 @@
 <h1 class="title-1">Быстрая регистрация</h1>
 <div class="d-flex justify-content-between flex-wrap reg-wrap">
-  <form [formGroup]="form" (ngSubmit)="sendSMS()">
+  <form *ngIf="!(smsSent$ | async);else confirmForm" [formGroup]="form" (ngSubmit)="sendSMS()">
     <p>Моментальная регистрация.
       Введите свой номер телефона</p>
     <psycho-tel-input [control]="$any(controls.phone)"></psycho-tel-input> 
@@ -21,3 +21,30 @@
     </ul>
   </div>
 </div>
+<ng-template #confirmForm>
+  <form [formGroup]="form" (ngSubmit)="onSignup()">
+    <p>
+      Код отправлен на номер
+      <br>
+      {{controls.phone.value}}
+    </p>
+    <psycho-input 
+      [control]="$any(controls.code)"
+      placeholder="Код из смс"
+      class="code"></psycho-input>
+    <psycho-input 
+      [control]="$any(controls.password)"
+      placeholder="Придумайте пароль"
+      type="password"></psycho-input>
+    <psycho-input 
+      [control]="$any(controls.repeat_password)"
+      placeholder="Повторите пароль"
+      type="password"></psycho-input>
+    <div class="__hint">
+      Код действителен в течение 2-х минут.
+      Если код вам так и не пришел, нажмите <a href="#" (click)="sendSMS($event)">сюда</a> чтобы его переслать.
+    </div>
+    <button mat-raised-button color="primary">Даллее</button>
+
+  </form>
+</ng-template>

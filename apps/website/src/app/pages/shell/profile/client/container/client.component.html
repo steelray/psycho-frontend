@@ -1,0 +1,4 @@
+<psycho-profile-layout [showSidebar]="registrationCompleted$ | async">
+  <ng-container *ngIf="registrationCompleted$ | async" sidebar>sidebar</ng-container>
+  <router-outlet></router-outlet>
+</psycho-profile-layout>

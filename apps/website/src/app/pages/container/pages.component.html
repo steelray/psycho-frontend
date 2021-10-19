@@ -1,6 +1,8 @@
 <psycho-header 
   *ngIf="mainMenu$ | async as mainMenu" 
-  [menuItems]="mainMenu"></psycho-header>
+  [menuItems]="mainMenu"
+  [userData]="userData$ | async"
+  (logout)="onLogout()"></psycho-header>
 <main class="content">
   <router-outlet></router-outlet>
 </main>

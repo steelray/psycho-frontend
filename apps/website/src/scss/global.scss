@@ -49,6 +49,14 @@ psycho-root {
   }
 }
 
+a {
+  color: var(--main-color);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .title-1 {
   font-size: 36px;
   font-weight: 600;

@@ -1,0 +1,44 @@
+<mat-stepper linear #stepper>
+  <mat-step 
+    label="Выберите формат"
+    [stepControl]="formatForm"
+    [editable]="true">
+    formatForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step 
+    label="Общие вопросы"
+    [stepControl]="commonQuestionsForm"
+    [editable]="true">
+    commonQuestionsForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step 
+    label="Выберите тему"
+    [stepControl]="subjectsForm"
+    [editable]="true">
+    subjectsForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step 
+    label="Выбрите специалиста"
+    [stepControl]="specialistForm"
+    [editable]="true">
+    specialistForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step 
+    label="Выберите время"
+    [stepControl]="datetimeForm"
+    [editable]="true">
+    datetimeForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step 
+    label="Условия оплаты"
+    [editable]="false">
+    datetimeForm
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+
+</mat-stepper>

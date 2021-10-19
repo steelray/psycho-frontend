@@ -6,6 +6,22 @@
     <div *ngIf="menuItems" class="header__menu">
       <a *ngFor="let item of menuItems" [routerLink]="item.url" routerLinkActive="active">{{item.label}}</a>
     </div>
-    <a [routerLink]="['/auth/login']" mat-button class="__bold">Войти</a>
+    <a *ngIf="!userData;else userAva" [routerLink]="['/auth/login']" mat-button class="__bold">Войти</a>
   </div>
 </header>
+<ng-template #userAva>
+  <a mat-icon-button [matMenuTriggerFor]="menu" class="user-ava" mat-ripple>
+    A
+  </a>
+  <mat-menu #menu="matMenu">
+    <a [routerLink]="['/profile/messages']" mat-menu-item>
+      1 непрочитанное сообщение
+    </a>
+    <a [routerLink]="['/profile/notifications']" mat-menu-item>
+      Напоминание: сессия сегодня в 12:40
+    </a>
+    <button mat-menu-item (click)="onLogout()">
+      Выйти из личного кабинета
+    </button>
+  </mat-menu>
+</ng-template>
