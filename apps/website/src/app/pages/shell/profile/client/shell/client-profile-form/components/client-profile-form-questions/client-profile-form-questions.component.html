@@ -1,0 +1,45 @@
+<form [formGroup]="form" class="d-flex justify-content-between flex-wrap">
+  <div class="form-field d-flex flex-wrap align-items-center">
+    <div class="__label">Имя</div>
+    <div class="__input">
+      <psycho-input
+        *ngIf="form.get('first_name') as control"
+        [control]="$any(control)"></psycho-input>
+    </div>
+  </div>
+  <div class="form-field d-flex flex-wrap align-items-center">
+    <div class="__label">Фамилия</div>
+    <div class="__input">
+      <psycho-input
+        *ngIf="form.get('last_name') as control"
+        [control]="$any(control)"></psycho-input>
+    </div>
+  </div>
+  <div class="form-field d-flex flex-wrap align-items-center">
+    <div class="__label">Отчество</div>
+    <div class="__input">
+      <psycho-input
+        *ngIf="form.get('middle_name') as control"
+        [control]="$any(control)"></psycho-input>
+    </div>
+  </div>
+  <div class="form-field d-flex flex-wrap align-items-center">
+    <div class="__label">Год рождения</div>
+    <div class="__input">
+      <psycho-select
+        *ngIf="form.get('birthday') as control"
+        [control]="$any(control)"
+        [options]="yearsOptions"
+        hint="Для получения консультации вам должно быть не мнее 18 лет"></psycho-select>
+    </div>
+  </div>
+  <div class="form-field d-flex flex-wrap align-items-center">
+    <div class="__label">E-mail</div>
+    <div class="__input">
+      <psycho-input
+        *ngIf="form.get('email') as control"
+        [control]="$any(control)"></psycho-input>
+      <mat-checkbox *ngIf="form.get('subscribe') as control" [formControl]="$any(control)" >Подписаться на новости</mat-checkbox>
+    </div>
+  </div>
+</form>

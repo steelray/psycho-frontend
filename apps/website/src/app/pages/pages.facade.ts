@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AuthApiService, AuthService, IMenuItem, MenuApiService } from '@psycho/core';
+import { AuthService, IMenuItem, MenuApiService, WSService } from '@psycho/core';
 import { Observable } from 'rxjs';
-import { filter, map, shareReplay } from 'rxjs/operators';
+import { filter, shareReplay, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class PagesFacade {
   private _mainMenu$!: Observable<IMenuItem[]>;
-  private readonly _userData$!: Observable<any>;
+
   constructor(
-    private menuService: MenuApiService,
-    private authService: AuthService,
-    private authApiService: AuthApiService
+    private readonly menuService: MenuApiService,
+    private readonly authService: AuthService,
+    private readonly wsService: WSService
   ) { }
 
   get mainMenu$(): Observable<IMenuItem[]> {
@@ -25,8 +25,19 @@ export class PagesFacade {
   }
 
   get userData$(): Observable<any> {
-    return this.authService.isAuthed$;
+    return this.authService.userData$;
   }
+
+  // get unreadMessages(): Observable<number> {
+
+  //   return this.authService.userData$.pipe(
+  //     filter(data => !!data),
+  //     switchMap(data => this.wsService.afterOpen$),
+  //     switchMap(() => this.wsService.sendMessage({
+
+  //     }))
+  //   )
+  // }
 
   logout(): void {
     this.authService.logout();

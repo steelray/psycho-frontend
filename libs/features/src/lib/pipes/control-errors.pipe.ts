@@ -10,8 +10,6 @@ export class ControlErrorsPipe implements PipeTransform {
     if (controlErrors) {
 
       const errorsKeys = Object.keys(controlErrors);
-      console.log(controlErrors);
-
 
       for (const key of errorsKeys) {
         const controlError = controlErrors[key];

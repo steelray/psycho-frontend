@@ -5,5 +5,6 @@ import { IEnvironment } from '../environment.interface';
  */
 export const environmentBase: IEnvironment = {
   production: false,
-  apiEndpoint: '/api'
+  apiEndpoint: '/api',
+  wsEndpoint: 'ws://localhost:8080'
 };

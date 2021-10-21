@@ -1,0 +1,25 @@
+<ng-container *ngIf="psychologist">
+  <div class="__top d-flex align-items-start">
+    <psycho-picture class="__img" [origin]='psychologist.avatar' [alt]="psychologist | fio"></psycho-picture>
+    <div class="__text">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="__bottom">
+    <psycho-rating-stars [value]="psychologist.rating"></psycho-rating-stars>
+    <div class="__name">{{psychologist | fio}}</div>
+    <div class="__details d-flex  align-items-center justify-content-between">
+      <div class="d-flex">
+        <span class="d-flex align-items-center">
+          {{psychologist.birthday | datesDiff | agetostr}}
+        </span>
+        <span class="d-flex align-items-center">
+          Опыт работы {{psychologist.experience_since | datesDiff | agetostr}}
+        </span>
+      </div>
+      <ng-container *ngIf="chooseBtn">
+        <button mat-button (click)="onChoose(psychologist.id)">{{isChoosed ? 'Отмена' : 'Выбрать' }}</button>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

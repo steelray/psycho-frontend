@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  .__top {
+    margin-bottom: 10px;
+    background: var(--medium-gray-bg);
+    border-radius: 6px;
+  }
+  .__img {
+    position: relative;
+    width: 250px;
+    height: 340px;
+    border-radius: 6px;
+  }
+  .__text {
+    padding: 25px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  psycho-rating-stars {
+    margin-bottom: 5px;
+  }
+
+  .__name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 7px;
+  }
+  .__details {
+    font-size: 17px;
+    margin-bottom: 22px;
+    span {
+      margin-right: 35px;
+    }
+    mat-icon {
+      margin-right: 12px;
+    }
+  }
+}

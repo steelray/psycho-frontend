@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.__slogan {
+  margin-bottom: 20px;
+}
+.__education {
+  margin-bottom: 10px;
+  max-height: 170px;
+  overflow: hidden;
+  &.expanded {
+    max-height: none;
+  }
+  ::ng-deep {
+    * {
+      font-size: 16px !important;
+      font-family: var(--base-font-family) !important;
+    }
+  }
+}
+
+.__more {
+  color: var(--base-font-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--main-color);
+  border: none;
+  background: none;
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+.__grid {
+  > * {
+    width: calc(50% - 25px);
+    margin-bottom: 35px;
+  }
+}

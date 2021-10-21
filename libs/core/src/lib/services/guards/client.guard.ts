@@ -16,7 +16,6 @@ export class ClientGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.clientApiService.getClientData().pipe(
       map((res: IClient) => {
-        console.log(res);
 
         if (!res?.user?.first_name) {
           this.router.navigate(['/profile/complete-registration']);

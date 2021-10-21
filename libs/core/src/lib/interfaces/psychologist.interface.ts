@@ -14,10 +14,13 @@ export interface IPsychologist {
   rating: number;
   slogan: string;
   id: number;
+  education?: string;
+  description?: string;
 }
 
 export interface IPsychologistSearchParams {
   limit?: number;
   fio?: string;
   top?: 1 | 0;
+  expand?: string;
 }

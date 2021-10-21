@@ -9,4 +9,5 @@ import { ISubject } from '@psycho/core';
 })
 export class SubjectItemComponent {
   @Input() subject!: ISubject;
+  @Input() iconMode = false;
 }

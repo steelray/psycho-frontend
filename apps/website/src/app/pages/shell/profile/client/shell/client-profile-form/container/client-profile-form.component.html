@@ -3,42 +3,42 @@
     label="Выберите формат"
     [stepControl]="formatForm"
     [editable]="true">
-    formatForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-format [form]="formatForm"></psycho-client-profile-form-format>
+    <button mat-raised-button color="primary" [disabled]="formatForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Общие вопросы"
     [stepControl]="commonQuestionsForm"
     [editable]="true">
-    commonQuestionsForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-questions [form]="commonQuestionsForm" [yearsOptions]="yearsOptions"></psycho-client-profile-form-questions>
+    <button mat-raised-button color="primary" [disabled]="commonQuestionsForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Выберите тему"
     [stepControl]="subjectsForm"
     [editable]="true">
-    subjectsForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
+    <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Выбрите специалиста"
     [stepControl]="specialistForm"
     [editable]="true">
-    specialistForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
+    <button mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Выберите время"
     [stepControl]="datetimeForm"
     [editable]="true">
-    datetimeForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-datetime></psycho-client-profile-form-datetime>
+    <button mat-raised-button color="primary" [disabled]="datetimeForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Условия оплаты"
     [editable]="false">
-    datetimeForm
-    <button mat-button matStepperNext>Next</button>
+    <psycho-client-profile-form-payment-conditions></psycho-client-profile-form-payment-conditions>
+    <button mat-raised-button color="primary" matStepperNext>Далее</button>
   </mat-step>
 
 </mat-stepper>

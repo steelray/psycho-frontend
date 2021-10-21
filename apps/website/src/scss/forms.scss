@@ -1,4 +1,7 @@
 body {
+  input[type="text"]:focus {
+    outline: none !important;
+  }
   mat-form-field.mat-form-field {
     margin-bottom: 0;
   }

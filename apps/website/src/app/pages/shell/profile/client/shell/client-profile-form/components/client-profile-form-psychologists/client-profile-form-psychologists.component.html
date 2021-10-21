@@ -1,0 +1,28 @@
+<ng-container *ngIf="psychologists">
+  <div class="h4">Выберите специалиста</div>
+
+  <div class="d-flex __grid justify-content-between flex-wrap">
+    <psycho-psychologist-card 
+      *ngFor="let psychologist of psychologists" 
+      [psychologist]="psychologist" 
+      [chooseBtn]="true" 
+      [isChoosed]="form.get('psychologist_id')?.value === psychologist.id"
+      (choosed)="onChoose($event)">
+    
+      <div class="__slogan">
+        {{psychologist.slogan}}
+      </div>
+    
+      <div class="__education" [class.expanded]="psychologist.id === expandedText">
+        <strong>Образование</strong>
+        <div [innerHTML]="psychologist.education | safe:'html'"></div>
+      </div>
+    
+      <a href="#" (click)="expandEducationText($event, psychologist.id)" class="__more" >
+        {{expandedText === psychologist.id ? 'Скрыть' : 'Подробнее'}}
+      </a>
+    
+         
+    </psycho-psychologist-card>
+  </div>
+</ng-container>

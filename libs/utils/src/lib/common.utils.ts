@@ -224,3 +224,14 @@ export function simulateAClick(link: string): void {
     console.log(err.message);
   }
 }
+
+export function generateYears(start: number, end?: number): number[] {
+  if (!end) {
+    end = new Date().getFullYear();
+  }
+  if (end <= start) {
+    return [start];
+  }
+
+  return new Array(end - start).fill(start).map((k, v) => v + k);
+}

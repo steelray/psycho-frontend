@@ -1,56 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ISubject } from '@psycho/core';
 
-const SUBJECTS_MOCK: ISubject[] = [
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-1.png'
-  },
-  {
-    title: 'Поиск себя и своего призвания',
-    image: '/assets/img/cat-2.png'
-  },
-  {
-    title: 'Трудности в отношениях',
-    image: '/assets/img/cat-3.png'
-  },
-  {
-    title: 'Неуверенность в себе',
-    image: '/assets/img/cat-4.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-5.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-6.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-7.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-8.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-9.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-10.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-11.png'
-  },
-  {
-    title: 'Отношения в семье',
-    image: '/assets/img/cat-12.png'
-  }
-];
+const SUBJECTS_MOCK: ISubject[] = [];
 
 @Component({
   selector: 'psycho-home-subjects',

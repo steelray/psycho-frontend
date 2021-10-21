@@ -12,8 +12,6 @@ export class MenuApiService extends ApiService {
     return this.get<IMenuItem[]>(`menu/${menuId}`).pipe(
       map(items => items.map(item => {
         item.url = item?.url[0];
-        console.log(item);
-
         return item;
       }))
     );

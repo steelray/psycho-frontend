@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthApiService, AuthService, WindowService } from '@psycho/core';
+import { AuthApiService, AuthService } from '@psycho/core';
 import { Observable, of } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
@@ -10,9 +10,7 @@ export class AuthFacade {
 
   constructor(
     private readonly authApiService: AuthApiService,
-    private readonly authService: AuthService,
-
-    private windowService: WindowService
+    private readonly authService: AuthService
   ) {
 
   }

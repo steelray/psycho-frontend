@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+.__col {
+  width: 50%;
+  min-width: 400px;
+}
+
+.form-field {
+  align-items: center;
+  width: calc(50% - 40px);
+  min-width: 450px;
+  margin-bottom: 0;
+  .__label {
+    width: 200px;
+    padding-right: 15px;
+    padding-bottom: 1.25em;
+  }
+  .__input {
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -25,6 +25,7 @@
     "@angular/router": "^12.2.0",
     "@nrwl/angular": "12.9.0",
     "@rxweb/reactive-form-validators": "^2.1.4",
+    "@zoomus/websdk": "^1.9.9",
     "angular2-text-mask": "^9.0.0",
     "countries-phone-masks": "^1.0.0",
     "flatpickr": "^4.6.9",

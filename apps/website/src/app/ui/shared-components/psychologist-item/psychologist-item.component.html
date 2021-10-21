@@ -1,7 +1,6 @@
 <ng-container *ngIf="psychologist">
-  <div class="__img">
-    <img [src]="psychologist.avatar" alt="">
-  </div>
+  <psycho-picture [origin]="psychologist.avatar" [alt]="psychologist | fio" class="__img">
+  </psycho-picture>
   <psycho-rating-stars [value]="psychologist.rating"></psycho-rating-stars>
   <div class="__name">{{psychologist | fio}}</div>
   <div class="__slogan">“
@@ -9,7 +8,7 @@
   <div class="__details d-flex  align-items-center">
     <span class="d-flex align-items-center">
       <mat-icon svgIcon="experience"></mat-icon>
-      Опыт работы {{psychologist.experience_since | datesDiff}} лет
+      Опыт работы {{psychologist.experience_since | datesDiff | agetostr}}
     </span>
     <span class="d-flex align-items-center">
       <mat-icon svgIcon="degree"></mat-icon>

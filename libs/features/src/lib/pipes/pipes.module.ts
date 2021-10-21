@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
+import { AgeTostrPipe } from './agetostr.pipe';
 import { ControlErrorsPipe } from './control-errors.pipe';
 import { DatesDiffPipe } from './dates-diff.pipe';
 import { FIOPipe } from './fio.pipe';
+import { InArrayPipe } from './in-array.pipe';
 import { IsExpiredPipe } from './is-expired.pipe';
 import { LocalizedDatePipe } from './localized-date.pipe';
 import { PhonePipe } from './phone.pipe';
@@ -16,7 +18,9 @@ const PIPES = [
   PhonePipe,
   LocalizedDatePipe,
   FIOPipe,
-  DatesDiffPipe
+  DatesDiffPipe,
+  InArrayPipe,
+  AgeTostrPipe
 ];
 
 @NgModule({

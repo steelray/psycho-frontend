@@ -14,6 +14,9 @@ export class ClientProfileFormComponent {
   readonly subjectsForm = this.facade.subjectsForm;
   readonly specialistForm = this.facade.specialistForm;
   readonly datetimeForm = this.facade.datetimeForm;
+  readonly yearsOptions = this.facade.yearsOptions;
+  readonly subjects$ = this.facade.subjects$;
+  readonly psychologists$ = this.facade.psychologists$;
 
   constructor(
     private readonly facade: ClientProfileFormFacade
