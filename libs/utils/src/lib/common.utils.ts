@@ -1,4 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 export const sizeInMb = (size: number): number => {
   // tslint:disable-next-line:no-magic-numbers
@@ -234,4 +235,8 @@ export function generateYears(start: number, end?: number): number[] {
   }
 
   return new Array(end - start).fill(start).map((k, v) => v + k);
+}
+
+export function monthsList(format = 'MMM', locale = 'ru'): string[] {
+  return Array.apply(0, Array(12)).map(function (_, i) { return moment().month(i).locale(locale).format(format) });
 }

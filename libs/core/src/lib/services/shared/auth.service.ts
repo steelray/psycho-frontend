@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { IUserAuthData } from '@psycho/core';

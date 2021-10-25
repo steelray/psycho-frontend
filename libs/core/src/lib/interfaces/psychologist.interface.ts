@@ -24,3 +24,13 @@ export interface IPsychologistSearchParams {
   top?: 1 | 0;
   expand?: string;
 }
+
+export interface IPsychologistSchedule {
+  id: number;
+  datetime: number;
+}
+
+export interface IGroupedSchedule {
+  date: string;
+  times: number[]
+}

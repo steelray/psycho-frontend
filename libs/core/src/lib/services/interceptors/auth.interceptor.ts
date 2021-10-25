@@ -13,7 +13,7 @@ const guestMethods = [
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private AUTH_HEADER = 'Authentication';
+  private AUTH_HEADER = 'Authorization';
 
   constructor(
     private readonly authService: AuthService
@@ -37,6 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         if (token && !guestMethods.find(method => req.url.includes(method))) {
+
           headers = headers.append(this.AUTH_HEADER, 'Bearer ' + token);
         }
         return next.handle(req.clone({ headers }));

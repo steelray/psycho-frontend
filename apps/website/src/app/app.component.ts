@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
-import { HttpErrorService } from '@psycho/core';
+import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
+import { HttpErrorService, PsychologistApiService } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -11,10 +11,11 @@ import { filter, takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SnackbarService]
 })
-export class AppComponent extends WithDestroy() {
+export class AppComponent extends WithDestroy() implements OnInit {
   constructor(
     @Self() private readonly snackbar: SnackbarService,
-    private readonly errorService: HttpErrorService
+    private readonly errorService: HttpErrorService,
+    private readonly psychologistApiService: PsychologistApiService
   ) {
     super();
     errorService.error$.pipe(
@@ -24,6 +25,12 @@ export class AppComponent extends WithDestroy() {
       if (res) {
         this.snackbar.error(res);
       }
+    });
+  }
+
+  ngOnInit(): void {
+    this.psychologistApiService.getMonthSchedule(2021, 10, 7).subscribe(res => {
+      console.log(res);
     });
   }
 

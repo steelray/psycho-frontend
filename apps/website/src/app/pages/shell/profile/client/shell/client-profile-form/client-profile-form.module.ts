@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedComponentsModule } from '../../../../../../ui/shared-components/shared-components.module';
 import { PipesModule } from '@psycho/features';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PipesModule } from '@psycho/features';
     ReactiveFormsModule,
     MatCheckboxModule,
     SharedComponentsModule,
-    PipesModule
+    PipesModule,
+    MatIconModule
   ]
 })
 export class ClientProfileFormModule { }

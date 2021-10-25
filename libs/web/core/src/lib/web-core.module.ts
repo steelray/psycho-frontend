@@ -2,7 +2,8 @@ import { LOCALE_ID, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { throwIfAlreadyLoaded } from '@psycho/utils';
 import {
-  CoreModule, CUSTOM_DATE_FORMATS, HttpErrorInterceptor,
+  AuthInterceptor,
+  CoreModule, CUSTOM_DATE_FORMATS, HttpErrorInterceptor, TimestampInterceptor,
 } from '@psycho/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -32,6 +33,16 @@ function winFactory(): any {
       {
         provide: HTTP_INTERCEPTORS,
         useClass: HttpErrorInterceptor,
+        multi: true
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TimestampInterceptor,
         multi: true
       },
       { provide: LOCALE_ID, useValue: 'ru' },

@@ -1,6 +1,6 @@
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { IPsychologist, IPsychologistSearchParams } from '../../interfaces/psychologist.interface';
+import { IPsychologist, IPsychologistSchedule, IPsychologistSearchParams } from '../../interfaces/psychologist.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -15,6 +15,10 @@ export class PsychologistApiService extends ApiService {
 
   fetchOne(id: number): Observable<IPsychologist> {
     return this.get(`${this.controller}/${id}`);
+  }
+
+  getMonthSchedule(year: number, month: number, psychologistId: number): Observable<IPsychologistSchedule[]> {
+    return this.get(`${this.controller}/get-month-schedule/${year}/${month}/${psychologistId}`);
   }
 
 }

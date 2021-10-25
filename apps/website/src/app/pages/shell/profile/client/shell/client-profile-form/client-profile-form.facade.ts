@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IPsychologist, ISelectOption, ISubject, PsychologistApiService, SubjectApiService } from '@psycho/core';
+import { IGroupedSchedule, IPsychologist, IPsychologistSchedule, ISelectOption, ISubject, PsychologistApiService, SubjectApiService } from '@psycho/core';
 import { generateYears } from '@psycho/utils';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import * as moment from 'moment';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ClientProfileFormFacade {
@@ -21,6 +22,16 @@ export class ClientProfileFormFacade {
     shareReplay()
   );
 
+  private _formatForm!: FormGroup;
+  private _commonQuestionsForm!: FormGroup;
+  private _subjectsForm!: FormGroup;
+  private _specialistForm!: FormGroup;
+  private _datetimeForm!: FormGroup;
+  private _scheduleForm!: FormGroup;
+  private _selectedPsychologist$!: Observable<IPsychologist>;
+  private _selectedPsychologistSchedule$!: Observable<IPsychologistSchedule[]>;
+
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly subjectApiService: SubjectApiService,
@@ -28,50 +39,126 @@ export class ClientProfileFormFacade {
   ) { }
 
   get formatForm(): FormGroup {
-    return this.fb.group({
-      format: [null, RxwebValidators.required()]
-    });
+    if (!this._formatForm) {
+      this._formatForm = this.fb.group({
+        format: [null, RxwebValidators.required()]
+      });
+    }
+    return this._formatForm;
   }
 
   get commonQuestionsForm(): FormGroup {
-    return this.fb.group({
-      first_name: [null, [
-        RxwebValidators.required(),
-        RxwebValidators.alpha()
-      ]],
-      last_name: [null, [
-        RxwebValidators.alpha()
-      ]],
-      middle_name: [null, [
-        RxwebValidators.alpha()
-      ]],
-      birthday: [null, [
-        RxwebValidators.required()
-      ]],
-      email: [null, [
-        RxwebValidators.required(),
-        RxwebValidators.email()
-      ]],
-      subscribe: [true]
-    });
+    if (!this._commonQuestionsForm) {
+      this._commonQuestionsForm = this.fb.group({
+        first_name: [null, [
+          RxwebValidators.required(),
+          RxwebValidators.alpha()
+        ]],
+        last_name: [null, [
+          RxwebValidators.alpha()
+        ]],
+        middle_name: [null, [
+          RxwebValidators.alpha()
+        ]],
+        birthday: [null, [
+          RxwebValidators.required()
+        ]],
+        email: [null, [
+          RxwebValidators.required(),
+          RxwebValidators.email()
+        ]],
+        subscribe: [true]
+      });
+    }
+    return this._commonQuestionsForm;
   }
 
   get subjectsForm(): FormGroup {
-    return this.fb.group({
-      subjects: [null, [RxwebValidators.required()]]
-    });
+    if (!this._subjectsForm) {
+      this._subjectsForm = this.fb.group({
+        subjects: [null, [RxwebValidators.required()]]
+      });
+    }
+    return this._subjectsForm;
   }
 
   get specialistForm(): FormGroup {
-    return this.fb.group({
-      psychologist_id: [null, [RxwebValidators.required(), RxwebValidators.numeric()]]
-    });
+    if (!this._specialistForm) {
+      this._specialistForm = this.fb.group({
+        psychologist_id: [null, [RxwebValidators.required(), RxwebValidators.numeric()]]
+      });
+    }
+    return this._specialistForm;
   }
 
   get datetimeForm(): FormGroup {
-    return this.fb.group({
-      datetime: [null, [RxwebValidators.required()]]
-    });
+    if (!this._datetimeForm) {
+      this._datetimeForm = this.fb.group({
+        datetime: [null, [RxwebValidators.required()]],
+      });
+    }
+    return this._datetimeForm;
+  }
+
+  get scheduleForm(): FormGroup {
+    if (!this._scheduleForm) {
+      this._scheduleForm = this.fb.group({
+        year: [new Date().getFullYear()],
+        month: [new Date().getMonth() + 1],
+        date: [new Date().getDate(), RxwebValidators.required()],
+        psychologist_id: [null, RxwebValidators.required()]
+      });
+    }
+    return this._scheduleForm;
+  }
+
+  get selectedPsychologist$(): Observable<IPsychologist | undefined> {
+    return this._specialistForm.valueChanges.pipe(
+      map(res => res.psychologist_id),
+      filter(id => !!id),
+      switchMap(id => this.psychologists$.pipe(
+        map(psychologists => psychologists.find(psychologist => psychologist.id === id))
+      )),
+      tap(console.log)
+    );
+  }
+
+  get selectedPsychologistGroupedSchedule$(): Observable<IGroupedSchedule[]> {
+    return this._specialistForm.valueChanges.pipe(
+      map(res => res?.psychologist_id),
+      filter(psychologist_id => !!psychologist_id),
+      switchMap(psychologistId => this._datetimeForm.valueChanges.pipe(
+        startWith({ ...this.defaultDatetimeValue(), psychologist_id: psychologistId }),
+      )),
+      filter(res => !!res),
+      switchMap(res => this.psychologistApiService.getMonthSchedule(res.year, res.month, res.psychologist_id)),
+      map(res => {
+        const arr: IGroupedSchedule[] = [];
+        res.forEach((item: IPsychologistSchedule) => {
+          const date = moment(item.datetime * 1000).format('YYYY.MM.DD');
+          const exists = arr.find(i => i.date === date);
+          if (exists) {
+            exists.times.push(item.datetime * 1000);
+          } else {
+            arr.push({
+              date,
+              times: [item.datetime * 1000]
+            })
+          }
+        });
+        return arr;
+      })
+    );
+  }
+
+  private defaultDatetimeValue(): { year: number, month: number, date: number, psychologist_id: number | null } {
+    const now = new Date();
+    return {
+      year: now.getFullYear(),
+      month: now.getMonth() + 1,
+      date: now.getDate(),
+      psychologist_id: null
+    }
   }
 
 }

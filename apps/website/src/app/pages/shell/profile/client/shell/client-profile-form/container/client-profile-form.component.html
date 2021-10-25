@@ -31,8 +31,11 @@
     label="Выберите время"
     [stepControl]="datetimeForm"
     [editable]="true">
-    <psycho-client-profile-form-datetime></psycho-client-profile-form-datetime>
-    <button mat-raised-button color="primary" [disabled]="datetimeForm.invalid" matStepperNext>Далее</button>
+    <psycho-client-profile-form-datetime
+      [form]="scheduleForm"
+      [psychologist]="$any(selectedPsychologist$ | async)"
+      [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
+    <button mat-raised-button color="primary" [disabled]="scheduleForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <mat-step 
     label="Условия оплаты"
