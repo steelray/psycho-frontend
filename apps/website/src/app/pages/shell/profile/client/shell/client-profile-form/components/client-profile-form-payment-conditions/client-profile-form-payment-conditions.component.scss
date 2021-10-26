@@ -1,3 +1,28 @@
 :host {
   display: block;
 }
+
+.h4 {
+  margin-bottom: 10px;
+  &:not(.bold) {
+    font-weight: 600;
+  }
+}
+
+.__card {
+  margin-bottom: 10px;
+  .__img {
+    width: 250px;
+    margin-right: 65px;
+    psycho-picture {
+      height: 290px;
+      border-radius: 6px;
+    }
+  }
+  .__text {
+    padding: 30px 50px;
+    background: var(--card-gray-bg);
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IGroupedSchedule, IPsychologist, IPsychologistSchedule, ISelectOption } from '@psycho/core';
+import { IGroupedSchedule, IGroupedScheduleTime, IPsychologist, ISelectOption } from '@psycho/core';
 import { generateYears, monthsList } from '@psycho/utils';
-import * as moment from 'moment';
 
 @Component({
   selector: 'psycho-client-profile-form-datetime',
@@ -11,14 +10,16 @@ import * as moment from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClientProfileFormDatetimeComponent {
-  @Input() form!: FormGroup;
+  @Input() scheduleForm!: FormGroup;
   @Input() psychologist!: IPsychologist;
   @Input() schedule!: IGroupedSchedule[];
+  @Input() datetimeForm!: FormGroup;
 
   educationExpanded = false;
   descriptionExpanded = false;
 
-  onToggle(blockName: 'education' | 'description'): void {
+  onToggle(e: Event, blockName: 'education' | 'description'): void {
+    e.preventDefault();
     if (blockName === 'education') {
       this.educationExpanded = !this.educationExpanded;
     } else {
@@ -34,10 +35,15 @@ export class ClientProfileFormDatetimeComponent {
   }
 
   get yearOptions(): ISelectOption[] {
-    return generateYears(new Date().getFullYear(), new Date().getFullYear() + 1).map(y => ({
+    return generateYears(new Date().getFullYear(), new Date().getFullYear() + 2).map(y => ({
       value: y,
       title: `${y}`
     }));
+  }
+
+  onSelect(time: IGroupedScheduleTime): void {
+    this.datetimeForm.get('schedule_id')?.setValue(time.id);
+    this.datetimeForm.get('datetime')?.setValue(time.time);
   }
 
 }

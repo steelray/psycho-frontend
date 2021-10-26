@@ -31,7 +31,7 @@ export class ClientProfileFormSubjectsComponent {
   }
 
   get control(): FormControl | AbstractControl | null {
-    return this.form.get('subjects');
+    return this.form.get('subjectIds');
   }
 
   trackByFn(index: number): number {

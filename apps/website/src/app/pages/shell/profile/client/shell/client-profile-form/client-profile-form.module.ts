@@ -16,7 +16,7 @@ import { FormFieldModule } from '@psycho/web/features';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedComponentsModule } from '../../../../../../ui/shared-components/shared-components.module';
-import { PipesModule } from '@psycho/features';
+import { PipesModule, UIModule } from '@psycho/features';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -41,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCheckboxModule,
     SharedComponentsModule,
     PipesModule,
-    MatIconModule
+    MatIconModule,
+    UIModule
   ]
 })
 export class ClientProfileFormModule { }

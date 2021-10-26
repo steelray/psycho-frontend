@@ -45,8 +45,8 @@ function winFactory(): any {
         useClass: TimestampInterceptor,
         multi: true
       },
-      { provide: LOCALE_ID, useValue: 'ru' },
-      { provide: MAT_DATE_LOCALE, useValue: 'ru' },
+      { provide: LOCALE_ID, useValue: 'ru-RU' },
+      { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
       { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
       { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
       {

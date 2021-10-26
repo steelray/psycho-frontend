@@ -1,5 +1,5 @@
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IPsychologist, IPsychologistSchedule, IPsychologistSearchParams } from '../../interfaces/psychologist.interface';
 import { Injectable } from '@angular/core';
 
@@ -19,6 +19,10 @@ export class PsychologistApiService extends ApiService {
 
   getMonthSchedule(year: number, month: number, psychologistId: number): Observable<IPsychologistSchedule[]> {
     return this.get(`${this.controller}/get-month-schedule/${year}/${month}/${psychologistId}`);
+  }
+
+  getConsultationPrice(format: 1 | 2 | 3): Observable<number> {
+    return of(format === 1 ? 2490 : 250);
   }
 
 }

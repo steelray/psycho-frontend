@@ -44,7 +44,8 @@
       Код действителен в течение 2-х минут.
       Если код вам так и не пришел, нажмите <a href="#" (click)="sendSMS($event)">сюда</a> чтобы его переслать.
     </div>
-    <button mat-raised-button color="primary">Даллее</button>
+    <button mat-raised-button color="primary">Далее</button>
+    <button type="button" (click)="goBack()" mat-raised-button >Назад</button>
 
   </form>
 </ng-template>

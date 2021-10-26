@@ -59,8 +59,13 @@ export class SignupComponent extends WithDestroy() {
       finalize(() => this.isLoading = false),
       takeUntil(this.destroy$),
     ).subscribe(() => {
-      this.router.navigate(['/profile/settings']);
+
+      this.router.navigate(['/profile']);
     });
+  }
+
+  goBack(): void {
+    this.smsSent$.next(false);
   }
 
 }

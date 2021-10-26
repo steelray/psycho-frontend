@@ -9,7 +9,8 @@ export class TimestampInterceptor implements HttpInterceptor {
     'updated_at',
     'datetime',
     'birthday',
-    'published_at'
+    'published_at',
+    'experience_since'
   ];
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

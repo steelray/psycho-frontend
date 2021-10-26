@@ -1,1 +1,26 @@
-<p>client-profile-form-payment-conditions works!</p>
+<ng-container *ngIf="psychologist">
+  <div class="h4 bold">Условия оплаты</div>
+  <div class="__card d-flex">
+    <div class="__img">
+      <p>Вы записаны к специалисту</p>
+      <psycho-picture [origin]="psychologist.avatar" [alt]="psychologist | fio"></psycho-picture>
+    </div>
+    <div class="__text">
+      <div class="__title">
+        Стоимость сессии составит {{price | number}} ₽.
+      </div>
+      <p>
+        После того, как вы привяжете карту, мы снимем с неё 1 рубль. Это стандартная процедура проверки.
+      </p>
+      <p>
+        Деньги списываются с карты за 12 часов до сессии – и после того, как это произошло, вы уже не сможете ее перенести или отменить.
+
+      </p>
+      <p>Вы в любой момент можете отвязать свою карту. Это можно сделать в личном кабинете.</p>
+      <p>Все сессии проводятся из личного кабинета, в том формате, который вы выбрали.</p>
+    </div>
+  </div>
+  <div class="h4">{{psychologist | fio}}</div>
+  <div class="h4">Дата и время сессии:</div>
+  <div *ngIf="datetime">{{datetime |  date:'d MMM, EEEE HH:mm'}}</div>
+</ng-container>

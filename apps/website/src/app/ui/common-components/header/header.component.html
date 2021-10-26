@@ -14,6 +14,9 @@
     A
   </a>
   <mat-menu #menu="matMenu">
+    <a [routerLink]="['/profile']" mat-menu-item>
+      Мой профиль
+    </a>
     <a [routerLink]="['/profile/messages']" mat-menu-item>
       1 непрочитанное сообщение
     </a>

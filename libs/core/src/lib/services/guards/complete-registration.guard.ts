@@ -7,7 +7,7 @@ import { IUser } from '@psycho/core';
 
 
 @Injectable({ providedIn: 'root' })
-export class ClientGuard implements CanActivate {
+export class CompleteRegistrationGuard implements CanActivate {
   constructor(
     private readonly router: Router,
     private readonly clientApiService: ClientApiService
@@ -16,8 +16,8 @@ export class ClientGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.clientApiService.getClientData().pipe(
       map((res: IUser) => {
-        if (!res.first_name) {
-          this.router.navigate(['/profile/complete-registration']);
+        if (res.first_name) {
+          this.router.navigate(['/profile']);
           return false;
         }
         return true;

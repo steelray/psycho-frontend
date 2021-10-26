@@ -22,26 +22,22 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let headers = req.headers;
+    const token = this.authService.currentToken;
 
-    return this.authService.userData$.pipe(
-      map(data => data?.token),
-      switchMap((token: string | undefined) => {
-        if (req.url.includes('login') || !token) {
-          return next.handle(req);
-        }
+    if (req.url.includes('login') || !token) {
+      return next.handle(req);
+    }
 
-        if (headers.has('x-legacy')) {
-          // todo remove after api-service cleanup
-          headers = headers.delete('x-legacy');
-          return next.handle(req.clone({ headers }));
-        }
+    if (headers.has('x-legacy')) {
+      // todo remove after api-service cleanup
+      headers = headers.delete('x-legacy');
+      return next.handle(req.clone({ headers }));
+    }
 
-        if (token && !guestMethods.find(method => req.url.includes(method))) {
+    if (token && !guestMethods.find(method => req.url.includes(method))) {
 
-          headers = headers.append(this.AUTH_HEADER, 'Bearer ' + token);
-        }
-        return next.handle(req.clone({ headers }));
-      })
-    );
+      headers = headers.append(this.AUTH_HEADER, 'Bearer ' + token);
+    }
+    return next.handle(req.clone({ headers }));
   }
 }

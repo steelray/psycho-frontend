@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as moment from 'moment';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { finalize, tap } from 'rxjs/operators';
 import { ClientProfileFormFacade } from '../client-profile-form.facade';
 
 @Component({
@@ -21,10 +21,23 @@ export class ClientProfileFormComponent {
   readonly psychologists$ = this.facade.psychologists$;
   readonly selectedPsychologist$ = this.facade.selectedPsychologist$;
   readonly selectedPsychologistGroupedSchedule$ = this.facade.selectedPsychologistGroupedSchedule$;
+  isSaving = false;
 
   constructor(
-    private readonly facade: ClientProfileFormFacade
+    private readonly facade: ClientProfileFormFacade,
+    private readonly cdRef: ChangeDetectorRef
   ) {
+  }
+
+  onCompleteRegistration(stepper: any): void {
+    this.isSaving = true;
+    this.facade.onCompleteRegistration().pipe(
+      tap(() => this.cdRef.markForCheck()),
+    ).subscribe(() => {
+      stepper.next();
+      this.isSaving = false;
+      this.cdRef.detectChanges();
+    });
   }
 
 }

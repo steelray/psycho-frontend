@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientGuard } from '@psycho/core';
+import { ClientGuard, CompleteRegistrationGuard } from '@psycho/core';
 import { ClientComponent } from './container/client.component';
 
 const routes: Routes = [
@@ -10,7 +10,8 @@ const routes: Routes = [
     children: [
       {
         path: 'complete-registration',
-        loadChildren: () => import('./shell/client-profile-form/client-profile-form.module').then(m => m.ClientProfileFormModule)
+        loadChildren: () => import('./shell/client-profile-form/client-profile-form.module').then(m => m.ClientProfileFormModule),
+        canActivate: [CompleteRegistrationGuard]
       },
       {
         path: 'questions',

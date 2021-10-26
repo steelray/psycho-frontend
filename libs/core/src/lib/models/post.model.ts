@@ -22,7 +22,7 @@ export class Post implements IPost {
     this.author = post?.author;
     this.tags = post?.tags;
     this.pictures = post?.pictures;
-    this.published_at = post?.published_at ? post.published_at * 1000 : new Date().getTime();
+    this.published_at = post?.published_at ? post.published_at : new Date().getTime();
     this.description = post?.description;
     this.content = post?.content;
     this.category = post?.category;

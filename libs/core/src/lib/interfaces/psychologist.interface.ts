@@ -32,5 +32,10 @@ export interface IPsychologistSchedule {
 
 export interface IGroupedSchedule {
   date: string;
-  times: number[]
+  times: IGroupedScheduleTime[]
+}
+
+export interface IGroupedScheduleTime {
+  id: number;
+  time: number;
 }

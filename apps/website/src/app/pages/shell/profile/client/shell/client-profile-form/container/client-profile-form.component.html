@@ -32,16 +32,23 @@
     [stepControl]="datetimeForm"
     [editable]="true">
     <psycho-client-profile-form-datetime
-      [form]="scheduleForm"
+      [scheduleForm]="scheduleForm"
+      [datetimeForm]="datetimeForm"
       [psychologist]="$any(selectedPsychologist$ | async)"
       [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
-    <button mat-raised-button color="primary" [disabled]="scheduleForm.invalid" matStepperNext>Далее</button>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Завершить регистрацию</button>
+      </div>
   </mat-step>
   <mat-step 
     label="Условия оплаты"
     [editable]="false">
-    <psycho-client-profile-form-payment-conditions></psycho-client-profile-form-payment-conditions>
-    <button mat-raised-button color="primary" matStepperNext>Далее</button>
+      <psycho-client-profile-form-payment-conditions
+        [psychologist]="$any(selectedPsychologist$ | async)"
+        [datetime]="datetimeForm.get('datetime')?.value"></psycho-client-profile-form-payment-conditions>
+        <div class="d-flex justify-content-center">
+          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Привязать карту</a>
+        </div>
   </mat-step>
 
 </mat-stepper>

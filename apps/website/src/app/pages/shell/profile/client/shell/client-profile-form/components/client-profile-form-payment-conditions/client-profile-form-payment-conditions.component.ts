@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
+import { IPsychologist } from '@psycho/core';
 
 @Component({
   selector: 'psycho-client-profile-form-payment-conditions',
@@ -6,11 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./client-profile-form-payment-conditions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientProfileFormPaymentConditionsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class ClientProfileFormPaymentConditionsComponent {
+  @Input() psychologist!: IPsychologist;
+  @Input() price = 2490;
+  @Input() datetime!: number | null | undefined;
 
 }

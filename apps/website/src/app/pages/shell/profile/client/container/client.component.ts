@@ -16,7 +16,7 @@ export class ClientComponent {
 
   get registrationCompleted$(): Observable<boolean> {
     return this.clientApiService.getClientData().pipe(
-      map(data => !!data?.user?.first_name)
+      map(data => !!data?.first_name)
     )
   }
 

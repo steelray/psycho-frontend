@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -34,7 +34,9 @@ const maskConfig: Partial<IConfig> = {
     {
       provide: ENVIRONMENTS,
       useValue: environment
-    }
+    },
+    { provide: LOCALE_ID, useValue: "ru-RU" }, //replace "en-US" with your locale
+
   ],
   bootstrap: [AppComponent],
 })
