@@ -1,0 +1,36 @@
+<h2 class="title-3">Экспресс-консультация</h2>
+<psycho-profile-chat-layout>
+  <ng-container new>
+    
+    <div class="__item"
+      mat-ripple 
+      (click)="onSelect(1)"
+      [class.active]="selectedItem === 1"  
+    >
+      <div class="__item-header d-flex align-items-center">
+        <psycho-picture></psycho-picture>
+        <div class="__item-name">Петрова Марина</div>
+      </div>
+      <div class="__item-btns d-flex">
+        <a class="__btn" href="#" mat-button>Подробнее</a>
+      </div>
+    </div>
+
+  </ng-container>
+  <ng-container past>
+    <div class="__item"
+      mat-ripple 
+      (click)="onSelect(1)"
+      [class.active]="selectedItem === 1"  
+    >
+      <div class="__item-header d-flex align-items-center">
+        <psycho-picture></psycho-picture>
+        <div class="__item-name">Петрова Марина</div>
+      </div>
+      <div class="__item-btns d-flex justify-content-between">
+        <a class="__btn" href="#" mat-button>Подробнее</a>
+        <a class="__btn __primary" href="#" mat-raised-button color="primary">Записаться</a>
+      </div>
+    </div>
+  </ng-container>
+</psycho-profile-chat-layout>

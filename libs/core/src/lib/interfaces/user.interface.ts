@@ -9,5 +9,5 @@ export interface IUser {
 export interface IUserAuthData {
   token: string;
   is_client: boolean;
-  is_psychologis: boolean;
+  is_psychologist: boolean;
 }

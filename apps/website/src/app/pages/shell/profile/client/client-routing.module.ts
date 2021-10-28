@@ -19,6 +19,11 @@ const routes: Routes = [
         canActivate: [ClientGuard]
       },
       {
+        path: 'psychologists',
+        loadChildren: () => import('./shell/client-psychologists/client-psychologists.module').then(m => m.ClientPsychologistsModule),
+        canActivate: [ClientGuard]
+      },
+      {
         path: '',
         redirectTo: 'questions'
       }

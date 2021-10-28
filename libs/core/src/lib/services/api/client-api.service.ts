@@ -23,7 +23,7 @@ export class ClientApiService extends ApiService {
           //     id: 1
           //   }
           // })
-          this._clientData$ = this.get<IUser>(this.controller).pipe(
+          this._clientData$ = this.get<IUser>(`${this.controller}/profile`).pipe(
             shareReplay()
           );
         }

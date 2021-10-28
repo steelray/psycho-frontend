@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ClientQuestionsRoutingModule } from './client-questions-routing.module';
-import { ClientQuestionsComponent } from './client-questions.component';
+import { ClientQuestionsComponent } from './container/client-questions.component';
+import { CoreSharedModules } from '@psycho/core';
+import { UIModule } from '@psycho/features';
+import { ProfileSharedComponentsModule } from '../../../shared/components/profile-shared-components.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -10,8 +14,12 @@ import { ClientQuestionsComponent } from './client-questions.component';
     ClientQuestionsComponent
   ],
   imports: [
-    CommonModule,
-    ClientQuestionsRoutingModule
+    CoreSharedModules,
+    UIModule,
+    ProfileSharedComponentsModule,
+    ClientQuestionsRoutingModule,
+    MatButtonModule,
+    MatRippleModule
   ]
 })
 export class ClientQuestionsModule { }

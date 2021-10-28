@@ -1,4 +1,14 @@
-<psycho-profile-layout [showSidebar]="registrationCompleted$ | async">
-  <ng-container *ngIf="registrationCompleted$ | async" sidebar>sidebar</ng-container>
+<psycho-profile-layout *ngIf="userData$ | async as userData" 
+  [showSidebar]="registrationCompleted$ | async"
+  [isClient]="(userAuthData$ | async)?.is_client"
+  [isPsychologist]="(userAuthData$ | async)?.is_psychologist"
+>
+  <ng-container *ngIf="registrationCompleted$ | async" sidebar>
+    <psycho-profile-sidebar-header [user]="userData"></psycho-profile-sidebar-header>
+    <psycho-profile-sidebar-menu [menuItems]="menuItems$ | async"></psycho-profile-sidebar-menu>
+    <div class="__new-seans">
+      <button mat-button size="medium">Новая запись</button>
+    </div>
+  </ng-container>
   <router-outlet></router-outlet>
 </psycho-profile-layout>

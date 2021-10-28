@@ -6,11 +6,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./client-questions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientQuestionsComponent implements OnInit {
+export class ClientQuestionsComponent {
+  selectedItem: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onSelect(e: any): void {
+    this.selectedItem = e;
   }
 
 }

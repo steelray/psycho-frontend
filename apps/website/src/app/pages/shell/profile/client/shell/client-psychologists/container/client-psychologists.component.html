@@ -1,0 +1,20 @@
+<h2 class="title-3">Мои психологи</h2>
+
+<psycho-psychologist-card 
+  *ngFor="let psychologist of psychologists"
+  [psychologist]="psychologist">
+  <div class="__slogan">
+    “{{psychologist.slogan}}”
+  </div>
+  <div class="__btns d-flex flex-column align-items-start">
+    <button mat-raised-button color="primary" size="medium">
+      Записаться
+    </button>
+    <button mat-button size="medium">
+      Подробнее
+    </button>
+    <button mat-button size="medium">
+      Оставить отзыв
+    </button>
+  </div>
+</psycho-psychologist-card>

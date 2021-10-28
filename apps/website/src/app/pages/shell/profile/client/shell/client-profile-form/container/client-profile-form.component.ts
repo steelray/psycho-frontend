@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { finalize, tap } from 'rxjs/operators';
+import { WithDestroy } from '@psycho/utils';
+import { finalize, takeUntil, tap } from 'rxjs/operators';
 import { ClientProfileFormFacade } from '../client-profile-form.facade';
 
 @Component({
@@ -9,7 +10,7 @@ import { ClientProfileFormFacade } from '../client-profile-form.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ClientProfileFormFacade]
 })
-export class ClientProfileFormComponent {
+export class ClientProfileFormComponent extends WithDestroy() {
   readonly formatForm = this.facade.formatForm;
   readonly commonQuestionsForm = this.facade.commonQuestionsForm;
   readonly subjectsForm = this.facade.subjectsForm;
@@ -21,20 +22,23 @@ export class ClientProfileFormComponent {
   readonly psychologists$ = this.facade.psychologists$;
   readonly selectedPsychologist$ = this.facade.selectedPsychologist$;
   readonly selectedPsychologistGroupedSchedule$ = this.facade.selectedPsychologistGroupedSchedule$;
+  isEditable = true;
   isSaving = false;
 
   constructor(
     private readonly facade: ClientProfileFormFacade,
     private readonly cdRef: ChangeDetectorRef
   ) {
+    super();
   }
 
   onCompleteRegistration(stepper: any): void {
     this.isSaving = true;
     this.facade.onCompleteRegistration().pipe(
-      tap(() => this.cdRef.markForCheck()),
+      takeUntil(this.destroy$)
     ).subscribe(() => {
       stepper.next();
+      this.isEditable = false;
       this.isSaving = false;
       this.cdRef.detectChanges();
     });

@@ -1,7 +1,7 @@
 <div 
   *ngFor="let subject of subjects;trackBy: trackByFn" 
   (click)="onSelect(subject)"
-  [class.selected]="subject.isSelected"
+  [class.selected]="subject.id === control?.value"
 >
   <psycho-subject-item 
     mat-ripple

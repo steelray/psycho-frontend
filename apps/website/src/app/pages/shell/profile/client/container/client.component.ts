@@ -1,23 +1,20 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ClientApiService } from '@psycho/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ClientFacade } from '../client.facade';
 
 @Component({
   selector: 'psycho-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ClientFacade]
 })
 export class ClientComponent {
+  readonly registrationCompleted$ = this.facade.registrationCompleted$;
+  readonly userData$ = this.facade.userData$;
+  readonly menuItems$ = this.facade.menuItems$;
+  readonly userAuthData$ = this.facade.userAuthData$;
   constructor(
-    private readonly clientApiService: ClientApiService
+    private readonly facade: ClientFacade
   ) { }
-
-  get registrationCompleted$(): Observable<boolean> {
-    return this.clientApiService.getClientData().pipe(
-      map(data => !!data?.first_name)
-    )
-  }
 
 }

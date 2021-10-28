@@ -23,6 +23,7 @@ export interface IPsychologistSearchParams {
   fio?: string;
   top?: 1 | 0;
   expand?: string;
+  subject_id?: number;
 }
 
 export interface IPsychologistSchedule {

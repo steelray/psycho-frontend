@@ -1,6 +1,15 @@
 <div class="container d-flex">
-  <div *ngIf="showSidebar" class="profile-sidebar">
+  <div 
+    *ngIf="showSidebar" 
+    class="profile-sidebar"
+    [class.client-sidebar]="isClient"
+    [class.psychologist-sidebar]="isPsychologist"
+  >
     <ng-content select="[sidebar]"></ng-content>
+    <a class="__help-btn" href="#">
+      <mat-icon svgIcon="help"></mat-icon>
+      Поддержка
+    </a>
   </div>
   <div class="profile-content">
     <ng-content></ng-content>

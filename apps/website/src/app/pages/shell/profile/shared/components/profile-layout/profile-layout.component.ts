@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { IUser } from '@psycho/core';
 
 @Component({
   selector: 'psycho-profile-layout',
@@ -6,11 +7,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styleUrls: ['./profile-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileLayoutComponent implements OnInit {
+export class ProfileLayoutComponent {
   @Input() showSidebar: boolean | null = false;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  @Input() isClient!: boolean | undefined;
+  @Input() isPsychologist!: boolean | undefined;
 }

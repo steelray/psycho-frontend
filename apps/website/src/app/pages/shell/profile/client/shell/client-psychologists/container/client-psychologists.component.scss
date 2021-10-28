@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  ::ng-deep {
+    psycho-psychologist-card {
+      .__top {
+        background: none !important;
+      }
+      .__text {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        height: 340px;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+psycho-psychologist-card {
+  &:not(:last-child) {
+    margin-bottom: 55px;
+  }
+}
+.__slogan {
+  font-weight: 600;
+  max-width: 260px;
+}
+.__btns {
+  margin-top: auto;
+  > * {
+    min-width: 260px;
+    &:not(:last-child) {
+      margin-bottom: 9px;
+    }
+  }
+}

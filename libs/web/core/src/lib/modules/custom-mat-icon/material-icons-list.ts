@@ -53,6 +53,22 @@ const commonIcons: IMatIcon[] = [
   {
     name: 'time',
     src
+  },
+  {
+    name: 'chat',
+    src
+  },
+  {
+    name: 'video',
+    src
+  },
+  {
+    name: 'favourite',
+    src
+  },
+  {
+    name: 'help',
+    src
   }
 ];
 export const MATERIAL_ICONS_LIST: IMatIcon[] = [...commonIcons];

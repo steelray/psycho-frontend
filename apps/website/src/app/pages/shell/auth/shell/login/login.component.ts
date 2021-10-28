@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, Self } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Self, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PHONE_MASK } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
-import { takeUntil } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { AuthFacade } from '../../auth.facade';
 
 @Component({
@@ -19,7 +19,8 @@ export class LoginComponent extends WithDestroy() {
   isLoading = false;
   constructor(
     @Self() private readonly facade: AuthFacade,
-    private router: Router
+    private router: Router,
+    private readonly cdRef: ChangeDetectorRef
   ) {
     super();
   }
@@ -31,9 +32,12 @@ export class LoginComponent extends WithDestroy() {
   onSubmit(): void {
     this.isLoading = true;
     this.facade.login().pipe(
+      finalize(() => {
+        this.cdRef.markForCheck();
+        this.isLoading = false;
+      }),
       takeUntil(this.destroy$)
     ).subscribe(() => {
-      this.isLoading = false;
       this.router.navigate(['/profile']);
     });
   }

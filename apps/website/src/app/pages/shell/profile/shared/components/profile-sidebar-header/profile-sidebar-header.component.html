@@ -1,0 +1,10 @@
+<ng-container *ngIf="user">
+  <psycho-picture
+    [origin]="user?.avatar"
+    [alt]="user | fio"
+    class="__avatar"></psycho-picture>
+  <div class="__text">
+    <div class="h4">Профиль</div>
+    <ng-content></ng-content>
+  </div>
+</ng-container>

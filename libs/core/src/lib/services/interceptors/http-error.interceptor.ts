@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@psycho/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HTTP_CODES } from '../../enums';
@@ -9,6 +10,7 @@ import { HttpErrorService } from '../shared/http-error.service';
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private httpErrorService: HttpErrorService,
+    private authService: AuthService,
     private router: Router,
     private ngZone: NgZone) { }
 
@@ -50,6 +52,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             HTTP_CODES.NOT_AUTHED,
             HTTP_CODES.NOT_ALLOWED
           ].includes(error.status)) {
+            this.authService.logout();
+            this.router.navigate(['/']);
             return throwError(errorMessage);
           }
 

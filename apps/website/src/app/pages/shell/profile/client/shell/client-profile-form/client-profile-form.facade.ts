@@ -4,14 +4,12 @@ import { AuthService, ClientApiService, IGroupedSchedule, IPsychologist, IPsycho
 import { generateYears } from '@psycho/utils';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { concatAll, filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ClientProfileFormFacade {
-  readonly psychologists$: Observable<IPsychologist[]> = this.psychologistApiService.fetchAll({
-    expand: 'education,description'
-  });
+  private _psychologists$!: Observable<IPsychologist[]>;
   readonly yearsOptions: ISelectOption[] = generateYears(new Date().getFullYear() - 100, new Date().getFullYear() - 17).reverse().map(v => ({
     value: v,
     title: `${v}`
@@ -35,8 +33,7 @@ export class ClientProfileFormFacade {
     private readonly fb: FormBuilder,
     private readonly subjectApiService: SubjectApiService,
     private readonly psychologistApiService: PsychologistApiService,
-    private readonly clientApiService: ClientApiService,
-    private readonly authService: AuthService
+    private readonly clientApiService: ClientApiService
   ) { }
 
   get formatForm(): FormGroup {
@@ -77,7 +74,7 @@ export class ClientProfileFormFacade {
   get subjectsForm(): FormGroup {
     if (!this._subjectsForm) {
       this._subjectsForm = this.fb.group({
-        subjectIds: [null, [RxwebValidators.required()]]
+        subject_id: [null, [RxwebValidators.required()]]
       });
     }
     return this._subjectsForm;
@@ -114,16 +111,29 @@ export class ClientProfileFormFacade {
     return this._scheduleForm;
   }
 
+  get psychologists$(): Observable<IPsychologist[]> {
+    if (!this._psychologists$) {
+      this._psychologists$ = this.subjectsForm.get('subject_id')?.valueChanges.pipe(
+        filter(id => !!id),
+        switchMap(id => this.psychologistApiService.fetchAll({
+          expand: 'education,description',
+          subject_id: id
+        }).pipe(
+          shareReplay()
+        ))
+      ) as Observable<IPsychologist[]>;
+    }
+    return this._psychologists$;
+  }
+
   get selectedPsychologist$(): Observable<IPsychologist | undefined> {
     if (!this._selectedPsychologist$) {
-      this._selectedPsychologist$ = this._specialistForm.valueChanges.pipe(
-        map(res => res.psychologist_id),
+      this._selectedPsychologist$ = this.specialistForm.get('psychologist_id')?.valueChanges.pipe(
         filter(id => !!id),
-        switchMap(id => this.psychologists$.pipe(
-          map(psychologists => psychologists.find(psychologist => psychologist.id === id))
-        )),
-        tap(console.log)
-      );
+        switchMap(id => this.psychologistApiService.fetchOne(id)),
+        tap(console.log),
+        shareReplay()
+      ) as Observable<IPsychologist>;
     }
     return this._selectedPsychologist$;
   }
@@ -180,11 +190,11 @@ export class ClientProfileFormFacade {
 
   private collectFormsData(): any {
     return {
-      ...this._formatForm.value,
-      ...this._commonQuestionsForm.value,
-      ...this._subjectsForm.value,
-      ...this._specialistForm.value,
-      ...this._datetimeForm.value,
+      ...this.formatForm.value,
+      ...this.commonQuestionsForm.value,
+      ...this.subjectsForm.value,
+      ...this.specialistForm.value,
+      ...this.datetimeForm.value,
     };
 
   }

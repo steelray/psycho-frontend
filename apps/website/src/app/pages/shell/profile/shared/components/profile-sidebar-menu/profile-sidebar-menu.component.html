@@ -1,0 +1,9 @@
+<ul>
+  <li *ngFor="let item of menuItems" routerLinkActive="active">
+    <a [routerLink]="item.value">
+      <mat-icon *ngIf="item.img as icon" [svgIcon]="icon"></mat-icon>
+      {{item.title}}
+      <span *ngIf="item.subtitle">{{item.subtitle}}</span>
+    </a>
+  </li>
+</ul>

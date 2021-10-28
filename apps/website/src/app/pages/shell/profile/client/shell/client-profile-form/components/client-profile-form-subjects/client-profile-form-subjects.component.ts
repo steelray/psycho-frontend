@@ -13,25 +13,11 @@ export class ClientProfileFormSubjectsComponent {
   @Input() subjects: ISubject[] = [];
 
   onSelect(subject: ISubject) {
-    let selectedIds = this.control?.value ?? [];
-    const id = subject.id;
-    if (!selectedIds.find((i: number) => i === id)) {
-      subject.isSelected = true;
-      selectedIds = [...selectedIds, id];
-    } else {
-      subject.isSelected = false;
-      selectedIds = selectedIds.filter((i: number) => i !== id);
-    }
-
-    if (selectedIds.length === 0) {
-      selectedIds = null;
-    }
-
-    this.control?.setValue(selectedIds);
+    this.control?.setValue(subject.id);
   }
 
   get control(): FormControl | AbstractControl | null {
-    return this.form.get('subjectIds');
+    return this.form.get('subject_id');
   }
 
   trackByFn(index: number): number {

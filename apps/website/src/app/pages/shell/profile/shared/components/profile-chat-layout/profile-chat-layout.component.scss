@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  height: 80vh;
+  background: var(--light-gray-bg);
+  border-radius: 6px;
+  ::ng-deep {
+    .mat-tab-header {
+      margin-bottom: 15px;
+    }
+    .mat-tab-nav-bar,
+    .mat-tab-header {
+      border-bottom: none;
+    }
+    .mat-tab-label-container {
+      .mat-tab-labels {
+        padding: 0 15px;
+        justify-content: space-between;
+      }
+    }
+    .mat-ink-bar {
+      display: none;
+    }
+    .mat-tab-label {
+      min-width: 0;
+      opacity: 1;
+      margin: 0;
+      height: 45px;
+      padding: 0 20px;
+      border-radius: 6px;
+      color: var(--white);
+      font-size: var(--base-font-color);
+      border: none;
+      font-weight: 600;
+      &-active {
+        color: var(--base-font-color);
+        background-color: var(--accent-bg-light);
+      }
+    }
+  }
+}
+
+.__sidebar {
+  width: 290px;
+  background: var(--accent-bg-medium);
+  border-radius: 6px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.__content {
+  flex: 1;
+  min-width: 0;
+}
