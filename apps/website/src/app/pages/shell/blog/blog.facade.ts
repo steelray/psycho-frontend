@@ -9,7 +9,7 @@ export class BlogFacade {
   private _newArticles$!: Observable<Post[] | null>;
 
   constructor(
-    private postApiService: PostApiService
+    private readonly postApiService: PostApiService
   ) { }
 
   get categories$(): Observable<IPostCategory[]> {

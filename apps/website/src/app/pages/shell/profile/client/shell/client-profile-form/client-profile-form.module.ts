@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SharedComponentsModule } from '../../../../../../ui/shared-components/shared-components.module';
 import { PipesModule, UIModule } from '@psycho/features';
 import { MatIconModule } from '@angular/material/icon';
+import { ProfileSharedComponentsModule } from '../../../shared/components/profile-shared-components.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MatIconModule } from '@angular/material/icon';
     SharedComponentsModule,
     PipesModule,
     MatIconModule,
-    UIModule
+    UIModule,
+    ProfileSharedComponentsModule
   ]
 })
 export class ClientProfileFormModule { }

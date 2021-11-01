@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { IClient } from '../../interfaces/client.interface';
-import { IUser } from '@psycho/core';
+import { IClientConsultationCreateBody } from '../../interfaces/client.interface';
+import { IPsychologist, IUser } from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,14 @@ export class ClientApiService extends ApiService {
 
   completeRegistration(data: any): Observable<boolean> {
     return this.post(`${this.controller}/complete-registration`, data);
+  }
+
+  getMyPsychologists(): Observable<IPsychologist[]> {
+    return this.get(`${this.controller}/my-psychologists`, { params: { expand: 'description,education' } });
+  }
+
+  createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
+    return this.post(`${this.controller}/create-consultation`, body);
   }
 
 }

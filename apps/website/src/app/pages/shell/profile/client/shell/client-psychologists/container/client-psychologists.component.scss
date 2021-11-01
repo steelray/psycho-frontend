@@ -23,13 +23,39 @@ psycho-psychologist-card {
 .__slogan {
   font-weight: 600;
   max-width: 260px;
+  margin-bottom: 25px;
 }
+
 .__btns {
   margin-top: auto;
+  flex: 1;
+  min-width: 0;
+  margin-right: 20px;
   > * {
     min-width: 260px;
     &:not(:last-child) {
       margin-bottom: 9px;
     }
+    &.__sub-btn {
+      margin-bottom: 30px;
+    }
   }
+}
+
+.__right-block {
+  width: 360px;
+  padding: 10px 25px 25px;
+  background: #efefef;
+  height: 440px;
+  button {
+    margin-right: -12px;
+    color: var(--main-color);
+  }
+  &-inner {
+    height: calc(100% - 50px);
+    overflow: auto;
+  }
+}
+.__height-100 {
+  height: 100%;
 }

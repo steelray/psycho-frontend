@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IGroupedSchedule, IGroupedScheduleTime, IPsychologist, ISelectOption } from '@psycho/core';
-import { generateYears, monthsList } from '@psycho/utils';
+import { generateYears, monthsList, monthsOptions, yearOptions } from '@psycho/utils';
 
 @Component({
   selector: 'psycho-client-profile-form-datetime',
@@ -14,32 +14,8 @@ export class ClientProfileFormDatetimeComponent {
   @Input() psychologist!: IPsychologist;
   @Input() schedule!: IGroupedSchedule[];
   @Input() datetimeForm!: FormGroup;
-
-  educationExpanded = false;
-  descriptionExpanded = false;
-
-  onToggle(e: Event, blockName: 'education' | 'description'): void {
-    e.preventDefault();
-    if (blockName === 'education') {
-      this.educationExpanded = !this.educationExpanded;
-    } else {
-      this.descriptionExpanded = !this.descriptionExpanded;
-    }
-  }
-
-  get monthsOptions(): ISelectOption[] {
-    return monthsList().map((m, i) => ({
-      value: i,
-      title: m
-    }));
-  }
-
-  get yearOptions(): ISelectOption[] {
-    return generateYears(new Date().getFullYear(), new Date().getFullYear() + 2).map(y => ({
-      value: y,
-      title: `${y}`
-    }));
-  }
+  readonly monthsOptions = monthsOptions();
+  readonly yearOptions = yearOptions();
 
   onSelect(time: IGroupedScheduleTime): void {
     this.datetimeForm.get('schedule_id')?.setValue(time.id);

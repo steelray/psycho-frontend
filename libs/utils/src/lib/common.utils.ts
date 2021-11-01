@@ -1,4 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import { ISelectOption } from '@psycho/core';
 import * as moment from 'moment';
 
 export const sizeInMb = (size: number): number => {
@@ -239,4 +240,19 @@ export function generateYears(start: number, end?: number): number[] {
 
 export function monthsList(format = 'MMM', locale = 'ru'): string[] {
   return Array.apply(0, Array(12)).map(function (_, i) { return moment().month(i).locale(locale).format(format) });
+}
+
+
+export function monthsOptions(): ISelectOption[] {
+  return monthsList().map((m, i) => ({
+    value: i,
+    title: m
+  }));
+}
+
+export function yearOptions(): ISelectOption[] {
+  return generateYears(new Date().getFullYear(), new Date().getFullYear() + 2).map(y => ({
+    value: y,
+    title: `${y}`
+  }));
 }

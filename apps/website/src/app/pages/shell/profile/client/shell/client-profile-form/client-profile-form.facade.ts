@@ -6,6 +6,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
 import { combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { ClientSharedFormsService } from '../../../shared/services/client-shared-forms.service';
 
 @Injectable()
 export class ClientProfileFormFacade {
@@ -33,7 +34,8 @@ export class ClientProfileFormFacade {
     private readonly fb: FormBuilder,
     private readonly subjectApiService: SubjectApiService,
     private readonly psychologistApiService: PsychologistApiService,
-    private readonly clientApiService: ClientApiService
+    private readonly clientApiService: ClientApiService,
+    private readonly formsService: ClientSharedFormsService
   ) { }
 
   get formatForm(): FormGroup {
@@ -91,22 +93,14 @@ export class ClientProfileFormFacade {
 
   get datetimeForm(): FormGroup {
     if (!this._datetimeForm) {
-      this._datetimeForm = this.fb.group({
-        schedule_id: [null, [RxwebValidators.required()]],
-        datetime: [null]
-      });
+      this._datetimeForm = this.formsService.datetimeForm;
     }
     return this._datetimeForm;
   }
 
   get scheduleForm(): FormGroup {
     if (!this._scheduleForm) {
-      this._scheduleForm = this.fb.group({
-        year: [new Date().getFullYear()],
-        month: [new Date().getMonth() + 1],
-        date: [new Date().getDate(), RxwebValidators.required()],
-        psychologist_id: [null, RxwebValidators.required()]
-      });
+      this._scheduleForm = this.formsService.scheduleForm;
     }
     return this._scheduleForm;
   }

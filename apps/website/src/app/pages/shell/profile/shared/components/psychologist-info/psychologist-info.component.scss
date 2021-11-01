@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.__education,
+.__description {
+  > div {
+    margin-bottom: 10px;
+    max-height: 156px;
+    overflow: hidden;
+  }
+  &.expanded {
+    > div {
+      max-height: none;
+    }
+  }
+  ::ng-deep {
+    * {
+      font-size: 16px !important;
+      font-family: var(--base-font-family) !important;
+    }
+  }
+}
+
+a {
+  color: var(--base--font-color);
+}

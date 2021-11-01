@@ -1,20 +1,36 @@
 <h2 class="title-3">Мои психологи</h2>
 
 <psycho-psychologist-card 
-  *ngFor="let psychologist of psychologists"
+  *ngFor="let psychologist of psychologists$ | async"
   [psychologist]="psychologist">
-  <div class="__slogan">
-    “{{psychologist.slogan}}”
+  <div class="d-flex">
+    <div class="d-flex flex-column">
+      <div class="__slogan">
+        “{{psychologist.slogan}}”
+      </div>
+      <div class="__btns d-flex flex-column align-items-start">
+        <button class="__sub-btn" mat-raised-button color="primary" size="medium" (click)="onSign(psychologist.id)">
+          Записаться
+        </button>
+        <button mat-button size="medium" (click)="showInfo(psychologist)">
+          Подробнее
+        </button>
+        <button mat-button size="medium" (click)="onComment(psychologist)">
+          Оставить отзыв
+        </button>
+      </div>
+    </div>
+    
+    <div class="__right-block" *ngIf="selectedPsychologist && psychologist.id === selectedPsychologist?.id">
+      <div class="text-right">
+        <button (click)="hideInfo()" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="__right-block-inner">
+        <psycho-psychologist-info [psychologist]="selectedPsychologist"></psycho-psychologist-info>
+      </div>
+    </div>
   </div>
-  <div class="__btns d-flex flex-column align-items-start">
-    <button mat-raised-button color="primary" size="medium">
-      Записаться
-    </button>
-    <button mat-button size="medium">
-      Подробнее
-    </button>
-    <button mat-button size="medium">
-      Оставить отзыв
-    </button>
-  </div>
+  
 </psycho-psychologist-card>

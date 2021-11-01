@@ -9,6 +9,7 @@ import { ProfileSidebarMenuComponent } from './profile-sidebar-menu/profile-side
 import { ProfileTextChatComponent } from './profile-text-chat/profile-text-chat.component';
 import { ProfileVideoChatComponent } from './profile-video-chat/profile-video-chat.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { PsychologistInfoComponent } from './psychologist-info/psychologist-info.component';
 
 const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileLayoutComponent,
@@ -16,7 +17,8 @@ const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileSidebarMenuComponent,
   ProfileTextChatComponent,
   ProfileVideoChatComponent,
-  ProfileChatLayoutComponent
+  ProfileChatLayoutComponent,
+  PsychologistInfoComponent
 ];
 
 @NgModule({
