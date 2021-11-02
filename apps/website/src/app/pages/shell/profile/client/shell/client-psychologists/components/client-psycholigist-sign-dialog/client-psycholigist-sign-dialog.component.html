@@ -1,76 +1,115 @@
+<ng-container *ngIf="currentSignStep$ | async as step">
+  <h2 mat-dialog-title class="h4">Новая запись</h2>
+  <mat-dialog-content>
+      <ng-container [ngSwitch]="step">
+        <ng-container *ngSwitchCase="steps.FORMAT_SELECT">
+          <p class="p">
+            Выбрите, каким способом вам удобно получить консультацию
+          </p>
+          <div  class="__cards d-flex flex-wrap align-items-center justify-content-between">
+            <div [class.selected]="selectedFormat === formats.FORMAT_FULL_VIDEO" (click)="onFormatSelect(formats.FORMAT_FULL_VIDEO)" mat-ripple class="__card d-flex flex-column">
+              <div class="__card-inner">
+                <div class="__card-title">Видео</div>
+                <div class="__card-time">50 <br>мин</div>
+              </div>
+            </div>
+            <div [class.selected]="selectedFormat === formats.FORMAT_FULL_CHAT" (click)="onFormatSelect(formats.FORMAT_FULL_CHAT)" mat-ripple class="__card d-flex flex-column">
+              <div class="__card-inner">
+                <div class="__card-title">Чат</div>
+                <div class="__card-time">50 <br>мин</div>
+              </div>
+            </div>
+            <div [class.selected]="selectedFormat === formats.FORMAT_EXPRESS" (click)="onFormatSelect(formats.FORMAT_EXPRESS)" mat-ripple class="__card d-flex flex-column __express">
+              <div class="__card-inner">
+                <div class="__card-title">Экспресс-консультация </div>
+                <p>Ответ на один срочный вопрос в чат </p>
+                <div class="__card-price">250  ₽ </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="steps.SUBJECT_SELECT">
+          <p class="p">
+            Выбрите тему
+          </p>
+          <div class="__subjects">
+            <div 
+              *ngFor="let subject of psychologist.subjects;"
+              [class.selected]="subject.id === selectedSubject?.id"
+              (click)="onSubjectSelect(subject)">
+              <psycho-subject-item 
+                mat-ripple
+                [subject]="subject"
+                [iconMode]="true"></psycho-subject-item>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="steps.DATETIME_SELECT">
 
-<mat-dialog-content>
-  <h2 class="h4">Новая запись</h2>
-  <ng-container *ngIf="currentSignStep$ | async as step">
-    <ng-container [ngSwitch]="step">
-      <ng-container *ngSwitchCase="steps.FORMAT_SELECT">
-        <p class="p">
-          Выбрите, каким способом вам удобно получить консультацию
-        </p>
-        <div  class="__cards d-flex flex-wrap align-items-center justify-content-between">
-          <div [class.selected]="selectedFormat === formats.FORMAT_FULL_VIDEO" (click)="onFormatSelect(formats.FORMAT_FULL_VIDEO)" mat-ripple class="__card d-flex flex-column">
-            <div class="__card-inner">
-              <div class="__card-title">Видео</div>
-              <div class="__card-time">50 <br>мин</div>
+          <div class="p">Выберите дату и время сессии</div>
+          <ul class="radio-list">
+            <li>
+              Можно перенести за 12 часов
+            </li>
+            <li>
+              Фиксированная цена 2 490 ₽
+            </li>
+          </ul>
+          <p>Часовой пояс: Москва</p>
+          <div class="d-flex">
+            <psycho-select
+              label="Выберите год"
+              [control]="$any(scheduleForm.get('year'))"
+              [options]="yearOptions"></psycho-select>
+            <psycho-select
+              label="Выберите месяц"
+              [control]="$any(scheduleForm.get('month'))"
+              [options]="monthsOptions"></psycho-select>
+          </div>
+          <div class="__days" *ngIf="schedule$ | async as schedule">
+            <div class="__field" *ngFor="let item of schedule">
+              <div class="__title">{{item.date | date:'MMM d, y'}}</div>
+              <div class="__btns">
+                <button
+                  type="button"  
+                  *ngFor="let time of item.times" 
+                  mat-raised-button
+                  [class.selected]="datetimeForm?.value?.schedule_id === time.id"
+                  (click)="onDatetimeSelect(time)">{{time.time | date:'HH:mm'}}</button>
+              </div>
             </div>
           </div>
-          <div [class.selected]="selectedFormat === formats.FORMAT_FULL_CHAT" (click)="onFormatSelect(formats.FORMAT_FULL_CHAT)" mat-ripple class="__card d-flex flex-column">
-            <div class="__card-inner">
-              <div class="__card-title">Чат</div>
-              <div class="__card-time">50 <br>мин</div>
-            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="steps.SUCCESS">
+          <div class="__success-card">
+            <div class="p">Стоимость сессии составит {{consultationPrice | number}} ₽.</div>
+            <p>После того, как вы привяжете карту, мы снимем с неё 1 рубль. Это стандартная процедура проверки.
+            </p>
+            <p>
+              Деньги списываются с карты за 12 часов до сессии – и после того, как это произошло, вы уже не сможете ее перенести или отменить.
+            </p>
+            <p>
+              Вы в любой момент можете отвязать свою карту. Это можно сделать в личном кабинете.
+            </p>
+            <p>
+              Все сессии проводятся из личного кабинета, в том формате, который вы выбрали.
+            </p>
           </div>
-          <div [class.selected]="selectedFormat === formats.FORMAT_EXPRESS" (click)="onFormatSelect(formats.FORMAT_EXPRESS)" mat-ripple class="__card d-flex flex-column __express">
-            <div class="__card-inner">
-              <div class="__card-title">Экспресс-консультация </div>
-              <p>Ответ на один срочный вопрос в чат </p>
-              <div class="__card-price">250  ₽ </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <ng-container *ngSwitchCase="steps.DATETIME_SELECT">
-
-        <div class="h4">Выберите дату и время сессии</div>
-        <ul class="radio-list">
-          <li>
-            Можно перенести за 12 часов
-          </li>
-          <li>
-            Фиксированная цена 2 490 ₽
-          </li>
-        </ul>
-        <p>Часовой пояс: Москва</p>
-        <div class="d-flex">
-          <psycho-select
-            label="Выберите год"
-            [control]="$any(scheduleForm.get('year'))"
-            [options]="yearOptions"></psycho-select>
-          <psycho-select
-            label="Выберите месяц"
-            [control]="$any(scheduleForm.get('month'))"
-            [options]="monthsOptions"></psycho-select>
-        </div>
-        <div class="__days" *ngIf="schedule$ | async as schedule">
-          <div class="__field" *ngFor="let item of schedule">
-            <div class="__title">{{item.date | date:'MMM d, y'}}</div>
-            <div class="__btns">
-              <button
-                type="button"  
-                *ngFor="let time of item.times" 
-                mat-raised-button
-                [class.selected]="datetimeForm?.value?.schedule_id === time.id"
-                (click)="onSelect(time)">{{time.time | date:'HH:mm'}}</button>
-            </div>
-          </div>
-        </div>
-
-      </ng-container>
-      <ng-container *ngSwitchCase="steps.SUCCESS"></ng-container>
+        </ng-container>
+      
     </ng-container>
-    <button class="__next-btn" (click)="toNextStep()" mat-raised-button color="primary">{{step === steps.SUCCESS ? 'Оплатить' : 'Далее'}}</button>
-  </ng-container>
-</mat-dialog-content>
-<button (click)="close()" class="__close-btn" mat-icon-button>
-  <mat-icon>close</mat-icon>
-</button>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button 
+      class="__next-btn" 
+      (click)="toNextStep()" 
+      mat-raised-button color="primary"
+      [disabled]="nextBtnIsDisabled$ | async">{{step === steps.SUCCESS ? 'Оплатить' : 'Далее'}}</button>
+  </div>
+  <button 
+    (click)="close()" 
+    class="__close-btn" 
+    mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</ng-container>

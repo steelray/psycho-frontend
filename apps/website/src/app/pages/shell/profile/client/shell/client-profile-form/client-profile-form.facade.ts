@@ -75,9 +75,7 @@ export class ClientProfileFormFacade {
 
   get subjectsForm(): FormGroup {
     if (!this._subjectsForm) {
-      this._subjectsForm = this.fb.group({
-        subject_id: [null, [RxwebValidators.required()]]
-      });
+      this._subjectsForm = this.formsService.subjectForm;
     }
     return this._subjectsForm;
   }

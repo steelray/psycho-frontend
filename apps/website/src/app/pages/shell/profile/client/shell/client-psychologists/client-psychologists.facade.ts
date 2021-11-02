@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ClientApiService, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
+import { ClientApiService, CONSULTATION_FORMAT, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { ClientSharedFormsService } from '../../../shared/services/client-shared-forms.service';
 
 export enum CLIENT_PSYCHOLOGIST_SIGN_STEPS {
   FORMAT_SELECT = 'format select',
+  SUBJECT_SELECT = 'subject select',
   DATETIME_SELECT = 'datetime select',
   SUCCESS = 'signed'
 }
 
 @Injectable()
 export class ClientPsychologistsFacade {
-  readonly currentSignStep$ = new BehaviorSubject(CLIENT_PSYCHOLOGIST_SIGN_STEPS.DATETIME_SELECT);
+  readonly currentSignStep$ = new BehaviorSubject(CLIENT_PSYCHOLOGIST_SIGN_STEPS.FORMAT_SELECT);
   private _myPsychologists$!: Observable<IPsychologist[]>;
   private _signForm!: FormGroup;
   private _scheduleForm!: FormGroup;
-  private _groupedSchedule$!: Observable<IGroupedSchedule[]>;
   private _datetimeForm!: FormGroup;
+  private _subjectsForm!: FormGroup;
 
   constructor(
     private readonly clientApiService: ClientApiService,
@@ -68,6 +69,13 @@ export class ClientPsychologistsFacade {
     return this._scheduleForm;
   }
 
+  get subjectsForm(): FormGroup {
+    if (!this._subjectsForm) {
+      this._subjectsForm = this.formsService.subjectForm;
+    }
+    return this._subjectsForm;
+  }
+
   getGroupedSchedule$(psychologistId: number): Observable<IGroupedSchedule[]> {
     return this.scheduleForm.valueChanges.pipe(
       startWith(this.defaultDatetimeValue())
@@ -97,8 +105,15 @@ export class ClientPsychologistsFacade {
         return arr;
       })
     );
+  }
 
-    return this._groupedSchedule$;
+  createConsultation(format: CONSULTATION_FORMAT, subject_id: number, schedule_id: number, psychologist_id: number): Promise<any> {
+    return this.clientApiService.createConsultation({
+      subject_id,
+      schedule_id,
+      psychologist_id,
+      format
+    }).toPromise();
   }
 
   private defaultDatetimeValue(): { year: number, month: number, date: number, psychologist_id: number | null } {

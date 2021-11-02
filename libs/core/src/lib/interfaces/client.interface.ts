@@ -1,3 +1,4 @@
+import { CONSULTATION_FORMAT } from '@psycho/core';
 import { IUser } from './user.interface';
 
 export interface IClient {
@@ -8,6 +9,6 @@ export interface IClient {
 export interface IClientConsultationCreateBody {
   schedule_id: number;
   psychologist_id: number;
-  format: number;
+  format: CONSULTATION_FORMAT;
   subject_id: number;
 }

@@ -25,4 +25,10 @@ export class ClientSharedFormsService {
     });
   }
 
+  get subjectForm(): FormGroup {
+    return this.fb.group({
+      subject_id: [null, [RxwebValidators.required()]]
+    });
+  }
+
 }

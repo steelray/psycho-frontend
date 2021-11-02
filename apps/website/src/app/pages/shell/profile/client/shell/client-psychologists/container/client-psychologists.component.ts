@@ -67,11 +67,11 @@ export class ClientPsychologistsComponent extends WithDestroy() {
     this.selectedPsychologist = null;
   }
 
-  onSign(id: number): void {
+  onSign(psychologist: IPsychologist): void {
     setTimeout(() => {
       this.dialog.open(ClientPsycholigistSignDialogComponent, {
         panelClass: 'default-dialog',
-        data: id
+        data: psychologist
       }).afterClosed().pipe(
         filter(signed => !!signed),
         takeUntil(this.destroy$)
