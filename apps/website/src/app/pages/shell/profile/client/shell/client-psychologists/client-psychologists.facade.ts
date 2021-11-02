@@ -4,7 +4,7 @@ import { ClientApiService, CONSULTATION_FORMAT, IGroupedSchedule, IPsychologist,
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { ClientSharedFormsService } from '../../../shared/services/client-shared-forms.service';
 
 export enum CLIENT_PSYCHOLOGIST_SIGN_STEPS {
@@ -17,11 +17,13 @@ export enum CLIENT_PSYCHOLOGIST_SIGN_STEPS {
 @Injectable()
 export class ClientPsychologistsFacade {
   readonly currentSignStep$ = new BehaviorSubject(CLIENT_PSYCHOLOGIST_SIGN_STEPS.FORMAT_SELECT);
+  private readonly _updateMyPsychologists$ = new BehaviorSubject(null);
   private _myPsychologists$!: Observable<IPsychologist[]>;
   private _signForm!: FormGroup;
   private _scheduleForm!: FormGroup;
   private _datetimeForm!: FormGroup;
   private _subjectsForm!: FormGroup;
+  private _commentForm!: FormGroup;
 
   constructor(
     private readonly clientApiService: ClientApiService,
@@ -32,7 +34,9 @@ export class ClientPsychologistsFacade {
 
   get myPsychologists$(): Observable<IPsychologist[]> {
     if (!this._myPsychologists$) {
-      this._myPsychologists$ = this.clientApiService.getMyPsychologists();
+      this._myPsychologists$ = this._updateMyPsychologists$.pipe(
+        switchMap(() => this.clientApiService.getMyPsychologists())
+      );
     }
     return this._myPsychologists$;
   }
@@ -76,6 +80,17 @@ export class ClientPsychologistsFacade {
     return this._subjectsForm;
   }
 
+  get commentForm(): FormGroup {
+    if (!this._commentForm) {
+      this._commentForm = this.fb.group({
+        psychologist_id: [null, RxwebValidators.required()],
+        rating: [null, RxwebValidators.required()],
+        review: [null, RxwebValidators.required()]
+      })
+    }
+    return this._commentForm;
+  }
+
   getGroupedSchedule$(psychologistId: number): Observable<IGroupedSchedule[]> {
     return this.scheduleForm.valueChanges.pipe(
       startWith(this.defaultDatetimeValue())
@@ -114,6 +129,12 @@ export class ClientPsychologistsFacade {
       psychologist_id,
       format
     }).toPromise();
+  }
+
+  commentAndRate(): Observable<boolean> {
+    return this.clientApiService.setPsychologistRating(this.commentForm.value).pipe(
+      tap(() => this._updateMyPsychologists$.next(null))
+    );
   }
 
   private defaultDatetimeValue(): { year: number, month: number, date: number, psychologist_id: number | null } {

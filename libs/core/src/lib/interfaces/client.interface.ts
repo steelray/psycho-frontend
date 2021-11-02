@@ -12,3 +12,9 @@ export interface IClientConsultationCreateBody {
   format: CONSULTATION_FORMAT;
   subject_id: number;
 }
+
+export interface ISetPsychologistRatingBody {
+  psychologist_id: number;
+  rating: number;
+  review: string;
+}

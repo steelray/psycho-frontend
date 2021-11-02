@@ -10,6 +10,7 @@ import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClientPsycholigistSignDialogComponent } from './components/client-psycholigist-sign-dialog/client-psycholigist-sign-dialog.component';
 import { FormFieldModule } from '@psycho/web/features';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormFieldModule } from '@psycho/web/features';
     ProfileSharedComponentsModule,
     MaterialIconCustomizeModule,
     MatDialogModule,
-    FormFieldModule
+    FormFieldModule,
+    ReactiveFormsModule
   ]
 })
 export class ClientPsychologistsModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IPsychologist } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
@@ -49,22 +49,28 @@ const mock: IPsychologist[] = [
 })
 export class ClientPsychologistsComponent extends WithDestroy() {
   readonly psychologists$ = this.facade.myPsychologists$;
+  readonly commentForm = this.facade.commentForm;
   selectedPsychologist!: IPsychologist | null;
+  infoView = false;
+  commenting = false;
 
   constructor(
     private readonly facade: ClientPsychologistsFacade,
     private readonly dialog: MatDialog,
-    private readonly snackbar: SnackbarService
+    private readonly snackbar: SnackbarService,
+    private readonly cdRef: ChangeDetectorRef
   ) {
     super();
   }
 
   showInfo(psychologist: IPsychologist): void {
     this.selectedPsychologist = psychologist;
+    this.infoView = true;
   }
 
   hideInfo(): void {
     this.selectedPsychologist = null;
+    this.infoView = this.commenting = false;
   }
 
   onSign(psychologist: IPsychologist): void {
@@ -83,6 +89,29 @@ export class ClientPsychologistsComponent extends WithDestroy() {
 
   onComment(psychologist: IPsychologist): void {
     this.selectedPsychologist = psychologist;
+    this.commenting = true;
+    this.commentForm.get('psychologist_id')?.setValue(psychologist.id);
+  }
+
+  commentAndRate(): void {
+    if (this.commentForm.invalid) {
+      console.error(this.commentForm.errors);
+      return;
+    }
+    this.facade.commentAndRate().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      if (res) {
+        this.cdRef.markForCheck();
+        this.commenting = false;
+        this.selectedPsychologist = null;
+        this.snackbar.success('Ваша оценка сохранена. Спасибо!');
+      }
+    });
+  }
+
+  onRate(rating: number): void {
+    this.commentForm.get('rating')?.setValue(rating);
   }
 
 }

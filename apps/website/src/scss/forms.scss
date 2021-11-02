@@ -5,7 +5,7 @@ body {
   mat-form-field.mat-form-field {
     margin-bottom: 0;
   }
-  pb-input {
+  psycho-input {
     &.no-error-message {
       .mat-form-field-appearance-legacy,
       mat-form-field {
@@ -93,12 +93,14 @@ body {
   .fields-group {
     margin-bottom: calc(24px - 1.5em);
   }
-  pb-textarea {
+  psycho-textarea {
     mat-form-field,
     .mat-form-field-appearance-legacy,
     .mat-form-field-appearance-fill {
       .mat-form-field-flex {
         height: auto;
+        background: var(--white);
+        border-radius: 6px;
         textarea {
           padding: 20px;
         }

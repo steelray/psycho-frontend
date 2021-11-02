@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { IClientConsultationCreateBody } from '../../interfaces/client.interface';
+import { IClientConsultationCreateBody, ISetPsychologistRatingBody } from '../../interfaces/client.interface';
 import { IPsychologist, IUser } from '../../interfaces';
 
 @Injectable({
@@ -48,6 +48,10 @@ export class ClientApiService extends ApiService {
 
   createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
     return this.post(`${this.controller}/create-consultation`, body);
+  }
+
+  setPsychologistRating(body: ISetPsychologistRatingBody): Observable<boolean> {
+    return this.post(`${this.controller}/set-psychologist-rating`, body);
   }
 
 }

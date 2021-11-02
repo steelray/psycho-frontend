@@ -23,12 +23,23 @@
     
     <div class="__right-block" *ngIf="selectedPsychologist && psychologist.id === selectedPsychologist?.id">
       <div class="text-right">
-        <button (click)="hideInfo()" mat-icon-button>
+        <button class="__close" (click)="hideInfo()" mat-icon-button>
           <mat-icon>close</mat-icon>
         </button>
       </div>
       <div class="__right-block-inner">
-        <psycho-psychologist-info [psychologist]="selectedPsychologist"></psycho-psychologist-info>
+        <psycho-psychologist-info *ngIf="infoView" [psychologist]="selectedPsychologist"></psycho-psychologist-info>
+
+        <div *ngIf="commenting" class="__comment-block">
+          <div class="p">Оцените работу психолога</div>
+          <form [formGroup]="commentForm" (ngSubmit)="commentAndRate()">
+            <psycho-rating-stars [readonly]="false" (rated)="onRate($event)"></psycho-rating-stars>
+
+            <p>Поделитесь своими впечатлениями, вам удалось решить проблему?</p>
+            <psycho-textarea [control]="$any(commentForm.get('review'))"></psycho-textarea>
+            <button mat-raised-button [disabled]="commentForm.invalid" color="primary">Оставить отзыв</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
