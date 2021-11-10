@@ -16,7 +16,7 @@ export class ApiService {
   constructor(
     public http: HttpClient,
     public httpErrorService: HttpErrorService,
-    @Inject(ENVIRONMENTS) private env: IEnvironment
+    @Inject(ENVIRONMENTS) private env: IEnvironment,
   ) { }
 
   public get<Response>(
@@ -32,9 +32,14 @@ export class ApiService {
 
   public post<Body, Response>(
     url: string,
-    body?: Body
+    body?: Body,
+    options?: {
+      params?: Record<string, any>,
+      headers?: HttpHeaders,
+      observe?: HttpObserve
+    }
   ): Observable<Response> {
-    return this.makeRequest('post', url, { body });
+    return this.makeRequest('post', url, { body, ...options });
   }
 
 
@@ -77,6 +82,15 @@ export class ApiService {
 
   private prepareUrl(action: string, customUrl: string | null): string {
     return customUrl ? customUrl : `${this._apiEndpoint}/${action}`;
+  }
+
+  fileUploadHeaders(token: string): any {
+    return {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`
+      }
+    };
   }
 }
 

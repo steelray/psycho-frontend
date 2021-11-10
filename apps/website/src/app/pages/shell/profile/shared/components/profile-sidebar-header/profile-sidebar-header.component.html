@@ -1,4 +1,4 @@
-<ng-container *ngIf="user">
+<a [routerLink]="['/profile']" *ngIf="user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
   <psycho-picture
     [origin]="user?.avatar"
     [alt]="user | fio"
@@ -7,4 +7,4 @@
     <div class="h4">Профиль</div>
     <ng-content></ng-content>
   </div>
-</ng-container>
+</a>

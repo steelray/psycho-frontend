@@ -5,6 +5,7 @@ export interface IUser {
   middle_name?: string;
   birthday?: number;
   avatar?: string;
+  email?: string;
 }
 export interface IUserAuthData {
   token: string;

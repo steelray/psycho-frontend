@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  height: 80vh;
   background: var(--light-gray-bg);
   border-radius: 6px;
   ::ng-deep {
@@ -49,4 +48,5 @@
 .__content {
   flex: 1;
   min-width: 0;
+  padding: 20px;
 }

@@ -9,6 +9,11 @@ const routes: Routes = [
     component: ClientComponent,
     children: [
       {
+        path: '',
+        loadChildren: () => import('./shell/client-profile/client-profile.module').then(m => m.ClientProfileModule),
+        canActivate: [ClientGuard]
+      },
+      {
         path: 'complete-registration',
         loadChildren: () => import('./shell/client-profile-form/client-profile-form.module').then(m => m.ClientProfileFormModule),
         canActivate: [CompleteRegistrationGuard]
@@ -22,10 +27,6 @@ const routes: Routes = [
         path: 'psychologists',
         loadChildren: () => import('./shell/client-psychologists/client-psychologists.module').then(m => m.ClientPsychologistsModule),
         canActivate: [ClientGuard]
-      },
-      {
-        path: '',
-        redirectTo: 'questions'
       }
     ]
   }

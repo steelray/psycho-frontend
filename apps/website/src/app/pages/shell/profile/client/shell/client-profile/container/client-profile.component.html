@@ -1,0 +1,44 @@
+<ng-container *ngIf="clientData$ | async as user">
+  <div class="__header">
+    <div class="d-flex align-items-center __mb-20">
+      <div class="__avatar">
+        <psycho-picture
+          [origin]="avatarPreview || user?.avatar"
+          [alt]="user | fio"></psycho-picture>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </div>
+      <div class="__text d-flex align-items-center">
+        <span>
+          {{user.first_name}}
+        </span>
+        <span>
+          {{$any(user.birthday) | datesDiff | agetostr}}
+        </span>
+      </div>
+    </div>
+    <label class="__upload-avatar">
+      Загрузить аватар
+      <input (change)="onAvatarUpload($event)" type="file">
+    </label>
+  </div>
+
+  <div class="__form bordered-fields">
+    <div class="form-field d-flex align-items-end">
+      <psycho-input label="Ваша почта" [control]="$any(emailForm.get('email'))"></psycho-input>
+      <button [disabled]="emailForm.invalid" (click)="onEmailChange()" mat-raised-button color="primary">Сохранить</button>
+    </div>
+    <ng-container *ngIf="changePassword">
+      <div class="form-field d-flex align-items-end">
+        <psycho-input [control]="$any(passwordForm.get('current_password'))" type="password" [passwordViewable]="true" label="Старый пароль"></psycho-input>
+      </div>
+      <div class="form-field d-flex align-items-end">
+        <psycho-input [control]="$any(passwordForm.get('password'))" type="password" [passwordViewable]="true" label="Новый пароль"></psycho-input>
+        <psycho-input [control]="$any(passwordForm.get('repeat_password'))" type="password" [passwordViewable]="true" label="Повторите новый пароль"></psycho-input>
+      </div>
+    </ng-container>
+    <div>
+      <button class="__mr-20" (click)="togglePasswordFields()" mat-raised-button color="primary">{{changePassword ? 'Отменить' : 'Сменить пароль'}}</button>
+      <button *ngIf="changePassword" (click)="onPasswordChange()" [disabled]="passwordForm.invalid" mat-raised-button color="primary">Сохранить</button>
+    </div>
+  </div>
+</ng-container>

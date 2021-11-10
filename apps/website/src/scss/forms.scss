@@ -213,11 +213,18 @@ body {
     .mat-form-field-label {
       transform: none !important;
       top: 0;
-      font-size: 14px;
+      font-size: var(--base-font-size);
+      font-weight: 600;
     }
 
     .mat-form-field-underline {
       display: none;
+    }
+  }
+  .bordered-fields {
+    .mat-form-field-flex {
+      background: var(--white);
+      border: 1px solid var(--border-color);
     }
   }
   .mat-date-range-input-container {
@@ -392,7 +399,7 @@ body {
       white-space: normal;
       align-items: flex-start;
       .__hint {
-        font-size: 14px;
+        font-size: 16px;
         color: var(--na-font-color);
         display: block;
       }

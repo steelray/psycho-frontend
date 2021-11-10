@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  background: url(/assets/img/cabinet-bg.png) no-repeat right bottom;
+  min-height: 800px;
+  height: 100%;
+}
+
+.__header {
+  margin-bottom: 65px;
+  .__avatar {
+    position: relative;
+  }
+  psycho-picture {
+    width: 150px;
+    height: 150px;
+    background: var(--main-color-2);
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden;
+  }
+
+  .__text {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+    font-size: 20px;
+    span {
+      border-bottom: 1px dashed var(--base-font-color);
+      margin-right: 20px;
+    }
+  }
+
+  .h4 {
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+}
+
+.__mr-20 {
+  margin-right: 20px;
+}
+
+.__upload-avatar {
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 1px dashed;
+  input {
+    display: none;
+  }
+}
+
+.__form {
+  psycho-input {
+    width: 300px;
+    margin-right: 20px;
+  }
+  .form-field {
+    button {
+      margin-bottom: 22px;
+    }
+  }
+  button {
+    min-width: 250px;
+    text-align: center;
+    height: 55px;
+    line-height: 55px;
+    padding: 0;
+    font-weight: 600;
+  }
+}
