@@ -22,7 +22,7 @@
           <mat-icon svgIcon="instagram"></mat-icon>
         </a>
       </div>
-      <a href="#" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
+      <a [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
     </div>
     <div class="footer__note">
       <p>Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: срочная психологическая помощь.</p>

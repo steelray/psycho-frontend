@@ -1,14 +1,14 @@
 <ng-container *ngIf="psychologist">
   <psycho-picture [origin]="psychologist.avatar" [alt]="psychologist | fio" class="__img">
   </psycho-picture>
-  <psycho-rating-stars [value]="psychologist.rating"></psycho-rating-stars>
+  <psycho-rating-stars [value]="$any(psychologist.rating)"></psycho-rating-stars>
   <div class="__name">{{psychologist | fio}}</div>
   <div class="__slogan">“
     {{psychologist.slogan}}”</div>
   <div class="__details d-flex  align-items-center">
     <span class="d-flex align-items-center">
       <mat-icon svgIcon="experience"></mat-icon>
-      Опыт работы {{psychologist.experience_since | datesDiff | agetostr}}
+      Опыт работы {{$any(psychologist.experience_since) | datesDiff | agetostr}}
     </span>
     <span class="d-flex align-items-center">
       <mat-icon svgIcon="degree"></mat-icon>

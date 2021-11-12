@@ -10,8 +10,8 @@ import axios from 'axios';
 export class AuthApiService extends ApiService {
   private readonly controller = 'auth';
 
-  login(phone: number, password: string): Observable<any> {
-    return this.post(`${this.controller}/login`, { username: phone, password });
+  login(username: number | string, password: string): Observable<any> {
+    return this.post(`${this.controller}/login`, { username, password });
   }
 
   sendSMS(phone: number): Observable<boolean> {

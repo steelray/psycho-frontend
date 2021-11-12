@@ -13,6 +13,7 @@ export class ClientProfileFacade extends WithDestroy() {
   private _emailForm!: FormGroup;
   private _avatarForm!: FormGroup;
   readonly isLoading$ = new BehaviorSubject<boolean>(false);
+  readonly changePassword$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly clientApiService: ClientApiService,
@@ -75,7 +76,8 @@ export class ClientProfileFacade extends WithDestroy() {
         repeat_password: [null, [
           RxwebValidators.compare({
             fieldName: 'password'
-          })
+          }),
+          RxwebValidators.required()
         ]],
       })
     }
@@ -97,7 +99,10 @@ export class ClientProfileFacade extends WithDestroy() {
   }
 
   onPasswordChange(): void {
-    this.authApiService.updatePassword(this.passwordForm.value).subscribe(() => this.snackbar.success('Ваш пароль обновлен'));
+    this.authApiService.updatePassword(this.passwordForm.value).subscribe(() => {
+      this.snackbar.success('Ваш пароль обновлен');
+      this.changePassword$.next(false);
+    });
   }
 
   onEmailChange(): void {

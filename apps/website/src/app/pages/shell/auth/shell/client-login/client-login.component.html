@@ -1,7 +1,6 @@
 <h1 class="title-1">Вход в личный кабинет</h1>
-<form *ngIf="form$ | async as form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <psycho-tel-input *ngIf="form.get('phone') as control"  placeholder="Номер телефона" [control]="$any(control)"></psycho-tel-input> 
-  <psycho-input *ngIf="form.get('email') as control" placeholder="Введите почту" [control]="$any(control)"></psycho-input> 
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <psycho-tel-input  placeholder="Номер телефона" [control]="$any(controls.phone)"></psycho-tel-input> 
   <psycho-input
     [control]="$any(form.get('password'))"
     placeholder="Введите пароль" 
@@ -10,7 +9,7 @@
   <div class="d-flex align-items-end justify-content-between">
     <button [disabled]="form.invalid || (isLoading$ | async)" mat-raised-button color="primary">Войти</button>
     <a [routerLink]="['/auth/reset-password']">Забыли пароль?</a>
-  </div>
+  </div> 
 </form>
 <div class="text-center">
   <a [routerLink]="['/auth/signup']">Зарегистрироваться</a>

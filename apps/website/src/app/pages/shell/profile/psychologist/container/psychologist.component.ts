@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'psycho-psycholigist',
-  templateUrl: './psycholigist.component.html',
-  styleUrls: ['./psycholigist.component.scss'],
+  selector: 'psycho-psychologist',
+  templateUrl: './psychologist.component.html',
+  styleUrls: ['./psychologist.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PsycholigistComponent implements OnInit {
+export class PsychologistComponent implements OnInit {
 
   constructor() { }
 

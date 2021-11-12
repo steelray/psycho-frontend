@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  max-width: 410px;
+}
+.title-1 {
+  text-transform: none;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+form {
+  margin-bottom: 30px;
+}
+button {
+  font-weight: 700;
+  padding: 16px 40px;
+}
+a {
+  font-size: 18px;
+  color: var(--na-link-color);
+  &:hover {
+    text-decoration: none;
+  }
+}

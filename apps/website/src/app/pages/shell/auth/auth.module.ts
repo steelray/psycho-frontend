@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './shell/login/login.component';
 import { SignupComponent } from './shell/signup/signup.component';
 import { AuthComponent } from './container/auth.component';
 import { SharedComponentsModule } from '../../../ui/shared-components/shared-components.module';
@@ -10,13 +9,14 @@ import { FormFieldModule } from '@psycho/web/features';
 import { MatButtonModule } from '@angular/material/button';
 import { ResetPasswordComponent } from './shell/reset-password/reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './shell/login/login.component';
 
 @NgModule({
   declarations: [
-    LoginComponent,
     SignupComponent,
     AuthComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    LoginComponent
   ],
   imports: [
     CoreSharedModules,

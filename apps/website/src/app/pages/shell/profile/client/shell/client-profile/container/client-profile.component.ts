@@ -14,9 +14,10 @@ export class ClientProfileComponent {
   readonly emailForm = this.facade.emailForm;
   readonly passwordForm = this.facade.passwordForm;
   readonly isLoading$ = this.facade.isLoading$;
-  avatarPreview!: string;
 
-  changePassword = false;
+  readonly changePassword$ = this.facade.changePassword$;
+
+
 
   constructor(
     private readonly facade: ClientProfileFacade
@@ -28,13 +29,12 @@ export class ClientProfileComponent {
   }
 
   togglePasswordFields(): void {
-    this.changePassword = !this.changePassword;
+    this.facade.changePassword$.next(!this.facade.changePassword$.getValue());
   }
 
   onAvatarUpload(event: any): void {
     const file = event?.target?.files[0];
     if (file) {
-      // this.avatarPreview = URL.createObjectURL(file);
       this.avatarForm.get('image')?.setValue(file);
       this.facade.onAvatarUpload();
     }

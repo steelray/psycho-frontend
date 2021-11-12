@@ -23,9 +23,11 @@ export interface IClientConsultation {
   id: number;
   status: 0 | 1;
   subject?: ISubject;
-  schedule: IPsychologistSchedule,
+  schedule?: IPsychologistSchedule,
   client?: IClient;
   psychologist?: IPsychologist;
+  format?: CONSULTATION_FORMAT,
+  price?: number
 }
 
 export interface IClientConsultationQueryParams {
@@ -34,4 +36,10 @@ export interface IClientConsultationQueryParams {
   limit?: number;
   expand?: string;
   status?: number;
+}
+
+export interface IClientCardOperation {
+  consultation: IClientConsultation;
+  payment_datetime: number;
+  status: string;
 }

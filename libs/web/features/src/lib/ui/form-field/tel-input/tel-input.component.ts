@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BaseFormFieldComponent } from '@psycho/web/core';
-import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
-import { debounceTime, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ICountryPhoneData, countryPhoneData } from './tel-input-data';
 import { CountryCode, parsePhoneNumber } from 'libphonenumber-js'
 import { AbstractControl, ValidationErrors } from '@angular/forms';
@@ -13,7 +12,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
   styleUrls: ['./tel-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TelInputComponent extends BaseFormFieldComponent implements AfterViewInit {
+export class TelInputComponent extends BaseFormFieldComponent {
   @Input() countries: ICountryPhoneData[] = countryPhoneData;
   @Input() autocompletePlaceholder: string = 'search...';
   @Input() showFlag = true;
@@ -43,8 +42,6 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
   filteredCountries$!: Observable<ICountryPhoneData[]>;
   selectedCountry$ = new BehaviorSubject<ICountryPhoneData | undefined>(this.getCountryByISO(this.selectedCountryCode));
 
-  @ViewChild('input', { static: false }) input!: ElementRef;
-
 
   constructor(
     private cdRef: ChangeDetectorRef
@@ -63,25 +60,22 @@ export class TelInputComponent extends BaseFormFieldComponent implements AfterVi
     }
   }
 
-  ngAfterViewInit(): void {
-    fromEvent(this.input.nativeElement, 'keyup').pipe(
-      debounceTime(200),
-      map((e: any) => e?.target?.value),
-      switchMap(value => this.selectedCountry$.pipe(
-        map(country => {
-          if (!value) {
-            return;
-          }
-          return `${country?.code}${value}`;
-        })
-      )),
-      takeUntil(this.destroy$)
-    ).subscribe(res => {
-      this.cdRef.markForCheck();
-      const phoneNumber = res ? res.replace(/\D/g, '') : null;
-      this.control.setValue(phoneNumber);
-      this.control.markAsTouched();
-    })
+
+  onKeyup(event: any): void {
+    const value = event.target?.value;
+    if (!value) {
+      return;
+    }
+    this.cdRef.markForCheck();
+
+    const selectedCountry = this.selectedCountry$.getValue();
+    const res = `${selectedCountry?.code}${value}`;
+
+    const phoneNumber = res ? res.replace(/\D/g, '') : null;
+    console.log([phoneNumber]);
+
+
+    this.control.setValue(phoneNumber);
   }
 
   onSelect(e: MatAutocompleteSelectedEvent): void {

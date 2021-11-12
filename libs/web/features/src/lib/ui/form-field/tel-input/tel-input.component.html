@@ -3,6 +3,7 @@
   <input matInput
     aria-label="code"
     #input
+    (keyup)="onKeyup($event)"
     [matAutocomplete]="auto"
     [mask]="$any((selectedCountry$ | async)?.mask)">
   <div

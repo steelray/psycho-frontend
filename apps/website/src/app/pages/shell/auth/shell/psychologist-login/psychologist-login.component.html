@@ -1,0 +1,16 @@
+<h1 class="title-1">Вход в личный кабинет для психолога</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <psycho-input placeholder="Введите почту" [control]="$any(controls.email)"></psycho-input> 
+  <psycho-input
+    [control]="$any(form.get('password'))"
+    placeholder="Введите пароль" 
+    type="password" 
+    [passwordViewable]="true"></psycho-input>
+  <div class="d-flex align-items-end justify-content-between">
+    <button [disabled]="form.invalid || isLoading" mat-raised-button color="primary">Войти</button>
+    <a [routerLink]="['/auth/reset-password']">Забыли пароль?</a>
+  </div>
+</form>
+<div class="text-center">
+  <a [routerLink]="['/auth/signup']">Зарегистрироваться</a>
+</div>

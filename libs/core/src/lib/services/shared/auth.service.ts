@@ -12,13 +12,14 @@ import { IUserAuthData } from '@psycho/core';
 export class AuthService {
   private _loginForm!: FormGroup;
   private _signupForm!: FormGroup;
+  private _psychologistLoginForm!: FormGroup;
 
   private readonly lsUserDataKey = '__psychoLsData';
   private readonly _userData$ = new BehaviorSubject<IUserAuthData | null>(this.lsUserData);
 
   constructor(
     private readonly windowService: WindowService,
-    private fb: FormBuilder
+    private readonly fb: FormBuilder
   ) { }
 
   get isAuthed$(): Observable<boolean> {
@@ -52,52 +53,54 @@ export class AuthService {
 
   get loginForm(): FormGroup {
     if (!this._loginForm) {
-      this._loginForm = this.buildLoginForm();
+      this._loginForm = this.fb.group({
+        phone: [null, [RxwebValidators.required()]],
+        password: [null, RxwebValidators.required()]
+      });
     }
     return this._loginForm;
   }
 
+  get psychologistLoginForm(): FormGroup {
+    if (!this._psychologistLoginForm) {
+      this._psychologistLoginForm = this.fb.group({
+        email: [null, [RxwebValidators.required(), RxwebValidators.email()]],
+        password: [null, RxwebValidators.required()]
+      });
+    }
+    return this._psychologistLoginForm;
+  }
+
   get signupForm(): FormGroup {
     if (!this._signupForm) {
-      this._signupForm = this.buildSignupForm();
+      this._signupForm = this.fb.group({
+        phone: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
+        code: [null, [
+          RxwebValidators.required(),
+          RxwebValidators.maxLength({ value: 6 }),
+          RxwebValidators.minLength({ value: 6 })
+        ]],
+        password: [null, [
+          RxwebValidators.required(),
+          RxwebValidators.password({
+            validation: {
+              alphabet: true,
+              digit: true,
+              // specialCharacter: true,
+              minLength: 6,
+              maxLength: 16,
+            }
+          })
+        ]],
+        repeat_password: [null, [
+          RxwebValidators.compare({
+            fieldName: 'password'
+          })
+        ]]
+      });
     }
     return this._signupForm;
   }
 
-
-  private buildLoginForm(): FormGroup {
-    return this.fb.group({
-      phone: [null, [RxwebValidators.required()]],
-      password: [null, RxwebValidators.required()]
-    });
-  }
-
-  private buildSignupForm(): FormGroup {
-    return this.fb.group({
-      phone: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
-      code: [null, [
-        RxwebValidators.required(),
-        RxwebValidators.maxLength({ value: 6 }),
-        RxwebValidators.minLength({ value: 6 })
-      ]],
-      password: [null, [
-        RxwebValidators.required(),
-        RxwebValidators.password({
-          validation: {
-            alphabet: true,
-            digit: true,
-            // specialCharacter: true,
-            minLength: 6,
-            maxLength: 16,
-          }
-        })
-      ]],
-      repeat_password: [null, [
-        RxwebValidators.compare({
-          fieldName: 'password'
-        })
-      ]]
-    });
-  }
 
 }

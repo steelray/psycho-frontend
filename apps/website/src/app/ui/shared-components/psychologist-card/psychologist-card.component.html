@@ -6,15 +6,15 @@
     </div>
   </div>
   <div class="__bottom">
-    <psycho-rating-stars [value]="psychologist.rating"></psycho-rating-stars>
+    <psycho-rating-stars [value]="$any(psychologist.rating)"></psycho-rating-stars>
     <div class="__name">{{psychologist | fio}}</div>
     <div class="__details d-flex  align-items-center justify-content-between">
       <div class="d-flex">
         <span class="d-flex align-items-center">
-          {{psychologist.birthday | datesDiff | agetostr}}
+          {{$any(psychologist.birthday) | datesDiff | agetostr}}
         </span>
         <span class="d-flex align-items-center">
-          Опыт работы {{psychologist.experience_since | datesDiff | agetostr}}
+          Опыт работы {{$any(psychologist.experience_since) | datesDiff | agetostr}}
         </span>
       </div>
       <ng-container *ngIf="chooseBtn">

@@ -11,26 +11,19 @@ import { filter, takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SnackbarService]
 })
-export class AppComponent extends WithDestroy() implements OnInit {
+export class AppComponent extends WithDestroy() {
   constructor(
     @Self() private readonly snackbar: SnackbarService,
-    private readonly errorService: HttpErrorService,
-    private readonly psychologistApiService: PsychologistApiService
+    private readonly errorService: HttpErrorService
   ) {
     super();
-    errorService.error$.pipe(
+    this.errorService.error$.pipe(
       filter(res => !!res),
       takeUntil(this.destroy$)
     ).subscribe(res => {
       if (res) {
         this.snackbar.error(res);
       }
-    });
-  }
-
-  ngOnInit(): void {
-    this.psychologistApiService.getMonthSchedule(2021, 10, 7).subscribe(res => {
-      console.log(res);
     });
   }
 

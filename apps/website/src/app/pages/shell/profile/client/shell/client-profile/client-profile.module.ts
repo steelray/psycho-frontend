@@ -8,12 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldModule } from '@psycho/web/features';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { ClientProfileCardOperationsComponent } from './components/client-profile-card-operations/client-profile-card-operations.component';
 
 
 
 @NgModule({
   declarations: [
-    ClientProfileComponent
+    ClientProfileComponent,
+    ClientProfileCardOperationsComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     FormFieldModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule
   ]
 })
 export class ClientProfileModule { }
