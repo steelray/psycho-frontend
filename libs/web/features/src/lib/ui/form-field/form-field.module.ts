@@ -21,7 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RangeDatepickerMaxRangeDirective } from './range-datepicker/range-datepicker-max-range.directive';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { CoreSharedModules } from '@psycho/core';
@@ -72,7 +72,7 @@ const DECLARATIONS = [...compoments, directives];
     PipesModule,
     UIModule,
     NgxMaskModule,
-
+    FormsModule
   ],
   exports: compoments
 })

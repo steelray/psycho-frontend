@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { BaseFormFieldComponent } from '@psycho/web/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ICountryPhoneData, countryPhoneData } from './tel-input-data';
 import { CountryCode, parsePhoneNumber } from 'libphonenumber-js'
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'psycho-tel-input',
@@ -12,7 +12,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
   styleUrls: ['./tel-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TelInputComponent extends BaseFormFieldComponent {
+export class TelInputComponent extends BaseFormFieldComponent implements OnChanges {
   @Input() countries: ICountryPhoneData[] = countryPhoneData;
   @Input() autocompletePlaceholder: string = 'search...';
   @Input() showFlag = true;
@@ -41,7 +41,7 @@ export class TelInputComponent extends BaseFormFieldComponent {
   ];
   filteredCountries$!: Observable<ICountryPhoneData[]>;
   selectedCountry$ = new BehaviorSubject<ICountryPhoneData | undefined>(this.getCountryByISO(this.selectedCountryCode));
-
+  inputControl = new FormControl();
 
   constructor(
     private cdRef: ChangeDetectorRef

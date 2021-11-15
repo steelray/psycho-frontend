@@ -1,0 +1,77 @@
+<ng-container *ngIf="profileData$ | async as user">
+  <div class="__header">
+    <div class="d-flex align-items-center __mb-20">
+      <div class="__avatar">
+        <psycho-picture
+          [origin]="user?.avatar"
+          [alt]="user | fio"></psycho-picture>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </div>
+      <div class="__text">
+        <div class="__mb-10">
+          <span>
+            {{user.first_name}}
+          </span>
+          <span>
+            {{$any(user.birthday) | datesDiff | agetostr}}
+          </span>
+        </div>
+        <div class="__slogan">
+          <div>{{user?.slogan}}</div>
+          <button class="__change-slogan-btn" (click)="onSloganChange($any(user?.slogan))">Сменить статус</button>
+        </div>
+      </div>
+    </div>
+    <label class="__upload-avatar">
+      Загрузить аватар
+      <input (change)="onAvatarUpload($event)" type="file">
+    </label>
+  </div>
+
+  <div class="__form bordered-fields">
+    <div class="form-field d-flex align-items-end">
+      <psycho-input label="Ваша почта" [control]="$any(emailForm.get('email'))"></psycho-input>
+      <button [disabled]="emailForm.invalid" (click)="onEmailChange()" mat-raised-button color="primary">Сохранить</button>
+    </div>
+    <ng-container *ngIf="changePassword$ | async">
+      <div class="form-field d-flex align-items-end">
+        <psycho-input [control]="$any(passwordForm.get('current_password'))" type="password" [passwordViewable]="true" label="Старый пароль"></psycho-input>
+      </div>
+      <div class="form-field d-flex align-items-end">
+        <psycho-input [control]="$any(passwordForm.get('password'))" type="password" [passwordViewable]="true" label="Новый пароль"></psycho-input>
+        <psycho-input [control]="$any(passwordForm.get('repeat_password'))" type="password" [passwordViewable]="true" label="Повторите новый пароль"></psycho-input>
+      </div>
+    </ng-container>
+    <div>
+      <button class="__mr-20" (click)="togglePasswordFields()" mat-raised-button color="primary">{{(changePassword$ | async) ? 'Отменить' : 'Сменить пароль'}}</button>
+      <button *ngIf="changePassword$ | async" (click)="onPasswordChange()" [disabled]="passwordForm.invalid" mat-raised-button color="primary">Сохранить</button>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+  <div class="d-flex justify-content-end __mb-20">
+    <button mat-raised-button color="primary" size="medium">Запрос на смну личных данных</button>
+  </div>
+  <div class="__card">
+    <div class="__title">Образование</div>
+    <div [innerHTML]="user.education | safe:'html'"></div>
+  </div>
+
+  <div class="__card">
+    <div class="__title">Описание</div>
+    <div [innerHTML]="user.description | safe:'html'"></div>
+  </div>
+
+  <div class="__card">
+    <div class="__title">С какими темами я работаю </div>
+    <div class="__subjects">
+      <span *ngFor="let subject of user.subjects;">{{subject.title}}</span>
+    </div>
+    <button mat-raised-button color="primary" (click)="onSubjectsUpdate($any(user.subjects))">
+      Изменить
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  
+
+</ng-container>

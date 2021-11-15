@@ -31,17 +31,17 @@ export class ClientFacade {
     return of([
       {
         title: 'Мои вопросы',
-        value: ['/profile/questions'],
+        value: ['/profile/client/questions'],
         img: 'chat'
       },
       {
         title: 'Консультации 50 мин',
-        value: ['/profile/consultations'],
+        value: ['/profile/client/consultations'],
         img: 'video'
       },
       {
         title: 'Мои психологи',
-        value: ['/profile/psychologists'],
+        value: ['/profile/client/psychologists'],
         img: 'favourite'
       },
     ]);

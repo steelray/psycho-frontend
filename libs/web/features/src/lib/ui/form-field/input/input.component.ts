@@ -11,7 +11,7 @@ export class InputComponent extends BaseFormFieldComponent {
   @Input() type: 'text' | 'number' | 'password' | 'email' | 'search' | 'file' = 'text';
   @Input() readonly!: boolean;
   @Input() mask: any;
-  @Input() autocomplete = 'off';
+  @Input() autocomplete = 'new-password';
   @Input() passwordViewable = false;
   @Output() keyUp = new EventEmitter();
 
@@ -22,4 +22,5 @@ export class InputComponent extends BaseFormFieldComponent {
   showHidePassword(): void {
     this.type = this.type === 'password' ? 'text' : 'password';
   }
+
 }

@@ -256,3 +256,8 @@ export function yearOptions(): ISelectOption[] {
     title: `${y}`
   }));
 }
+
+// default Moscow tz
+export function momentWithUTC(date?: any, utc = '+03:00'): moment.Moment {
+  return moment(date).utcOffset(utc);
+}

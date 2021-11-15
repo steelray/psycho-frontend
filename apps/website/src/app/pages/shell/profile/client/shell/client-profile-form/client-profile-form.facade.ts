@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService, ClientApiService, IGroupedSchedule, IPsychologist, IPsychologistSchedule, ISelectOption, ISubject, PsychologistApiService, SubjectApiService } from '@psycho/core';
+import { ClientApiService, IGroupedSchedule, IPsychologist, IPsychologistSchedule, ISelectOption, ISubject, PsychologistApiService, SubjectApiService } from '@psycho/core';
 import { generateYears } from '@psycho/utils';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
 import { combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 import { ClientSharedFormsService } from '../../../shared/services/client-shared-forms.service';
 
 @Injectable()

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { PsychologistRoutingModule } from './psychologist-routing.module';
 import { PsychologistComponent } from './container/psychologist.component';
+import { CoreSharedModules } from '@psycho/core';
+import { ProfileSharedComponentsModule } from '../shared/components/profile-shared-components.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -10,8 +13,10 @@ import { PsychologistComponent } from './container/psychologist.component';
     PsychologistComponent
   ],
   imports: [
-    CommonModule,
-    PsychologistRoutingModule
+    CoreSharedModules,
+    PsychologistRoutingModule,
+    ProfileSharedComponentsModule,
+    MatButtonModule
   ]
 })
 export class PsychologistModule { }

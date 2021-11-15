@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, Self } from '@angular/core';
-import { HttpErrorService, PsychologistApiService } from '@psycho/core';
+import { HttpErrorService, ISelectOption, PsychologistApiService } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
+import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +12,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SnackbarService]
 })
-export class AppComponent extends WithDestroy() {
+export class AppComponent extends WithDestroy() implements OnInit {
   constructor(
     @Self() private readonly snackbar: SnackbarService,
     private readonly errorService: HttpErrorService
@@ -26,5 +27,9 @@ export class AppComponent extends WithDestroy() {
       }
     });
   }
+
+  ngOnInit(): void {
+  }
+
 
 }

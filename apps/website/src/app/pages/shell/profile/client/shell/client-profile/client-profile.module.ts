@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { ClientProfileCardOperationsComponent } from './components/client-profile-card-operations/client-profile-card-operations.component';
+import { CoreSharedModules } from '@psycho/core';
 
 
 
@@ -19,7 +20,7 @@ import { ClientProfileCardOperationsComponent } from './components/client-profil
     ClientProfileCardOperationsComponent
   ],
   imports: [
-    CommonModule,
+    CoreSharedModules,
     ClientProfileRoutingModule,
     UIModule,
     PipesModule,

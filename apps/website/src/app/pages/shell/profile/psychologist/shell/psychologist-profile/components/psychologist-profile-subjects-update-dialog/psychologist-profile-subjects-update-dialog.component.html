@@ -1,0 +1,11 @@
+<div 
+  *ngFor="let subject of subjects$ | async;trackBy: trackByFn" 
+  (click)="onSelect(subject.id)"
+  [class.selected]="subject.isSelected"
+>
+  <psycho-subject-item 
+    mat-ripple
+    [subject]="subject"
+    [iconMode]="true"></psycho-subject-item>
+</div>
+<button mat-raised-button color="primary" (click)="onSubmit()" size="medium">Сохранить</button>

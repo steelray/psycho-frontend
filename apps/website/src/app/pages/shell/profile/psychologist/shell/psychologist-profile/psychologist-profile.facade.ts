@@ -1,32 +1,43 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthApiService, AuthService, ClientApiService, IUser } from '@psycho/core';
+import { AuthApiService, AuthService, IPsychologist, ISubject, IUser, PsychologistApiService, SubjectApiService } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, shareReplay, takeUntil, tap } from 'rxjs/operators';
 import { ProfileSharedForms } from '../../../shared/services/profile-shared-forms.service';
 
 @Injectable()
-export class ClientProfileFacade extends WithDestroy() {
+export class PsychologistProfileFacade extends WithDestroy() {
   private _passwordForm!: FormGroup;
   private _emailForm!: FormGroup;
   private _avatarForm!: FormGroup;
+  private _subjects$!: Observable<ISubject[]>;
   readonly isLoading$ = new BehaviorSubject<boolean>(false);
   readonly changePassword$ = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private readonly clientApiService: ClientApiService,
+    private readonly psychologistApiService: PsychologistApiService,
     private readonly authApiService: AuthApiService,
     private readonly authService: AuthService,
     private readonly snackbar: SnackbarService,
-    private readonly profileSharedForms: ProfileSharedForms
+    private readonly profileSharedForms: ProfileSharedForms,
+    private readonly subjectApiService: SubjectApiService
   ) {
     super();
   }
 
-  get clientData$(): Observable<IUser> {
-    return this.clientApiService.getClientData().pipe(
+  get subjects$(): Observable<ISubject[]> {
+    if (!this._subjects$) {
+      this._subjects$ = this.subjectApiService.getSubjects().pipe(
+        shareReplay()
+      );
+    }
+    return this._subjects$;
+  }
+
+  get profileData$(): Observable<IPsychologist> {
+    return this.psychologistApiService.getProfile().pipe(
       filter(data => !!data),
       tap(data => {
         this.emailForm.get('email')?.setValue(data.email)
@@ -59,7 +70,7 @@ export class ClientProfileFacade extends WithDestroy() {
     }
     const userToken = this.authService.currentToken as string;
     this.authApiService.uploadAvatar(this.avatarForm.value?.image, userToken).then(() => {
-      this.clientApiService.updateClientData();
+      this.psychologistApiService.updateProfileData();
     }).catch(error => {
       if (error.response) {
         this.snackbar.error(error.response.data)
@@ -78,4 +89,21 @@ export class ClientProfileFacade extends WithDestroy() {
     this.authApiService.setEmail(this.emailForm.value).subscribe(() => this.snackbar.success('Ваш email обновлен'));
   }
 
+  updateSlogan(slogan: string): Observable<IPsychologist> {
+    return this.psychologistApiService.updateSlogan(slogan).pipe(
+      tap(() => this.psychologistApiService.updateProfileData()),
+      takeUntil(this.destroy$)
+    );
+  }
+
+
+  setSubjects(ids: number[]): Observable<ISubject[]> | null {
+    if (!ids.length) {
+      this.snackbar.error('Необходимо выбрать минимум одну тему');
+      return null;
+    }
+    return this.psychologistApiService.setSubjects(ids).pipe(
+      tap(() => this.psychologistApiService.updateProfileData())
+    );
+  }
 }

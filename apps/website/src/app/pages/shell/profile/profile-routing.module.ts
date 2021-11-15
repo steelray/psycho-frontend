@@ -1,19 +1,21 @@
 import { Injectable, NgModule } from '@angular/core';
-import { CanActivate, RouterModule, Routes } from '@angular/router';
-import { AuthService, ClientGuard } from '@psycho/core';
+import { CanActivate, Router, RouterModule, Routes } from '@angular/router';
+import { AuthService } from '@psycho/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 class IsClientGuard implements CanActivate {
 
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) { }
 
   canActivate(): Observable<boolean> {
     return this.authService.userData$.pipe(
-      map(data => data?.is_client || false)
+      map(data => data?.is_client || false),
+      tap(res => !res && this.router.navigate(['/profile', 'psychologist']))
     );
   }
 
@@ -23,12 +25,15 @@ class IsClientGuard implements CanActivate {
 class IsPsychologistGuard implements CanActivate {
 
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
+
   ) { }
 
   canActivate(): Observable<boolean> {
     return this.authService.userData$.pipe(
-      map(data => data?.is_psychologist || false)
+      map(data => data?.is_psychologist || false),
+      tap(res => !res && this.router.navigate(['/profile', 'psychologist']))
     );
   }
 
@@ -63,12 +68,6 @@ const routes: Routes = [
   providers: [
     IsClientGuard,
     IsPsychologistGuard
-    // {
-    //   provide: ROUTES,
-    //   useFactory: routesFactory,
-    //   deps: [AuthService],
-    //   multi: true
-    // }
   ]
 })
 export class ProfileRoutingModule { }

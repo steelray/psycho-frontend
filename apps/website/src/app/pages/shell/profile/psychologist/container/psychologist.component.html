@@ -1,1 +1,11 @@
-<p>psycholigist works!</p>
+<psycho-profile-layout *ngIf="userData$ | async as userData" 
+  [showSidebar]="true"
+  [isClient]="(userAuthData$ | async)?.is_client"
+  [isPsychologist]="(userAuthData$ | async)?.is_psychologist"
+>
+  <ng-container sidebar>
+    <psycho-profile-sidebar-header [user]="userData"></psycho-profile-sidebar-header>
+    <psycho-profile-sidebar-menu [menuItems]="menuItems$ | async"></psycho-profile-sidebar-menu>
+  </ng-container>
+  <router-outlet></router-outlet>
+</psycho-profile-layout>

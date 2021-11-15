@@ -3,6 +3,9 @@
   <input matInput
     aria-label="code"
     #input
+    autocomplete="off"
+    name="wowowow"
+    type="search"
     (keyup)="onKeyup($event)"
     [matAutocomplete]="auto"
     [mask]="$any((selectedCountry$ | async)?.mask)">

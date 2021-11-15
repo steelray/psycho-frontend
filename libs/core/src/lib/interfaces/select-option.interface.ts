@@ -4,4 +4,5 @@ export interface ISelectOption {
   img?: string;
   subtitle?: string;
   isSelected?: boolean;
+  disabled?: boolean;
 }

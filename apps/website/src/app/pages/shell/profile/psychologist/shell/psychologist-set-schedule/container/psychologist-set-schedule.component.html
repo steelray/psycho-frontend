@@ -1,0 +1,41 @@
+<h2 class="title-3">Задать расписание</h2>
+
+<div class="__calendar">
+  <mat-calendar [minDate]="minDate" [selected]="selectedDate" [dateClass]="$any(dateClass)" (selectedChange)="onSelectDate($event)"></mat-calendar>
+  <div class="__labels">
+    <div class="__exist">
+      Есть запись, нажмите на окошко для просмотра
+    </div>
+    <div class="__free">
+      Нет записи
+    </div>
+  </div>
+</div>
+
+<div class="__selected-date" *ngIf="schedule$ | async as schedule">
+  <div class="__date-title">{{$any(selectedDate) | date:'dd.M.Y, EEEE'}}</div>
+  <div class="__title">Чтобы задать расписание, выберите время и нажмите на кнопку “Сохранить”</div>
+  <p>Часовой пояс: Москва</p>
+
+  <div class="__times d-flex flex-wrap">
+    <span 
+      mat-ripple 
+      *ngFor="let hour of hours$ | async;trackBy: trackByFn"
+      (click)="onSelectHour(hour)"
+      [class.__selected]="hour.selected"
+      [class.__setted]="hour.setted"
+      [class.__disabled]="hour.disabled"
+    > 
+      {{hour.title}}
+      <button *ngIf="hour.setted" mat-icon-button (click)="onTimeRemove($event, 1)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+  </div>
+  <div class="__mb-35">
+    <button mat-raised-button size="medium" color="primary" (click)="onSave()" [disabled]="isLoading$ | async">Сохранить</button>
+  </div>
+  <div class="__note d-flex align-items-center">
+    Задано расписание, редактировать
+  </div>
+</div>

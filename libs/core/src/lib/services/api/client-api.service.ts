@@ -17,12 +17,6 @@ export class ClientApiService extends ApiService {
     return this._updateClientData$.pipe(
       switchMap(() => {
         if (!this._clientData$) {
-          // this._clientData$ = of({
-          //   id: 1,
-          //   user: {
-          //     id: 1
-          //   }
-          // })
           this._clientData$ = this.get<IUser>(`${this.controller}/profile`).pipe(
             shareReplay()
           );
