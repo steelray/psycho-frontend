@@ -76,12 +76,19 @@ export class PsychologistSetScheduleComponent {
   }
 
   private openConsultationsModalIfExist(date: string): void {
+    const consultations = this.consultations.filter(consultation => {
+      const ts = consultation?.schedule?.datetime ? consultation?.schedule?.datetime * 1000 : 0;
+      return moment(ts).format(this.dateFormat) === date;
+    });
+    if (!consultations.length) {
+      return;
+    }
     this.dialog.open(PsychologistSetScheduleConsultationsDialogComponent, {
-      data: this.consultations.filter(consultation => {
-        const ts = consultation?.schedule?.datetime ? consultation?.schedule?.datetime * 1000 : 0;
-        return moment(ts).format(this.dateFormat) === date;
-      }),
-      width: '550px'
+      data: {
+        consultations,
+        selected_date: date
+      },
+      width: '700px'
     })
   }
 

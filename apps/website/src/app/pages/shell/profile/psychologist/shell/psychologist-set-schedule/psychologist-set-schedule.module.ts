@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { PsychologistSetScheduleConsultationsDialogComponent } from './components/psychologist-set-schedule-consultations-dialog/psychologist-set-schedule-consultations-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PipesModule } from '@psycho/features';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
+    PipesModule
   ]
 })
 export class PsychologistSetScheduleModule { }

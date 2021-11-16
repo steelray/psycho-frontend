@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CONSULTATION_FORMAT, CONSULTATION_FORMAT_PRICE, IClientConsultation } from '@psycho/core';
 
 @Component({
   selector: 'psycho-psychologist-set-schedule-consultations-dialog',
@@ -6,11 +8,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./psychologist-set-schedule-consultations-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PsychologistSetScheduleConsultationsDialogComponent implements OnInit {
+export class PsychologistSetScheduleConsultationsDialogComponent {
+  readonly formats = CONSULTATION_FORMAT;
+  readonly prices = CONSULTATION_FORMAT_PRICE;
 
-  constructor() { }
+  constructor(
+    private readonly dialogRef: MatDialogRef<PsychologistSetScheduleConsultationsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public readonly data: {
+      consultations: IClientConsultation,
+      selected_date: string | number
+    }
+  ) { }
 
-  ngOnInit(): void {
+  onClose(): void {
+    this.dialogRef.close();
   }
 
 }

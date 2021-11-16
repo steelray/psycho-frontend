@@ -1,1 +1,33 @@
-<p>psychologist-set-schedule-consultations-dialog works!</p>
+<div class="__header d-flex justify-content-between align-items-center">
+  {{data.selected_date}}
+  <button mat-icon-button class="close-btn" (click)="onClose()"><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+  <div *ngFor="let consultation of $any(data.consultations)" class="__consultation d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <span>
+        {{$any(consultation.schedule.datetime) | date:'HH:mm'}}
+      </span>
+      <span>{{consultation.client | fio}}</span>
+      <span class="d-flex align-items-center">
+        <ng-container *ngIf="consultation.format === formats.FORMAT_EXPRESS">
+          Экспресс
+        </ng-container>
+        <ng-container *ngIf="consultation.format === formats.FORMAT_FULL_CHAT">
+          50 мин
+          <mat-icon svgIcon="chat"></mat-icon>
+        </ng-container>
+        <ng-container *ngIf="consultation.format === formats.FORMAT_FULL_VIDEO">
+          50 мин
+          <mat-icon svgIcon="video"></mat-icon>
+        </ng-container>
+      </span>
+    </div>
+
+    <div>
+      <button mat-button>Анкета</button>
+      <button mat-raised-button color="primary">Отменить</button>
+    </div>
+
+  </div>
+</mat-dialog-content>

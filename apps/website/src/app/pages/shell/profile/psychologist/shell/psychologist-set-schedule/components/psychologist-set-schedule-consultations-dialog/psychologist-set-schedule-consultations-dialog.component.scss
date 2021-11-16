@@ -1,3 +1,41 @@
 :host {
   display: block;
 }
+
+mat-dialog-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.__header {
+  margin: -10px 0 20px;
+  font-weight: 600;
+  button {
+    margin-right: -15px;
+    margin-top: -5px;
+    color: var(--main-color);
+  }
+}
+
+.__consultation {
+  padding: 10px 24px;
+  border: 1px solid #e2e2e2;
+  border-radius: 6px;
+  &:not(:last-child) {
+    margin-bottom: -1px;
+  }
+  span {
+    margin-right: 15px;
+  }
+  button {
+    margin-left: 15px;
+    font-weight: 600;
+  }
+  mat-icon {
+    color: var(--main-color);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+}
