@@ -1,6 +1,15 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    // a set of cool rules
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    // a shortcut enabling 6 rules above
+    "strict": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,

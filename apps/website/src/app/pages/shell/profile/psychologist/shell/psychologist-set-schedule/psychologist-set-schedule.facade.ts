@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IPsychologist, IPsychologistSchedule, ISelectOption, PsychologistApiService } from '@psycho/core';
+import { IClientConsultation, IPsychologist, IPsychologistSchedule, ISelectOption, PsychologistApiService } from '@psycho/core';
 import { momentWithUTC, WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import * as moment from 'moment';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, finalize, map, shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 export interface IHour {
   unix: number;
@@ -20,6 +20,8 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
   private readonly _selectedSettedHours$ = new BehaviorSubject<IHour[]>([]); // all selected|setted hours of all dates(selected = not saved yet but selected by user in real time, setted = setted hour in db)
 
   private readonly updateSchedule$ = new BehaviorSubject<null>(null); // for updating schedule|hours falgs after save  
+  private _consultations$!: Observable<IClientConsultation[]>;
+
   readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -36,7 +38,6 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
       this.psychologistApiService.getProfile(),
       this._selectedDate$.pipe(
         filter(date => !!date),
-        tap(date => console.log(date?.format())),
         map(date => ({
           start: date?.startOf('day').set({ hour: 1 }).format('D.MM.yyyy HH:mm'),
           end: date?.endOf('day').format('D.MM.yyyy HH:mm')
@@ -56,7 +57,7 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
         .fill(+momentWithUTC().set({ hour: 9 }).format('H'))
         .map((v, i) => v + i)
         .map(v =>
-          momentWithUTC()
+          momentWithUTC(this._selectedDate$.getValue()?.format())
             .set({
               hour: v,
               minute: 0,
@@ -69,8 +70,17 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
           disabled: v < momentWithUTC().unix(),
           setted: res.find(hour => hour.unix === v)?.setted || false,
           selected: !!res.find(hour => hour.unix === v)
-        })))
+        }))),
     )
+  }
+
+  get consultations$(): Observable<IClientConsultation[]> {
+    if (!this._consultations$) {
+      this._consultations$ = this.psychologistApiService.getConsultations().pipe(
+        shareReplay()
+      );
+    }
+    return this._consultations$;
   }
 
   saveHours(): void {
@@ -81,12 +91,18 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.snackbar.info('Ваше расписание успешно сохранено');
-      this.updateSchedule$.next(null);
+      const allTimes = this._selectedSettedHours$.getValue();
+      this._selectedSettedHours$.next(allTimes.map(hour => {
+        hour.selected = false;
+        hour.setted = true;
+        return hour;
+      }))
     });
   }
 
   setSelectedDate(date: moment.Moment): void {
     this._selectedDate$.next(date);
+    this._selectedSettedHours$.next([]);
   }
 
   toggleDateToSelectedDates(hour: IHour): void {
@@ -98,6 +114,14 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
       res = [...currentHours, hour];
     }
     this._selectedSettedHours$.next(res);
+  }
+
+  onTimeRemove(unix: number): void {
+    this.psychologistApiService.removeTimeFromSchedule(unix).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this._selectedSettedHours$.next(this._selectedSettedHours$.getValue().filter(hour => hour.unix !== unix));
+    });
   }
 
   private setSettedHours(schdule: IPsychologistSchedule[]): void {

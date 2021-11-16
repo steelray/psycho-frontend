@@ -7,11 +7,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import { PsychologistSetScheduleConsultationsDialogComponent } from './components/psychologist-set-schedule-consultations-dialog/psychologist-set-schedule-consultations-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
-    PsychologistSetScheduleComponent
+    PsychologistSetScheduleComponent,
+    PsychologistSetScheduleConsultationsDialogComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDialogModule
   ]
 })
 export class PsychologistSetScheduleModule { }
