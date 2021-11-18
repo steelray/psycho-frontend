@@ -1,0 +1,103 @@
+:host {
+  display: block;
+  margin-left: -25px;
+  margin-top: -40px;
+}
+.__header {
+  margin-bottom: 100px;
+}
+.__finances {
+  background: var(--medium-gray-bg);
+  padding: 38px 20px;
+  &-item {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    text-align: center;
+    background: var(--white);
+    margin-bottom: 20px;
+    margin-right: 12px;
+    padding: 12px 20px;
+    &:last-child {
+      margin-right: 0;
+      background: var(--main-color);
+      color: var(--white);
+      .__amount {
+        color: var(--main-color-medium);
+      }
+    }
+    .__title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .__amount {
+      color: var(--main-color);
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .__note {
+      font-size: 16px;
+    }
+  }
+}
+
+.__data {
+  background: var(--accent-bg-medium);
+  padding: 38px 35px;
+  color: var(--white);
+  .__note {
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .__card {
+    border-radius: 12px;
+    background: #f9f9f9;
+    padding: 30px 12px;
+    height: 200px;
+    width: 300px;
+    justify-content: space-between;
+    input {
+      background: var(--accent-bg-medium);
+      width: 100%;
+      border: none;
+      height: 30px;
+      border-radius: 3px;
+      padding: 0 12px;
+      text-align: center;
+    }
+    button {
+      margin: 0 12px;
+    }
+  }
+
+  span {
+    height: 18px;
+    width: calc(25% - 10px);
+    background: var(--accent-bg-medium);
+  }
+}
+
+.__table-container {
+  background: var(--medium-gray-bg);
+  margin: 0 -25px;
+  padding: 55px 15px;
+  table {
+    width: 550px;
+    margin: 0 auto;
+    background: none;
+    td {
+      font-size: 20px;
+      background: none;
+      padding: 0;
+      &:last-child {
+        text-align: right;
+        color: var(--main-color);
+      }
+      &:nth-child(2) {
+        text-align: center;
+      }
+    }
+  }
+}

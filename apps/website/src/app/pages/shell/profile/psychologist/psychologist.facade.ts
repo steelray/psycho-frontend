@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { AuthService, IPsychologist, ISelectOption, IUser, PsychologistApiService } from '@psycho/core';
+import { AuthService, ISelectOption, IUser, PsychologistApiService } from '@psycho/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable()

@@ -1,3 +1,4 @@
+import { IClientConsultation } from '@psycho/core';
 import { ISubject } from './subject.interface';
 
 export interface IPsychologist {
@@ -39,4 +40,11 @@ export interface IGroupedSchedule {
 export interface IGroupedScheduleTime {
   id: number;
   time: number;
+}
+
+export interface IPsychologistOutput {
+  payed_at: number;
+  id: number;
+  amount: number;
+  consultation: IClientConsultation
 }

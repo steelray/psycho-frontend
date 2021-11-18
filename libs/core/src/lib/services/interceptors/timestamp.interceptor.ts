@@ -11,7 +11,8 @@ export class TimestampInterceptor implements HttpInterceptor {
     'birthday',
     'published_at',
     'experience_since',
-    'payment_datetime'
+    'payment_datetime',
+    'payed_at'
   ];
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

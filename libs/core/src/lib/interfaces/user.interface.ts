@@ -11,4 +11,5 @@ export interface IUserAuthData {
   token: string;
   is_client: boolean;
   is_psychologist: boolean;
+  id?: number;
 }

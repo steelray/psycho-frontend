@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ENVIRONMENTS, IEnvironment } from '@psycho/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
-import { finalize, switchMap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class WSService {
     return this._opened$.asObservable()
   }
 
-  private connect(): void {
+  connect(): void {
     // prevent multiple connections
     if (!this.connected) {
       this._reconnect$.pipe(

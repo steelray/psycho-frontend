@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { catchError, distinctUntilChanged, filter, map, switchMap, take, takeUntil, tap, timestamp } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { IUserAuthData } from '@psycho/core';
+import { IUser, IUserAuthData, WSService } from '@psycho/core';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,14 @@ export class AuthService {
   private readonly lsUserDataKey = '__psychoLsData';
   private readonly _userData$ = new BehaviorSubject<IUserAuthData | null>(this.lsUserData);
 
+  private readonly wsSubscription$ = new Subject();
+
   constructor(
     private readonly windowService: WindowService,
-    private readonly fb: FormBuilder
-  ) { }
+    private readonly fb: FormBuilder,
+    private readonly ws: WSService
+  ) {
+  }
 
   get isAuthed$(): Observable<boolean> {
     return this._userData$.asObservable().pipe(
@@ -29,7 +33,9 @@ export class AuthService {
   }
 
   get userData$(): Observable<IUserAuthData | null> {
-    return this._userData$.asObservable();
+    return this._userData$.asObservable().pipe(
+      tap(data => this.wsConnectionHandler(data))
+    );
   }
 
   get currentToken(): string | undefined {
@@ -100,6 +106,14 @@ export class AuthService {
       });
     }
     return this._signupForm;
+  }
+
+  private wsConnectionHandler(userData: IUserAuthData | null): void {
+    if (userData) {
+      this.ws.connect();
+    } else {
+      this.ws.onComplete();
+    }
   }
 
 
