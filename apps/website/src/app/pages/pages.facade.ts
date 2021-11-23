@@ -12,7 +12,7 @@ export class PagesFacade {
     private readonly authService: AuthService,
     private readonly wsService: WSService
   ) {
-    this.registerWSUserHandler();
+    // this.registerWSUserHandler();
 
     this.wsService.onMessage$.subscribe(res => console.log(res));
   }
@@ -40,10 +40,10 @@ export class PagesFacade {
         map(() => data)
       )),
     ).subscribe(res => {
-      this.wsService.sendMessage({
-        command: 'register',
-        user: this.authService.userData$
-      });
+      // this.wsService.sendMessage({
+      //   command: 'register',
+      //   user: this.authService.userData$
+      // });
     })
   }
 

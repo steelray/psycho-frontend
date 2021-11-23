@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
-import { HttpErrorService } from '@psycho/core';
+import { ChangeDetectionStrategy, Component, HostListener, Self } from '@angular/core';
+import { AuthService, HttpErrorService, WSService, WS_COMMANDS } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'psycho-root',
@@ -12,9 +12,12 @@ import { filter, takeUntil } from 'rxjs/operators';
   providers: [SnackbarService]
 })
 export class AppComponent extends WithDestroy() {
+  readonly userData$ = this.authService.userData$;
   constructor(
     @Self() private readonly snackbar: SnackbarService,
     private readonly errorService: HttpErrorService,
+    private readonly ws: WSService,
+    private readonly authService: AuthService
   ) {
     super();
     this.errorService.error$.pipe(
@@ -23,6 +26,21 @@ export class AppComponent extends WithDestroy() {
     ).subscribe(res => {
       if (res) {
         this.snackbar.error(res);
+      }
+    });
+
+    // this.ws.connect();
+    this.authService.userData$.pipe(
+      filter(userData => !!userData),
+      switchMap(userData => this.ws.afterOpen$.pipe(
+        map(() => userData?.id)
+      )),
+    ).subscribe(userId => {
+      if (userId) {
+        this.ws.sendMessage({
+          command: WS_COMMANDS.REGISTER,
+          user: userId,
+        })
       }
     });
   }

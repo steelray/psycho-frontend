@@ -6,7 +6,7 @@ import { IEnvironment } from '../environment.interface';
 export const environmentBase: IEnvironment = {
   production: false,
   // apiEndpoint: '/api',
-  apiEndpoint: 'http://psycho.loc/api',
-  // apiEndpoint: 'http://server.zarland.ru/api',
-  wsEndpoint: 'ws://localhost:8080'
+  // apiEndpoint: 'http://psycho.loc/api',
+  apiEndpoint: 'http://server.zarland.ru/api',
+  wsEndpoint: 'ws://socket.zarland.ru/'
 };

@@ -3,6 +3,34 @@ import { ENVIRONMENTS, IEnvironment } from '@psycho/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+
+export enum WS_RESPONSE_TYPE {
+  CLOSED = 'closed',
+  REGISTERED = 'registered',
+  MESSAGE = 'message',
+  ONLINE_PSYCHOLOGISTS = 'online-psychologists',
+  ONLINE_INTERVIEWEES = 'online-interviewees',
+  ERROR = 'error',
+}
+
+export enum WS_COMMANDS {
+  REGISTER = 'register',
+  SEND_MESSAGE = 'send-message',
+  GET_ONLINE_PSYCHOLOGISTS = 'get-online-psychologists'
+}
+
+export interface IWSMessage {
+  type: WS_RESPONSE_TYPE,
+  message: any
+}
+
+export interface IWSSendMessageParams {
+  user: number,
+  command: WS_COMMANDS
+  message?: string,
+  receiver?: number,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,7 +88,7 @@ export class WSService {
     this.socket$.complete();
   }
 
-  sendMessage(message: any): void {
+  sendMessage(message: IWSSendMessageParams): void {
     this.socket$.next(message);
   }
 
