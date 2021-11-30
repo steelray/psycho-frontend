@@ -17,7 +17,7 @@ export class ClientGuard implements CanActivate {
     return this.clientApiService.getClientData().pipe(
       map((res: IUser) => {
         if (!res.first_name) {
-          this.router.navigate(['/profile/complete-registration']);
+          this.router.navigate(['/profile/client/complete-registration']);
           return false;
         }
         return true;

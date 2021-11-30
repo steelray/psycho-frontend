@@ -24,6 +24,11 @@ const routes: Routes = [
         canActivate: [ClientGuard]
       },
       {
+        path: 'consultations',
+        loadChildren: () => import('./shell/client-consultations/client-consultations.module').then(m => m.ClientConsultationsModule),
+        canActivate: [ClientGuard]
+      },
+      {
         path: 'psychologists',
         loadChildren: () => import('./shell/client-psychologists/client-psychologists.module').then(m => m.ClientPsychologistsModule),
         canActivate: [ClientGuard]

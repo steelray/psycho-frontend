@@ -10,7 +10,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { FormFieldModule } from '@psycho/web/features';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
-import { WebsiteWidgetsModule } from './ui/widgets/website-widgets.module';
+import { ProfileSharedComponentsModule } from './pages/shell/profile/shared/components/profile-shared-components.module';
+import { ChatWidgetModule } from '../../../../libs/features/src/lib/widgets/chat/chat.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -27,7 +30,7 @@ const maskConfig: Partial<IConfig> = {
     LazyLoadImageModule,
     FormFieldModule,
     NgxMaskModule.forRoot(maskConfig),
-    WebsiteWidgetsModule
+    MatSnackBarModule
 
   ],
   providers: [

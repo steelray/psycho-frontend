@@ -33,9 +33,20 @@ export class AuthService {
   }
 
   get userData$(): Observable<IUserAuthData | null> {
-    return this._userData$.asObservable().pipe(
-      tap(data => this.wsConnectionHandler(data))
-    );
+    return this._userData$.asObservable()
+    // .pipe(
+    //   tap(data => this.wsConnectionHandler(data)),
+    //   switchMap(data => {
+    //     if (!data) {
+    //       return of(data);
+    //     }
+    //     console.log(data);
+    //     return this.ws.afterOpen$.pipe(
+
+    //       map(() => data)
+    //     )
+    //   })
+    // );
   }
 
   get currentToken(): string | undefined {
@@ -50,6 +61,7 @@ export class AuthService {
   logout(): void {
     this.windowService.localStorage.removeItem(this.lsUserDataKey);
     this._userData$.next(null);
+    this.ws.onComplete();
   }
 
   private get lsUserData(): IUserAuthData | null {

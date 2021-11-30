@@ -1,3 +1,16 @@
+html,
+body {
+  margin: 0 !important;
+  font-family: var(--base-font-family) !important;
+  font-size: var(--base-font-size) !important;
+  color: var(--base-font-color) !important;
+  line-height: 1.4 !important;
+  overflow: inherit !important;
+  height: auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
 psycho-root {
   overflow: hidden;
   min-height: 100%;

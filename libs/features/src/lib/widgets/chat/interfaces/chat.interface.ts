@@ -1,4 +1,4 @@
-import { CHAT_COMMANDS } from './chat.enum';
+import { CHAT_COMMANDS } from '../enum/chat.enum';
 
 export interface IChat {
   group_date: number;
@@ -7,9 +7,10 @@ export interface IChat {
 
 export interface IChatMessage {
   message: string;
-  datetime: number; // timestamp
+  created_at: number; // timestamp
   owner_id: number; // owner_id === user.id = is author
-  receiver_id: number; // chat partner id
+  read?: boolean;
+  receiver_id?: number; // chat partner id
 }
 
 export interface IChatMessageRequest {

@@ -28,7 +28,7 @@ export interface IWSSendMessageParams {
   user: number,
   command: WS_COMMANDS
   message?: string,
-  receiver?: number,
+  consultation?: number,
 }
 
 @Injectable({
@@ -38,20 +38,31 @@ export class WSService {
   private socket$!: WebSocketSubject<any>;
   private readonly _message$ = new ReplaySubject();
   private readonly _error$ = new Subject();
-  private readonly _opened$ = new Subject();
+  private readonly _opened$ = new BehaviorSubject<boolean>(false);
   private readonly _reconnect$ = new BehaviorSubject<null>(null);
   private connected = false;
+
+
+  private connection!: WebSocket;
 
   constructor(
     @Inject(ENVIRONMENTS) private readonly env: IEnvironment
   ) {
-    if (!this.socket$) {
-      this.socket$ = webSocket({
-        url: this.env?.wsEndpoint || 'ws://localhost:8080',
-        openObserver: this._opened$
-      });
-    } else if (this.socket$ && !this.connected) {
-      this.connect();
+    if (!this.connection) {
+      this.connection = new WebSocket(this.env.wsEndpoint as string);
+    }
+
+    this.connection.onopen = (e) => {
+      this._opened$.next(true);
+    };
+
+    this.connection.onmessage = (e) => {
+      this._message$.next(e.data);
+    };
+    this.connection.onclose = function (e) {
+      console.log('ws closed');
+
+      // onlineUsersDiv.innerHTML = e.data;
     }
   }
 
@@ -74,22 +85,22 @@ export class WSService {
         switchMap(() => this.socket$),
         finalize(() => this.connected = true)
       ).subscribe(
-        message => this._message$.next(message),
+        message => {
+          this._message$.next(message);
+        },
         err => this._error$.next(err),
       )
     }
   }
 
-  reconnect(): void {
-    this._reconnect$.next(null);
-  }
-
   onComplete(): void {
-    this.socket$.complete();
+    this.connection.close();
   }
 
   sendMessage(message: IWSSendMessageParams): void {
-    this.socket$.next(message);
+    if (message && this.connection) {
+      this.connection.send(JSON.stringify(message as any));
+    }
   }
 
 

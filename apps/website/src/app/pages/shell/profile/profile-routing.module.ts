@@ -53,6 +53,7 @@ const routes: Routes = [
         loadChildren: () => import('./psychologist/psychologist.module').then(m => m.PsychologistModule),
         canActivate: [IsPsychologistGuard]
       },
+
       {
         path: '',
         redirectTo: 'client',

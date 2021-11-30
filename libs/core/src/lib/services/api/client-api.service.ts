@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { IClientConsultationCreateBody, ISetPsychologistRatingBody } from '../../interfaces/client.interface';
+import { IClientConsultationCreateBody, ISetPsychologistRatingBody, IClientConsultation } from '../../interfaces/client.interface';
 import { IPsychologist, IUser } from '../../interfaces';
+import { CONSULTATION_FORMAT } from '@psycho/core';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,15 @@ export class ClientApiService extends ApiService {
 
   setPsychologistRating(body: ISetPsychologistRatingBody): Observable<boolean> {
     return this.post(`${this.controller}/set-psychologist-rating`, body);
+  }
+
+  getConsultations(params?: {
+    format: CONSULTATION_FORMAT,
+    page?: number,
+    limit?: number,
+    status?: 0 | 1
+  }): Observable<IClientConsultation[]> {
+    return this.get(`${this.controller}/consultations/${params?.format}?expand=psychologist,schedule`, { params });
   }
 
 }

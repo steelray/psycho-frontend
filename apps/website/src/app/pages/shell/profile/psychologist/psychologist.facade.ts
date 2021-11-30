@@ -29,7 +29,7 @@ export class PsychologistFacade {
       },
       {
         title: 'Консультации 50 мин',
-        value: ['/profile/psychologist/clients'],
+        value: ['/profile/psychologist/consultations'],
         img: 'video'
       },
       {

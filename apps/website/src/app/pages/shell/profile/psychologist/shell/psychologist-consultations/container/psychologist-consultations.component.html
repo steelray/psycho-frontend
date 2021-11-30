@@ -1,0 +1,37 @@
+<h2 class="title-3">Консультации 50 мин</h2>
+<psycho-profile-chat-layout>
+  <ng-container new>
+    <div *ngFor="let consultation of newConsultations$ | async" class="__item"
+      mat-ripple 
+      (click)="onSelect(consultation)"
+      [class.active]="seletedConsultationId === consultation.id"  
+    >
+      <div  class="__item-header d-flex align-items-center">
+        <psycho-picture [origin]="consultation?.client?.avatar"></psycho-picture>
+        <div class="__item-name">{{$any(consultation?.client) | fio}} {{consultation.client?.id}}</div>
+      </div>
+      <div class="__item-btns d-flex">
+        <a class="__btn" href="#" mat-button>Подробнее</a>
+      </div>
+    </div>
+
+  </ng-container>
+  <ng-container past>
+    <div *ngFor="let consultation of pastConsultations$ | async" class="__item"
+      mat-ripple 
+      (click)="onSelect($any(consultation.client))"
+      [class.active]="seletedConsultationId === consultation.id"  
+    >
+      <div  class="__item-header d-flex align-items-center">
+        <psycho-picture [origin]="consultation?.client?.avatar"></psycho-picture>
+        <div class="__item-name">{{$any(consultation?.client) | fio}}</div>
+      </div>
+      <div class="__item-btns d-flex">
+        <a class="__btn" href="#" mat-button>Подробнее</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <psycho-chat *ngIf="seletedConsultationId" [includesVideoChat]="true"></psycho-chat>
+
+</psycho-profile-chat-layout>

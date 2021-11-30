@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IPsychologist, IPsychologistSchedule, IPsychologistSearchParams } from '../../interfaces/psychologist.interface';
 import { Injectable } from '@angular/core';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { IClientConsultation, ISubject } from '@psycho/core';
+import { CONSULTATION_FORMAT, IClientConsultation, ISubject } from '@psycho/core';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +69,14 @@ export class PsychologistApiService extends ApiService {
 
   getConsultations(): Observable<IClientConsultation[]> {
     return this.get(`${this.controller}/consultations?expand=client,schedule`);
+  }
+
+  getClientsConsultations(params?: {
+    format: CONSULTATION_FORMAT,
+    page?: number,
+    limit?: number,
+    status?: 0 | 1
+  }): Observable<IClientConsultation[]> {
+    return this.get(`${this.controller}/clients?expand=client,schedule`, { params });
   }
 }

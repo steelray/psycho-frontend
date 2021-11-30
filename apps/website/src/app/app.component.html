@@ -1,3 +1,13 @@
-<!-- <router-outlet></router-outlet>  -->
+<router-outlet></router-outlet> 
+<!-- <button (click)="onUserSwitch(25)" [class.is-online]="receiver.is_online" [class.active]="receiver.id === 25">user 25</button>
+<button (click)="onUserSwitch(26)" [class.is-online]="receiver.is_online" [class.active]="receiver.id === 26">user 26</button>
+<psycho-chat 
+  *ngIf="userData$ | async as userData" 
+  [messages]="messages"  
+  [receiver]="receiver"
+  [isLoading]="$any(isLoading$ | async)"
+  [userId]="$any(userData?.id)"
+  (submitted)="onChatSubmit($event, $any(userData.id))"
+  (loadHistory)="onLoadHistory()"></psycho-chat> -->
 
-{{userData$ | async}}
+  

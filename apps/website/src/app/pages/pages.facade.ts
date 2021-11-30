@@ -14,7 +14,7 @@ export class PagesFacade {
   ) {
     // this.registerWSUserHandler();
 
-    this.wsService.onMessage$.subscribe(res => console.log(res));
+    // this.wsService.onMessage$.subscribe(res => console.log(res));
   }
 
   get mainMenu$(): Observable<IMenuItem[]> {

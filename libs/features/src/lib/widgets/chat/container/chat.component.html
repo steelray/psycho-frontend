@@ -1,0 +1,50 @@
+<ng-container *ngIf="ownerId$ | async as ownerId">
+  <div class="__header d-flex align-items-center justify-content-end">
+    <div class="__title">{{$any(receiver$ | async) | fio}}</div>
+    <button mat-icon-button>
+      <mat-icon svgIcon="ring"></mat-icon>
+    </button>
+    <button mat-icon-button  *ngIf="includesVideoChat" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
+      <mat-icon svgIcon="video"></mat-icon>
+    </button>
+  </div>
+  
+  <div  class="__body" #body  handleChatScroll (loadHistory)="onLoadHistory()" [isLoading]="isLoading">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <ng-container *ngFor="let chat of messages$ | async;trackBy: trackByFn">
+      <div class="__date">
+        <span>{{chat.group_date | date:'MMM d, y'}}</span>
+      </div>
+      <div 
+        *ngFor="let message of chat.messages" 
+        class=" __message d-flex align-items-start"
+        [class.__sender]="message.owner_id !== ownerId"
+        [class.__owner]="message.owner_id === ownerId"
+        [class.__unread]="message.owner_id !== ownerId && !message.read">
+        <psycho-picture *ngIf="message.owner_id !== ownerId" class="__message-avatar"></psycho-picture>
+        <div class="flex-1">
+          <div class="__message-header">
+            <div class="__message-time">
+              {{message.created_at | date:'HH:mm'}}
+            </div>
+          </div>
+          <div class="__message-text">
+            {{message.message}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="__footer d-flex align-items-end">
+    <textarea 
+      [class.__empty]="true" 
+      placeholder="Напишиите вопрос" 
+      heightAdjust 
+      [maxHeight]='200'
+      [(ngModel)]="message"></textarea>
+    <button mat-icon-button *ngIf="consultation$ | async as consultation" (click)="onSubmit($any(ownerId), $any(consultation?.id))" handleChatScroll target=".__body">
+      <mat-icon svgIcon="send"></mat-icon>
+    </button>
+  </div>
+  
+</ng-container>

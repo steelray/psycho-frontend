@@ -24,7 +24,7 @@ export interface IClientConsultation {
   status: 0 | 1;
   subject?: ISubject;
   schedule?: IPsychologistSchedule,
-  client?: IClient;
+  client?: IUser;
   psychologist?: IPsychologist;
   format?: CONSULTATION_FORMAT,
   price?: number

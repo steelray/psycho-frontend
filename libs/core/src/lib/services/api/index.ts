@@ -10,3 +10,4 @@ export * from './auth-api.service';
 export * from './client-api.service';
 export * from './ws.service';
 export * from './zoom-api.service';
+export * from './chat-api.service';
