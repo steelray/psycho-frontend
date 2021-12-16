@@ -1,0 +1,12 @@
+<ng-container *ngIf="consultation">
+  <psycho-picture [origin]="user?.avatar" [alt]="$any(user) | fio" class="__img">
+  </psycho-picture>
+  <div class="__name">{{$any(user) | fio}}</div>
+  <div class="__slogan">Тема консультации: “<span [innerHTML]="consultation.subject?.title | safe:'html'"></span>”</div>
+  <div class="__details d-flex  align-items-center">
+    <span class="d-flex align-items-center">
+      <mat-icon svgIcon="experience"></mat-icon>
+      Начала консультации {{$any(consultation.schedule?.datetime) * 1000 | date:'YYYY.MM.dd HH:mm'}}
+    </span>
+  </div>
+</ng-container>

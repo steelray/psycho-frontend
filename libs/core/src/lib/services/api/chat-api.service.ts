@@ -1,8 +1,6 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +8,19 @@ import axios from 'axios';
 export class ChatApiService extends ApiService {
 
   getMessages(params: {
-    id: number,
+    receiver_id: number,
     page?: number,
     limit?: number
   }): Observable<any[]> {
     return this.post('chat-messages', params);
   }
 
-  getZoomSignature(): Observable<string> {
-    return this.post('zoom/generate-token');
+  startMeeting(consultationId: number): Observable<any> {
+    return this.post(`zoom/start-meeting`, { consultation_id: consultationId });
+  }
+
+  joinMeeting(consultationId: number): Observable<any> {
+    return this.get(`zoom/join-meeting/${consultationId}`);
   }
 
 }

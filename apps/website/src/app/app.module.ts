@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './container/app.component';
 import { WebCoreModule } from '@psycho/web/core';
 import { CoreSharedModules, ENVIRONMENTS } from '@psycho/core';
 import { environment } from '../environments/environment';
@@ -10,9 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { FormFieldModule } from '@psycho/web/features';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
-import { ProfileSharedComponentsModule } from './pages/shell/profile/shared/components/profile-shared-components.module';
 import { ChatWidgetModule } from '../../../../libs/features/src/lib/widgets/chat/chat.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const maskConfig: Partial<IConfig> = {
@@ -30,7 +28,8 @@ const maskConfig: Partial<IConfig> = {
     LazyLoadImageModule,
     FormFieldModule,
     NgxMaskModule.forRoot(maskConfig),
-    MatSnackBarModule
+    MatSnackBarModule,
+    ChatWidgetModule
 
   ],
   providers: [

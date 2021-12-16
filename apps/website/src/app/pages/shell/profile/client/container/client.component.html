@@ -7,7 +7,7 @@
     <psycho-profile-sidebar-header [user]="userData"></psycho-profile-sidebar-header>
     <psycho-profile-sidebar-menu [menuItems]="menuItems$ | async"></psycho-profile-sidebar-menu>
     <div class="__new-seans">
-      <button mat-button size="medium">Новая запись</button>
+      <button (click)="onNewSession()" mat-button size="medium">Новая запись</button>
     </div>
   </ng-container>
   <router-outlet></router-outlet>

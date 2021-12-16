@@ -17,6 +17,7 @@ export interface IPsychologist {
   slogan?: string;
   education?: string;
   description?: string;
+  last_consultation_subject?: ISubject
 }
 
 export interface IPsychologistSearchParams {

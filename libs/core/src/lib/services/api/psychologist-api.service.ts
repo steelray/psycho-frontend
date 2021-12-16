@@ -28,9 +28,7 @@ export class PsychologistApiService extends ApiService {
     return this.get(`${this.controller}/get-schedule/${psychologistId}`, { params: { start, end } });
   }
 
-  getConsultationPrice(format: 1 | 2 | 3): Observable<number> {
-    return of(format === 1 ? 2490 : 250);
-  }
+
 
   getProfile(): Observable<IPsychologist> {
     return this._updateProfileData$.pipe(
@@ -67,16 +65,4 @@ export class PsychologistApiService extends ApiService {
     return this.delete(`${this.controller}/remove-time-from-schedule/${unix}`)
   }
 
-  getConsultations(): Observable<IClientConsultation[]> {
-    return this.get(`${this.controller}/consultations?expand=client,schedule`);
-  }
-
-  getClientsConsultations(params?: {
-    format: CONSULTATION_FORMAT,
-    page?: number,
-    limit?: number,
-    status?: 0 | 1
-  }): Observable<IClientConsultation[]> {
-    return this.get(`${this.controller}/clients?expand=client,schedule`, { params });
-  }
 }

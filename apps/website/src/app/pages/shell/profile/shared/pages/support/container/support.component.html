@@ -1,0 +1,39 @@
+<ng-container *ngIf="messages$ | async as messages">
+  <div class="__header d-flex align-items-center">
+    <div class="__title">Тех поддержка</div>
+  </div>
+  
+  <div  class="__body">
+    <div 
+      *ngFor="let message of messages" 
+      class=" __message d-flex align-items-start"
+      [class.__sender]="message.manager"
+      [class.__owner]="!message.manager">
+      <psycho-picture *ngIf="message.manager" [origin]="message.manager?.avatar" class="__message-avatar"></psycho-picture>
+      <div class="flex-1">
+        <div class="__message-header">
+          <div class="__message-time">
+            {{message.created_at | date:'YYYY.mm.dd HH:mm'}}
+          </div>
+        </div>
+        <div class="__message-text">
+          {{message.message}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="__footer d-flex align-items-end">
+    <textarea 
+      [class.__empty]="true" 
+      placeholder="Напишиите вопрос" 
+      [(ngModel)]="message"></textarea>
+    <button 
+      mat-icon-button 
+      handleChatScroll 
+      target=".__body"
+      (click)="onSendMessage()" 
+    >
+      <mat-icon svgIcon="send"></mat-icon>
+    </button>
+  </div>
+</ng-container>

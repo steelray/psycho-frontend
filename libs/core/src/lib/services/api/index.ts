@@ -11,3 +11,5 @@ export * from './client-api.service';
 export * from './ws.service';
 export * from './zoom-api.service';
 export * from './chat-api.service';
+export * from './support-api.service';
+export * from './consultation-api.service';

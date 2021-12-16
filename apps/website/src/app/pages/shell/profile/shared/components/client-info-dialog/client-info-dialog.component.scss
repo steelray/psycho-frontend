@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  background: var(--white);
+  padding: 17px;
+  border-radius: 6px;
+  .__img {
+    position: relative;
+    margin-bottom: 10px;
+    height: 427px;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  .__name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 7px;
+  }
+  .__slogan {
+    margin-bottom: 25px;
+  }
+  .__details {
+    font-size: 17px;
+    margin-bottom: 22px;
+    span {
+      margin-right: 35px;
+    }
+    mat-icon {
+      margin-right: 12px;
+    }
+  }
+  .__subtitle {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .__subjects {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      padding: 7px 19px;
+      line-height: 22px;
+      font-size: 15px;
+      background: var(--accent-bg-light);
+      margin-right: 9px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      br {
+        display: none;
+      }
+    }
+  }
+}

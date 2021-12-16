@@ -9,3 +9,4 @@ export * from './select-option.interface';
 export * from './psychologist.interface';
 export * from './user.interface';
 export * from './client.interface';
+export * from './support.interface';

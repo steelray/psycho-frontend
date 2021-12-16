@@ -9,3 +9,12 @@ export enum CONSULTATION_FORMAT_PRICE {
   FORMT_FULL_PRICE = 2490,
 }
 
+export enum CONSULTATION_USER_ROLE {
+  ROLE_CLIENT = 'client',
+  ROLE_PSYCHOLOGIST = 'psychologist'
+}
+
+export enum CONSULTATION_FORM_ROUTE {
+  FORMAT_EXPRESS = 'express',
+  FORMAT_FULL = 'full'
+}

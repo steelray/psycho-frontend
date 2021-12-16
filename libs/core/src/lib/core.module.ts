@@ -14,6 +14,8 @@ import { LogService } from './services/shared/log.service';
 import { WindowService } from './services/shared/window.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { StopPropPreventDefaultPlugin } from '../lib/plugins/stop-prop-prevent-default.plugin';
 
 @NgModule({
   imports: [HttpClientModule, RxReactiveFormsModule],
@@ -31,6 +33,11 @@ export class CoreModule {
         {
           provide: APP_BASE_HREF,
           useValue: '/',
+        },
+        {
+          provide: EVENT_MANAGER_PLUGINS,
+          useExisting: StopPropPreventDefaultPlugin,
+          multi: true
         },
         ...configuredProviders,
       ],

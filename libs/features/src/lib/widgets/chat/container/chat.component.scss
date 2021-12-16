@@ -10,7 +10,7 @@
     font-size: 24px;
     font-weight: 600;
   }
-  button {
+  button.__rounded {
     height: 70px;
     width: 70px;
     border-radius: 50%;
@@ -89,6 +89,9 @@
     background: var(--accent-bg-medium);
     border-radius: 50%;
     margin-left: 10px;
+    &.disabled {
+      pointer-events: none;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IClientConsultation, IPsychologist, IPsychologistSchedule, ISelectOption, PsychologistApiService } from '@psycho/core';
+import { ConsultationApiService, IClientConsultation, IPsychologist, IPsychologistSchedule, ISelectOption, PsychologistApiService } from '@psycho/core';
 import { momentWithUTC, WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import * as moment from 'moment';
@@ -26,6 +26,7 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
 
   constructor(
     private readonly psychologistApiService: PsychologistApiService,
+    private readonly consultationApiService: ConsultationApiService,
     private readonly snackbar: SnackbarService
   ) {
     super();
@@ -76,7 +77,7 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
 
   get consultations$(): Observable<IClientConsultation[]> {
     if (!this._consultations$) {
-      this._consultations$ = this.psychologistApiService.getConsultations().pipe(
+      this._consultations$ = this.consultationApiService.getPsychologistConsultations().pipe(
         shareReplay()
       );
     }

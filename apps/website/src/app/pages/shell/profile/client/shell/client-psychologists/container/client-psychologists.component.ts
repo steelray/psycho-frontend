@@ -74,17 +74,13 @@ export class ClientPsychologistsComponent extends WithDestroy() {
   }
 
   onSign(psychologist: IPsychologist): void {
-    setTimeout(() => {
-      this.dialog.open(ClientPsycholigistSignDialogComponent, {
-        panelClass: 'default-dialog',
-        data: psychologist
-      }).afterClosed().pipe(
-        filter(signed => !!signed),
-        takeUntil(this.destroy$)
-      ).subscribe(() => this.snackbar.success('Вы записаны'));
-
-    })
-
+    this.dialog.open(ClientPsycholigistSignDialogComponent, {
+      panelClass: 'default-dialog',
+      data: { psychologist, subject: psychologist.last_consultation_subject }
+    }).afterClosed().pipe(
+      filter(signed => !!signed),
+      takeUntil(this.destroy$)
+    ).subscribe(() => this.snackbar.success('Вы записаны'));
   }
 
   onComment(psychologist: IPsychologist): void {

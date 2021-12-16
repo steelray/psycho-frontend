@@ -19,20 +19,23 @@ const routes: Routes = [
         canActivate: [CompleteRegistrationGuard]
       },
       {
-        path: 'questions',
-        loadChildren: () => import('./shell/client-questions/client-questions.module').then(m => m.ClientQuestionsModule),
-        canActivate: [ClientGuard]
-      },
-      {
-        path: 'consultations',
-        loadChildren: () => import('./shell/client-consultations/client-consultations.module').then(m => m.ClientConsultationsModule),
+        path: 'new-session',
+        loadChildren: () => import('./shell/new-session/new-session.module').then(m => m.NewSessionModule),
         canActivate: [ClientGuard]
       },
       {
         path: 'psychologists',
         loadChildren: () => import('./shell/client-psychologists/client-psychologists.module').then(m => m.ClientPsychologistsModule),
         canActivate: [ClientGuard]
-      }
+      },
+      {
+        path: 'support',
+        loadChildren: () => import('../shared/pages/support/support.module').then(m => m.SupportModule)
+      },
+      {
+        path: 'consultations',
+        loadChildren: () => import('../shared/pages/consultations/consultations.module').then(m => m.ConsultationsModule)
+      },
     ]
   }
 ];

@@ -11,8 +11,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private httpErrorService: HttpErrorService,
     private authService: AuthService,
-    private router: Router,
-    private ngZone: NgZone) { }
+    private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!request.headers.has('Content-Type')) {

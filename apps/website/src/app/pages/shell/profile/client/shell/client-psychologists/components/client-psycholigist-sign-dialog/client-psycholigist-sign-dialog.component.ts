@@ -29,12 +29,16 @@ export class ClientPsycholigistSignDialogComponent {
   constructor(
     private readonly facade: ClientPsychologistsFacade,
     private readonly dialogRef: MatDialogRef<ClientPsycholigistSignDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public readonly psychologist: IPsychologist,
+    @Inject(MAT_DIALOG_DATA) public readonly data: { psychologist: IPsychologist, subject: ISubject },
     private readonly windowService: WindowService
   ) { }
 
   close(signed = false): void {
     this.dialogRef.close(signed);
+  }
+
+  get psychologist(): IPsychologist {
+    return this.data.psychologist;
   }
 
 
@@ -44,15 +48,15 @@ export class ClientPsycholigistSignDialogComponent {
 
   async toNextStep(): Promise<any> {
     const currentStep = this.currentSignStep$.getValue();
-    let nextStep = this.steps.SUBJECT_SELECT;
+    let nextStep = this.steps.DATETIME_SELECT;
     switch (currentStep) {
-      case this.steps.SUBJECT_SELECT:
-        nextStep = this.steps.DATETIME_SELECT
-        break;
+      // case this.steps.SUBJECT_SELECT:
+      //   nextStep = this.steps.DATETIME_SELECT
+      //   break;
       case this.steps.DATETIME_SELECT:
         await this.facade.createConsultation(
           this.selectedFormat,
-          this.selectedSubject.id,
+          this.data.subject.id,
           this.datetimeForm.value?.schedule_id,
           this.psychologist.id
         );

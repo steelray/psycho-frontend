@@ -51,14 +51,13 @@ export class ClientProfileFormFacade {
     if (!this._commonQuestionsForm) {
       this._commonQuestionsForm = this.fb.group({
         first_name: [null, [
-          RxwebValidators.required(),
-          RxwebValidators.alpha()
+          RxwebValidators.required()
         ]],
         last_name: [null, [
-          RxwebValidators.alpha()
+
         ]],
         middle_name: [null, [
-          RxwebValidators.alpha()
+
         ]],
         birthday: [null, [
           RxwebValidators.required()

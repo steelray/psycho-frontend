@@ -17,4 +17,8 @@ export class ClientComponent {
     private readonly facade: ClientFacade
   ) { }
 
+  onNewSession(): void {
+    this.facade.onNewSession();
+  }
+
 }

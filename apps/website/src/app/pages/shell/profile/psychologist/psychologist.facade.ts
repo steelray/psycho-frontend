@@ -24,12 +24,12 @@ export class PsychologistFacade {
     return of([
       {
         title: 'Экспресс-консультации',
-        value: ['/profile/psychologist/express-chat'],
+        value: ['/profile/psychologist/consultations/express'],
         img: 'chat'
       },
       {
         title: 'Консультации 50 мин',
-        value: ['/profile/psychologist/consultations'],
+        value: ['/profile/psychologist/consultations/full'],
         img: 'video'
       },
       {

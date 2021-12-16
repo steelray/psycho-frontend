@@ -312,3 +312,9 @@ body {
 .default-dialog {
   width: 1000px;
 }
+.meeting-info-container--right-side {
+  z-index: 1111 !important;
+}
+#wc-content {
+  display: flex;
+}

@@ -33,20 +33,11 @@ export class AuthService {
   }
 
   get userData$(): Observable<IUserAuthData | null> {
-    return this._userData$.asObservable()
-    // .pipe(
-    //   tap(data => this.wsConnectionHandler(data)),
-    //   switchMap(data => {
-    //     if (!data) {
-    //       return of(data);
-    //     }
-    //     console.log(data);
-    //     return this.ws.afterOpen$.pipe(
+    return this._userData$.asObservable();
+  }
 
-    //       map(() => data)
-    //     )
-    //   })
-    // );
+  get userData(): IUserAuthData | null {
+    return this._userData$.getValue();
   }
 
   get currentToken(): string | undefined {

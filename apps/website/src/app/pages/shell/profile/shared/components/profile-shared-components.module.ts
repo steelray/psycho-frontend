@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormFieldModule } from '@psycho/web/features';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClientInfoDialogComponent } from './client-info-dialog/client-info-dialog.component';
 
 const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileLayoutComponent,
@@ -20,7 +21,8 @@ const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileSidebarMenuComponent,
   ProfileVideoChatComponent,
   ProfileChatLayoutComponent,
-  PsychologistInfoComponent
+  PsychologistInfoComponent,
+  ClientInfoDialogComponent
 ];
 
 

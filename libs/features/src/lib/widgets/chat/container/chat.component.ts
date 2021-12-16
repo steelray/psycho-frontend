@@ -1,76 +1,71 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectorRef, OnInit, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { IUser, WindowService, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ChangeDetectionStrategy, Input, OnInit, AfterViewChecked, OnChanges, SimpleChanges, Inject, Output, EventEmitter } from '@angular/core';
+import { AuthService, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WindowService, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
 import { findBinary, WithDestroy } from '@psycho/utils';
 import * as moment from 'moment';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { VideoChatDialogComponent } from '../components/video-chat-dialog/video-chat-dialog.component';
 import { IChat, IChatMessage } from '../interfaces/chat.interface';
 import { ChatService } from '../services/chat.service';
-import { ZoomMtg } from '@zoomus/websdk';
-import { DOCUMENT } from '@angular/common';
 
-ZoomMtg.preLoadWasm();
-ZoomMtg.prepareWebSDK();
-// loads language files, also passes any error messages to the ui
-ZoomMtg.i18n.load('en-US');
-ZoomMtg.i18n.reload('en-US');
 @Component({
   selector: 'psycho-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatComponent extends WithDestroy() implements OnInit {
+export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
   @Input() includesVideoChat = false;
-  consultation$ = this.chatService.selectedConsultation$;
-  ownerId$ = this.chatService.ownerID$;
+  @Input() receiver!: IUser;
+  @Input() consultation?: IClientConsultation;
+  @Input() userRole!: CONSULTATION_USER_ROLE;
+  @Input() showEndChatButton = false;
+  @Output() endConsultation = new EventEmitter<boolean>();
+  readonly userData$ = this.authService.userData$;
+
   isLoading = false;
   videoDialogIsOpened = false;
 
   private _messages$ = new BehaviorSubject<IChatMessage[]>([]);
-  message!: string;
+  message!: string; // ngModel
 
   private readonly limit = 50;
   private page$ = new BehaviorSubject<number>(0);
+  private receiver$ = new BehaviorSubject<IUser | null>(null);
 
-  // setup your signature endpoint here: https://github.com/zoom/meetingsdk-sample-signature-node.js
-  signatureEndpoint = 'http://psycho.loc/api/zoom/generate-token';
-  apiKey = 'gNc_Vld8SPG0xyqUxA_6Xg'
-  meetingNumber = '1'
-  role = 0
-  leaveUrl = 'http://localhost:4200'
-  userName = 'Angular'
-  userEmail = ''
-  passWord = ''
-  // pass in the registrant's token if your meeting or webinar requires registration. More info here:
-  // Meetings: https://marketplace.zoom.us/docs/sdk/native-sdks/web/build/meetings/join#join-registered
-  // Webinars: https://marketplace.zoom.us/docs/sdk/native-sdks/web/build/webinars/join#join-registered-webinar
-  registrantToken = ''
 
 
   constructor(
     private readonly chatService: ChatService,
-    private readonly cdRef: ChangeDetectorRef,
+    private readonly authService: AuthService,
     private readonly ws: WSService,
-    private readonly dialog: MatDialog,
-    @Inject(DOCUMENT) private readonly document: Document
-  ) {
+    private windowService: WindowService,
+    @Inject(DOCUMENT) private readonly document: Document) {
     super();
   }
 
+  get consultationId(): number {
+    return this.consultation?.id as number;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes?.receiver?.currentValue?.id !== changes?.receiver?.previousValue?.id) {
+      const receiver: any = changes.receiver.currentValue;
+      this.receiver$.next(receiver);
+      this._messages$.next([]);
+    }
+  }
+
+
   ngOnInit(): void {
     combineLatest([
-      this.consultation$.pipe(
-        filter(res => !!res),
-        tap(() => this._messages$.next([])) // reset on consultation switch
-      ),
-      this.page$
+      this.page$,
+      this.receiver$
     ]).pipe(
-      map(([consultation, page]) => ({ consultation, page })),
-      switchMap(res => this.chatService.getMessages(res.page, this.limit, res.consultation?.id as number)),
+      map(([page, receiver]) => ({ page, receiver })),
+      filter(res => !!res?.receiver),
+      tap(console.log),
+      switchMap(res => this.chatService.getMessages(res.page, this.limit, res.receiver?.id as number)),
       takeUntil(this.destroy$)
     ).subscribe(messages => {
       this._messages$.next([...messages, ...this._messages$.getValue()]);
@@ -80,25 +75,14 @@ export class ChatComponent extends WithDestroy() implements OnInit {
     this.ws.onMessage$.pipe(
       map(message => JSON.parse(message)),
       filter(message => message.type === WS_RESPONSE_TYPE.MESSAGE),
-      switchMap(message => this.consultation$.pipe(
-        filter(consultation => message.consultation === consultation?.id),
-        map(() => message)
-      )),
+      // switchMap(message => this.consultation$.pipe(
+      //   filter(consultation => message.consultation === this.consultationId),
+      //   map(() => message)
+      // )),
       takeUntil(this.destroy$)
-    ).subscribe(message => {
+    ).subscribe((message: any) => {
       this.pushMessageToCurrentList(message.message, message.owner as number)
     })
-  }
-
-  get receiver$(): Observable<IUser | undefined> {
-    return this.consultation$.pipe(
-      map(consultation => {
-        if (consultation?.psychologist) {
-          return consultation.psychologist;
-        }
-        return consultation?.client;
-      })
-    )
   }
 
   get messages$(): Observable<IChat[]> {
@@ -116,56 +100,48 @@ export class ChatComponent extends WithDestroy() implements OnInit {
     return index;
   }
 
-  onSubmit(ownerId: number, consultationId: number): void {
+  onSubmit(ownerId: number): void {
     if (this.message) {
       this.pushMessageToCurrentList(this.message, ownerId);
-      this.chatService.onMessageSend(this.message, ownerId, consultationId)
+      this.chatService.onMessageSend(this.message, ownerId, this.consultationId as number)
       this.message = '';
     }
+  }
+
+  onConsultationEnd(): void {
+    this.endConsultation.emit(true);
   }
 
   async onVideoSwitch(): Promise<void> {
     this.videoDialogIsOpened = !this.videoDialogIsOpened;
 
     if (this.videoDialogIsOpened) {
-      const signature = await this.chatService.getSignature().toPromise();
-      this.startMeeting(signature);
+      of('').pipe(
+        switchMap(() => {
+          if (this.userRole === CONSULTATION_USER_ROLE.ROLE_CLIENT) {
+            return this.chatService.joinMeeting(this.consultationId as number);
+          }
+          return this.chatService.startMeeting(this.consultationId as number);
+        })
+      ).subscribe((data: any) => {
+        this.handleGenrateSignature(data.signature, { meetingNumber: data.id, userEmail: '', userName: data.username, passWord: data.password, apiKey: data.api_key });
+      });
     }
 
   }
 
-  private startMeeting(signature: string) {
-    const zoomRootEl = this.document.getElementById('zmmtg-root');
-    console.log(zoomRootEl);
 
-    if (zoomRootEl) {
-      zoomRootEl.style.display = 'block'
-      ZoomMtg.init({
-        leaveUrl: this.leaveUrl,
-        success: (success: any) => {
-          console.log(success)
-          ZoomMtg.join({
-            signature,
-            meetingNumber: this.meetingNumber,
-            userName: this.userName,
-            apiKey: this.apiKey,
-            userEmail: this.userEmail,
-            passWord: this.passWord,
-            tk: this.registrantToken,
-            success: (success: any) => {
-              console.log(success)
-            },
-            error: (error: any) => {
-              console.log(error)
-            }
-          })
-        },
-        error: (error: any) => {
-          console.log(error)
-        }
-      })
-    }
-
+  private handleGenrateSignature(signature: string, formValues: any) {
+    let meetingPayloads: any = {
+      meetingNumber: formValues.meetingNumber,
+      passWord: formValues.passWord,
+      signature: signature,
+      userEmail: formValues.userEmail,
+      userName: formValues.userName,
+      apiKey: formValues.apiKey
+    };
+    this.chatService.initializeWebSDK(meetingPayloads);
+    this.document.getElementById('zmmtg-root')!.style.display = 'block'
   }
 
 

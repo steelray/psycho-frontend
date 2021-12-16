@@ -7,13 +7,13 @@ const routes: Routes = [
     path: '',
     component: PsychologistComponent,
     children: [
-      {
-        path: 'express-chat',
-        loadChildren: () => import('./shell/psychologist-questions/psychologist-questions.module').then(m => m.PsychologistQuestionsModule)
-      },
+      // {
+      //   path: 'consultations',
+      //   loadChildren: () => import('./shell/psychologist-questions/psychologist-questions.module').then(m => m.PsychologistQuestionsModule)
+      // },
       {
         path: 'consultations',
-        loadChildren: () => import('./shell/psychologist-consultations/psychologist-consultations.module').then(m => m.PsychologistConsultationsModule)
+        loadChildren: () => import('../shared/pages/consultations/consultations.module').then(m => m.ConsultationsModule)
       },
       {
         path: 'set-schedule',
@@ -26,6 +26,10 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./shell/psychologist-profile/psychologist-profile.module').then(m => m.PsychologistProfileModule)
+      },
+      {
+        path: 'support',
+        loadChildren: () => import('../shared/pages/support/support.module').then(m => m.SupportModule)
       },
       {
         path: '',

@@ -1,0 +1,142 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.__header {
+  margin-bottom: 20px;
+  .__title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  button {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    &.active {
+      background: var(--main-color);
+      color: var(--white);
+    }
+  }
+}
+
+.__body {
+  overflow: auto;
+  padding-right: 20px;
+  // margin-right: -20px;
+  height: 75vh;
+  // display: flex;
+  // flex-direction: column-reverse;
+}
+
+.__date {
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  background: var(--light-gray-bg);
+  text-align: center;
+  span {
+    position: relative;
+    padding: 10px 20px;
+    display: inline-block;
+    &::before,
+    &::after {
+      width: 50vw;
+      background: var(--border-color);
+      height: 1px;
+      position: absolute;
+      top: calc(50% - 0.5px);
+      content: "";
+    }
+    &::before {
+      right: 100%;
+    }
+    &::after {
+      left: 100%;
+    }
+  }
+}
+
+.__footer {
+  padding: 10px 0 0;
+  textarea {
+    border-radius: 50px;
+    background: var(--gray-btn-color);
+    flex: 1;
+    min-height: 86px;
+    border: none;
+    padding: 20px 40px;
+    font-size: 18px;
+    &.__empty {
+      height: 86px;
+      line-height: 45px;
+    }
+  }
+  button {
+    height: 86px;
+    width: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
+    background: var(--accent-bg-medium);
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+}
+
+.__message {
+  &.__owner {
+    text-align: right;
+    .__message {
+      &-text {
+        margin-left: auto;
+      }
+    }
+  }
+  &-header {
+    margin-bottom: 10px;
+  }
+  &-time {
+    color: #959595;
+    font-size: 14px;
+  }
+  &-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    background: var(--border-color);
+    border-radius: 50%;
+    overflow: hidden;
+    display: block;
+  }
+  &-sender-name {
+    font-size: 16px;
+  }
+  &-text {
+    background: #fbfbfb;
+    border-radius: 6px;
+    padding: 15px;
+    max-width: 80%;
+  }
+}
+
+::ng-deep {
+  #zmmtg-root {
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 999;
+    .main-content {
+      background: none !important;
+    }
+    .mini-layout-body {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<h3 class="title-3">Новая запись</h3>
+
+<p>Ваш психолог</p>
+<div class="d-flex">
+  <psycho-picture
+    [origin]="psychologist?.avatar"></psycho-picture>
+  <div>
+    <psycho-rating-stars [value]="$any(psychologist.rating)"></psycho-rating-stars>
+    <div class="__name">{{psychologist | fio}}</div>
+    <div class="__details d-flex  align-items-center">
+      <span class="d-flex align-items-center">
+        Возраст  {{$any(psychologist.birthday) | datesDiff | agetostr}}
+      </span>
+      <span class="d-flex align-items-center">
+        Опыт работы {{$any(psychologist.experience_since) | datesDiff | agetostr}}
+
+      </span>
+    </div>
+    <button mat-raised-button color="primary" size="medium" (click)="onClose(true)">Записаться</button>
+    <br>
+    <a href="#" (click)="selectNewPsychologist($event)">Выбрать другого психолога</a>
+  </div>
+</div>

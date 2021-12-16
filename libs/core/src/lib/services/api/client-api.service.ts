@@ -3,7 +3,7 @@ import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/operators';
 import { IClientConsultationCreateBody, ISetPsychologistRatingBody, IClientConsultation } from '../../interfaces/client.interface';
-import { IPsychologist, IUser } from '../../interfaces';
+import { IPsychologist, ISubject, IUser } from '../../interfaces';
 import { CONSULTATION_FORMAT } from '@psycho/core';
 
 @Injectable({
@@ -38,7 +38,7 @@ export class ClientApiService extends ApiService {
   }
 
   getMyPsychologists(): Observable<IPsychologist[]> {
-    return this.get(`${this.controller}/my-psychologists`, { params: { expand: 'description,education' } });
+    return this.get(`${this.controller}/my-psychologists`, { params: { expand: 'description,education,last_consultation_subject' } });
   }
 
   createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
@@ -55,7 +55,11 @@ export class ClientApiService extends ApiService {
     limit?: number,
     status?: 0 | 1
   }): Observable<IClientConsultation[]> {
-    return this.get(`${this.controller}/consultations/${params?.format}?expand=psychologist,schedule`, { params });
+    return this.get(`${this.controller}/consultations/${params?.format}?expand=psychologist,schedule,subject`, { params });
+  }
+
+  getLastConsultationPsychologist(): Observable<{ psychologist: IPsychologist, subject: ISubject }> {
+    return this.get(`${this.controller}/get-my-psychologist`);
   }
 
 }
