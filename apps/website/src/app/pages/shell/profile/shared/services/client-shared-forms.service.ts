@@ -31,4 +31,17 @@ export class ClientSharedFormsService {
     });
   }
 
+  get formatForm(): FormGroup {
+    return this.fb.group({
+      format: [null, RxwebValidators.required()]
+    });
+  }
+
+  get specialistForm(): FormGroup {
+    return this.fb.group({
+      psychologist_id: [null, [RxwebValidators.required(), RxwebValidators.numeric()]]
+    });
+  }
+
+
 }

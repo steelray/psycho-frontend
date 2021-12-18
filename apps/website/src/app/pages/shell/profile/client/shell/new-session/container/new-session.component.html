@@ -1,1 +1,47 @@
-<p>new-session works!</p>
+<mat-stepper linear #stepper>
+  <mat-step 
+    label="Выберите формат"
+    [stepControl]="formatForm"
+    [editable]="isEditable">
+    <psycho-client-profile-form-format [form]="formatForm"></psycho-client-profile-form-format>
+    <button mat-raised-button color="primary" [disabled]="formatForm.invalid" matStepperNext>Далее</button>
+  </mat-step>
+  <mat-step 
+    label="Выберите тему"
+    [stepControl]="subjectsForm"
+    [editable]="isEditable">
+    <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
+    <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
+  </mat-step>
+  <mat-step 
+    label="Выбрите специалиста"
+    [stepControl]="specialistForm"
+    [editable]="isEditable">
+    <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
+    <button mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
+  </mat-step>
+  <mat-step 
+    label="Выберите время"
+    [stepControl]="datetimeForm"
+    [editable]="isEditable">
+    <psycho-client-profile-form-datetime
+      [scheduleForm]="scheduleForm"
+      [datetimeForm]="datetimeForm"
+      [psychologist]="$any(selectedPsychologist$ | async)"
+      [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Завершить регистрацию</button>
+      </div>
+  </mat-step>
+  <mat-step 
+    label="Условия оплаты"
+    [editable]="false">
+      <psycho-client-profile-form-payment-conditions
+        [psychologist]="$any(selectedPsychologist$ | async)"
+        [datetime]="datetimeForm.get('datetime')?.value"></psycho-client-profile-form-payment-conditions>
+        <div class="d-flex justify-content-center">
+          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Привязать карту</a>
+        </div>
+  </mat-step>
+
+</mat-stepper>

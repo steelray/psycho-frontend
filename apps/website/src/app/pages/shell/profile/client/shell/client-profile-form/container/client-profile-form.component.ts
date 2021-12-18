@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { WithDestroy } from '@psycho/utils';
-import { finalize, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ClientProfileFormFacade } from '../client-profile-form.facade';
 
 @Component({

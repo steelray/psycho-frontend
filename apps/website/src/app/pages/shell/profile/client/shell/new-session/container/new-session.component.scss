@@ -1,3 +1,48 @@
 :host {
   display: block;
+  ::ng-deep {
+    .mat-stepper-vertical,
+    .mat-stepper-horizontal {
+      font-family: var(--base-font-family);
+    }
+    .mat-horizontal-stepper-header-container {
+      justify-content: space-between;
+      border-bottom: 1px solid var(--main-color-medium);
+    }
+    .mat-horizontal-stepper-header {
+      height: 60px;
+      margin-bottom: -5px;
+      padding: 0;
+      .mat-step-icon {
+        display: none;
+      }
+    }
+    .mat-stepper-horizontal-line {
+      display: none;
+    }
+    .mat-step-label {
+      font-size: 17px;
+      color: var(--base-font-color);
+      height: 100%;
+      line-height: 60px;
+      position: relative;
+      padding: 0 15px 5px;
+      &-selected {
+        &::after {
+          position: absolute;
+          height: 10px;
+          width: 100%;
+          margin: 0;
+          content: "";
+          left: 0;
+          bottom: 0;
+          border-radius: 10px;
+          background: var(--main-color);
+        }
+      }
+    }
+    .mat-horizontal-content-container {
+      padding: 60px 0;
+    }
+  }
 }
