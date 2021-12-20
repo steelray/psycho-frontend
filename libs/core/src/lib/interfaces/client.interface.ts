@@ -1,4 +1,4 @@
-import { CONSULTATION_FORMAT, IPsychologist, IPsychologistSchedule, ISubject } from '@psycho/core';
+import { CONSULTATION_FORMAT, CONSULTATION_STATUS, IPsychologist, IPsychologistSchedule, ISubject } from '@psycho/core';
 import { IUser } from './user.interface';
 
 export interface IClient {
@@ -21,13 +21,14 @@ export interface ISetPsychologistRatingBody {
 
 export interface IClientConsultation {
   id: number;
-  status: 0 | 1;
+  status: CONSULTATION_STATUS;
   subject?: ISubject;
   schedule?: IPsychologistSchedule,
   client?: IUser;
   psychologist?: IPsychologist;
   format?: CONSULTATION_FORMAT,
   price?: number
+  is_taken?: boolean;
 }
 
 export interface IClientConsultationQueryParams {

@@ -12,7 +12,6 @@ declare var ZoomMtg: any;
   providedIn: 'any'
 })
 export class ChatService {
-  private readonly _selectedConsultation$ = new BehaviorSubject<IClientConsultation | null>(null);
   readonly ownerID$ = this.authService.userData$.pipe(
     startWith({
       token: 'asd',
@@ -34,9 +33,6 @@ export class ChatService {
   }
 
 
-  get selectedConsultation$(): Observable<IClientConsultation | null> {
-    return this._selectedConsultation$.asObservable();
-  }
 
   startMeeting(consultationId: number): Observable<any> {
     return this.chatApiService.startMeeting(consultationId);
@@ -46,9 +42,6 @@ export class ChatService {
     return this.chatApiService.joinMeeting(consultationId);
   }
 
-  setSelectedConsultation(consultation: IClientConsultation): void {
-    this._selectedConsultation$.next(consultation);
-  }
 
   getMessages(page = 0, limit: 50, receiverId: number): Observable<IChatMessage[]> {
     return this.chatApiService.getMessages({

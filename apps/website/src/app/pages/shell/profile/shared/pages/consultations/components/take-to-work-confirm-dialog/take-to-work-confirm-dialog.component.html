@@ -1,0 +1,6 @@
+<p>Вы уверены что хотите взять в работу сеанс по теме "<strong [innerHTML]="consultation.subject?.title | safe:'html'"></strong>"?
+</p>
+<div class="d-flex justify-content-between">
+  <button mat-button (click)="onClose()">Нет</button>
+  <button mat-raised-button color="primary" (click)="onClose(true)">Да</button>
+</div>

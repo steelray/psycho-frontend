@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ChangeDetectionStrategy, Input, OnInit, AfterViewChecked, OnChanges, SimpleChanges, Inject, Output, EventEmitter } from '@angular/core';
-import { AuthService, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WindowService, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
+import { Component, ChangeDetectionStrategy, Input, OnInit, AfterViewChecked, OnChanges, SimpleChanges, Inject, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { AuthService, ConsultationApiService, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WindowService, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
 import { findBinary, WithDestroy } from '@psycho/utils';
 import * as moment from 'moment';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
@@ -14,14 +14,16 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['./chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
+export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, AfterViewChecked {
   @Input() includesVideoChat = false;
   @Input() receiver!: IUser;
   @Input() consultation?: IClientConsultation;
   @Input() userRole!: CONSULTATION_USER_ROLE;
   @Input() showEndChatButton = false;
+  @Output() startConsultation = new EventEmitter<boolean>();
   @Output() endConsultation = new EventEmitter<boolean>();
   readonly userData$ = this.authService.userData$;
+  readonly statusEnum = CONSULTATION_STATUS
 
   isLoading = false;
   videoDialogIsOpened = false;
@@ -33,14 +35,18 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
   private page$ = new BehaviorSubject<number>(0);
   private receiver$ = new BehaviorSubject<IUser | null>(null);
 
+  currentStatus!: CONSULTATION_STATUS;
+
 
 
   constructor(
     private readonly chatService: ChatService,
     private readonly authService: AuthService,
+    private readonly consultationApiService: ConsultationApiService,
     private readonly ws: WSService,
     private windowService: WindowService,
-    @Inject(DOCUMENT) private readonly document: Document) {
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly cdRef: ChangeDetectorRef) {
     super();
   }
 
@@ -48,7 +54,17 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
     return this.consultation?.id as number;
   }
 
+  ngAfterViewChecked(): void {
+    if (this.currentStatus !== this.consultation?.status) {
+
+      this.cdRef.markForCheck(); // mark for check(for start|end buttons)
+      this.currentStatus = this.consultation?.status as CONSULTATION_STATUS;
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+
     if (changes?.receiver?.currentValue?.id !== changes?.receiver?.previousValue?.id) {
       const receiver: any = changes.receiver.currentValue;
       this.receiver$.next(receiver);
@@ -108,8 +124,16 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
     }
   }
 
+  onConsultationStart(): void {
+    this.startConsultation.emit(true);
+  }
+
   onConsultationEnd(): void {
     this.endConsultation.emit(true);
+  }
+
+  onStartChat(): void {
+    // TODO: start chat
   }
 
   async onVideoSwitch(): Promise<void> {
@@ -117,6 +141,13 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges {
 
     if (this.videoDialogIsOpened) {
       of('').pipe(
+        switchMap(() => {
+          if (this.consultation?.status === CONSULTATION_STATUS.WAITING) {
+            return this.consultationApiService.startConsultation(this.consultationId);
+          }
+          return of(true);
+        }),
+        filter(res => !!res),
         switchMap(() => {
           if (this.userRole === CONSULTATION_USER_ROLE.ROLE_CLIENT) {
             return this.chatService.joinMeeting(this.consultationId as number);

@@ -9,9 +9,10 @@
 
   
   <psycho-chat 
-    *ngIf="selectedConsultation" 
+    *ngIf="selectedConsultation$ | async as selectedConsultation" 
     (endConsultation)="onConsultationEnd()"
-    [receiver]="$any(receiver)"
+    (startConsultation)="onConsultationStart()"
+    [receiver]="$any(receiver$ | async)"
     [consultation]="selectedConsultation"
     [userRole]="userRole"
     [includesVideoChat]="$any(includesVideoChat$ | async)"
@@ -25,7 +26,7 @@
   <div *ngFor="let consultation of consultations" class="__item"
     mat-ripple 
     (click)="onSelect(consultation)"
-    [class.active]="selectedConsultation?.id === consultation.id"  
+    [class.active]="(selectedConsultation$ | async)?.id === consultation.id"  
   >
     <div  class="__item-header d-flex align-items-center">
       <ng-container *ngIf="consultation?.client as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user}"></ng-container>
@@ -33,6 +34,7 @@
     </div>
     <div class="__item-btns d-flex">
       <a  class="__btn" href="#" (click)="onShowInfo($event, consultation)" mat-button>Подробнее</a>
+      <a  class="__btn" href="#" *ngIf="!consultation?.is_taken" (click)="onTakeToWork($event, consultation)" mat-button>Взять в работу</a>
     </div>
   </div>
 </ng-template>

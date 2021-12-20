@@ -18,7 +18,10 @@ export class PsychologistSetScheduleConsultationsDialogComponent {
       consultations: IClientConsultation,
       selected_date: string | number
     }
-  ) { }
+  ) {
+    console.log(data.consultations);
+
+  }
 
   onClose(): void {
     this.dialogRef.close();

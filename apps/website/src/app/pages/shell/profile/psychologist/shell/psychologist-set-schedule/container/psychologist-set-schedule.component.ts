@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatCalendar } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { IClientConsultation } from '@psycho/core';
 import * as moment from 'moment';
@@ -19,7 +20,7 @@ import { IHour, PsychologistSetScheduleFacade } from '../psychologist-set-schedu
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
 })
-export class PsychologistSetScheduleComponent {
+export class PsychologistSetScheduleComponent implements AfterViewChecked {
   private readonly dateFormat = 'DD.MM.YYYY';
   readonly selectedUnixes: number[] = []; // all selected unix
   readonly hours$ = this.facade.hours$;
@@ -27,15 +28,30 @@ export class PsychologistSetScheduleComponent {
   readonly consultations$ = this.facade.consultations$.pipe(
     tap(res => this.consultations = res)
   );
-  consultations!: IClientConsultation[];
 
   readonly schedule$ = this.facade.selectedDateSchedule$;
-  selectedDate!: moment.Moment | null;
   readonly minDate = new Date();
+  readonly monthSchedule$ = this.facade.selectedMonthSchedule$;
+
+  selectedDate!: moment.Moment | null;
+  consultations!: IClientConsultation[];
+
+  activeDate!: moment.Moment;
+
+  @ViewChild('calendar', { static: false }) calendar!: MatCalendar<any>;
+
+  ngAfterViewChecked(): void {
+    if (this.calendar && this.calendar.activeDate.unix() !== this.activeDate?.unix()) {
+      this.activeDate = this.calendar.activeDate;
+      this.facade.setSelectedMonth(this.activeDate);
+    }
+  }
+
   constructor(
     private readonly facade: PsychologistSetScheduleFacade,
     private readonly dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   dateClass = (d: moment.Moment) => {
     const date = d.format(this.dateFormat);
@@ -44,6 +60,7 @@ export class PsychologistSetScheduleComponent {
       const ts = consultation?.schedule?.datetime ? consultation?.schedule?.datetime * 1000 : 0;
       return moment(ts).format(this.dateFormat);
     });
+
 
     // Highlight saturday and sunday.
     return consultationsDates.includes(date) ? 'highlight-dates' : undefined;
@@ -74,6 +91,8 @@ export class PsychologistSetScheduleComponent {
   trackByFn(index: number, item: IHour): number {
     return item.unix;
   }
+
+
 
   private openConsultationsModalIfExist(date: string): void {
     const consultations = this.consultations.filter(consultation => {

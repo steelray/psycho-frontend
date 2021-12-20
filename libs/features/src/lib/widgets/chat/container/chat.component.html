@@ -1,65 +1,68 @@
-<ng-container *ngIf="userData$ | async as userData">
-  <div class="__header d-flex align-items-center justify-content-between">
-    <div class="__title">{{$any(receiver) | fio}}</div>
-    <!-- <button mat-icon-button>
-      <mat-icon svgIcon="ring"></mat-icon>
-    </button> -->
-    <button  
-      *ngIf="showEndChatButton && consultation?.status == 0"
-      mat-button
-      (click)="onConsultationEnd()"
-      color="primary"
-    >Завершить чат</button>
-    <button 
-    
-    class="__rounded" mat-icon-button  *ngIf="includesVideoChat && !consultation?.status" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
-      <mat-icon svgIcon="video"></mat-icon>
-    </button>
-  </div>
-  
-  <div  class="__body" #body  handleChatScroll (loadHistory)="onLoadHistory()" [isLoading]="isLoading">
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <ng-container *ngFor="let chat of messages$ | async;trackBy: trackByFn">
-      <div class="__date">
-        <span>{{chat.group_date | date:'MMM d, y'}}</span>
+<ng-container *ngIf="consultation">
+  <ng-container *ngIf="userData$ | async as userData">
+    <div class="__header d-flex align-items-center justify-content-between">
+      <div class="__title">{{$any(receiver) | fio}}</div>
+     
+      <div class="d-flex">
+        <button  
+          *ngIf="showEndChatButton && consultation?.status === statusEnum.STARTED"
+          mat-button
+          (click)="onConsultationEnd()"
+          color="primary"
+        >Завершить чат</button>
+        <button mat-icon-button class="__rounded" *ngIf="consultation?.status === statusEnum.WAITING" (click)="onConsultationStart()">
+          <mat-icon svgIcon="chat"></mat-icon>
+        </button>
+        <button 
+          class="__rounded" mat-icon-button  *ngIf="includesVideoChat && (consultation?.status === statusEnum.STARTED || consultation?.status === statusEnum.WAITING)" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
+          <mat-icon svgIcon="video"></mat-icon>
+        </button>
       </div>
-      <div 
-        *ngFor="let message of chat.messages" 
-        class=" __message d-flex align-items-start"
-        [class.__sender]="message.owner_id !== userData?.id"
-        [class.__owner]="message.owner_id === userData?.id"
-        [class.__unread]="message.owner_id !== userData?.id && !message.read">
-        <psycho-picture *ngIf="message.owner_id !== userData?.id" class="__message-avatar"></psycho-picture>
-        <div class="flex-1">
-          <div class="__message-header">
-            <div class="__message-time">
-              {{message.created_at | date:'HH:mm'}}
+    </div>
+    
+    <div  class="__body" #body  handleChatScroll (loadHistory)="onLoadHistory()" [isLoading]="isLoading">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <ng-container *ngFor="let chat of messages$ | async;trackBy: trackByFn">
+        <div class="__date">
+          <span>{{chat.group_date | date:'MMM d, y'}}</span>
+        </div>
+        <div 
+          *ngFor="let message of chat.messages" 
+          class=" __message d-flex align-items-start"
+          [class.__sender]="message.owner_id !== userData?.id"
+          [class.__owner]="message.owner_id === userData?.id"
+          [class.__unread]="message.owner_id !== userData?.id && !message.read">
+          <psycho-picture *ngIf="message.owner_id !== userData?.id" class="__message-avatar"></psycho-picture>
+          <div class="flex-1">
+            <div class="__message-header">
+              <div class="__message-time">
+                {{message.created_at | date:'HH:mm'}}
+              </div>
+            </div>
+            <div class="__message-text">
+              {{message.message}}
             </div>
           </div>
-          <div class="__message-text">
-            {{message.message}}
-          </div>
         </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="__footer d-flex align-items-end">
-    <textarea 
-      [class.__empty]="true" 
-      placeholder="Напишиите вопрос"
-      [disabled]="$any(consultation?.status)"
-
-      heightAdjust 
-      [maxHeight]='200'
-      [(ngModel)]="message"></textarea>
-    <button 
-      [class.disabled]="$any(consultation?.status)"
-      mat-icon-button 
-      handleChatScroll 
-      target=".__body"
-      (click)="onSubmit($any(userData?.id))" 
-    >
-      <mat-icon svgIcon="send"></mat-icon>
-    </button>
-  </div>
+      </ng-container>
+    </div>
+    <div class="__footer d-flex align-items-end">
+      <textarea 
+        [class.__empty]="true" 
+        placeholder="Напишиите вопрос"
+        [disabled]="consultation?.status !== statusEnum.STARTED"
+        heightAdjust 
+        [maxHeight]='200'
+        [(ngModel)]="message"></textarea>
+      <button 
+        [class.disabled]="consultation?.status !== statusEnum.STARTED"
+        mat-icon-button 
+        handleChatScroll 
+        target=".__body"
+        (click)="onSubmit($any(userData?.id))" 
+      >
+        <mat-icon svgIcon="send"></mat-icon>
+      </button>
+    </div>
+  </ng-container>
 </ng-container>

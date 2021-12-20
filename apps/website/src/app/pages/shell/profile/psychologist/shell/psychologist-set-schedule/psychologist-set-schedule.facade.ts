@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConsultationApiService, IClientConsultation, IPsychologist, IPsychologistSchedule, ISelectOption, PsychologistApiService } from '@psycho/core';
+import { ConsultationApiService, IClientConsultation, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
 import { momentWithUTC, WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import * as moment from 'moment';
@@ -16,6 +16,7 @@ export interface IHour {
 
 @Injectable()
 export class PsychologistSetScheduleFacade extends WithDestroy() {
+  private readonly _selectedMonth$ = new BehaviorSubject<moment.Moment | null>(null); // current selected date from calendar
   private readonly _selectedDate$ = new BehaviorSubject<moment.Moment | null>(null); // current selected date from calendar
   private readonly _selectedSettedHours$ = new BehaviorSubject<IHour[]>([]); // all selected|setted hours of all dates(selected = not saved yet but selected by user in real time, setted = setted hour in db)
 
@@ -42,6 +43,23 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
         map(date => ({
           start: date?.startOf('day').set({ hour: 1 }).format('D.MM.yyyy HH:mm'),
           end: date?.endOf('day').format('D.MM.yyyy HH:mm')
+        }))
+      ),
+      this.updateSchedule$
+    ]).pipe(
+      switchMap(([profile, date]) => this.psychologistApiService.getSchedule(profile.id, date.start, date.end)),
+      tap(schdule => this.setSettedHours(schdule)) // save all setted hours in state
+    )
+  }
+
+  get selectedMonthSchedule$(): Observable<IPsychologistSchedule[]> {
+    return combineLatest([
+      this.psychologistApiService.getProfile(),
+      this._selectedMonth$.pipe(
+        filter(date => !!date),
+        map(date => ({
+          start: moment(date).startOf('month').set({ hour: 1 }).format('D.MM.yyyy HH:mm'),
+          end: moment(date).endOf('month').format('D.MM.yyyy HH:mm')
         }))
       ),
       this.updateSchedule$
@@ -123,6 +141,10 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
     ).subscribe(() => {
       this._selectedSettedHours$.next(this._selectedSettedHours$.getValue().filter(hour => hour.unix !== unix));
     });
+  }
+
+  setSelectedMonth(date: moment.Moment): void {
+    this._selectedMonth$.next(date);
   }
 
   private setSettedHours(schdule: IPsychologistSchedule[]): void {

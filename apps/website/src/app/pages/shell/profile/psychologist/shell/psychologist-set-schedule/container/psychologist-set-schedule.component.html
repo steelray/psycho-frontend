@@ -1,7 +1,12 @@
 <h2 class="title-3">Задать расписание</h2>
 
 <div *ngIf="consultations$ | async" class="__calendar">
-  <mat-calendar [minDate]="minDate" [selected]="selectedDate" [dateClass]="$any(dateClass)" (selectedChange)="onSelectDate($event)"></mat-calendar>
+  <mat-calendar 
+    #calendar
+    [minDate]="minDate" 
+    [selected]="selectedDate" 
+    [dateClass]="$any(dateClass)" 
+    (selectedChange)="onSelectDate($event)"></mat-calendar>
   <div class="__labels">
     <div class="__exist">
       Есть запись, нажмите на окошко для просмотра

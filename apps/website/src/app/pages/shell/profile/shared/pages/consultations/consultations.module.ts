@@ -8,11 +8,14 @@ import { ProfileSharedComponentsModule } from '../../components/profile-shared-c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormFieldModule } from '@psycho/web/features';
 import { ChatWidgetModule, PipesModule, UIModule } from '@psycho/features';
+import { TakeToWorkConfirmDialogComponent } from './components/take-to-work-confirm-dialog/take-to-work-confirm-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
-    ConsultationsComponent
+    ConsultationsComponent,
+    TakeToWorkConfirmDialogComponent
   ],
   imports: [
     CoreSharedModules,
@@ -24,7 +27,8 @@ import { ChatWidgetModule, PipesModule, UIModule } from '@psycho/features';
     FormFieldModule,
     ChatWidgetModule,
     PipesModule,
-    UIModule
+    UIModule,
+    MatButtonModule
   ]
 })
 export class ConsultationsModule { }

@@ -18,3 +18,9 @@ export enum CONSULTATION_FORM_ROUTE {
   FORMAT_EXPRESS = 'express',
   FORMAT_FULL = 'full'
 }
+
+export enum CONSULTATION_STATUS {
+  WAITING,
+  STARTED,
+  COMPLETED
+}

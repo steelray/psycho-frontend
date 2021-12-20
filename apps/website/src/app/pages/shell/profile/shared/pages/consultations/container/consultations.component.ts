@@ -12,16 +12,17 @@ import { ConsultationsFacade } from '../consultations.facade';
   providers: [ConsultationsFacade]
 })
 export class ConsultationsComponent {
-  selectedConsultation!: IClientConsultation;
-  newConsultations$ = this.facade.newConsultations$;
-  pastConsultations$ = this.facade.pastConsultations$;
-  userRole = this.facade.userRole;
+  readonly selectedConsultation$ = this.facade.selectedConsultation$;
+  readonly newConsultations$ = this.facade.newConsultations$;
+  readonly pastConsultations$ = this.facade.pastConsultations$;
+  readonly userRole = this.facade.userRole;
+  readonly receiver$ = this.facade.receiver$;
   constructor(
     private readonly facade: ConsultationsFacade
-  ) { }
+  ) {
+  }
 
   onSelect(consultation: IClientConsultation): void {
-    this.selectedConsultation = consultation;
     this.facade.onConsultationSelect(consultation);
   }
 
@@ -31,9 +32,18 @@ export class ConsultationsComponent {
     this.facade.showClientInfo(consultation);
   }
 
+  onConsultationStart(): void {
+    this.facade.startConsultation();
+  }
+
   onConsultationEnd(): void {
-    this.facade.endConsultation(this.selectedConsultation?.id as number);
-    this.selectedConsultation.status = 1;
+    this.facade.endConsultation();
+  }
+
+  onTakeToWork(e: Event, consultation: IClientConsultation): void {
+    e.stopPropagation();
+    e.preventDefault();
+    this.facade.takeToWork(consultation);
   }
 
   get includesVideoChat$(): Observable<boolean> {
@@ -54,8 +64,5 @@ export class ConsultationsComponent {
     )
   }
 
-  get receiver(): IUser | null | undefined {
-    return this.selectedConsultation?.client || this.selectedConsultation?.psychologist;
-  }
 
 }

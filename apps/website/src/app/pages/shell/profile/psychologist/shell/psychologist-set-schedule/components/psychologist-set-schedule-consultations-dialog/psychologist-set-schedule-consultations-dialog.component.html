@@ -6,7 +6,7 @@
   <div *ngFor="let consultation of $any(data.consultations)" class="__consultation d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
       <span>
-        {{$any(consultation.schedule.datetime) | date:'HH:mm'}}
+        {{$any(consultation.schedule.datetime * 1000) | date:'HH:mm'}}
       </span>
       <span>{{consultation.client | fio}}</span>
       <span class="d-flex align-items-center">

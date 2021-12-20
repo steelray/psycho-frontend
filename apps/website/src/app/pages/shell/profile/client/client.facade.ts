@@ -72,7 +72,7 @@ export class ClientFacade extends WithDestroy() {
             }).afterClosed())
           );
         }
-
+        this.router.navigate(['/profile', 'client', 'new-session']);
         return EMPTY;
 
       }),
