@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import axios from 'axios';
+import { IUserAuthData } from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import axios from 'axios';
 export class AuthApiService extends ApiService {
   private readonly controller = 'auth';
 
-  login(username: number | string, password: string): Observable<any> {
+  login(username: number | string, password: string): Observable<IUserAuthData> {
     return this.post(`${this.controller}/login`, { username, password });
   }
 

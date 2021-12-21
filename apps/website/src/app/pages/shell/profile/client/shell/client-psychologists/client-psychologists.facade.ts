@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ClientApiService, CONSULTATION_FORMAT, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
+import { ClientApiService, ConsultationApiService, CONSULTATION_FORMAT, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -29,7 +29,8 @@ export class ClientPsychologistsFacade {
     private readonly clientApiService: ClientApiService,
     private readonly fb: FormBuilder,
     private readonly psychologistApiService: PsychologistApiService,
-    private readonly formsService: ClientSharedFormsService
+    private readonly formsService: ClientSharedFormsService,
+    private readonly consultationApiService: ConsultationApiService
   ) { }
 
   get myPsychologists$(): Observable<IPsychologist[]> {
@@ -123,7 +124,7 @@ export class ClientPsychologistsFacade {
   }
 
   createConsultation(format: CONSULTATION_FORMAT, subject_id: number, schedule_id: number, psychologist_id: number): Promise<any> {
-    return this.clientApiService.createConsultation({
+    return this.consultationApiService.createConsultation({
       subject_id,
       schedule_id,
       psychologist_id,

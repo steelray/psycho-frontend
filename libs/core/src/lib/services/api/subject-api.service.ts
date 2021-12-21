@@ -7,8 +7,12 @@ import { ApiService } from './api.service';
 })
 export class SubjectApiService extends ApiService {
 
-  getSubjects(): Observable<ISubject[]> {
-    return this.get('subjects');
+  getSubjects(fixed = false): Observable<ISubject[]> {
+    const params: any = {};
+    if (fixed) {
+      params['fixed'] = 1;
+    }
+    return this.get('subjects', { params });
   }
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthApiService, AuthService } from '@psycho/core';
+import { AuthApiService, AuthService, IUserAuthData } from '@psycho/core';
 import { Observable, of } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class AuthFacade {
     );
   }
 
-  psychologistLogin(): Observable<any> {
+  psychologistLogin(): Observable<IUserAuthData | null> {
     if (this.psychologistLoginForm.invalid) {
       return of(null);
     }

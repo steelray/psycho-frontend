@@ -29,6 +29,12 @@
   }
   &-header {
     margin-bottom: 14px;
+    position: relative;
+    .__online {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
     psycho-picture {
       width: 44px;
       height: 44px;

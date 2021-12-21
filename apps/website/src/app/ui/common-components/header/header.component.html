@@ -11,7 +11,10 @@
 </header>
 <ng-template #userAva>
   <a mat-icon-button [matMenuTriggerFor]="menu" class="user-ava" mat-ripple>
-    A
+    <psycho-picture *ngIf="userData?.avatar;else faceIcon" [origin]="userData?.avatar"></psycho-picture>
+    <ng-template #faceIcon>
+      <mat-icon>face</mat-icon>
+    </ng-template>
   </a>
   <mat-menu #menu="matMenu">
     <a [routerLink]="['/profile']" mat-menu-item>

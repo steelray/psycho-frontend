@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthService, IMenuItem, MenuApiService, WSService } from '@psycho/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService, IMenuItem, MenuApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
-import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, startWith, tap } from 'rxjs/operators';
 
 @Injectable()
 export class PagesFacade {
@@ -10,17 +11,28 @@ export class PagesFacade {
   constructor(
     private readonly menuService: MenuApiService,
     private readonly authService: AuthService,
-    private readonly wsService: WSService
+    private readonly router: Router
+
   ) {
     // this.registerWSUserHandler();
 
     // this.wsService.onMessage$.subscribe(res => console.log(res));
   }
 
+  get isHomePage$(): Observable<boolean> {
+    return this.router.events.pipe(
+      startWith(this.router.url === '/'),
+      filter(event => event === true || event instanceof NavigationEnd),
+      map(event => event === true ? { url: '/' } : event),
+      map((event: any) => event?.url === '/')
+    )
+  }
+
   get mainMenu$(): Observable<IMenuItem[]> {
 
     if (!this._mainMenu$) {
       this._mainMenu$ = this.menuService.getMenu('main-menu').pipe(
+        tap(console.log),
         shareReplay()
       );
     }
@@ -32,23 +44,9 @@ export class PagesFacade {
     return this.authService.userData$;
   }
 
-  private registerWSUserHandler(): void {
-    this.authService.userData$.pipe(
-      filter(data => !!data),
-      switchMap(data => this.wsService.afterOpen$.pipe(
-        filter(subject => !!subject),
-        map(() => data)
-      )),
-    ).subscribe(res => {
-      // this.wsService.sendMessage({
-      //   command: 'register',
-      //   user: this.authService.userData$
-      // });
-    })
-  }
-
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

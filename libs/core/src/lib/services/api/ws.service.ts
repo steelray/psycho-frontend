@@ -35,12 +35,10 @@ export interface IWSSendMessageParams {
   providedIn: 'root'
 })
 export class WSService {
-  private socket$!: WebSocketSubject<any>;
   private readonly _message$ = new ReplaySubject();
   private readonly _error$ = new Subject();
   private readonly _opened$ = new BehaviorSubject<boolean>(false);
   private readonly _reconnect$ = new BehaviorSubject<null>(null);
-  private connected = false;
 
 
   private connection!: WebSocket;
@@ -78,20 +76,6 @@ export class WSService {
     return this._opened$.asObservable()
   }
 
-  connect(): void {
-    // prevent multiple connections
-    if (!this.connected) {
-      this._reconnect$.pipe(
-        switchMap(() => this.socket$),
-        finalize(() => this.connected = true)
-      ).subscribe(
-        message => {
-          this._message$.next(message);
-        },
-        err => this._error$.next(err),
-      )
-    }
-  }
 
   onComplete(): void {
     this.connection.close();

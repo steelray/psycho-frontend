@@ -1,0 +1,6 @@
+<div class="container" *ngIf="page$ | async as page">
+  <h1 class="title-1">{{page.title}}</h1>
+
+  <div class="__page-content" [innerHTML]="page.content | safe:'html'"></div>
+
+</div>

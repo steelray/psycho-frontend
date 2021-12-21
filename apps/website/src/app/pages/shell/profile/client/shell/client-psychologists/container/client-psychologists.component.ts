@@ -66,6 +66,7 @@ export class ClientPsychologistsComponent extends WithDestroy() {
   showInfo(psychologist: IPsychologist): void {
     this.selectedPsychologist = psychologist;
     this.infoView = true;
+    this.commenting = false;
   }
 
   hideInfo(): void {
@@ -84,6 +85,7 @@ export class ClientPsychologistsComponent extends WithDestroy() {
   }
 
   onComment(psychologist: IPsychologist): void {
+    this.infoView = false;
     this.selectedPsychologist = psychologist;
     this.commenting = true;
     this.commentForm.get('psychologist_id')?.setValue(psychologist.id);

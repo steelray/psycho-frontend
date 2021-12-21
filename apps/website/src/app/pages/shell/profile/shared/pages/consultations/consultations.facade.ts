@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { AuthService, ConsultationApiService, CONSULTATION_FORMAT, CONSULTATION_FORM_ROUTE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser } from '@psycho/core';
+import { AuthService, ConsultationApiService, CONSULTATION_FORMAT, CONSULTATION_FORM_ROUTE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
 import { ChatService } from '@psycho/features';
 import { WithDestroy } from '@psycho/utils';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -13,52 +13,47 @@ import { TakeToWorkConfirmDialogComponent } from './components/take-to-work-conf
 export class ConsultationsFacade extends WithDestroy() {
   private readonly _realoadConsultations$ = new BehaviorSubject<null>(null);
   private readonly _selectedConsultation$ = new BehaviorSubject<IClientConsultation | null>(null);
-
+  readonly intervieweesOnline$ = new BehaviorSubject<number[]>([]);
   constructor(
     private readonly api: ConsultationApiService,
     private readonly authService: AuthService,
-    private readonly chatService: ChatService,
     private readonly dialog: MatDialog,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly ws: WSService
   ) {
     super();
     this.resetSelectedConsultationOnNavigationStart();
 
+    this.ws.onMessage$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(message => {
+      message = JSON.parse(message);
+
+      const current = this.intervieweesOnline$.getValue();
+
+      switch (message.type) {
+        case WS_RESPONSE_TYPE.ONLINE_INTERVIEWEES:
+          this.intervieweesOnline$.next(message.message?.map((i: any) => +i));
+          break;
+        case WS_RESPONSE_TYPE.CLOSED:
+          this.intervieweesOnline$.next(current.filter(i => i !== +message.message));
+          break;
+        case WS_RESPONSE_TYPE.REGISTERED:
+          current.push(+message.message);
+          this.intervieweesOnline$.next(current);
+          break;
+      }
+    })
+
   }
 
   get newConsultations$(): Observable<IClientConsultation[]> {
-    return combineLatest([
-      this.formatRoute$,
-      this._realoadConsultations$
-    ]).pipe(
-      map(([format]) => {
-        return format === CONSULTATION_FORM_ROUTE.FORMAT_EXPRESS ? CONSULTATION_FORMAT.FORMAT_EXPRESS : CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
-      }),
-      switchMap(format => this.api.getConsultations({
-        status: [CONSULTATION_STATUS.STARTED, CONSULTATION_STATUS.WAITING],
-        format,
-        role: this.userRole,
-        expand: this.getExpandParams(this.userRole)
-      }))
-    );
+    return this.getConsultations([CONSULTATION_STATUS.STARTED, CONSULTATION_STATUS.WAITING]);
   }
 
   get pastConsultations$(): Observable<IClientConsultation[]> {
-    return combineLatest([
-      this.formatRoute$,
-      this._realoadConsultations$
-    ]).pipe(
-      map(([format]) => {
-        return format === CONSULTATION_FORM_ROUTE.FORMAT_EXPRESS ? CONSULTATION_FORMAT.FORMAT_EXPRESS : CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
-      }),
-      switchMap((format) => this.api.getConsultations({
-        status: CONSULTATION_STATUS.COMPLETED,
-        format,
-        role: this.userRole,
-        expand: this.getExpandParams(this.userRole)
-      }))
-    );
+    return this.getConsultations(CONSULTATION_STATUS.COMPLETED);
   }
 
   get formatRoute$(): Observable<CONSULTATION_FORM_ROUTE> {
@@ -139,6 +134,34 @@ export class ConsultationsFacade extends WithDestroy() {
     ).subscribe(() => {
       this._realoadConsultations$.next(null);
     })
+  }
+
+  private getConsultations(status: CONSULTATION_STATUS | CONSULTATION_STATUS[]): Observable<IClientConsultation[]> {
+    return combineLatest([
+      this.formatRoute$,
+      this.intervieweesOnline$,
+      this._realoadConsultations$
+    ]).pipe(
+      map(([routeFormat, onlines]) => {
+        const format = routeFormat === CONSULTATION_FORM_ROUTE.FORMAT_EXPRESS ? CONSULTATION_FORMAT.FORMAT_EXPRESS : CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
+        return { format, onlines };
+      }),
+      switchMap((res) => this.api.getConsultations({
+        status,
+        format: res.format,
+        role: this.userRole,
+        expand: this.getExpandParams(this.userRole)
+      }).pipe(
+        map(consultations => consultations.map(consultation => {
+          if (consultation?.psychologist) {
+            consultation.psychologist.isOnline = res.onlines.includes(consultation.psychologist.id);
+          } else if (consultation?.client) {
+            consultation.client.isOnline = res.onlines.includes(consultation.client.id);
+          }
+          return consultation;
+        }))
+      )
+      ));
   }
 
   private resetSelectedConsultationOnNavigationStart(): void {

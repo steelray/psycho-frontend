@@ -1,7 +1,8 @@
 import { IClientConsultation } from '@psycho/core';
+import { IUser } from '.';
 import { ISubject } from './subject.interface';
 
-export interface IPsychologist {
+export interface IPsychologist extends Pick<IUser, 'isOnline'> {
   first_name: string;
   last_name: string;
   id: number;

@@ -314,7 +314,7 @@ body {
       background: var(--main-color);
     }
   }
-  .highlight-dates:not(.mat-calendar-body-disabled) {
+  .date-has-sessions:not(.mat-calendar-body-disabled) {
     > .mat-calendar-body-cell-content {
       background: var(--accent-bg-medium) !important;
     }

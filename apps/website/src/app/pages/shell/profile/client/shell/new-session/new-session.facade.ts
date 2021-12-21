@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ClientApiService } from '@psycho/core';
+import { ClientApiService, ConsultationApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { ClientProfileFormsService } from '../../../shared/components/client-profile-forms/client-profile-forms.service';
 
@@ -19,13 +19,14 @@ export class NewSessionFacade {
 
   constructor(
     private readonly clientApiService: ClientApiService,
-    private readonly clientProfileFormsService: ClientProfileFormsService
+    private readonly clientProfileFormsService: ClientProfileFormsService,
+    private readonly consultationApiService: ConsultationApiService
   ) { }
 
 
   sign(): Observable<boolean> {
     const data = this.collectFormsData();
-    return this.clientApiService.createConsultation(data);
+    return this.consultationApiService.createConsultation(data);
   }
 
   private collectFormsData(): any {

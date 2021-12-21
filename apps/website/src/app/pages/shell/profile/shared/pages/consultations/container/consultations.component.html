@@ -1,10 +1,10 @@
 <h2 class="title-3">{{title$ | async}}</h2>
-<psycho-profile-chat-layout>
+<psycho-profile-chat-layout *ngIf="intervieweesOnline$ | async as intervieweesOnline">
   <ng-container new>
-    <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: newConsultations$ | async}"></ng-container>
+    <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: newConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>
   <ng-container past>
-    <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: pastConsultations$ | async}"></ng-container>
+    <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: pastConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>
 
   
@@ -22,15 +22,15 @@
 
 </psycho-profile-chat-layout>
 
-<ng-template #consultations let-consultations>
+<ng-template #consultations let-consultations let-onlines="intervieweesOnline">
   <div *ngFor="let consultation of consultations" class="__item"
     mat-ripple 
     (click)="onSelect(consultation)"
     [class.active]="(selectedConsultation$ | async)?.id === consultation.id"  
   >
     <div  class="__item-header d-flex align-items-center">
-      <ng-container *ngIf="consultation?.client as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user}"></ng-container>
-      <ng-container *ngIf="consultation?.psychologist as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user}"></ng-container>
+      <ng-container *ngIf="consultation?.client as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
+      <ng-container *ngIf="consultation?.psychologist as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
     </div>
     <div class="__item-btns d-flex">
       <a  class="__btn" href="#" (click)="onShowInfo($event, consultation)" mat-button>Подробнее</a>
@@ -39,7 +39,10 @@
   </div>
 </ng-template>
 
-<ng-template #userData let-user>
-  <psycho-picture [origin]="user?.avatar"></psycho-picture>
+<ng-template #userData let-user let-onlines="onlines">
+  <ng-container>
+    <span class="__online" [class.__on]="user?.isOnline"></span>
+    <psycho-picture [origin]="user?.avatar"></psycho-picture>
+  </ng-container>
   <div class="__item-name">{{$any(user) | fio}}</div>
 </ng-template>

@@ -6,10 +6,12 @@ export interface IUser {
   birthday?: number;
   avatar?: string;
   email?: string;
+  isOnline?: boolean;
 }
 export interface IUserAuthData {
   token: string;
   is_client: boolean;
   is_psychologist: boolean;
   id?: number;
+  avatar?: string;
 }

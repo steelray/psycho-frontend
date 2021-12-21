@@ -2,7 +2,20 @@
   <div class="__header d-flex align-items-center">
     <div class="__title">Тех поддержка</div>
   </div>
-  
+  <div class="__footer d-flex align-items-end">
+    <textarea 
+      [class.__empty]="true" 
+      placeholder="Напишиите вопрос" 
+      [(ngModel)]="message"></textarea>
+    <button 
+      mat-icon-button 
+      handleChatScroll 
+      target=".__body"
+      (click)="onSendMessage()" 
+    >
+      <mat-icon svgIcon="send"></mat-icon>
+    </button>
+  </div>
   <div  class="__body">
     <div 
       *ngFor="let message of messages" 
@@ -22,18 +35,5 @@
       </div>
     </div>
   </div>
-  <div class="__footer d-flex align-items-end">
-    <textarea 
-      [class.__empty]="true" 
-      placeholder="Напишиите вопрос" 
-      [(ngModel)]="message"></textarea>
-    <button 
-      mat-icon-button 
-      handleChatScroll 
-      target=".__body"
-      (click)="onSendMessage()" 
-    >
-      <mat-icon svgIcon="send"></mat-icon>
-    </button>
-  </div>
+
 </ng-container>

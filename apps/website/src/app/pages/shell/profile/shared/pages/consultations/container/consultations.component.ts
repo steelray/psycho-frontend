@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CONSULTATION_FORM_ROUTE, CONSULTATION_USER_ROLE, IClientConsultation, IUser } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class ConsultationsComponent {
   readonly pastConsultations$ = this.facade.pastConsultations$;
   readonly userRole = this.facade.userRole;
   readonly receiver$ = this.facade.receiver$;
+  readonly intervieweesOnline$ = this.facade.intervieweesOnline$;
   constructor(
     private readonly facade: ConsultationsFacade
   ) {
@@ -45,6 +46,7 @@ export class ConsultationsComponent {
     e.preventDefault();
     this.facade.takeToWork(consultation);
   }
+
 
   get includesVideoChat$(): Observable<boolean> {
     return this.facade.formatRoute$.pipe(

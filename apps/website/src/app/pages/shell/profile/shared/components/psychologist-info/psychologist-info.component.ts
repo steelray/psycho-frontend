@@ -9,15 +9,4 @@ import { IPsychologist } from '@psycho/core';
 })
 export class PsychologistInfoComponent {
   @Input() psychologist!: IPsychologist;
-  educationExpanded = false;
-  descriptionExpanded = false;
-
-  onToggle(e: Event, blockName: 'education' | 'description'): void {
-    e.preventDefault();
-    if (blockName === 'education') {
-      this.educationExpanded = !this.educationExpanded;
-    } else {
-      this.descriptionExpanded = !this.descriptionExpanded;
-    }
-  }
 }

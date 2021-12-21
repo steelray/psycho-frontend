@@ -22,13 +22,13 @@
           <mat-icon svgIcon="instagram"></mat-icon>
         </a>
       </div>
-      <a [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
+      <a *ngIf="isHomePage" [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
     </div>
     <div class="footer__note">
-      <p>Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: срочная психологическая помощь.</p>
-      <div class="text-right">
+      <p>Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: <a [routerLink]="['/page', 'srocnaa-psihologiceskaa-pomos']">срочная психологическая помощь</a>.</p>
+      <!-- <div class="text-right">
         <a href="#" mat-button size="medium">Написать в техподдержку</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -41,21 +41,10 @@ export class ClientApiService extends ApiService {
     return this.get(`${this.controller}/my-psychologists`, { params: { expand: 'description,education,last_consultation_subject' } });
   }
 
-  createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
-    return this.post(`${this.controller}/create-consultation`, body);
-  }
+
 
   setPsychologistRating(body: ISetPsychologistRatingBody): Observable<boolean> {
     return this.post(`${this.controller}/set-psychologist-rating`, body);
-  }
-
-  getConsultations(params?: {
-    format: CONSULTATION_FORMAT,
-    page?: number,
-    limit?: number,
-    status?: 0 | 1
-  }): Observable<IClientConsultation[]> {
-    return this.get(`${this.controller}/consultations/${params?.format}?expand=psychologist,schedule,subject`, { params });
   }
 
   getLastConsultationPsychologist(): Observable<{ psychologist: IPsychologist, subject: ISubject }> {

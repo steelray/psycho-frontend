@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { CONSULTATION_FORMAT, CONSULTATION_STATUS, CONSULTATION_USER_ROLE } from '../../enums';
-import { IClientConsultation } from '../../interfaces';
+import { IClientConsultation, IClientConsultationCreateBody } from '../../interfaces';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -43,6 +43,10 @@ export class ConsultationApiService extends ApiService {
 
   takeToWork(id: number): Observable<boolean | any> {
     return this.post(`${this.controller}/take-to-work/${id}`);
+  }
+
+  createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
+    return this.post(`${this.controller}/create-consultation`, body);
   }
 
 } 

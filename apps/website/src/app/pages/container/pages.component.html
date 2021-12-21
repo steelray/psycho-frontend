@@ -8,4 +8,5 @@
 </main>
 <psycho-footer 
   *ngIf="mainMenu$ | async as mainMenu" 
+  [isHomePage]="$any(isHomePage$ | async)"
   [menuItems]="mainMenu"></psycho-footer>

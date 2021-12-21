@@ -111,13 +111,5 @@ export class AuthService {
     return this._signupForm;
   }
 
-  private wsConnectionHandler(userData: IUserAuthData | null): void {
-    if (userData) {
-      this.ws.connect();
-    } else {
-      this.ws.onComplete();
-    }
-  }
-
 
 }

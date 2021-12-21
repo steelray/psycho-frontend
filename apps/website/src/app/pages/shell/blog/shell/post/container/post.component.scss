@@ -7,11 +7,13 @@ psycho-breadcrumbs {
 }
 
 .post-header {
-  height: 450px;
   position: relative;
   overflow: hidden;
   border-radius: 6px;
   margin-bottom: 35px;
+  psycho-picture {
+    height: 340px;
+  }
   &__category {
     position: absolute;
     top: 25px;
@@ -25,23 +27,17 @@ psycho-breadcrumbs {
     background: var(--main-color);
   }
   &__sidebar {
-    background: var(--light-gray-bg);
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 321px;
-    padding: 20px 15px;
+    width: 100%;
+    padding: 20px 0;
     overflow-y: auto;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     > div {
       position: relative;
-      padding-left: 45px;
+      padding-left: 35px;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -50,6 +46,7 @@ psycho-breadcrumbs {
       }
     }
     p {
+      color: var(--na-font-color);
       font-weight: normal;
       margin-top: 0;
       margin-bottom: 0;
@@ -57,11 +54,10 @@ psycho-breadcrumbs {
       align-items: center;
     }
     mat-icon {
-      margin-right: 21px;
-      width: 28px;
+      width: 26px;
       color: var(--main-color);
       position: absolute;
-      top: 5px;
+      top: 0;
       left: 0;
       &.eye {
         height: 34px;

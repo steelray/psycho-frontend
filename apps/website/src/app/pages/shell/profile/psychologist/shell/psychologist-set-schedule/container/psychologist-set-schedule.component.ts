@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatCalendar } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { IClientConsultation } from '@psycho/core';
+import { WithDestroy } from '@psycho/utils';
 import * as moment from 'moment';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { PsychologistSetScheduleConsultationsDialogComponent } from '../components/psychologist-set-schedule-consultations-dialog/psychologist-set-schedule-consultations-dialog.component';
 import { IHour, PsychologistSetScheduleFacade } from '../psychologist-set-schedule.facade';
 
@@ -20,7 +21,7 @@ import { IHour, PsychologistSetScheduleFacade } from '../psychologist-set-schedu
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
 })
-export class PsychologistSetScheduleComponent implements AfterViewChecked {
+export class PsychologistSetScheduleComponent extends WithDestroy() implements AfterViewChecked {
   private readonly dateFormat = 'DD.MM.YYYY';
   readonly selectedUnixes: number[] = []; // all selected unix
   readonly hours$ = this.facade.hours$;
@@ -49,11 +50,42 @@ export class PsychologistSetScheduleComponent implements AfterViewChecked {
 
   constructor(
     private readonly facade: PsychologistSetScheduleFacade,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly cdRef: ChangeDetectorRef
   ) {
+    super();
+
+    // this.monthSchedule$.pipe(
+    //   takeUntil(this.destroy$)
+    // ).subscribe(res => {
+    //   this.dateClass = (d: moment.Moment) => {
+    //     const date = d.format(this.dateFormat);
+
+    //     const consultationsDates = res.map(schedule => {
+    //       const ts = schedule.datetime;
+    //       const res = moment(ts).format(this.dateFormat);
+    //       return res;
+    //     });
+
+    //     const workingDates = this.consultations.map(consultation => {
+    //       const ts = consultation?.schedule?.datetime ? consultation?.schedule?.datetime * 1000 : 0;
+    //       return moment(ts).format(this.dateFormat);
+    //     });
+
+
+    //     if (consultationsDates.includes(date)) {
+    //       return 'date-has-sessions';
+    //     } else if (workingDates.includes(date)) {
+    //       return 'date-is-weekday';
+    //     } else {
+    //       return undefined;
+    //     }
+    //   }
+    // })
+
   }
 
-  dateClass = (d: moment.Moment) => {
+  dateClass = (d: moment.Moment): any => {
     const date = d.format(this.dateFormat);
 
     const consultationsDates = this.consultations.map(consultation => {
@@ -63,7 +95,7 @@ export class PsychologistSetScheduleComponent implements AfterViewChecked {
 
 
     // Highlight saturday and sunday.
-    return consultationsDates.includes(date) ? 'highlight-dates' : undefined;
+    return consultationsDates.includes(date) ? 'date-has-sessions' : undefined;
   }
 
   onSelectDate(date: moment.Moment): void {

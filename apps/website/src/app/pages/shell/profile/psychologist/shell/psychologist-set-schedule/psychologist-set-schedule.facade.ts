@@ -4,7 +4,7 @@ import { momentWithUTC, WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import * as moment from 'moment';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, finalize, map, shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, finalize, map, pairwise, shareReplay, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 export interface IHour {
   unix: number;
@@ -22,6 +22,8 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
 
   private readonly updateSchedule$ = new BehaviorSubject<null>(null); // for updating schedule|hours falgs after save  
   private _consultations$!: Observable<IClientConsultation[]>;
+  private _selectedMonthSchedule$ = new BehaviorSubject<IPsychologistSchedule[]>([]);
+  private selectedMonthDate!: number | undefined;
 
   readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -56,16 +58,22 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
     return combineLatest([
       this.psychologistApiService.getProfile(),
       this._selectedMonth$.pipe(
-        filter(date => !!date),
-        map(date => ({
-          start: moment(date).startOf('month').set({ hour: 1 }).format('D.MM.yyyy HH:mm'),
-          end: moment(date).endOf('month').format('D.MM.yyyy HH:mm')
-        }))
+        filter(date => !!date)
       ),
       this.updateSchedule$
     ]).pipe(
-      switchMap(([profile, date]) => this.psychologistApiService.getSchedule(profile.id, date.start, date.end)),
-      tap(schdule => this.setSettedHours(schdule)) // save all setted hours in state
+      switchMap(([profile, date]) => {
+        if (date?.unix() !== this.selectedMonthDate) {
+
+          this.selectedMonthDate = date?.unix();
+          const start = moment(date).startOf('month').set({ hour: 1 }).format('D.MM.yyyy HH:mm');
+          const end = moment(date).endOf('month').format('D.MM.yyyy HH:mm')
+          return this.psychologistApiService.getSchedule(profile.id, start, end).pipe(
+            tap(data => this._selectedMonthSchedule$.next(data))
+          )
+        }
+        return this._selectedMonthSchedule$.asObservable();
+      })
     )
   }
 

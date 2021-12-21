@@ -9,9 +9,12 @@ import { IMenuItem } from '@psycho/core';
 })
 export class FooterComponent implements OnInit {
   @Input() menuItems: IMenuItem[] = [];
+  @Input() isHomePage = false;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.isHomePage);
+
   }
 
 }

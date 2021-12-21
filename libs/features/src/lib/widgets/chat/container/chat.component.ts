@@ -24,6 +24,7 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
   @Output() endConsultation = new EventEmitter<boolean>();
   readonly userData$ = this.authService.userData$;
   readonly statusEnum = CONSULTATION_STATUS
+  readonly rolesEnum = CONSULTATION_USER_ROLE;
 
   isLoading = false;
   videoDialogIsOpened = false;
