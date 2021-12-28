@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PostRoutingModule } from './post-routing.module';
 import { PostComponent } from './container/post.component';
-import { SharedComponentsModule } from '../../../../../ui/shared-components/shared-components.module';
 import { PipesModule, UIModule } from '@psycho/features';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
-import { BlogSharedComponentsModule } from '../../components/shared/blog-shared-components.module';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedComponentsModule } from '../../../../../ui/shared-components/shared-components.module';
+import { BlogSharedComponentsModule } from '../../components/shared/blog-shared-components.module';
 
 
 @NgModule({

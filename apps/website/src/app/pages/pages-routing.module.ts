@@ -13,10 +13,6 @@ const ROUTES: Routes = [
         loadChildren: () => import('./shell/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'page/:slug',
-        loadChildren: () => import('./shell/page/page.module').then(m => m.PageModule)
-      },
-      {
         path: 'tests',
         loadChildren: () => import('./shell/tests/tests.module').then(m => m.TestsModule)
       },

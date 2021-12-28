@@ -17,7 +17,7 @@ export class Post implements IPost {
 
   constructor(post: IPost) {
     this.title = post.title;
-    this.slug = `/blog/${post.category?.slug}/${post.slug}`;
+    this.slug = `/blog/${post.slug}`;
     this.sub_title = post?.sub_title;
     this.author = post?.author;
     this.tags = post?.tags;

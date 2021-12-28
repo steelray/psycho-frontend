@@ -13,11 +13,11 @@
         <button mat-icon-button class="__rounded" *ngIf="consultation?.status === statusEnum.WAITING" (click)="onConsultationStart()">
           <mat-icon svgIcon="chat"></mat-icon>
         </button>
-        <button 
-          class="__rounded" mat-icon-button  *ngIf="includesVideoChat && (consultation?.status === statusEnum.STARTED || consultation?.status === statusEnum.WAITING)" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
-          <mat-icon svgIcon="video"></mat-icon>
-        </button>
       </div>
+      <button 
+        class="__rounded" mat-icon-button  *ngIf="includesVideoChat && (consultation?.status === statusEnum.STARTED || consultation?.status === statusEnum.WAITING)" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
+        <mat-icon svgIcon="video"></mat-icon>
+      </button>
     </div>
     
     <div  class="__body" #body  handleChatScroll (loadHistory)="onLoadHistory()" [isLoading]="isLoading">

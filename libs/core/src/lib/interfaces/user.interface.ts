@@ -14,4 +14,5 @@ export interface IUserAuthData {
   is_psychologist: boolean;
   id?: number;
   avatar?: string;
+  registration_completed?: boolean;
 }

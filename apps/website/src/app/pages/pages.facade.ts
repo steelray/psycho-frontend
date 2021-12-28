@@ -41,7 +41,9 @@ export class PagesFacade {
   }
 
   get userData$(): Observable<any> {
-    return this.authService.userData$;
+    return this.authService.userData$.pipe(
+      tap(console.log)
+    );
   }
 
   logout(): void {

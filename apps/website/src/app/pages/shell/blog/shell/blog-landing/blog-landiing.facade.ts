@@ -44,7 +44,7 @@ export class BlogLandingFacade {
   }
 
   private getPosts(params: IPostQueryParams): Observable<HttpResponse<IPost[] | null>> {
-    return this.postApiService.fetchAll({ ...params, skipNew: 1 });
+    return this.postApiService.fetchAll({ ...params, skipNew: 1, category_slug: 'blog' });
   }
 
   private get paginationParams(): { page: number, limit: number } {

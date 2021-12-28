@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { CONSULTATION_FORMAT } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { takeUntil } from 'rxjs/operators';
 import { ClientProfileFormFacade } from '../client-profile-form.facade';
@@ -22,6 +23,7 @@ export class ClientProfileFormComponent extends WithDestroy() {
   readonly psychologists$ = this.facade.psychologists$;
   readonly selectedPsychologist$ = this.facade.selectedPsychologist$;
   readonly selectedPsychologistGroupedSchedule$ = this.facade.selectedPsychologistGroupedSchedule$;
+  readonly formats = CONSULTATION_FORMAT;
   isEditable = true;
   isSaving = false;
 

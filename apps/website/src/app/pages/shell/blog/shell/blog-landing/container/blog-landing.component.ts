@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost, IPostCategory, Post } from '@psycho/core';
-import { getTotalCountFromRes, WithDestroy } from '@psycho/utils';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { IPostCategory, Post } from '@psycho/core';
+import { WithDestroy } from '@psycho/utils';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { BlogLandingFacade } from '../blog-landiing.facade';
 

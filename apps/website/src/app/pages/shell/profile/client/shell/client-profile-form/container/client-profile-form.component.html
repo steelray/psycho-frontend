@@ -11,35 +11,40 @@
     [stepControl]="commonQuestionsForm"
     [editable]="isEditable">
     <psycho-client-profile-form-questions [form]="commonQuestionsForm" [yearsOptions]="yearsOptions"></psycho-client-profile-form-questions>
-    <button mat-raised-button color="primary" [disabled]="commonQuestionsForm.invalid" matStepperNext>Далее</button>
+  
+    <button *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="commonQuestionsForm.invalid">Завершить регистрацию</button>
+  
+    <button *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="commonQuestionsForm.invalid" matStepperNext>Далее</button>
   </mat-step>
-  <mat-step 
-    label="Выберите тему"
-    [stepControl]="subjectsForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
-    <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
-  </mat-step>
-  <mat-step 
-    label="Выбрите специалиста"
-    [stepControl]="specialistForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
-    <button mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
-  </mat-step>
-  <mat-step 
-    label="Выберите время"
-    [stepControl]="datetimeForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-datetime
-      [scheduleForm]="scheduleForm"
-      [datetimeForm]="datetimeForm"
-      [psychologist]="$any(selectedPsychologist$ | async)"
-      [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
-      <div class="d-flex justify-content-center">
-        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Завершить регистрацию</button>
-      </div>
-  </mat-step>
+  <ng-container *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS">
+    <mat-step 
+      label="Выберите тему"
+      [stepControl]="subjectsForm"
+      [editable]="isEditable">
+      <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
+      <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
+    </mat-step>
+    <mat-step 
+      label="Выбрите специалиста"
+      [stepControl]="specialistForm"
+      [editable]="isEditable">
+      <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
+      <button mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
+    </mat-step>
+    <mat-step 
+      label="Выберите время"
+      [stepControl]="datetimeForm"
+      [editable]="isEditable">
+      <psycho-client-profile-form-datetime
+        [scheduleForm]="scheduleForm"
+        [datetimeForm]="datetimeForm"
+        [psychologist]="$any(selectedPsychologist$ | async)"
+        [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
+        <div class="d-flex justify-content-center">
+          <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Завершить регистрацию</button>
+        </div>
+    </mat-step>
+  </ng-container>
   <mat-step 
     label="Условия оплаты"
     [editable]="false">
@@ -47,7 +52,7 @@
         [psychologist]="$any(selectedPsychologist$ | async)"
         [datetime]="datetimeForm.get('datetime')?.value"></psycho-client-profile-form-payment-conditions>
         <div class="d-flex justify-content-center">
-          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Привязать карту</a>
+          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Оплатить</a>
         </div>
   </mat-step>
 

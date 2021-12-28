@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { shareReplay, switchMap } from 'rxjs/operators';
-import { IClientConsultationCreateBody, ISetPsychologistRatingBody, IClientConsultation } from '../../interfaces/client.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ISetPsychologistRatingBody } from '../../interfaces/client.interface';
 import { IPsychologist, ISubject, IUser } from '../../interfaces';
-import { CONSULTATION_FORMAT } from '@psycho/core';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +15,7 @@ export class ClientApiService extends ApiService {
 
   getClientData(): Observable<IUser> {
     return this._updateClientData$.pipe(
-      switchMap(() => {
-        if (!this._clientData$) {
-          this._clientData$ = this.get<IUser>(`${this.controller}/profile`).pipe(
-            shareReplay()
-          );
-        }
-        return this._clientData$;
-      })
+      switchMap(() => this.get<IUser>(`${this.controller}/profile`))
     );
   }
 

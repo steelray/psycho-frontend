@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ClientApiService } from '@psycho/core';
+import { AuthService, ClientApiService, IUserAuthData } from '@psycho/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ClientProfileFormsService } from '../../../shared/components/client-profile-forms/client-profile-forms.service';
 
 @Injectable()
@@ -24,7 +25,8 @@ export class ClientProfileFormFacade {
   constructor(
     private readonly clientApiService: ClientApiService,
     private readonly clientProfileFormsService: ClientProfileFormsService,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService
   ) { }
 
 
@@ -57,7 +59,15 @@ export class ClientProfileFormFacade {
 
   onCompleteRegistration(): Observable<boolean> {
     const data = this.collectFormsData();
-    return this.clientApiService.completeRegistration(data);
+    return this.clientApiService.completeRegistration(data).pipe(
+      tap(data => {
+        if (data) {
+          const userData = this.authService.userData as IUserAuthData;
+          userData.registration_completed = true;
+          this.authService.saveUserData(userData);
+        }
+      })
+    );
   }
 
   private collectFormsData(): any {

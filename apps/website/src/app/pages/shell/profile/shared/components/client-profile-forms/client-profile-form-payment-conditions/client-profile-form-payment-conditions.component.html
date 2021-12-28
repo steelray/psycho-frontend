@@ -1,4 +1,4 @@
-<ng-container *ngIf="psychologist">
+<ng-container *ngIf="psychologist;else expressText">
   <div class="h4 bold">Условия оплаты</div>
   <div class="__card d-flex">
     <div class="__img">
@@ -14,3 +14,11 @@
   <div class="h4">Дата и время сессии:</div>
   <div *ngIf="datetime">{{datetime |  date:'d MMM, EEEE HH:mm'}}</div>
 </ng-container>
+
+<ng-template #expressText>
+  <p class="__text">
+    После оплаты, вы получите консультацию психолога в чате вашего личного кабинета.
+    <br>
+    Дежурный психолог вам ответит в течение 2 минут с 09:00 до 22:00
+  </p>
+</ng-template>

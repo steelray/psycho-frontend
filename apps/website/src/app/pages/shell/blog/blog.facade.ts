@@ -24,7 +24,7 @@ export class BlogFacade {
 
   get newArticles$(): Observable<Post[] | null> {
     if (!this._newArticles$) {
-      this._newArticles$ = this.postApiService.fetchAll({ limit: 10, expand: 'category' }).pipe(
+      this._newArticles$ = this.postApiService.fetchAll({ limit: 10, expand: 'category', category_slug: 'blog' }).pipe(
         map(res => res?.body),
         map(posts => {
           if (!posts) {

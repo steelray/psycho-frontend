@@ -19,10 +19,11 @@
       border-radius: 6px;
     }
   }
-  .__text {
-    padding: 30px 50px;
-    background: var(--card-gray-bg);
-    flex: 1;
-    min-width: 0;
-  }
+}
+.__text {
+  padding: 30px 50px;
+  background: var(--card-gray-bg);
+  flex: 1;
+  min-width: 0;
+  text-align: center;
 }

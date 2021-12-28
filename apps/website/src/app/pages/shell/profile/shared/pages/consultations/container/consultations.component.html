@@ -29,12 +29,20 @@
     [class.active]="(selectedConsultation$ | async)?.id === consultation.id"  
   >
     <div  class="__item-header d-flex align-items-center">
-      <ng-container *ngIf="consultation?.client as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
-      <ng-container *ngIf="consultation?.psychologist as user" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
+      <ng-container *ngIf="consultation?.client as user;else psychologist" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
+      <ng-template #psychologist>
+        <ng-container *ngIf="consultation?.psychologist as user;else noPsychologistYet" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
+        <ng-template #noPsychologistYet>
+          Психолог еще не выбран
+        </ng-template>
+      </ng-template>
     </div>
     <div class="__item-btns d-flex">
       <a  class="__btn" href="#" (click)="onShowInfo($event, consultation)" mat-button>Подробнее</a>
-      <a  class="__btn" href="#" *ngIf="!consultation?.is_taken" (click)="onTakeToWork($event, consultation)" mat-button>Взять в работу</a>
+      <a  class="__btn" href="#" 
+        *ngIf="!consultation?.is_taken && userRole === userRoles.ROLE_PSYCHOLOGIST" 
+        (click)="onTakeToWork($event, consultation)" 
+        mat-button>Взять в работу</a>
     </div>
   </div>
 </ng-template>

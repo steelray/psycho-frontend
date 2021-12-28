@@ -12,38 +12,14 @@ import { PostFacade } from '../post.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [PostFacade]
 })
-export class PostComponent implements OnInit {
-  breadcrumbsItems$ = new BehaviorSubject<ISelectOption[]>([]);
-  post$!: Observable<Post>;
+export class PostComponent {
+  readonly breadcrumbs$ = this.facade.breadcrumbs$;
+  readonly post$ = this.facade.post$;
   constructor(
-    private readonly facade: PostFacade,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly facade: PostFacade
   ) { }
 
-  ngOnInit(): void {
-    this.post$ = this.activatedRoute.params.pipe(
-      map(params => params.post),
-      filter(res => !!res),
-      switchMap(slug => this.facade.getPost(slug)),
-      tap(post => this.generateBreadcrumbItems(post))
-    )
-  }
 
-  private generateBreadcrumbItems(post: Post): void {
-    const items: ISelectOption[] = [];
-    const category = post.category;
 
-    if (category) {
-      items.push({
-        value: ['/blog', category.slug],
-        title: category.title
-      })
-    }
-    items.push({
-      value: null,
-      title: post.title
-    })
-    this.breadcrumbsItems$.next(items);
-  }
 
 }
