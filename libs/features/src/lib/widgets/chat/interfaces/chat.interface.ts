@@ -11,6 +11,7 @@ export interface IChatMessage {
   owner_id: number; // owner_id === user.id = is author
   read?: boolean;
   receiver_id?: number; // chat partner id
+  system_message?: number
 }
 
 export interface IChatMessageRequest {

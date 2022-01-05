@@ -29,7 +29,7 @@ export class AuthApiService extends ApiService {
     return this.put(`${this.controller}/reset-password`, { code, password })
   }
 
-  uploadAvatar(image: File, userToken: string): Promise<string> {
+  uploadAvatar(image: File, userToken: string): Promise<any> {
     const formData = new FormData();
     formData.append('image', image);
     return axios.post(`http://server.zarland.ru/api/auth/upload-avatar`, formData, this.fileUploadHeaders(userToken));

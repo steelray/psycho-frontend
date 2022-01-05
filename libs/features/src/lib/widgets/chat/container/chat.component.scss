@@ -36,7 +36,8 @@
   // flex-direction: column-reverse;
 }
 
-.__date {
+.__date,
+.__system-message {
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -62,6 +63,13 @@
       left: 100%;
     }
   }
+}
+
+.__system-message {
+  color: #999;
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .__footer {
@@ -142,4 +150,8 @@
       text-align: center;
     }
   }
+}
+
+.__subtitle {
+  font-size: 15px;
 }

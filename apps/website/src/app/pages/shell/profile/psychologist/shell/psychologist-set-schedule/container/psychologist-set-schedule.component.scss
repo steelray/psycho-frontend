@@ -20,7 +20,6 @@
     .mat-calendar {
       display: flex;
       flex-direction: column-reverse;
-      max-width: 700px;
     }
     .mat-calendar-controls {
       margin: 0;
@@ -66,6 +65,8 @@
   background: var(--light-gray-bg);
   padding: 25px;
   position: relative;
+  max-width: 700px;
+
   .__labels {
     position: absolute;
     bottom: 50px;

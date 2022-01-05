@@ -18,9 +18,11 @@
     [stepControl]="specialistForm"
     [editable]="isEditable">
     <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
-    <button mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
+    <button  *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
+    <button  *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="specialistForm.invalid">Записаться</button>
   </mat-step>
   <mat-step 
+    *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS"
     label="Выберите время"
     [stepControl]="datetimeForm"
     [editable]="isEditable">
@@ -30,7 +32,7 @@
       [psychologist]="$any(selectedPsychologist$ | async)"
       [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
       <div class="d-flex justify-content-center">
-        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Завершить регистрацию</button>
+        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Записаться</button>
       </div>
   </mat-step>
   <mat-step 
@@ -38,7 +40,8 @@
     [editable]="false">
       <psycho-client-profile-form-payment-conditions
         [psychologist]="$any(selectedPsychologist$ | async)"
-        [datetime]="datetimeForm.get('datetime')?.value"></psycho-client-profile-form-payment-conditions>
+        [datetime]="datetimeForm.get('datetime')?.value"
+        [format]="formatForm.get('format')?.value"></psycho-client-profile-form-payment-conditions>
         <div class="d-flex justify-content-center">
           <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Оплатить</a>
         </div>

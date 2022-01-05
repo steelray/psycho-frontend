@@ -74,10 +74,6 @@
   }
 }
 
-.__next-btn {
-  margin-top: 40px;
-}
-
 .__close-btn {
   position: absolute;
   right: 0;
@@ -172,4 +168,12 @@
   p {
     margin-bottom: 12px;
   }
+}
+
+.__prev-btn {
+  margin-right: 12px;
+}
+
+.__btns {
+  margin-top: 40px;
 }

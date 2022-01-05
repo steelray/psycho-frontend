@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { IPsychologist } from '@psycho/core';
+import { CONSULTATION_FORMAT, IPsychologist } from '@psycho/core';
 
 @Component({
   selector: 'psycho-client-profile-form-payment-conditions',
@@ -12,5 +12,6 @@ export class ClientProfileFormPaymentConditionsComponent {
   @Input() psychologist!: IPsychologist;
   @Input() price = 2490;
   @Input() datetime!: number | null | undefined;
-
+  @Input() format = CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
+  readonly formats = CONSULTATION_FORMAT;
 }

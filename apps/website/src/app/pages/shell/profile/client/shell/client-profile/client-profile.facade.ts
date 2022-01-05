@@ -58,8 +58,9 @@ export class ClientProfileFacade extends WithDestroy() {
       return;
     }
     const userToken = this.authService.currentToken as string;
-    this.authApiService.uploadAvatar(this.avatarForm.value?.image, userToken).then(() => {
+    this.authApiService.uploadAvatar(this.avatarForm.value?.image, userToken).then(res => {
       this.clientApiService.updateClientData();
+      this.authService.updateUserData({ avatar: res.data })
     }).catch(error => {
       if (error.response) {
         this.snackbar.error(error.response.data)

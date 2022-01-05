@@ -44,6 +44,10 @@ export class AuthService {
     return this._userData$.getValue()?.token;
   }
 
+  updateUserData(data: IUserAuthData): void {
+    this.saveUserData({ ...this.userData, ...data })
+  }
+
   saveUserData(userData: IUserAuthData): void {
     this.windowService.localStorage.setItem(this.lsUserDataKey, JSON.stringify(userData));
     this._userData$.next(userData);

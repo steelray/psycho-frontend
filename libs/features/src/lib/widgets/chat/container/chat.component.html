@@ -1,4 +1,5 @@
 <ng-container *ngIf="consultation">
+  {{consultation.id}}
   <ng-container *ngIf="userData$ | async as userData">
     <div class="__header d-flex align-items-center justify-content-between">
       <div class="__title">{{$any(receiver) | fio}}</div>
@@ -19,6 +20,7 @@
         <mat-icon svgIcon="video"></mat-icon>
       </button>
     </div>
+    <div class="__subtitle" *ngIf="userRole === rolesEnum.ROLE_CLIENT && consultation.status === statusEnum.WAITING">Ваша консультация начнётся {{$any(consultation?.schedule?.datetime) * 1000 | date}} в {{$any(consultation?.schedule?.datetime) * 1000 | date:'HH:mm'}}. Пожалуйста, не опаздывайте!</div>
     
     <div  class="__body" #body  handleChatScroll (loadHistory)="onLoadHistory()" [isLoading]="isLoading">
       <mat-spinner *ngIf="isLoading"></mat-spinner>
@@ -32,17 +34,24 @@
           [class.__sender]="message.owner_id !== userData?.id"
           [class.__owner]="message.owner_id === userData?.id"
           [class.__unread]="message.owner_id !== userData?.id && !message.read">
-          <psycho-picture *ngIf="message.owner_id !== userData?.id" class="__message-avatar"></psycho-picture>
-          <div class="flex-1">
-            <div class="__message-header">
-              <div class="__message-time">
-                {{message.created_at | date:'HH:mm'}}
+          <ng-container *ngIf="message.system_message && userRole !== rolesEnum.ROLE_PSYCHOLOGIST;">
+            <div class="__system-message">
+              <span>{{message.message}}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!message.system_message">
+            <psycho-picture *ngIf="message.owner_id !== userData?.id" class="__message-avatar"></psycho-picture>
+            <div class="flex-1">
+              <div class="__message-header">
+                <div class="__message-time">
+                  {{message.created_at | date:'HH:mm'}}
+                </div>
+              </div>
+              <div class="__message-text">
+                {{message.message}}
               </div>
             </div>
-            <div class="__message-text">
-              {{message.message}}
-            </div>
-          </div>
+          </ng-container>
         </div>
       </ng-container>
     </div>

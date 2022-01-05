@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { AuthService, ConsultationApiService, CONSULTATION_FORMAT, CONSULTATION_FORM_ROUTE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
-import { ChatService } from '@psycho/features';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { AuthService, ConsultationApiService, CONSULTATION_FORMAT, CONSULTATION_FORM_ROUTE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WSService, WS_COMMANDS, WS_RESPONSE_TYPE } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import * as moment from 'moment';
+import { BehaviorSubject, combineLatest, interval, Observable, Subject } from 'rxjs';
+import { filter, map, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
 import { ClientInfoDialogComponent } from '../../../shared/components/client-info-dialog/client-info-dialog.component';
 import { TakeToWorkConfirmDialogComponent } from './components/take-to-work-confirm-dialog/take-to-work-confirm-dialog.component';
 
@@ -14,6 +14,8 @@ export class ConsultationsFacade extends WithDestroy() {
   private readonly _realoadConsultations$ = new BehaviorSubject<null>(null);
   private readonly _selectedConsultation$ = new BehaviorSubject<IClientConsultation | null>(null);
   readonly intervieweesOnline$ = new BehaviorSubject<number[]>([]);
+  private readonly _startTimer$ = new Subject();
+  private readonly _endTimer$ = new Subject();
   constructor(
     private readonly api: ConsultationApiService,
     private readonly authService: AuthService,
@@ -43,9 +45,41 @@ export class ConsultationsFacade extends WithDestroy() {
           current.push(+message.message);
           this.intervieweesOnline$.next(current);
           break;
+        case WS_RESPONSE_TYPE.CHAT_STARTED:
+          this._startTimer$.next();
+          this.changeConsultationStatus(CONSULTATION_STATUS.STARTED);
+          break;
+        case WS_RESPONSE_TYPE.CHAT_ENDED:
+          this._realoadConsultations$.next(null);
+          this._endTimer$.next(true);
+          this._endTimer$.complete();
+          this.changeConsultationStatus(CONSULTATION_STATUS.COMPLETED);
+          break;
       }
     })
 
+  }
+
+  get timer$(): Observable<string> {
+
+
+
+    return this._startTimer$.pipe(
+      switchMap(() => this.selectedConsultation$),
+      filter(res => !!res),
+      switchMap((res) => interval(1000).pipe(
+        map(() => res)
+      )),
+      map((selectedConsultation) => {
+        const start = moment(selectedConsultation?.schedule?.datetime);
+        const end = moment(start).add(50, 'minutes');
+        console.log(end.format());
+        console.log(selectedConsultation?.schedule?.datetime);
+        return end.subtract(1, 'second')
+      }),
+      map(res => res.format('YYYY.mm.dd HH:mm:ss')),
+      takeUntil(this._endTimer$)
+    )
   }
 
   get newConsultations$(): Observable<IClientConsultation[]> {
@@ -79,6 +113,9 @@ export class ConsultationsFacade extends WithDestroy() {
   }
 
   onConsultationSelect(consultation: IClientConsultation): void {
+    if (consultation?.status === CONSULTATION_STATUS.STARTED) {
+      this._startTimer$.next();
+    }
     this._selectedConsultation$.next(consultation);
   }
 
@@ -94,20 +131,18 @@ export class ConsultationsFacade extends WithDestroy() {
   }
 
   startConsultation(): void {
-    this.api.startConsultation(this._selectedConsultation$.getValue()?.id as number).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.changeConsultationStatus(CONSULTATION_STATUS.STARTED);
-      this._realoadConsultations$.next(null);
+    this.ws.sendMessage({
+      user: this.authService.userData?.id as number,
+      consultation: this._selectedConsultation$.getValue()?.id,
+      command: WS_COMMANDS.START_CHAT
     });
   }
 
   endConsultation(): void {
-    this.api.endConsultation(this._selectedConsultation$.getValue()?.id as number).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.changeConsultationStatus(CONSULTATION_STATUS.COMPLETED);
-      this._realoadConsultations$.next(null);
+    this.ws.sendMessage({
+      user: this.authService.userData?.id as number,
+      consultation: this._selectedConsultation$.getValue()?.id,
+      command: WS_COMMANDS.END_CHAT
     });
   }
 

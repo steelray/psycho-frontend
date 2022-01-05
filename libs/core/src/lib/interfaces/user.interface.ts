@@ -9,9 +9,9 @@ export interface IUser {
   isOnline?: boolean;
 }
 export interface IUserAuthData {
-  token: string;
-  is_client: boolean;
-  is_psychologist: boolean;
+  token?: string;
+  is_client?: boolean;
+  is_psychologist?: boolean;
   id?: number;
   avatar?: string;
   registration_completed?: boolean;

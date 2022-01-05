@@ -28,67 +28,57 @@
             </div>
           </div>
         </ng-container>
-        <!-- <ng-container *ngSwitchCase="steps.SUBJECT_SELECT">
-          <p class="p">
-            Выбрите тему
-          </p>
-          <div class="__subjects">
-            <div 
-              *ngFor="let subject of psychologist.subjects;"
-              [class.selected]="subject.id === selectedSubject?.id"
-              (click)="onSubjectSelect(subject)">
-              <psycho-subject-item 
-                mat-ripple
-                [subject]="subject"
-                [iconMode]="true"></psycho-subject-item>
-            </div>
-          </div>
-        </ng-container> -->
         <ng-container *ngSwitchCase="steps.DATETIME_SELECT">
-
-          <div class="p">Выберите дату и время сессии</div>
-          <ul class="radio-list">
-            <li>
-              Можно перенести за 12 часов
-            </li>
-            <li>
-              Фиксированная цена 2 490 ₽
-            </li>
-          </ul>
-          <p>Часовой пояс: Москва</p>
-          <div class="d-flex">
-            <psycho-select
-              label="Выберите год"
-              [control]="$any(scheduleForm.get('year'))"
-              [options]="yearOptions"></psycho-select>
-            <psycho-select
-              label="Выберите месяц"
-              [control]="$any(scheduleForm.get('month'))"
-              [options]="monthsOptions"></psycho-select>
-          </div>
-          <div class="__days" *ngIf="schedule$ | async as schedule">
-            <div class="__field" *ngFor="let item of schedule">
-              <div class="__title">{{item.date | date:'MMM d, y'}}</div>
-              <div class="__btns">
-                <button
-                  type="button"  
-                  *ngFor="let time of item.times" 
-                  mat-raised-button
-                  [class.selected]="datetimeForm?.value?.schedule_id === time.id"
-                  (click)="onDatetimeSelect(time)">{{time.time | date:'HH:mm'}}</button>
+          <ng-container *ngIf="selectedFormat !== formats.FORMAT_EXPRESS">
+            <div class="p">Выберите дату и время сессии</div>
+            <ul class="radio-list">
+              <li>
+                Можно перенести за 12 часов
+              </li>
+              <li>
+                Фиксированная цена 2 490 ₽
+              </li>
+            </ul>
+            <p>Часовой пояс: Москва</p>
+            <div class="d-flex">
+              <psycho-select
+                label="Выберите год"
+                [control]="$any(scheduleForm.get('year'))"
+                [options]="yearOptions"></psycho-select>
+              <psycho-select
+                label="Выберите месяц"
+                [control]="$any(scheduleForm.get('month'))"
+                [options]="monthsOptions"></psycho-select>
+            </div>
+            <div class="__days" *ngIf="schedule$ | async as schedule">
+              <div class="__field" *ngFor="let item of schedule">
+                <div class="__title">{{item.date | date:'MMM d, y'}}</div>
+                <div class="__btns">
+                  <button
+                    type="button"  
+                    *ngFor="let time of item.times" 
+                    mat-raised-button
+                    [class.selected]="datetimeForm?.value?.schedule_id === time.id"
+                    (click)="onDatetimeSelect(time)">{{time.time | date:'HH:mm'}}</button>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="steps.SUCCESS">
           <div class="__success-card">
-            <psycho-payment-text [price]="consultationPrice"></psycho-payment-text>
+            <psycho-payment-text [price]="consultationPrice" [format]="selectedFormat"></psycho-payment-text>
           </div>
         </ng-container>
       
     </ng-container>
   </mat-dialog-content>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions class="btns">
+    <button 
+      mat-button
+      class="__prev-btn" 
+      (click)="toPrevStep()" 
+      [disabled]="(currentSignStep$ | async) === steps.FORMAT_SELECT">Назад</button>
     <button 
       class="__next-btn" 
       (click)="toNextStep()" 

@@ -57,9 +57,8 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
 
   ngAfterViewChecked(): void {
     if (this.currentStatus !== this.consultation?.status) {
-
-      this.cdRef.markForCheck(); // mark for check(for start|end buttons)
       this.currentStatus = this.consultation?.status as CONSULTATION_STATUS;
+      this.cdRef.detectChanges(); // mark for check(for start|end buttons)
     }
   }
 
@@ -98,7 +97,7 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
       // )),
       takeUntil(this.destroy$)
     ).subscribe((message: any) => {
-      this.pushMessageToCurrentList(message.message, message.owner as number)
+      this.pushMessageToCurrentList(message.message, message.owner as number, message?.system_message)
     })
   }
 
@@ -198,15 +197,15 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
   }
 
 
-  private pushMessageToCurrentList(message: string, ownerId: number): void {
-    console.log('pushing message');
+  private pushMessageToCurrentList(message: string, ownerId: number, system_message = 0): void {
 
     const currentMessages = this._messages$.getValue();
     currentMessages.push({
       message: message,
       created_at: new Date().getTime(),
       owner_id: ownerId,
-      read: true
+      read: true,
+      system_message
     })
     this._messages$.next(currentMessages);
   }

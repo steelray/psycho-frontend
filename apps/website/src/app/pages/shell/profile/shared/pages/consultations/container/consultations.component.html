@@ -7,6 +7,7 @@
     <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: pastConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>
 
+  {{timer$ | async}}
   
   <psycho-chat 
     *ngIf="selectedConsultation$ | async as selectedConsultation" 

@@ -11,12 +11,16 @@ export enum WS_RESPONSE_TYPE {
   ONLINE_PSYCHOLOGISTS = 'online-psychologists',
   ONLINE_INTERVIEWEES = 'online-interviewees',
   ERROR = 'error',
+  CHAT_STARTED = 'chat-started',
+  CHAT_ENDED = 'chat-ended'
 }
 
 export enum WS_COMMANDS {
   REGISTER = 'register',
   SEND_MESSAGE = 'send-message',
-  GET_ONLINE_PSYCHOLOGISTS = 'get-online-psychologists'
+  GET_ONLINE_PSYCHOLOGISTS = 'get-online-psychologists',
+  START_CHAT = 'start-chat',
+  END_CHAT = 'end-chat'
 }
 
 export interface IWSMessage {

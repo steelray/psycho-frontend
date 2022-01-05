@@ -46,25 +46,26 @@ export class ClientPsycholigistSignDialogComponent {
     this.selectedFormat = format;
   }
 
+  toPrevStep(): void {
+    this.currentSignStep$.next(this.steps.FORMAT_SELECT);
+  }
+
   async toNextStep(): Promise<any> {
     const currentStep = this.currentSignStep$.getValue();
     let nextStep = this.steps.DATETIME_SELECT;
-    switch (currentStep) {
-      // case this.steps.SUBJECT_SELECT:
-      //   nextStep = this.steps.DATETIME_SELECT
-      //   break;
-      case this.steps.DATETIME_SELECT:
-        await this.facade.createConsultation(
-          this.selectedFormat,
-          this.data.subject.id,
-          this.datetimeForm.value?.schedule_id,
-          this.psychologist.id
-        );
-        nextStep = this.steps.SUCCESS
-        break;
-      case this.steps.SUCCESS:
-        this.windowService.location.href = 'https://yookassa.ru/';
-        return;
+
+    if (currentStep === this.steps.DATETIME_SELECT || (this.selectedFormat === this.formats.FORMAT_EXPRESS)) {
+      await this.facade.createConsultation(
+        this.selectedFormat,
+        this.data.subject.id,
+        this.datetimeForm.value?.schedule_id,
+        this.psychologist.id
+      );
+      nextStep = this.steps.SUCCESS
+    }
+
+    if (currentStep === this.steps.SUCCESS) {
+      this.windowService.location.href = 'https://yookassa.ru/';
     }
     this.currentSignStep$.next(nextStep);
   }

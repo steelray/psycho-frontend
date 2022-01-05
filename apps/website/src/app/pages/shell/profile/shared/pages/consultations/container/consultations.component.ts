@@ -19,6 +19,7 @@ export class ConsultationsComponent {
   readonly receiver$ = this.facade.receiver$;
   readonly intervieweesOnline$ = this.facade.intervieweesOnline$;
   readonly userRoles = CONSULTATION_USER_ROLE;
+  readonly timer$ = this.facade.timer$;
   constructor(
     private readonly facade: ConsultationsFacade
   ) {
