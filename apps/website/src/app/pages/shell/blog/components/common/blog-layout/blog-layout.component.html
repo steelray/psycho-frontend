@@ -1,0 +1,21 @@
+<psycho-blog-header  [categories]="categories"></psycho-blog-header>
+<div class="blog-content">
+  <div class="container d-flex __content">
+    <div class="blog-content__main">
+      <ng-content></ng-content>
+    </div>
+    <div class="blog-content__sidebar">
+      <psycho-blog-sidebar [newArticles]="newArticles" [ads]="sidebarAds"></psycho-blog-sidebar>
+    </div>
+  </div>
+
+  <psycho-blog-description *ngIf="isMainPage"></psycho-blog-description>
+  
+  <div class="container">
+    <div class="related-posts" *ngIf="relatedPosts">
+      <div class="title-2">Вам также может понравится</div>
+      <psycho-related-posts [posts]="relatedPosts"></psycho-related-posts>
+    </div>
+  </div>
+
+</div>

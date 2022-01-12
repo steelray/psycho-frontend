@@ -13,3 +13,4 @@ export * from './zoom-api.service';
 export * from './chat-api.service';
 export * from './support-api.service';
 export * from './consultation-api.service';
+export * from './common-data.api.service';

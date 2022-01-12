@@ -62,8 +62,6 @@ export class ChatService {
 
   initializeWebSDK(zoomClient: any): void {
 
-    console.log(zoomClient);
-
 
     ZoomMtg.preLoadWasm();
     ZoomMtg.prepareWebSDK();
@@ -83,7 +81,6 @@ export class ChatService {
           //userEmail: 'user@gmail.com',
           passWord: zoomClient.passWord,
           success: function () {
-            console.log('join meeting success');
             //var joinUrl = "meeting.html?" + testTool.serialize(meetConfig);
             //window.open(joinUrl, "_blank");
           },

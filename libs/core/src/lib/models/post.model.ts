@@ -14,10 +14,11 @@ export class Post implements IPost {
   category?: IPostCategory;
   views?: number;
   related_posts?: Post[];
+  isPage?: boolean;
 
   constructor(post: IPost) {
     this.title = post.title;
-    this.slug = `/blog/${post.slug}`;
+    this.slug = `/${post.slug}`;
     this.sub_title = post?.sub_title;
     this.author = post?.author;
     this.tags = post?.tags;
@@ -27,6 +28,7 @@ export class Post implements IPost {
     this.content = post?.content;
     this.category = post?.category;
     this.views = post?.views ?? 0;
+    this.isPage = !post?.category;
     if (post.related_posts) {
       this.related_posts = post.related_posts.map(post => new Post(post));
     }

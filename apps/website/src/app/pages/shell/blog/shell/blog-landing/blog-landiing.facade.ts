@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IPost, IPostCategory, IPostQueryParams, Post, PostApiService } from '@psycho/core';
 import { getTotalCountFromRes } from '@psycho/utils';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -13,16 +14,18 @@ export class BlogLandingFacade {
   readonly currentCategory$ = new BehaviorSubject<IPostCategory | null>(null);
   totalCount$ = new BehaviorSubject<number>(0);
   constructor(
-    private readonly postApiService: PostApiService
+    private readonly postApiService: PostApiService,
+    private readonly activatedRoute: ActivatedRoute,
+
   ) { }
 
   get posts$(): Observable<Post[] | null> {
     return combineLatest([
-      this.currentCategory$,
+      this.activatedRoute.params,
       this.currentPage$
     ]).pipe(
       map(res => ({
-        categorySlug: res[0]?.slug,
+        categorySlug: res[0]?.category || 'blog',
         currentPage: res[1]
       })),
       map(res => ({ category_slug: res.categorySlug })),
@@ -44,7 +47,7 @@ export class BlogLandingFacade {
   }
 
   private getPosts(params: IPostQueryParams): Observable<HttpResponse<IPost[] | null>> {
-    return this.postApiService.fetchAll({ ...params, skipNew: 1, category_slug: 'blog' });
+    return this.postApiService.fetchAll({ ...params, skipNew: 1 });
   }
 
   private get paginationParams(): { page: number, limit: number } {

@@ -17,9 +17,7 @@ psycho-root {
 }
 
 .container {
-  width: 1360px;
-  max-width: 100%;
-  min-width: 1200px;
+  width: 1200px;
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
@@ -301,6 +299,19 @@ body {
         top: 2px;
         left: 0;
       }
+    }
+  }
+  .__ad-block {
+    margin: 30px 0;
+    > * {
+      display: block !important;
+      margin: 0 !important;
+    }
+    img {
+      display: block !important;
+      margin: 0 !important;
+      width: 100% !important;
+      height: auto !important;
     }
   }
 }

@@ -61,9 +61,6 @@ export class ConsultationsFacade extends WithDestroy() {
   }
 
   get timer$(): Observable<string> {
-
-
-
     return this._startTimer$.pipe(
       switchMap(() => this.selectedConsultation$),
       filter(res => !!res),
@@ -73,8 +70,6 @@ export class ConsultationsFacade extends WithDestroy() {
       map((selectedConsultation) => {
         const start = moment(selectedConsultation?.schedule?.datetime);
         const end = moment(start).add(50, 'minutes');
-        console.log(end.format());
-        console.log(selectedConsultation?.schedule?.datetime);
         return end.subtract(1, 'second')
       }),
       map(res => res.format('YYYY.mm.dd HH:mm:ss')),

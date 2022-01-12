@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { IContacts } from '@psycho/core';
 
 @Component({
   selector: 'psycho-home-feedback',
@@ -7,5 +8,5 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeFeedbackComponent {
-
+  @Input() contacts!: IContacts;
 }

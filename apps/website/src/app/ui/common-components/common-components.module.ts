@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
-import { UIModule } from '@psycho/features';
+import { PipesModule, UIModule } from '@psycho/features';
 
 const COMPONENTS = [
   HeaderComponent,
@@ -22,7 +22,8 @@ const COMPONENTS = [
     MaterialIconCustomizeModule,
     MatRippleModule,
     MatMenuModule,
-    UIModule
+    UIModule,
+    PipesModule
   ]
 })
 export class CommonComponentsModule { }

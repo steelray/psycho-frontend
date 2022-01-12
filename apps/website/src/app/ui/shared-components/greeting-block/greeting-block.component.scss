@@ -7,18 +7,19 @@
   height: calc(100vh - 150px);
   overflow: hidden;
   font-size: 16px;
+  padding: 48px 0;
   .container {
     display: flex;
     height: 100%;
     align-items: center;
   }
   &::before {
-    height: 588px;
-    width: 500px;
+    height: 180px;
+    width: 180px;
     background: url(/assets/img/wave-1.png) no-repeat center center / 100% 100%;
     display: block;
     position: absolute;
-    top: -150px;
+    top: 0;
     left: 0;
     content: "";
   }

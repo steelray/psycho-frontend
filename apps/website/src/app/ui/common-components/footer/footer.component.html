@@ -5,20 +5,20 @@
     </div>
     <div class="footer__nets">
       <p>Мы в соцсетях</p>
-      <div class="d-flex">
-        <a href="#">
+      <div class="d-flex" *ngIf="contacts">
+        <a [href]="contacts?.facebook | safe:'url'" target="_blank">
           <mat-icon svgIcon="fb"></mat-icon>
         </a>
-        <a href="#">
+        <a [href]="contacts?.vk | safe:'url'" target="_blank">
           <mat-icon svgIcon="vk"></mat-icon>
         </a>
-        <a href="#">
+        <a [href]="contacts?.twitter | safe:'url'" target="_blank">
           <mat-icon svgIcon="twitter"></mat-icon>
         </a>
-        <a href="#">
+        <a [href]="contacts?.telegram | safe:'url'" target="_blank">
           <mat-icon svgIcon="tg"></mat-icon>
         </a>
-        <a href="#">
+        <a [href]="contacts?.instagram | safe:'url'" target="_blank">
           <mat-icon svgIcon="instagram"></mat-icon>
         </a>
       </div>
@@ -38,8 +38,7 @@
       &copy; 2021 Корпорация Психологии: консультации психолога онлайн
     </div>
     <div class="__links">
-      <a href="#">Политика конфиденциальности</a>
-      <a href="#">Пользовательское соглашение </a>
+      <a *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
     </div>
   </div>
 </div>

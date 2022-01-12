@@ -21,10 +21,6 @@ const ROUTES: Routes = [
         loadChildren: () => import('./shell/blog/blog.module').then(m => m.BlogModule)
       },
       {
-        path: 'contacts',
-        loadChildren: () => import('./shell/contacts/contacts.module').then(m => m.ContactsModule)
-      },
-      {
         path: 'auth',
         loadChildren: () => import('./shell/auth/auth.module').then(m => m.AuthModule),
         canActivate: [GuestGuardService]
@@ -33,7 +29,12 @@ const ROUTES: Routes = [
         path: 'profile',
         loadChildren: () => import('./shell/profile/profile.module').then(m => m.ProfileModule),
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: ':slug',
+        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule)
+      },
+
     ]
   }
 ];

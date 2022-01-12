@@ -18,7 +18,6 @@ export class ClientNewSessionDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.psychologist);
 
   }
 

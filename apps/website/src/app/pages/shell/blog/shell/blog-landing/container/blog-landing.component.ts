@@ -13,7 +13,7 @@ import { BlogLandingFacade } from '../blog-landiing.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [BlogLandingFacade]
 })
-export class BlogLandingComponent extends WithDestroy() implements OnInit {
+export class BlogLandingComponent {
   category$!: Observable<IPostCategory>; // current category title(if category param isset in route)
   posts$: Observable<Post[] | null> = this.facade.posts$;
   totalCount$ = this.facade.totalCount$;
@@ -22,21 +22,8 @@ export class BlogLandingComponent extends WithDestroy() implements OnInit {
   readonly updateList$ = new BehaviorSubject<null>(null);
 
   constructor(
-    private readonly activatedRoute: ActivatedRoute,
     private readonly facade: BlogLandingFacade
   ) {
-    super();
-  }
-
-  ngOnInit(): void {
-    this.category$ = this.activatedRoute.params.pipe(
-      map(params => params.category || 'blog'),
-      switchMap(category => {
-        return this.facade.getCategory(category);
-      }),
-      filter(res => !!res),
-      tap(category => this.facade.currentCategory$.next(category))
-    )
   }
 
   onPageChange(page: any): void {

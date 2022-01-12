@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IPost, IPsychologist, ISubject, PostApiService, PsychologistApiService, SubjectApiService } from '@psycho/core';
+import { CommonDataApiService, IContacts, IPost, IPsychologist, ISubject, PostApiService, PsychologistApiService, SubjectApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -10,9 +10,10 @@ export class HomeFacade {
   private _faq$!: Observable<IPost[] | null>;
 
   constructor(
-    private subjectApiService: SubjectApiService,
-    private psychologistApiService: PsychologistApiService,
-    private postApiService: PostApiService
+    private readonly subjectApiService: SubjectApiService,
+    private readonly psychologistApiService: PsychologistApiService,
+    private readonly postApiService: PostApiService,
+    private readonly commonDataApiService: CommonDataApiService
   ) { }
 
   get subjects$(): Observable<ISubject[]> {
@@ -40,6 +41,10 @@ export class HomeFacade {
       );
     }
     return this._faq$;
+  }
+
+  get contacts$(): Observable<IContacts> {
+    return this.commonDataApiService.contacts$;
   }
 
 }

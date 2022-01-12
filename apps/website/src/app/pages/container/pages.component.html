@@ -6,7 +6,8 @@
 <main class="content">
   <router-outlet></router-outlet>
 </main>
-<psycho-footer 
-  *ngIf="mainMenu$ | async as mainMenu" 
+<psycho-footer
   [isHomePage]="$any(isHomePage$ | async)"
-  [menuItems]="mainMenu"></psycho-footer>
+  [menuItems]="$any(footerMenu$ | async)"
+  [linkItems]="$any(linkItems$ | async)"
+  [contacts]="$any(contacts$ | async)"></psycho-footer>

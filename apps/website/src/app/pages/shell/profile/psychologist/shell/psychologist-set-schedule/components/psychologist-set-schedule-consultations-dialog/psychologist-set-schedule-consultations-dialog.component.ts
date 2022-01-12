@@ -19,7 +19,6 @@ export class PsychologistSetScheduleConsultationsDialogComponent {
       selected_date: string | number
     }
   ) {
-    console.log(data.consultations);
 
   }
 

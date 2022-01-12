@@ -72,7 +72,6 @@ export class TelInputComponent extends BaseFormFieldComponent implements OnChang
     const res = `${selectedCountry?.code}${value}`;
 
     const phoneNumber = res ? res.replace(/\D/g, '') : null;
-    console.log([phoneNumber]);
 
 
     this.control.setValue(phoneNumber);

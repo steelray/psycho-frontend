@@ -1,48 +1,67 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { INameValue } from '../../interfaces/common.interface';
-import { ISeo } from '../../interfaces/seo.interface';
-
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { INameValue, ISeo } from '../../interfaces';
+import { ApiService } from '../api/api.service';
+import { WindowService } from '../shared/window.service';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SeoService {
   constructor(
+    public http: HttpClient,
     private titleService: Title,
-    private metaService: Meta
-  ) { }
+    private metaService: Meta,
+    private router: Router,
+    private window: WindowService,
+    private api: ApiService
+  ) {
+  }
 
-  registerMetaTags(seo: ISeo): void {
+  getSeo(url: string | null = null): Observable<ISeo> {
+    if (!url) {
+      url = this.router.url;
+    }
+    return this.api.get<ISeo>(`seo?url=${url}`).pipe(
+      tap((seo) => this.registerMetaTags(seo))
+    );
+  }
+
+  private registerMetaTags(seo: ISeo): void {
+    this.clearMetaTags();
     if (!seo) {
-      this.clearMetaTags();
       return;
     }
     this.titleService.setTitle(seo.title);
     const preparedItems = this.prepareItems(seo);
     this.registerStandartMetaTags(preparedItems);
     this.registerOpenGraphMetaTags(preparedItems);
-
   }
 
   private registerStandartMetaTags(items: INameValue[]): void {
-    this.registerItems(items.filter(item => item.name !== 'title'));
+    this.registerItems(items.filter((item) => item.name !== 'title'));
   }
 
   private registerOpenGraphMetaTags(items: INameValue[]): void {
-    items = items.filter(item => item.name !== 'robots').map(item => ({
-      name: `og:${item.name}`,
-      value: item.value
-    }));
+    items = items
+      .filter((item) => item.name !== 'robots')
+      .map((item) => ({
+        name: `og:${item.name}`,
+        value: item.value,
+      }));
 
     const additionItems: INameValue[] = [
       {
         name: 'og:url',
-        value: location.href
+        value: this.window.location.href,
       },
       {
         name: 'og:site_name',
-        value: 'PaymeBusiness'
-      }
+        value: 'PaymeBusiness',
+      },
     ];
 
     items = [...items, ...additionItems];
@@ -50,27 +69,29 @@ export class SeoService {
     this.registerItems(items, 'og');
   }
 
-  private registerItems(items: INameValue[], type: 'og' | 'twitter' | 'default' = 'default'): void {
-    items.forEach(item => {
+  private registerItems(
+    items: INameValue[],
+    type: 'og' | 'twitter' | 'default' = 'default'
+  ): void {
+    items.forEach((item) => {
       if (item.value) {
         switch (type) {
           case 'og':
             this.metaService.updateTag({
               property: item.name,
-              content: item.value
+              content: item.value,
             });
             break;
           default:
             this.metaService.updateTag({
               name: item.name,
-              content: item.value
+              content: item.value,
             });
             break;
         }
       } else {
         if (type === 'og') {
           this.metaService.removeTag(`property="${item.name}"`);
-
         } else {
           this.metaService.removeTag(item.name);
         }
@@ -78,30 +99,30 @@ export class SeoService {
     });
   }
 
-
-  private prepareItems(seo: ISeo): INameValue[] {
-    const seoClone: any = { ...seo };
+  private prepareItems(seo: any): INameValue[] {
+    const seoClone = { ...seo };
     delete seoClone.follow;
     delete seoClone.index;
 
-    const res = Object.keys(seoClone).map(key => ({
+    const res = Object.keys(seoClone).map((key) => ({
       name: key,
-      value: seoClone[key]
+      value: seoClone[key],
     }));
     res.push({
       name: 'robots',
       value: [
         {
           name: 'noindex',
-          value: !seo.index
+          value: !seo.index,
         },
         {
           name: 'nofollow',
-          value: !seo.follow
-        }
-      ].filter(item => item.value)
-        .map(item => item.name)
-        .join(',')
+          value: !seo.follow,
+        },
+      ]
+        .filter((item) => item.value)
+        .map((item) => item.name)
+        .join(','),
     });
 
     return res;
@@ -117,14 +138,12 @@ export class SeoService {
       'author',
       'title',
       'site_name',
-      'url'
+      'url',
     ];
 
-    tagNames.forEach(name => {
-      this.metaService.removeTag('name');
+    tagNames.forEach((name) => {
+      this.metaService.removeTag(name);
       this.metaService.removeTag(`property="og:${name}"`);
-    })
-
+    });
   }
-
 }

@@ -8,6 +8,8 @@
 .__header {
   margin-top: -465px;
   max-width: 466px;
+  position: relative;
+  z-index: 2;
   float: right;
   .title-1 {
     margin-bottom: 40px;

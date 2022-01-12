@@ -14,7 +14,7 @@ export class PageApiService extends ApiService {
   }
 
   fetchOne(slug: string): Observable<IPage> {
-    return this.get(`${this.controller}/${slug}`, { params: { expand: 'content' } });
+    return this.get(slug, { params: { expand: 'content,category,related_posts' } });
   }
 
 }

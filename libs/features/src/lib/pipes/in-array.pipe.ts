@@ -9,7 +9,6 @@ export class InArrayPipe implements PipeTransform {
     if (!array) {
       return false;
     }
-    console.log(array);
 
     return !!array.find(i => i === value);
   }

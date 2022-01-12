@@ -8,4 +8,4 @@
 <psycho-home-chat-options></psycho-home-chat-options>
 <psycho-home-choose-psychologist></psycho-home-choose-psychologist>
 <psycho-home-faq *ngIf="faq$ | async as faq" [faq]="faq"></psycho-home-faq> 
-<psycho-home-feedback></psycho-home-feedback>
+<psycho-home-feedback [contacts]="$any(contacts$ | async)"></psycho-home-feedback>

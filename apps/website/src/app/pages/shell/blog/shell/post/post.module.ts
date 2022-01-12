@@ -8,6 +8,7 @@ import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedComponentsModule } from '../../../../../ui/shared-components/shared-components.module';
 import { BlogSharedComponentsModule } from '../../components/shared/blog-shared-components.module';
+import { BlogCommonComponentsModule } from '../../components/common/blog-common-components.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { BlogSharedComponentsModule } from '../../components/shared/blog-shared-
     PipesModule,
     MaterialIconCustomizeModule,
     BlogSharedComponentsModule,
+    BlogCommonComponentsModule,
     MatButtonModule
   ]
 })

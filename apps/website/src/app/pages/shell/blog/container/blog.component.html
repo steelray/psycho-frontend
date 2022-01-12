@@ -1,21 +1,8 @@
-<psycho-blog-header *ngIf="categories$ |async as categories" [categories]="categories"></psycho-blog-header>
-<div class="blog-content">
-  <div class="container d-flex __content">
-    <div class="blog-content__main">
-      <router-outlet></router-outlet>
-    </div>
-    <div class="blog-content__sidebar">
-      <psycho-blog-sidebar [newArticles]="newArticles$ | async"></psycho-blog-sidebar>
-    </div>
-  </div>
-
-  <psycho-blog-description *ngIf="isMainPage$ | async"></psycho-blog-description>
-  
-  <div class="container">
-    <div class="related-posts" *ngIf="relatedPosts$ | async as relatedPosts">
-      <div class="title-2">Вам также может понравится</div>
-      <psycho-related-posts [posts]="relatedPosts"></psycho-related-posts>
-    </div>
-  </div>
-
-</div>
+<psycho-blog-layout
+  [categories]="$any(categories$ | async)"
+  [isMainPage]="$any(isMainPage$ | async)"
+  [newArticles]="$any(newArticles$ | async)"
+  [relatedPosts]="$any(relatedPosts$ | async)"
+  [sidebarAds]="$any(sidebarAds$ | async)">
+  <router-outlet></router-outlet>
+</psycho-blog-layout>

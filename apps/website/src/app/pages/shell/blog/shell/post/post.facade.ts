@@ -11,7 +11,7 @@ export class PostFacade {
   constructor(
     private readonly postApiService: PostApiService,
     private readonly postService: PostService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
   ) { }
 
   get post$(): Observable<Post> {

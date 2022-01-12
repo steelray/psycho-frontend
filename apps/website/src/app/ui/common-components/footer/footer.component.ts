@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { IMenuItem } from '@psycho/core';
+import { IContacts, IMenuItem } from '@psycho/core';
 
 @Component({
   selector: 'psycho-footer',
@@ -9,11 +9,12 @@ import { IMenuItem } from '@psycho/core';
 })
 export class FooterComponent implements OnInit {
   @Input() menuItems: IMenuItem[] = [];
+  @Input() linkItems: IMenuItem[] = [];
   @Input() isHomePage = false;
+  @Input() contacts!: IContacts;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.isHomePage);
 
   }
 

@@ -6,7 +6,7 @@
     <div *ngIf="menuItems" class="header__menu">
       <a *ngFor="let item of menuItems" [routerLink]="item.url" routerLinkActive="active">{{item.label}}</a>
     </div>
-    <a *ngIf="!userData;else userAva" [routerLink]="['/auth/login']" mat-button class="__bold">Войти</a>
+    <a *ngIf="!userData;else userAva" [routerLink]="['/auth/login']" mat-raised-button color="primary">Войти</a>
   </div>
 </header>
 <ng-template #userAva>

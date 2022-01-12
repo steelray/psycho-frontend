@@ -15,7 +15,6 @@ export class ClientInfoDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.consultation);
 
   }
 

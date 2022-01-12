@@ -1,12 +1,4 @@
-<div class="sb-block-1">
-  <h3>Обретите спокойствие и уверенность в себе</h3>
-  <div>
-    <img src="/assets/img/sb-block-1.jpg" alt="Обретите спокойствие и уверенность в себе">
-    <a href="#" mat-raised-button color="primary" size="medium">Перейти на сайт</a>
-  </div>
-</div>
-
-
+<div *ngIf="ads && ads[0]" [innerHTML]="ads[0] | safe:'html'" class="sb-block-1"></div>
 <div class="new-articles">
   <h3 class="title-3">Новые статьи</h3>
   <psycho-post-item-secondary 
@@ -15,3 +7,4 @@
     [class.flex-column-reverse]="i === 5 || i === 6"
     [class.flex-row-reverse]="i % 2 ===0 && (i !== 5 && i !== 6)"></psycho-post-item-secondary>
 </div>
+<div *ngIf="ads && ads[1]" [innerHTML]="ads[1] | safe:'html'" class="sb-block-1"></div>

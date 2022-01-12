@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, Self } from '@angular/core';
-import { AuthService, HttpErrorService, WSService, WS_COMMANDS } from '@psycho/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService, HttpErrorService, SeoService, WSService, WS_COMMANDS } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -12,12 +13,13 @@ import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
   providers: [SnackbarService]
 })
 export class AppComponent extends WithDestroy() implements OnDestroy {
-  messages: any[] = [];
   constructor(
     @Self() private readonly snackbar: SnackbarService,
     private readonly errorService: HttpErrorService,
     private readonly ws: WSService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly seoService: SeoService,
+    protected readonly router: Router
 
   ) {
     super();
@@ -42,13 +44,25 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
         })
       )),
       takeUntil(this.destroy$)
-    ).subscribe()
+    ).subscribe();
+
+    this.getSeo();
 
   }
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
     this.ws.onComplete();
+  }
+
+  getSeo(): void {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        switchMap(() => this.seoService.getSeo()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
 }

@@ -12,6 +12,7 @@ export class HomeComponent {
   readonly subjects$ = this.facade.subjects$;
   readonly psychologists$ = this.facade.psychologists$;
   readonly faq$ = this.facade.faq$;
+  readonly contacts$ = this.facade.contacts$;
 
   constructor(
     @Self() private facade: HomeFacade

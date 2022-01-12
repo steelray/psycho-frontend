@@ -6,11 +6,10 @@
   margin-bottom: 10px;
 }
 h1 {
-  font-size: 38px;
-  font-weight: 700;
+  font-size: 57px;
+  font-weight: 800;
   line-height: 1.1;
   margin-bottom: 35px;
-  text-transform: uppercase;
 }
 .__card {
   width: 420px;
@@ -73,9 +72,18 @@ h1 {
   margin-bottom: 70px;
 }
 .__note {
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--main-color);
   font-size: 18px;
-  padding-right: 200px;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  mat-icon {
+    margin-right: 12px;
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+  }
 }
 
 .__footer {

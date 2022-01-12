@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IPostCategory, Post, PostApiService } from '@psycho/core';
+import { CommonDataApiService, IPostCategory, Post, PostApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +9,8 @@ export class BlogFacade {
   private _newArticles$!: Observable<Post[] | null>;
 
   constructor(
-    private readonly postApiService: PostApiService
+    private readonly postApiService: PostApiService,
+    private readonly commonDataApiService: CommonDataApiService
   ) { }
 
   get categories$(): Observable<IPostCategory[]> {
@@ -35,5 +36,9 @@ export class BlogFacade {
       );
     }
     return this._newArticles$;
+  }
+
+  get sidebarAds$(): Observable<string[]> {
+    return this.commonDataApiService.sidebarAds$;
   }
 }

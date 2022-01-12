@@ -8,7 +8,6 @@ export class StopPropPreventDefaultPlugin implements IEventManagerPlugin {
 
   supports(eventName: string): boolean {
     const eventNameArr = eventName?.split('.');
-    console.log(eventNameArr);
 
     return eventNameArr.includes('stop') || eventNameArr.includes('prevent');
   }

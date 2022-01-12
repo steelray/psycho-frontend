@@ -1,8 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ISelectOption, Post } from '@psycho/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { BlogFacade } from '../../../blog.facade';
 import { PostFacade } from '../post.facade';
 
 @Component({
@@ -10,13 +7,16 @@ import { PostFacade } from '../post.facade';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [PostFacade]
+  providers: [PostFacade, BlogFacade]
 })
 export class PostComponent {
   readonly breadcrumbs$ = this.facade.breadcrumbs$;
   readonly post$ = this.facade.post$;
+  readonly newArticles$ = this.blogFacade.newArticles$;
+  readonly categories$ = this.blogFacade.categories$;
   constructor(
-    private readonly facade: PostFacade
+    private readonly facade: PostFacade,
+    private readonly blogFacade: BlogFacade
   ) { }
 
 

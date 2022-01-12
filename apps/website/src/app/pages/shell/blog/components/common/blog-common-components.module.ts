@@ -8,11 +8,13 @@ import { MatRippleModule } from '@angular/material/core';
 import { BlogSharedComponentsModule } from '../shared/blog-shared-components.module';
 import { BlogDescriptionComponent } from './blog-description/blog-description.component';
 import { PipesModule } from '@psycho/features';
+import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
 
 const COMPONENTS = [
   BlogSidebarComponent,
   BlogHeaderComponent,
-  BlogDescriptionComponent
+  BlogDescriptionComponent,
+  BlogLayoutComponent
 ];
 
 @NgModule({

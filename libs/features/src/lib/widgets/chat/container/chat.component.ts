@@ -63,7 +63,6 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
 
     if (changes?.receiver?.currentValue?.id !== changes?.receiver?.previousValue?.id) {
       const receiver: any = changes.receiver.currentValue;

@@ -62,7 +62,6 @@ export class WSService {
       this._message$.next(e.data);
     };
     this.connection.onclose = function (e) {
-      console.log('ws closed');
 
       // onlineUsersDiv.innerHTML = e.data;
     }

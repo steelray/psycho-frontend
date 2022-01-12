@@ -17,7 +17,7 @@ export class PostApiService extends ApiService {
     if (!params) {
       params = { expand: 'content,category,related_posts' };
     }
-    return this.get(`${this.controller}/${slug}`, { params });
+    return this.get(`page/${slug}`, { params });
   }
 
   getCategories(params?: { parent_id: number }): Observable<IPostCategory[]> {

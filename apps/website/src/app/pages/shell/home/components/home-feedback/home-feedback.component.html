@@ -3,15 +3,15 @@
     <h3 class="title-1">Остались вопросы? <br>Мы поможем!</h3>
 
     <div class="__btns">
-      <a href="#" mat-button>
+      <a target="_blank" [href]="contacts?.telegram | safe:'url'" mat-button>
         Telegram
         <mat-icon svgIcon="tg"></mat-icon>
       </a>
-      <a href="#" mat-button>
+      <a target="_blank" [href]="contacts?.watsapp" mat-button>
         What'sApp
         <mat-icon svgIcon="whatsapp"></mat-icon>
       </a>
-      <a href="#" mat-button>
+      <a [href]="'mailto:' + contacts?.mail" mat-button>
         E-mail
         <mat-icon svgIcon="email"></mat-icon>
       </a>
