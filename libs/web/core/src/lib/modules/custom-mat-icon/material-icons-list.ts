@@ -81,6 +81,10 @@ const commonIcons: IMatIcon[] = [
   {
     name: 'lock',
     src
+  },
+  {
+    name: 'clock',
+    src
   }
 ];
 export const MATERIAL_ICONS_LIST: IMatIcon[] = [...commonIcons];

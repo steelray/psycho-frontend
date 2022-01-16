@@ -3,24 +3,24 @@ a {
   &.mat-button {
     border: 1px solid var(--main-color);
     border-radius: 6px;
-    padding: 13px 28px;
+    padding: 18px 30px;
     line-height: 1;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     span {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   &.mat-button-base {
     span {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   &.bold {
     font-weight: 700;
   }
   &.mat-raised-button {
-    padding: 17px 28px;
+    padding: 18px 30px;
     line-height: 1;
     border-radius: 6px;
     font-weight: 600;

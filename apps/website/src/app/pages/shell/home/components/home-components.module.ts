@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { CoreSharedModules } from '@psycho/core';
-import { PipesModule } from '@psycho/features';
+import { PipesModule, UIModule } from '@psycho/features';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedComponentsModule } from '../../../../ui/shared-components/shared-components.module';
@@ -44,7 +44,8 @@ const COMPONENTS = [
     PipesModule,
     CarouselModule,
     MatExpansionModule,
-    MatRippleModule
+    MatRippleModule,
+    UIModule
   ]
 })
 export class HomeComponentsModule { }

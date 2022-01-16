@@ -1,9 +1,11 @@
+<div class="__bg">
+  <div class="__img"></div>
+</div>
 <div class="container">
-  <h2 class="title-1 text-center">С чем поможет психолог</h2>
+  <h2 class="title-1 text-center">С чем <strong>поможет</strong><br> психолог</h2>
   <div class="__subjects">
     <psycho-subject-item 
       *ngFor="let subject of subjects;let i = index"
-      [subject]="subject"
-      class="__item-{{subject.id}}"></psycho-subject-item>
+      [subject]="subject"></psycho-subject-item>
   </div>
 </div>

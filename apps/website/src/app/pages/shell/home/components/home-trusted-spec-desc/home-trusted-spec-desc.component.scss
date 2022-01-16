@@ -1,65 +1,30 @@
 :host {
   display: block;
-  background: var(--accent-bg-light);
   position: relative;
   min-height: 600px;
-  &::before {
-    height: 100%;
-    width: 100%;
-    content: "";
-    position: absolute;
-    top: -70px;
-    right: 0;
-    background: url(/assets/img/wave-3.png) no-repeat center 0;
-  }
-  &::after {
-    height: 52%;
-    background: #fff;
-    position: absolute;
-    bottom: 0;
-    right: -50vw;
-    left: -50vw;
-    content: "";
-    z-index: 1;
-  }
+  margin-top: -170px;
 }
 .container {
   position: relative;
   z-index: 2;
-  margin-bottom: -80px;
-  &::after {
-    height: 100%;
-    width: 50vw;
-    top: -70px;
-    background: #fff;
-    position: absolute;
-    bottom: 0;
-    left: calc(100% + 280px);
-    content: "";
-    z-index: 1;
-  }
 }
 
 .__img {
-  width: 930px;
+  width: 720px;
   display: flex;
   align-items: flex-end;
 }
 .__desc {
   margin-left: -200px;
+  margin-top: -20px;
   flex: 1;
   min-width: 0;
-  margin-top: 140px;
-}
-
-.title-1 {
-  margin-bottom: 40px;
-  font-size: 30px;
 }
 
 .radio-list {
   li {
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+    font-size: 18px;
   }
 }
 
@@ -71,8 +36,8 @@
   background: url(/assets/img/wave-4.png) no-repeat center top;
   height: 150px;
   z-index: 2;
-  width: 1920px;
-  margin: 0 auto;
+  width: 1330px;
+  margin: -85px auto 0;
   &::before,
   &::after {
     position: absolute;
@@ -83,10 +48,10 @@
   }
   &::before {
     right: 100%;
-    height: 122px;
+    height: 81px;
   }
   &::after {
     left: 100%;
-    height: 78px;
+    height: 110px;
   }
 }

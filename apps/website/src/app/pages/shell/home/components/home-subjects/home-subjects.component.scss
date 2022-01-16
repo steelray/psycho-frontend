@@ -1,7 +1,49 @@
 :host {
   display: block;
+  background: var(--white);
+  position: relative;
+  min-height: 971px;
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+  .__bg {
+    position: relative;
+    width: 1330px;
+    margin: 0 auto;
+    height: 0;
+    z-index: 0;
+    .__img {
+      position: absolute;
+      height: 971px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: url(/assets/img/wave-3.png) no-repeat center top;
+      content: "";
+    }
+    &::before,
+    &::after {
+      background-color: var(--accent-bg-light);
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 50vw;
+      display: block;
+    }
+    &::before {
+      height: 838px;
+      right: 1330px;
+    }
+    &::after {
+      height: 324px;
+      left: 1330px;
+    }
+  }
+}
+.container {
   padding-top: 55px;
-  background: var(--accent-bg-light);
 }
 
 .title-1 {
@@ -15,6 +57,5 @@
   psycho-subject-item {
     margin-bottom: 22px;
     width: calc(25% - 15px);
-    height: 163px;
   }
 }

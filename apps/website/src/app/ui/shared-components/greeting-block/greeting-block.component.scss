@@ -3,16 +3,9 @@
 }
 .__content {
   position: relative;
-  min-height: 670px;
-  height: calc(100vh - 150px);
   overflow: hidden;
   font-size: 16px;
   padding: 48px 0;
-  .container {
-    display: flex;
-    height: 100%;
-    align-items: center;
-  }
   &::before {
     height: 180px;
     width: 180px;
@@ -35,6 +28,5 @@
   .__inner {
     position: relative;
     z-index: 1;
-    width: 860px;
   }
 }

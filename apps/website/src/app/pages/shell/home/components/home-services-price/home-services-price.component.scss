@@ -2,87 +2,69 @@
   display: block;
   position: relative;
   z-index: 2;
-  margin-top: 20px;
-  background: var(--light-gray-bg);
-  padding-bottom: 170px;
+  background: var(--white);
+  padding-bottom: 189px;
+  padding-top: 109px;
 
-  .title-2 {
-    margin-bottom: 20px;
+  p {
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+}
+.__desc {
+  flex: 1;
+  min-width: 0;
+}
+.__cards {
+  margin-left: 40px;
+  width: 52%;
+  min-width: 52%;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 3px 21px 50px rgba(118, 96, 220, 0.15);
+  padding: 22px;
+}
+.__card {
+  width: 100%;
+  align-items: center;
+  padding: {
+    left: 40px;
+    right: 40px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 40px;
+  }
+  > div {
+    &:first-child {
+      flex: 1;
+    }
+    &:last-child {
+      text-align: right;
+      padding-bottom: 70px;
+    }
+  }
+  &-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 7px;
+  }
+  &-price {
+    font-size: 21px;
+    color: var(--orange);
+    font-weight: 700;
+  }
+  &-time {
+    font-size: 21px;
+    font-weight: 700;
+    color: #666;
+    mat-icon {
+      margin-right: 7px;
+    }
   }
   p {
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-}
-.__top-wave {
-  position: absolute;
-  bottom: 100%;
-  height: 150px;
-  background: url(/assets/img/wave-5.png) no-repeat;
-  &::before,
-  &::after {
-    content: "";
-    background: var(--light-gray-bg);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-  &::before {
-    right: 100%;
-    height: 146px;
-  }
-  &::after {
-    left: 100%;
-    height: 134px;
-  }
-}
-
-.prices-blocks {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 34px;
-}
-
-.__price-block {
-  border-radius: 6px;
-  background: var(--accent-bg-light);
-  padding: 20px 60px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  align-items: flex-start;
-  position: relative;
-  overflow: hidden;
-  &.__accent-bg-medium {
-    background: var(--accent-bg-medium);
-    color: var(--white);
-  }
-  .__price {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 9px;
-  }
-  .__title {
-    font-weight: 700;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  .__desc {
-    font-size: 22px;
-    margin-bottom: 30px;
-  }
-  .__time {
-    width: 155px;
-    height: 155px;
-    font-weight: 700;
-    font-size: 22px;
-    border-radius: 50%;
-    right: -23px;
-    top: -17px;
-    position: absolute;
-    background: var(--accent-bg-light);
-    color: var(--base-font-color);
-    padding: 60px 0 0 28px;
+    font-size: 14px;
+    margin: 0 0 27px 0;
   }
 }

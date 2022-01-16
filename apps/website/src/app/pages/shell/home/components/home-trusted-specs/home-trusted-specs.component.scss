@@ -8,7 +8,111 @@
 }
 
 .psychologists-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 30px;
+  .__desc {
+    flex: 1;
+    min-width: 0;
+  }
+  psycho-picture {
+    width: 445px;
+    height: 445px;
+    margin-left: 115px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .__name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .__slogan {
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .__details {
+    font-size: 17px;
+    margin-bottom: 22px;
+    span {
+      margin-right: 35px;
+    }
+    mat-icon {
+      margin-right: 12px;
+    }
+  }
+  .__subtitle {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .__subjects {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      padding: 7px 19px;
+      line-height: 22px;
+      font-size: 15px;
+      background: var(--white);
+      margin-right: 9px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      br {
+        display: none;
+      }
+    }
+  }
+  ::ng-deep {
+    .owl-nav {
+      margin: 0;
+      padding: 40px 0 0;
+      display: flex;
+      justify-content: center;
+      .owl {
+        &-prev,
+        &-next {
+          height: 56px;
+          width: 56px;
+          background: var(--main-color);
+          border-radius: 50%;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: transform 0.3s, background-color 0.3s;
+          margin: 0 13px;
+          &.disabled {
+            border: 1px solid #cccccc;
+            background: none;
+            opacity: 1;
+            &::before {
+              border-color: #cccccc;
+            }
+          }
+          &::before {
+            height: 15px;
+            width: 15px;
+            border: {
+              top: 2px solid var(--white);
+              right: 2px solid var(--white);
+            }
+            content: "";
+          }
+        }
+        &-prev {
+          &::before {
+            transform: rotate(-140deg);
+            margin-right: -2px;
+          }
+        }
+        &-next {
+          &::before {
+            transform: rotate(45deg);
+            margin-left: -2px;
+          }
+        }
+      }
+    }
+  }
 }

@@ -229,7 +229,7 @@
             "{options.outputPath}"
           ],
           "options": {
-            "outputPath": "dist/apps/website",
+            "outputPath": "dist/website/browser",
             "index": "apps/website/src/index.html",
             "main": "apps/website/src/main.ts",
             "polyfills": "apps/website/src/polyfills.ts",
@@ -352,6 +352,83 @@
             "jestConfig": "apps/website/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/website/server",
+            "main": "apps/website/server.ts",
+            "tsConfig": "apps/website/tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "apps/website/src/scss",
+                "libs/scss/src"
+              ]
+            },
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/website/src/environments/environment.ts",
+                  "with": "apps/website/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true
+            },
+            "stage": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/website/src/environments/environment.ts",
+                  "with": "apps/website/src/environments/environment.stage.ts"
+                }
+              ],
+              "optimization": true
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "website:build:development",
+              "serverTarget": "website:server:development"
+            },
+            "production": {
+              "browserTarget": "website:build:production",
+              "serverTarget": "website:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "website:build:production",
+              "serverTarget": "website:server:production"
+            },
+            "development": {
+              "browserTarget": "website:build:development",
+              "serverTarget": "website:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },

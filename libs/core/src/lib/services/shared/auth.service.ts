@@ -49,19 +49,29 @@ export class AuthService {
   }
 
   saveUserData(userData: IUserAuthData): void {
-    this.windowService.localStorage.setItem(this.lsUserDataKey, JSON.stringify(userData));
-    this._userData$.next(userData);
+    if (this.windowService?.localStorage) {
+      this.windowService.localStorage.setItem(this.lsUserDataKey, JSON.stringify(userData));
+      this._userData$.next(userData);
+
+    }
   }
 
   logout(): void {
-    this.windowService.localStorage.removeItem(this.lsUserDataKey);
-    this._userData$.next(null);
-    this.ws.onComplete();
+    if (this.windowService?.localStorage) {
+      this.windowService.localStorage.removeItem(this.lsUserDataKey);
+      this._userData$.next(null);
+      this.ws.onComplete();
+
+    }
   }
 
   private get lsUserData(): IUserAuthData | null {
-    const lsData = this.windowService.localStorage.getItem(this.lsUserDataKey) || null;
-    return lsData ? JSON.parse(lsData) : null;
+    if (this.windowService?.localStorage) {
+
+      const lsData = this.windowService.localStorage.getItem(this.lsUserDataKey) || null;
+      return lsData ? JSON.parse(lsData) : null;
+    }
+    return null;
   }
 
   get loginForm(): FormGroup {

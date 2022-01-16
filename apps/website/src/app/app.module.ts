@@ -21,7 +21,7 @@ const maskConfig: Partial<IConfig> = {
   declarations: [AppComponent],
   imports: [
     WebCoreModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CoreSharedModules,
     AppRoutingModule,
     BrowserAnimationsModule,

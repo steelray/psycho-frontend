@@ -1,21 +1,40 @@
-<div class="__top-wave wave-bg"></div>
-<div class="container">
-  <h3 class="title-2">Фиксированная цена на услуги опытных психологов</h3>
-  <p>Мы установили единую цену на  услуги наших специалистов, а также<br> добавили  возможность экспресс-консультаций, для тех кому важно<br> получить  быстрый ответ на свой вопрос</p>
+<div class="container d-flex justify-content-between">
+  <div class="__desk">
+    <h2 class="title-1">Фиксированная цена на услуги<br> <strong>опытных психологов</strong></h2>
+    <p>Мы установили единую цену на  услуги наших специалистов, а также добавили  возможность экспресс-консультаций, для тех кому важно получить  быстрый ответ на свой вопрос</p>
+  </div>
 
-  <div class="d-flex justify-content-between flex-wrap prices-blocks">
-    <div class="__price-block">
-      <div class="__price">250  ₽ </div>
-      <div class="__title">Экспресс-консультация </div>
-      <div class="__desc">Ответ на один срочный вопрос в чат </div>
-      <a href="#" mat-button size="large">Получить консультацию</a>
+  <div class="__cards">
+    <div class="__card d-flex">
+      <div>
+        <div class="__card-title">
+          Полноценная онлайн консультация <br>
+          с психологом 
+        </div>
+        <p>Видео-консультация, телефон или чат.</p>
+        <button mat-raised-button color="primary">Записаться на консультацию</button>
+
+      </div>
+      <div>
+        <div class="__card-price __with-time">
+          2 490  ₽
+        </div> 
+        <div class="__card-time"><mat-icon svgIcon="time"></mat-icon> 50 мин</div>
+      </div>
     </div>
-    <div class="__price-block __accent-bg-medium">
-      <div class="__price">2 490  ₽</div>
-      <div class="__title">Полноценная онлайн консультация с психологом </div>
-      <div class="__desc">Видео-консультация или чат-сессия</div>
-      <a href="#" mat-raised-button size="large" color="accent">Подобрать психолога</a>
-      <div class="__time">50 мин</div>
+    <div class="__card d-flex">
+      <div>
+        <div class="__card-title">
+          Экспресс-консультация 
+        </div>
+        <p>Ответ на один срочный вопрос в чат </p>
+        <button mat-raised-button color="primary">Записаться на консультацию</button>
+      </div>
+      <div>
+        <div class="__card-price">
+          250  ₽
+        </div>
+      </div>
     </div>
   </div>
 

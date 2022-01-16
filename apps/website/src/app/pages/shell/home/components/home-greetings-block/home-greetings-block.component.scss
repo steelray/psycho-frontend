@@ -11,61 +11,48 @@ h1 {
   line-height: 1.1;
   margin-bottom: 35px;
 }
-.__card {
-  width: 420px;
-  border-radius: 6px;
+.__cards {
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 3px 21px 50px rgba(118, 96, 220, 0.15);
+  width: 576px;
   padding: 22px;
-  overflow: hidden;
-  position: relative;
-  background: var(--accent-bg-light);
-  margin-bottom: 35px;
-  font-size: 18px;
-  &-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 19px;
-    line-height: 1.1;
-    min-height: 84px;
+}
+.__card {
+  width: 100%;
+  align-items: center;
+  &:not(:last-child) {
+    margin-bottom: 20px;
   }
-  &-price {
-    position: absolute;
-    width: 167px;
-    height: 167px;
-    right: -60px;
-    top: -60px;
-    border-radius: 50%;
-    background: var(--accent-bg-medium);
-    padding-left: 30px;
-    line-height: 1;
-    padding-top: 95px;
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--white);
-    &.__with-time {
-      padding-left: 25px;
-      padding-top: 50px;
-      width: 128px;
-      height: 128px;
-      right: -20px;
-      top: -30px;
+  > div {
+    &:first-child {
+      flex: 1;
+    }
+    &:last-child {
+      text-align: right;
     }
   }
-  &-time {
-    width: 72px;
-    height: 72px;
-    line-height: 72px;
-    border-radius: 50%;
-    background-color: var(--accent-bold);
-    text-align: center;
-    font-size: 16px;
-    color: var(--white);
+  &-title {
+    font-size: 18px;
     font-weight: 700;
-    position: absolute;
-    top: 55px;
-    right: -4px;
+    margin-bottom: 7px;
+  }
+  &-price {
+    font-size: 21px;
+    color: var(--orange);
+    font-weight: 700;
+  }
+  &-time {
+    font-size: 21px;
+    font-weight: 700;
+    color: #666;
+    mat-icon {
+      margin-right: 7px;
+    }
   }
   p {
-    margin-top: auto;
+    font-size: 14px;
+    margin: 0;
   }
 }
 .__btn {
@@ -87,13 +74,20 @@ h1 {
 }
 
 .__footer {
-  z-index: 2;
-  left: 0;
-  background: url(/assets/img/wave-2.png) no-repeat 0 top / 100% 150%;
-  height: 170px;
-  margin-top: -45px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 30px;
+  padding: 85px 0;
+  .radio-list {
+    li {
+      font-size: 25px;
+      font-weight: 700;
+      &::before {
+        display: none;
+      }
+      &::after {
+        width: 13px;
+        height: 13px;
+        border: none;
+        top: 8px;
+      }
+    }
+  }
 }

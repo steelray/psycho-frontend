@@ -1,7 +1,7 @@
-<div class="__title" [innerHTML]="subject?.title | safe:'html'"></div>
 <div class="__image" *ngIf="subject?.image && !iconMode; else iconTemp">
   <img [src]="subject.image" alt="">
 </div>
+<div class="__title" [innerHTML]="subject?.title | safe:'html'"></div>
 <ng-template #iconTemp>
   <img *ngIf="subject?.icon as icon" [src]="subject.icon">
 </ng-template>
