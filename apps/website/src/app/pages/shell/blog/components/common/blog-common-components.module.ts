@@ -9,6 +9,7 @@ import { BlogSharedComponentsModule } from '../shared/blog-shared-components.mod
 import { BlogDescriptionComponent } from './blog-description/blog-description.component';
 import { PipesModule } from '@psycho/features';
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
+import { FormFieldModule } from '@psycho/web/features';
 
 const COMPONENTS = [
   BlogSidebarComponent,
@@ -24,7 +25,8 @@ const COMPONENTS = [
     MaterialIconCustomizeModule,
     MatRippleModule,
     BlogSharedComponentsModule,
-    PipesModule
+    PipesModule,
+    FormFieldModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS

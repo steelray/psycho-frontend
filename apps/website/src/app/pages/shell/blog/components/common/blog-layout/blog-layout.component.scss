@@ -1,9 +1,14 @@
+@import "mixins";
+
 :host {
   display: block;
 }
 .blog {
   &-content {
     padding: 60px 0;
+    @include for-sm {
+      padding: 45px 0;
+    }
     &__main {
       flex: 1;
       min-width: 0;
@@ -11,6 +16,9 @@
     &__sidebar {
       width: 300px;
       margin-left: 66px;
+      @include for-sm {
+        display: none;
+      }
     }
   }
 }
@@ -23,5 +31,15 @@
   .title-2 {
     text-transform: none;
     margin-bottom: 25px;
+    @include for-sm {
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
   }
+}
+
+.line {
+  background: var(--main-color);
+  height: 2px;
 }

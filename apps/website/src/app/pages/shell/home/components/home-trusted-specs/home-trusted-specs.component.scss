@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: flex;
   flex-wrap: wrap;
@@ -5,12 +6,30 @@
   position: relative;
   z-index: 2;
   padding-bottom: 150px;
+  @include for-sm {
+    display: block;
+    padding-bottom: 89px;
+  }
 }
 
 .psychologists-list {
+  .__item {
+    @include for-sm {
+      flex-direction: column;
+    }
+  }
+  psycho-rating-stars {
+    @include for-sm {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
   .__desc {
     flex: 1;
     min-width: 0;
+    @include for-sm {
+      margin-bottom: 60px;
+    }
   }
   psycho-picture {
     width: 445px;
@@ -18,21 +37,36 @@
     margin-left: 115px;
     overflow: hidden;
     border-radius: 50%;
+    @include for-sm {
+      width: 318px;
+      height: 318px;
+      margin: 0 auto;
+    }
   }
 
   .__name {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 20px;
+    @include for-sm {
+      text-align: center;
+    }
   }
   .__slogan {
     margin-bottom: 25px;
     font-size: 18px;
     font-weight: 600;
+    @include for-sm {
+      text-align: center;
+    }
   }
   .__details {
     font-size: 17px;
     margin-bottom: 22px;
+    font-weight: 600;
+    @include for-sm {
+      font-size: 16px;
+    }
     span {
       margin-right: 35px;
     }

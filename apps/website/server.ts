@@ -8,6 +8,7 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import 'localstorage-polyfill';
+import { environment } from './src/environments/environment';
 
 const domino = require('domino');
 const fs = require('fs');
@@ -25,7 +26,7 @@ export function app(): express.Express {
 
 
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/website/browser');
+  const distFolder = environment.production ? join(process.cwd(), 'browser') : 'dist/website/browser';
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const template = fs
     .readFileSync(path.join(distFolder, 'index.html'))
@@ -53,14 +54,32 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(
+      indexHtml,
+      {
+        req,
+        providers: [
+          {
+            provide: APP_BASE_HREF,
+            useValue: req.baseUrl,
+          },
+        ],
+      },
+      (error, html) => {
+        if (res.statusCode === 404) {
+          res.status(404).send(html);
+        } else {
+          res.send(html);
+        }
+      }
+    );
   });
 
   return server;
 }
 
 function run(): void {
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 4200;
 
   // Start up the Node server
   const server = app();

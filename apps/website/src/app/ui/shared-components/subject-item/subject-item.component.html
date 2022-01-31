@@ -1,5 +1,6 @@
 <div class="__image" *ngIf="subject?.image && !iconMode; else iconTemp">
   <img [src]="subject.image" alt="">
+  <img [src]="subject.image_hover" alt="">
 </div>
 <div class="__title" [innerHTML]="subject?.title | safe:'html'"></div>
 <ng-template #iconTemp>

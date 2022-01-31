@@ -1,33 +1,38 @@
 <div class="footer__top">
-  <div class="container d-flex">
-    <div class="footer__nav">
-      <a *ngFor="let item of menuItems" [routerLink]="item.url">{{item.label}}</a>
-    </div>
-    <div class="footer__nets">
-      <p>Мы в соцсетях</p>
-      <div class="d-flex" *ngIf="contacts">
-        <a [href]="contacts?.facebook | safe:'url'" target="_blank">
-          <mat-icon svgIcon="fb"></mat-icon>
-        </a>
-        <a [href]="contacts?.vk | safe:'url'" target="_blank">
-          <mat-icon svgIcon="vk"></mat-icon>
-        </a>
-        <a [href]="contacts?.twitter | safe:'url'" target="_blank">
-          <mat-icon svgIcon="twitter"></mat-icon>
-        </a>
-        <a [href]="contacts?.telegram | safe:'url'" target="_blank">
-          <mat-icon svgIcon="tg"></mat-icon>
-        </a>
-        <a [href]="contacts?.instagram | safe:'url'" target="_blank">
-          <mat-icon svgIcon="instagram"></mat-icon>
-        </a>
+  <div class="container d-flex justify-content-between">
+    <div class="footer__left">
+      <div class="footer__nav d-flex">
+        <a *ngFor="let item of menuItems" [routerLink]="item.url">{{item.label}}</a>
       </div>
-      <a *ngIf="isHomePage" [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
+      <div class="footer__nets">
+        <div class="d-flex" *ngIf="contacts">
+          <a [href]="contacts?.facebook | safe:'url'" target="_blank">
+            <img src="/assets/img/fb.png">
+          </a>
+          <a [href]="contacts?.vk | safe:'url'" target="_blank">
+            <img src="/assets/img/vk.png">
+          </a>
+          <a [href]="contacts?.twitter | safe:'url'" target="_blank">
+            <img src="/assets/img/tw.png">
+          </a>
+          <a [href]="contacts?.telegram | safe:'url'" target="_blank">
+            <img src="/assets/img/tg.png">
+          </a>
+          <a [href]="contacts?.instagram | safe:'url'" target="_blank">
+            <img src="/assets/img/inst.png">
+          </a>
+        </div>
+        
+      </div>
     </div>
     <div class="footer__note">
-      <p>Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: <a [routerLink]="['srocnaa-psihologiceskaa-pomos']">срочная психологическая помощь</a>.</p>
-      <!-- <div class="text-right">
-        <a href="#" mat-button size="medium">Написать в техподдержку</a>
+      Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: <a [routerLink]="['srocnaa-psihologiceskaa-pomos']">срочная психологическая помощь</a>.
+      
+    </div>
+    <div class="footer__right">
+      <a *ngIf="isHomePage" class="__en" [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>
+      <!-- <div class="text-center">
+        <a href="#">Написать в техподдержку</a>
       </div> -->
     </div>
   </div>
@@ -37,8 +42,6 @@
     <div class="copyright">
       &copy; 2021 Корпорация Психологии: консультации психолога онлайн
     </div>
-    <div class="__links">
-      <a *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
-    </div>
+    <a *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
   </div>
 </div>

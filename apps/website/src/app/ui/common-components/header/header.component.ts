@@ -10,9 +10,17 @@ import { IMenuItem } from '@psycho/core';
 export class HeaderComponent {
   @Input() menuItems!: IMenuItem[];
   @Input() userData: any;
+  @Input() isHomePage = false;
+  @Input() isAuthPage = false;
   @Output() logout = new EventEmitter();
+
+  menuOpened = false;
 
   onLogout(): void {
     this.logout.emit();
+  }
+
+  onMenuToggle(): void {
+    this.menuOpened = !this.menuOpened;
   }
 }

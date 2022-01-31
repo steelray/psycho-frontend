@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CommonDataApiService, IPostCategory, Post, PostApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any'
+})
 export class BlogFacade {
   private _categories$!: Observable<IPostCategory[]>;
   private _newArticles$!: Observable<Post[] | null>;
+  private _sidebarAds$!: Observable<string[]>;
 
   constructor(
     private readonly postApiService: PostApiService,
@@ -39,6 +42,11 @@ export class BlogFacade {
   }
 
   get sidebarAds$(): Observable<string[]> {
-    return this.commonDataApiService.sidebarAds$;
+    if (!this._sidebarAds$) {
+      this._sidebarAds$ = this.commonDataApiService.sidebarAds$.pipe(
+        shareReplay()
+      );
+    }
+    return this._sidebarAds$;
   }
 }

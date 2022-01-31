@@ -1,0 +1,11 @@
+@mixin for-xs {
+  @media (max-width: 575px) {
+    @content;
+  }
+}
+
+@mixin for-sm {
+  @media (max-width: 767px) {
+    @content;
+  }
+}

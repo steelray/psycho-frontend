@@ -1,5 +1,9 @@
+@import "mixins";
 :host {
   display: block;
+  @include for-sm {
+    padding-bottom: 58px;
+  }
 }
 .profile {
   &-sidebar {
@@ -14,6 +18,17 @@
     }
     position: relative;
     padding-top: 25px;
+    @include for-sm {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 102;
+      padding: 2.5px 20px;
+      margin: 0;
+      background: var(--white) !important;
+      box-shadow: 0 -10px 17px rgb(118 96 220 / 15%);
+    }
     &::before {
       position: absolute;
       top: 0;
@@ -22,6 +37,9 @@
       width: 50vw;
       background: var(--accent-bg-light);
       content: "";
+      @include for-sm {
+        display: none;
+      }
     }
     &.client-sidebar {
       background: {
@@ -45,6 +63,9 @@
   align-items: center;
   margin-left: 35px;
   color: var(--base-font-color);
+  @include for-sm {
+    display: none;
+  }
   mat-icon {
     width: 48px;
     height: 48px;

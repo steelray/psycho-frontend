@@ -5,23 +5,23 @@ import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 const carouselItems: ISelectOption[] = [
   {
     value: 1,
-    title: 'Заполняете анкету, где расскажете, что вас беспокоит и что вам важно получить от психолга',
-    img: '/assets/img/how-it-works.png'
+    title: 'Заполняете анкету, где расскажете, <strong>что вас беспокоит и что вам важно получить</strong> от психолга',
+    img: '/assets/img/hiw-1.webp'
   },
   {
     value: 1,
-    title: 'Заполняете анкету, где расскажете, что вас беспокоит и что вам важно получить от психолга',
-    img: '/assets/img/how-it-works.png'
+    title: '<strong>Выбираете специалиста</strong> и удобное время',
+    img: '/assets/img/hiw-2.webp'
   },
   {
     value: 1,
-    title: 'Заполняете анкету, где расскажете, что вас беспокоит и что вам важно получить от психолга',
-    img: '/assets/img/how-it-works.png'
+    title: 'Оплачиваете сеанс, и общаетесь с психологом внутри личного кабинта и <strong>меняете свою жизнь в лучшую сторону</strong>',
+    img: '/assets/img/hiw-3.webp'
   },
   {
     value: 1,
-    title: 'Заполняете анкету, где расскажете, что вас беспокоит и что вам важно получить от психолга',
-    img: '/assets/img/how-it-works.png'
+    title: '<strong>Управляте своими записями из нашего уютного личного кабинта,</strong> а мы вам напомним о вашей встрече за 24 часа и час до начала.',
+    img: '/assets/img/hiw-4.webp'
   }
 ];
 
@@ -40,7 +40,7 @@ export class HomeHowItWorksComponent {
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
-    dots: true,
+    dots: false,
     navSpeed: 700,
     nav: true,
     navText: ['', ''],

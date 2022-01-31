@@ -1,4 +1,4 @@
-<div class="__sidebar">
+<div [class.chat-expanded]="chatExpanded" class="__sidebar">
   <mat-tab-group mat-align-tabs="start">
     <mat-tab label="Новые">
       <ng-content select="[new]"></ng-content>
@@ -9,6 +9,9 @@
   </mat-tab-group>
   
 </div>
-<div class="__content">
+<div [class.chat-expanded]="chatExpanded" class="__content">
+  <button mat-icon-button class="__mob-back-btn" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <ng-content></ng-content>
 </div>

@@ -1,9 +1,21 @@
+@import "mixins";
+
 :host {
   display: block;
 }
 
 psycho-breadcrumbs {
   margin-bottom: 60px;
+  @include for-sm {
+    margin-bottom: 20px;
+  }
+}
+
+.title-1 {
+  @include for-sm {
+    font-size: 32px;
+    line-height: 1.2;
+  }
 }
 
 .post-header {
@@ -11,8 +23,14 @@ psycho-breadcrumbs {
   overflow: hidden;
   border-radius: 6px;
   margin-bottom: 35px;
+  @include for-sm {
+    margin-bottom: 0;
+  }
   psycho-picture {
     height: 340px;
+    @include for-sm {
+      height: 290px;
+    }
   }
   &__category {
     position: absolute;
@@ -35,12 +53,22 @@ psycho-breadcrumbs {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @include for-sm {
+      flex-wrap: wrap;
+      font-size: 14px;
+      padding: 15px 0 0;
+    }
     > div {
       position: relative;
       padding-left: 35px;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      @include for-sm {
+        width: calc(50% - 15px);
+        margin: 0 0 15px;
+        padding-left: 30px;
+      }
       &:not(:last-child) {
         margin-bottom: 20px;
       }
@@ -53,15 +81,25 @@ psycho-breadcrumbs {
       display: flex;
       align-items: center;
     }
-    mat-icon {
-      width: 26px;
+    mat-icon,
+    img {
+      width: 22px;
       color: var(--main-color);
       position: absolute;
       top: 0;
       left: 0;
+      font-size: 22px;
+      @include for-sm {
+        font-size: 18px;
+        width: 18px;
+      }
       &.eye {
         height: 34px;
         width: 34px;
+        @include for-sm {
+          height: 26px;
+          width: 26px;
+        }
       }
     }
   }
@@ -69,11 +107,18 @@ psycho-breadcrumbs {
 
 .post-share {
   margin-bottom: 60px;
+  @include for-sm {
+    margin-bottom: 0;
+  }
   .__title {
     font-size: 22px;
     text-transform: none;
     margin-bottom: 10px;
     font-weight: 600;
+    @include for-sm {
+      font-size: 18px;
+      font-weight: 700;
+    }
   }
   a {
     width: 45px;

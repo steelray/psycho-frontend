@@ -1,10 +1,7 @@
+@import "mixins";
+
 :host {
   display: block;
-  h1 {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 40px;
-  }
 }
 
 .posts {
@@ -14,6 +11,9 @@
   psycho-post-item-primary {
     margin-bottom: 33px;
     width: calc(50% - 17px);
+    @include for-sm {
+      width: 100%;
+    }
     &.large {
       width: 100%;
     }

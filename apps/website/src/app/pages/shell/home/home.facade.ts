@@ -18,7 +18,7 @@ export class HomeFacade {
 
   get subjects$(): Observable<ISubject[]> {
     if (!this._subjects$) {
-      this._subjects$ = this.subjectApiService.getSubjects(true).pipe(
+      this._subjects$ = this.subjectApiService.getSubjects(true, true).pipe(
         shareReplay()
       );
     }

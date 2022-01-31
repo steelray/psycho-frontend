@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="__header">
-    <h3 class="title-1">Остались вопросы? <br>Мы поможем!</h3>
-
-    <div class="__btns">
+<div class="__header">
+  <div class="container">
+    <h3 class="title-1 text-center"><strong>Остались вопросы?</strong> <br>Мы поможем!</h3>
+  
+    <div class="__btns d-flex justify-content-center">
       <a target="_blank" [href]="contacts?.telegram | safe:'url'" mat-button>
         Telegram
         <mat-icon svgIcon="tg"></mat-icon>
@@ -17,15 +17,18 @@
       </a>
     </div>
   </div>
+</div>
+<div class="__body">
+  <div class="container d-flex">
 
-  <div class="__body d-flex">
     <div class="flex-1">
       <div class="__calmness">
-        Обретите спокойствие <br>и уверенность в себе
+        Обретите<br> спокойствие <br>и уверенность<br> в себе
       </div>
-      <button mat-raised-button color="accent" size="large">Попробовать</button>
+      <button mat-raised-button color="primary">Попробовать</button>
     </div>
-    <img src="/assets/img/artwork.png" alt="">
+    <psycho-picture class="__img" origin="/assets/img/artwork.png" webp="/assets/img/artwork.webp"></psycho-picture>
   </div>
+  <div class="__bottom-wave wave-bg"></div>
 
 </div>

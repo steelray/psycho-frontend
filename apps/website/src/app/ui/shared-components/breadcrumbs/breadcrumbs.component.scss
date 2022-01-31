@@ -1,3 +1,5 @@
+@import "mixins";
+
 :host {
   display: block;
 }
@@ -8,7 +10,11 @@ ul {
   display: flex;
   font-size: 15px;
   color: var(--na-font-color);
-  text-transform: uppercase;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  @include for-sm {
+    font-size: 13px;
+  }
   a {
     color: var(--na-font-color);
     transition: color 0.3s;

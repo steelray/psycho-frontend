@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: flex;
   flex-direction: column;
@@ -34,6 +35,9 @@
   height: 75vh;
   // display: flex;
   // flex-direction: column-reverse;
+  @include for-sm {
+    height: calc(100vh - 400px);
+  }
 }
 
 .__date,
@@ -74,6 +78,16 @@
 
 .__footer {
   padding: 10px 0 0;
+  margin-top: auto;
+  @include for-sm {
+    background: var(--white);
+    padding: 0;
+    margin: {
+      left: -20px;
+      right: -20px;
+    }
+    position: relative;
+  }
   textarea {
     border-radius: 50px;
     background: var(--gray-btn-color);
@@ -82,6 +96,12 @@
     border: none;
     padding: 20px 40px;
     font-size: 18px;
+    @include for-sm {
+      padding: 12px 50px 15px 12px;
+      font-size: 16px;
+      border-radius: 0;
+      line-height: 1.2 !important;
+    }
     &.__empty {
       height: 86px;
       line-height: 45px;
@@ -97,6 +117,19 @@
     background: var(--accent-bg-medium);
     border-radius: 50%;
     margin-left: 10px;
+    @include for-sm {
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: none;
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
     &.disabled {
       pointer-events: none;
     }

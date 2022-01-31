@@ -4,8 +4,13 @@
 <div class="container">
   <h2 class="title-1 text-center">С чем <strong>поможет</strong><br> психолог</h2>
   <div class="__subjects">
-    <psycho-subject-item 
-      *ngFor="let subject of subjects;let i = index"
-      [subject]="subject"></psycho-subject-item>
+    <a
+      *ngFor="let subject of subjects;let i = index" 
+      [routerLink]="'/' + subject?.page?.slug" 
+    >
+      <psycho-subject-item 
+        class="has-hover-img"
+        [subject]="subject"></psycho-subject-item>
+    </a>
   </div>
 </div>

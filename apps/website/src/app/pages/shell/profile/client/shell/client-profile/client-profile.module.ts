@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { ClientProfileCardOperationsComponent } from './components/client-profile-card-operations/client-profile-card-operations.component';
 import { CoreSharedModules } from '@psycho/core';
+import { MaterialIconCustomizeModule } from '@psycho/web/core';
 
 
 
@@ -28,7 +29,8 @@ import { CoreSharedModules } from '@psycho/core';
     FormFieldModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MaterialIconCustomizeModule
   ]
 })
 export class ClientProfileModule { }

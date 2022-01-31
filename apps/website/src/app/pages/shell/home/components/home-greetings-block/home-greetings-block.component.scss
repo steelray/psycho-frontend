@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: block;
 }
@@ -10,6 +11,10 @@ h1 {
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 35px;
+  @include for-sm {
+    font-size: 40px;
+    margin-bottom: 18px;
+  }
 }
 .__cards {
   border-radius: 8px;
@@ -17,12 +22,17 @@ h1 {
   box-shadow: 3px 21px 50px rgba(118, 96, 220, 0.15);
   width: 576px;
   padding: 22px;
+  @include for-sm {
+    width: 100%;
+    padding: 20px 12px;
+  }
 }
 .__card {
   width: 100%;
   align-items: center;
   &:not(:last-child) {
     margin-bottom: 20px;
+    align-items: flex-start;
   }
   > div {
     &:first-child {
@@ -36,16 +46,25 @@ h1 {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 7px;
+    @include for-sm {
+      font-size: 16px;
+    }
   }
   &-price {
     font-size: 21px;
     color: var(--orange);
     font-weight: 700;
+    @include for-sm {
+      font-size: 16px;
+    }
   }
   &-time {
     font-size: 21px;
     font-weight: 700;
     color: #666;
+    @include for-sm {
+      font-size: 16px;
+    }
     mat-icon {
       margin-right: 7px;
     }
@@ -53,6 +72,10 @@ h1 {
   p {
     font-size: 14px;
     margin: 0;
+    color: #7b7b7b;
+  }
+  button {
+    width: 100%;
   }
 }
 .__btn {
@@ -65,6 +88,10 @@ h1 {
   font-size: 18px;
   display: flex;
   align-items: center;
+  @include for-sm {
+    font-size: 16px;
+    white-space: nowrap;
+  }
   mat-icon {
     margin-right: 12px;
     font-size: 18px;
@@ -75,10 +102,23 @@ h1 {
 
 .__footer {
   padding: 85px 0;
+  @include for-sm {
+    padding: 50px 0;
+  }
   .radio-list {
+    @include for-sm {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     li {
       font-size: 25px;
       font-weight: 700;
+      @include for-sm {
+        font-size: 21px;
+        &:not(:last-child) {
+          margin-bottom: 25px;
+        }
+      }
       &::before {
         display: none;
       }

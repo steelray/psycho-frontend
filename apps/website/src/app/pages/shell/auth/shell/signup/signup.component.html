@@ -1,5 +1,5 @@
 <h1 class="title-1">Быстрая регистрация</h1>
-<div class="d-flex justify-content-between flex-wrap reg-wrap">
+<div class="d-flex flex-wrap reg-wrap">
   <form *ngIf="!(smsSent$ | async);else confirmForm" [formGroup]="form" (ngSubmit)="sendSMS()">
     <p>Моментальная регистрация.
       Введите свой номер телефона</p>
@@ -13,11 +13,11 @@
     </div>
   </form>
   <div class="reg-desc">
-    <div class="__title">Подберем для вас специалиста за 3 простых шага</div>
+    <div class="__title">Подберем для вас специалиста <br>за 3 простых шага</div>
     <ul class="radio-list">
       <li>Заполните анкету</li>
       <li>Выберите терапевта из рекомендованных</li>
-      <li>Запишитесь на подходящее время</li>
+      <li>Запишитесь на подходящее<br> время</li>
     </ul>
   </div>
 </div>
@@ -44,8 +44,8 @@
       Код действителен в течение 2-х минут.
       Если код вам так и не пришел, нажмите <a href="#" (click)="sendSMS($event)">сюда</a> чтобы его переслать.
     </div>
-    <button mat-raised-button color="primary">Далее</button>
-    <button type="button" (click)="goBack()" mat-raised-button >Назад</button>
+    <div class="d-flex justify-content-between"><button mat-raised-button color="primary">Далее</button>
+      <button type="button" (click)="goBack()" mat-raised-button >Назад</button></div>
 
   </form>
 </ng-template>

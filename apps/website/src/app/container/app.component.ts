@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, Self } from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, PLATFORM_ID, Self } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService, HttpErrorService, SeoService, WSService, WS_COMMANDS } from '@psycho/core';
+import { AuthService, HttpErrorService, ScriptService, SeoService, WindowService, WSService, WS_COMMANDS } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -19,7 +21,10 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
     private readonly ws: WSService,
     private readonly authService: AuthService,
     private readonly seoService: SeoService,
-    protected readonly router: Router
+    protected readonly router: Router,
+    private readonly platform: Platform,
+    @Inject(PLATFORM_ID) private readonly platformId: string,
+    private readonly scriptService: ScriptService
 
   ) {
     super();
@@ -44,9 +49,21 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
         })
       )),
       takeUntil(this.destroy$)
-    ).subscribe();
+    ).subscribe(res => {
+      this.scriptService.load('zoom1', 'zoom2', 'zoom3', 'zoom4', 'zoom5', 'zoom6').then(data => {
+        console.log('script loaded ', data);
+      }).catch(error => console.log(error));
+    });
 
     this.getSeo();
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+    ).subscribe(() => {
+      if (isPlatformBrowser(platformId)) {
+        window.scrollTo(0, 0);
+      }
+    });
 
   }
 

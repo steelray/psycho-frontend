@@ -6,15 +6,7 @@
       </li>
     </ul>
   </nav>
-  <div class="blog-nets">
-    <a mat-icon-button href="#">
-      <mat-icon svgIcon="fb"></mat-icon>
-    </a>
-    <a mat-icon-button href="#">
-      <mat-icon svgIcon="instagram"></mat-icon>
-    </a>
-    <a mat-icon-button href="#">
-      <mat-icon svgIcon="tg"></mat-icon>
-    </a>
-  </div>
+  <psycho-select class="nav-select no-error-message" 
+    [options]="categoriesOptions" 
+    (selected)="onCategorySelect($event)"></psycho-select>
 </div>

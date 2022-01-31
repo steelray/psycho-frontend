@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ISelectOption } from '@psycho/core';
 
 @Component({
@@ -9,4 +9,9 @@ import { ISelectOption } from '@psycho/core';
 })
 export class ProfileSidebarMenuComponent {
   @Input() menuItems!: ISelectOption[] | null;
+  @Output() logout = new EventEmitter();
+
+  onLogout(): void {
+    this.logout.emit();
+  }
 }

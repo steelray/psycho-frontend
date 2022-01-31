@@ -1,3 +1,5 @@
+@import "mixins";
+
 :host {
   display: block;
 }
@@ -6,6 +8,10 @@
   overflow: hidden;
   font-size: 16px;
   padding: 48px 0;
+  @include for-sm {
+    padding-bottom: 412px;
+    padding-top: 35px;
+  }
   &::before {
     height: 180px;
     width: 180px;
@@ -15,6 +21,9 @@
     top: 0;
     left: 0;
     content: "";
+    @include for-sm {
+      display: none;
+    }
   }
   &::after {
     position: absolute;
@@ -24,6 +33,12 @@
     width: 100%;
     background: url(/assets/img/entire-block-bg.png) no-repeat right 0 / auto 100%;
     content: "";
+    @include for-sm {
+      height: 412px;
+      background: {
+        position: right center;
+      }
+    }
   }
   .__inner {
     position: relative;

@@ -1,33 +1,55 @@
 <header class="header">
   <div class="container d-flex align-items-center justify-content-between ">
-    <a [routerLink]="'/'" class="logo">
-      <img src="/assets/img/logo.svg" alt="">
-    </a>
-    <div *ngIf="menuItems" class="header__menu">
-      <a *ngFor="let item of menuItems" [routerLink]="item.url" routerLinkActive="active">{{item.label}}</a>
+    <a [routerLink]="'/'" class="logo"></a>
+    <div *ngIf="menuItems" class="header__menu" [class.active]="menuOpened">
+      <a *ngFor="let item of menuItems" [routerLink]="item.url" (click)="onMenuToggle()" routerLinkActive="active">{{item.label}}</a>
+      <a class="__mob" (click)="onMenuToggle()" *ngIf="userData" [routerLink]="['/profile']" routerLinkActive="active">
+        Мой профиль
+      </a>
+
+      <ng-container *ngIf="!isHomePage">
+        <div class="blog-nets">
+          <a mat-icon-button href="#">
+            <mat-icon svgIcon="fb"></mat-icon>
+          </a>
+          <a mat-icon-button href="#">
+            <mat-icon svgIcon="instagram"></mat-icon>
+          </a>
+          <a mat-icon-button href="#">
+            <mat-icon svgIcon="tg"></mat-icon>
+          </a>
+        </div>
+        <a mat-raised-button color="primary" class="__begin-btn" [routerLink]="['/auth', 'signup']">Начать терапию</a>
+      </ng-container>
     </div>
-    <a *ngIf="!userData;else userAva" [routerLink]="['/auth/login']" mat-raised-button color="primary">Войти</a>
+    <a *ngIf="!userData && !isAuthPage;" [routerLink]="['/auth/login']" mat-raised-button color="primary" class="no-shadow" size="sm-small">Войти</a>
+
+    <ng-container *ngIf="userData">
+      <a mat-icon-button [matMenuTriggerFor]="menu" class="user-ava" mat-ripple>
+        <psycho-picture *ngIf="userData?.avatar;else faceIcon" [origin]="userData?.avatar"></psycho-picture>
+        <ng-template #faceIcon>
+          <mat-icon>face</mat-icon>
+        </ng-template>
+      </a>
+      <mat-menu #menu="matMenu">
+        <a [routerLink]="['/profile']" mat-menu-item>
+          Мой профиль
+        </a>
+        <a [routerLink]="['/profile/messages']" mat-menu-item>
+          1 непрочитанное сообщение
+        </a>
+        <a [routerLink]="['/profile/notifications']" mat-menu-item>
+          Напоминание: сессия сегодня в 12:40
+        </a>
+        <button mat-menu-item (click)="onLogout()">
+          Выйти из личного кабинета
+        </button>
+      </mat-menu>
+    </ng-container>
+
+
+    <button class="header-menu-toggle" (click)="onMenuToggle()" mat-ripple [class.active]="menuOpened">
+      <span></span>
+    </button>
   </div>
 </header>
-<ng-template #userAva>
-  <a mat-icon-button [matMenuTriggerFor]="menu" class="user-ava" mat-ripple>
-    <psycho-picture *ngIf="userData?.avatar;else faceIcon" [origin]="userData?.avatar"></psycho-picture>
-    <ng-template #faceIcon>
-      <mat-icon>face</mat-icon>
-    </ng-template>
-  </a>
-  <mat-menu #menu="matMenu">
-    <a [routerLink]="['/profile']" mat-menu-item>
-      Мой профиль
-    </a>
-    <a [routerLink]="['/profile/messages']" mat-menu-item>
-      1 непрочитанное сообщение
-    </a>
-    <a [routerLink]="['/profile/notifications']" mat-menu-item>
-      Напоминание: сессия сегодня в 12:40
-    </a>
-    <button mat-menu-item (click)="onLogout()">
-      Выйти из личного кабинета
-    </button>
-  </mat-menu>
-</ng-template>

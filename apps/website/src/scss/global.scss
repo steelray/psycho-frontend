@@ -1,3 +1,5 @@
+@import "mixins";
+
 html,
 body {
   margin: 0 !important;
@@ -7,8 +9,11 @@ body {
   line-height: 1.4 !important;
   overflow: inherit !important;
   height: auto !important;
-  min-width: 0 !important;
+  min-width: 1200px !important;
   width: auto !important;
+  @include for-sm {
+    min-width: 0 !important;
+  }
 }
 
 psycho-root {
@@ -21,6 +26,10 @@ psycho-root {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
+  @include for-sm {
+    width: auto;
+    padding: 0 20px;
+  }
 }
 .radio-list {
   list-style: none;
@@ -32,6 +41,9 @@ psycho-root {
     line-height: 1.3;
     position: relative;
     padding-left: 30px;
+    @include for-sm {
+      font-size: 16px;
+    }
     &::before {
       height: 19px;
       width: 19px;
@@ -54,6 +66,20 @@ psycho-root {
       background: var(--main-color);
       border-radius: 50%;
     }
+  }
+}
+blockquote {
+  background: #f1eeff url(/assets/img/quote.png) no-repeat 12px 20px;
+  padding: 20px 12px 20px 40px;
+  border-radius: 8px;
+  margin: 25px 0;
+  @include for-sm {
+    margin: 20px 0;
+  }
+  blockquote {
+    margin: 0;
+    padding: 0;
+    background: none;
   }
 }
 
@@ -86,6 +112,10 @@ p {
   font-size: 55px;
   font-weight: 800;
   line-height: 1.07;
+  @include for-sm {
+    font-size: 35px;
+    line-height: 37.52px;
+  }
   strong {
     font-weight: 800;
   }
@@ -99,11 +129,18 @@ p {
   font-size: 31px;
   font-weight: 600;
   text-transform: uppercase;
+  @include for-sm {
+    font-size: 24px;
+    line-height: 1.2;
+  }
 }
 
 .title-3 {
   font-size: 28px;
   font-weight: 600;
+  @include for-sm {
+    font-size: 20px;
+  }
 }
 
 .wave-bg {
@@ -239,27 +276,46 @@ body {
 
 .article-body {
   font-size: 18px;
+  @include for-sm {
+    font-size: 16px;
+  }
   h2 {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 25px;
     margin-top: 0;
+    @include for-sm {
+      font-size: 26px;
+      line-height: 1.2;
+    }
   }
   h3 {
     margin-top: 0;
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 25px;
+    @include for-sm {
+      font-size: 23px;
+      line-height: 1.2;
+    }
   }
   h4 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 25px;
+    @include for-sm {
+      font-size: 20px;
+      line-height: 1.2;
+    }
   }
   h5 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 25px;
+    @include for-sm {
+      font-size: 18px;
+      line-height: 1.2;
+    }
   }
   h6 {
     font-size: 16px;
@@ -291,6 +347,9 @@ body {
     li {
       position: relative;
       padding-left: 40px;
+      @include for-sm {
+        padding-left: 25px;
+      }
       &:not(:last-child) {
         margin-bottom: 25px;
       }
@@ -307,6 +366,9 @@ body {
   }
   .__ad-block {
     margin: 30px 0;
+    @include for-sm {
+      margin: 18px 0;
+    }
     > * {
       display: block !important;
       margin: 0 !important;
@@ -341,5 +403,51 @@ body {
   border-radius: 50%;
   &.__on {
     background: rgb(12, 155, 12);
+  }
+}
+
+.about-table {
+  @include for-sm {
+    table {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 15px;
+      &:nth-child(even) {
+        tr {
+          flex-direction: column-reverse;
+        }
+      }
+      tr {
+        display: flex;
+        flex-direction: column;
+        td {
+          width: 100% !important;
+          text-align: center;
+          * {
+            text-align: center !important;
+          }
+          img {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+.post-imgs-list-table {
+  @include for-sm {
+    margin: 15px 0;
+    tr {
+      display: flex;
+      flex-direction: column;
+      td {
+        width: 100% !important;
+      }
+      img {
+        width: auto !important;
+        height: auto !important;
+      }
+    }
   }
 }

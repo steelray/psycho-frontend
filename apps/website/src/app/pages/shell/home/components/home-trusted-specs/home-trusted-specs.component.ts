@@ -14,7 +14,7 @@ export class HomeTrustedSpecsComponent {
     items: 1,
     loop: false,
     mouseDrag: false,
-    touchDrag: false,
+    touchDrag: true,
     pullDrag: false,
     dots: false,
     navSpeed: 700,

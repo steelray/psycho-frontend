@@ -1,11 +1,10 @@
-<div class="__top-wave wave-bg"></div>
 <div class="container">
-  <div class="title-2">Как это работает</div>
-  <div class="__slider">
+  <div class="title-1 text-center">Как это работает</div>
+  <div class="__slider d-flex">
     <div class="slides-desc">
-      <div *ngFor="let item of carouselItems;let i = index" class="__item d-flex align-items-center" [class.active]="activeSlide === (i + 1)">
+      <div *ngFor="let item of carouselItems;let i = index" class="__item d-flex" [class.active]="activeSlide === (i + 1)">
         <div class="__number">{{i+1}}</div>
-        <div class="flex-1">{{item.title}}</div>
+        <div class="flex-1" [innerHTML]="item.title | safe:'html'"></div>
       </div>
     </div>
     <owl-carousel-o 

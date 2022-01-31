@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { AuthService, CommonDataApiService, IContacts, IMenuItem, MenuApiService } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { filter, map, shareReplay, startWith, tap } from 'rxjs/operators';
@@ -18,9 +18,6 @@ export class PagesFacade {
     private readonly commonDataApiService: CommonDataApiService
 
   ) {
-    // this.registerWSUserHandler();
-
-    // this.wsService.onMessage$.subscribe(res => console.log(res));
   }
 
   get isHomePage$(): Observable<boolean> {
@@ -30,6 +27,24 @@ export class PagesFacade {
       map(event => event === true ? { url: '/' } : event),
       map((event: any) => event?.url === '/')
     )
+  }
+
+  get isAuthPage$(): Observable<boolean> {
+    return this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map((event: any) => event.url.split('/')[1]),
+      map(res => !!res || res === 'auth')
+    );
+  }
+  get isProfilePage$(): Observable<boolean> {
+    return this.router.events.pipe(
+      startWith(true),
+      filter(event => event === true || event instanceof NavigationEnd),
+      map(event => event === true ? this.router : event),
+      map((event: any) => event.url.split('/')[1]),
+      map(res => res === 'profile'),
+      tap(res => console.log(res))
+    );
   }
 
   get mainMenu$(): Observable<IMenuItem[]> {

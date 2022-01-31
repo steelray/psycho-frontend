@@ -3,3 +3,9 @@
   <source [attr.lazyLoad]="origin" type="image/jpeg">
   <img [defaultImage]="defaultImage" [lazyLoad]="origin" [alt]="alt">
 </picture>
+
+<!-- <picture *ngIf="origin">
+  <source  *ngIf="webp" [srcset]="webp" type="image/webp">
+  <source [srcset]="origin" type="image/jpeg"> 
+  <img [src]="origin" [alt]="alt">
+</picture> -->

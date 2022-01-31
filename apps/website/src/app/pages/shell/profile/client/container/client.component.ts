@@ -21,4 +21,8 @@ export class ClientComponent {
     this.facade.onNewSession();
   }
 
+  onLogout(): void {
+    this.facade.logout();
+  }
+
 }

@@ -1,32 +1,25 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ISelectOption, Post, PostApiService, PostService } from '@psycho/core';
+import { ISelectOption, Post, PostApiService } from '@psycho/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'any'
+})
 export class PostFacade {
   private readonly _breadcrumbsItems$ = new BehaviorSubject<ISelectOption[]>([]);
 
   constructor(
     private readonly postApiService: PostApiService,
-    private readonly postService: PostService,
     private readonly activatedRoute: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   get post$(): Observable<Post> {
-    return this.activatedRoute.params.pipe(
-      tap(console.log),
-      map(params => params.slug),
-      filter(res => !!res),
-      switchMap(slug => this.postApiService.fetchOne(slug)),
-      map(post => new Post(post)),
-      tap(post => {
-        if (post.related_posts) {
-          this.setRelatedPosts(post.related_posts);
-        }
-      }),
-      tap(post => this.generateBreadcrumbItems(post))
+    return this.activatedRoute.data.pipe(
+      tap(data => console.log(data)),
+      map(data => data?.post)
     );
   }
 
@@ -34,10 +27,12 @@ export class PostFacade {
     return this._breadcrumbsItems$.asObservable();
   }
 
-  private setRelatedPosts(posts: Post[]): void {
-    this.postService.setRelatedPosts(posts);
+  getPost(slug: string): Observable<Post> {
+    return this.postApiService.fetchOne(slug).pipe(
+      map(post => new Post(post)),
+      tap(post => this.generateBreadcrumbItems(post))
+    );
   }
-
 
   private generateBreadcrumbItems(post: Post): void {
     const items: ISelectOption[] = [];

@@ -1,54 +1,164 @@
+@import "mixins";
+
 :host {
   display: block;
   position: relative;
   z-index: 2;
   margin-top: 0;
-  padding-top: 60px;
-  padding-bottom: 200px;
-}
-.title-2 {
-  font-size: 40px;
-  margin-bottom: 165px;
-}
-img {
-  margin: 0 auto;
-  display: block;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  background: var(--accent-bg-light);
+  @include for-sm {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
 }
 
 .__top-wave {
   background: url(/assets/img/wave-7.png) no-repeat;
-  height: 550px;
+  height: 140px;
   bottom: 100%;
+  @include for-sm {
+    display: none;
+  }
+  &::before,
   &::after {
-    height: calc(100% - 145px);
-    left: 100%;
-    background: #fff;
+    background: var(--accent-bg-light);
     content: "";
     position: absolute;
     width: 100vw;
     bottom: 0;
   }
+  &::before {
+    right: 100%;
+    height: 50px;
+  }
+  &::after {
+    left: 100%;
+    height: 90px;
+  }
+}
+
+.title-1 {
+  margin-bottom: 60px;
+  @include for-sm {
+    margin-bottom: 35px;
+  }
 }
 
 .online-chat {
   position: relative;
+  height: 596px;
+  margin: 0 auto;
+  max-width: 1040px;
+  @include for-sm {
+    height: auto;
+  }
+  .__z {
+    position: absolute;
+    @include for-sm {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+  .__zgroup1 {
+    bottom: 0;
+    left: 0;
+
+    img {
+      float: left;
+      &:first-child {
+        position: relative;
+        @include for-sm {
+          width: 55%;
+        }
+      }
+      &:last-child {
+        margin-left: -57px;
+        margin-top: 79px;
+        @include for-sm {
+          width: 45%;
+          margin-left: -45px;
+          margin-top: 65px;
+        }
+      }
+    }
+  }
+  .__zgroup2 {
+    top: 0;
+    right: 0;
+    @include for-sm {
+      top: 0;
+      right: auto;
+      bottom: auto;
+      margin-bottom: 45px;
+    }
+    img {
+      float: left;
+      &:first-child {
+        @include for-sm {
+          width: 80%;
+        }
+      }
+      &:last-child {
+        position: relative;
+        margin-left: -60px;
+        margin-top: 11px;
+        @include for-sm {
+          width: 27%;
+          margin-left: -30px;
+          margin-top: 0;
+        }
+      }
+    }
+  }
   .__option {
     position: absolute;
-    width: 365px;
-    font-size: 22px;
-    line-height: 1.2;
-    &.__chat {
-      left: 56px;
-    }
-    &.__video {
-      width: 470px;
-      bottom: calc(100% + 40px);
-      right: 130px;
+    z-index: 2;
+    width: 344px;
+    font-size: 18px;
+    @include for-sm {
+      font-size: 16px;
+      position: relative;
     }
     .__title {
       font-size: 30px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
+      @include for-sm {
+        font-size: 24px;
+      }
+      &::before {
+        height: 13px;
+        width: 13px;
+        margin-right: 16px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 15px;
+        border-radius: 50%;
+        background: var(--main-color);
+        content: "";
+      }
+    }
+    &.__video {
+      top: 20px;
+      left: 15px;
+      @include for-sm {
+        top: 0;
+        left: 0;
+        margin-bottom: 40px;
+      }
+    }
+    &.__chat {
+      right: 241px;
+      bottom: 101px;
+      @include for-sm {
+        right: auto;
+        bottom: auto;
+        margin-bottom: 30px;
+      }
     }
   }
 }

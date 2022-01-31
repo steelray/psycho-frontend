@@ -60,7 +60,7 @@ export class SeoService {
       },
       {
         name: 'og:site_name',
-        value: 'PaymeBusiness',
+        value: 'PsychologyCorp',
       },
     ];
 

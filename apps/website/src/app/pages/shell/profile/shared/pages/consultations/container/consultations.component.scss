@@ -1,7 +1,16 @@
+@import "mixins";
 :host {
   display: block;
   height: 100%;
   padding-bottom: 20px;
+  @include for-sm {
+    margin-top: -40px;
+  }
+}
+@include for-sm {
+  .title-3 {
+    display: none;
+  }
 }
 
 .__item {

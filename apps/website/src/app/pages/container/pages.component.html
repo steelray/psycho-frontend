@@ -2,11 +2,15 @@
   *ngIf="mainMenu$ | async as mainMenu" 
   [menuItems]="mainMenu"
   [userData]="userData$ | async"
+  [isHomePage]="$any(isHomePage$ | async)"
+  [isAuthPage]="$any(isAuthPage$ | async)"
   (logout)="onLogout()"></psycho-header>
 <main class="content">
   <router-outlet></router-outlet>
 </main>
+
 <psycho-footer
+  *ngIf="((isProfilePage$ | async) && isMobile) === false"
   [isHomePage]="$any(isHomePage$ | async)"
   [menuItems]="$any(footerMenu$ | async)"
   [linkItems]="$any(linkItems$ | async)"

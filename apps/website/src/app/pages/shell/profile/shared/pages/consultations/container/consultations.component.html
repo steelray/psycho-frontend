@@ -1,5 +1,9 @@
 <h2 class="title-3">{{title$ | async}}</h2>
-<psycho-profile-chat-layout *ngIf="intervieweesOnline$ | async as intervieweesOnline">
+<psycho-profile-chat-layout 
+  *ngIf="intervieweesOnline$ | async as intervieweesOnline" 
+  [chatExpanded]="$any(chatExpanded$ | async)"
+  (hideChat)="onChatHide()"
+>
   <ng-container new>
     <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: newConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>

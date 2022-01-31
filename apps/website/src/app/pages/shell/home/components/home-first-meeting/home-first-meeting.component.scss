@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: block;
   position: relative;
@@ -5,6 +6,9 @@
   background-color: var(--accent-bg-light);
   padding-top: 60px;
   padding-bottom: 137px;
+  @include for-sm {
+    padding-bottom: 100px;
+  }
 }
 .title-1 {
   margin-bottom: 55px;
@@ -13,6 +17,9 @@
   height: 120px;
   background: url(/assets/img/wave-meeting.png) no-repeat 0 0;
   bottom: 100%;
+  @include for-sm {
+    display: none;
+  }
   &::before,
   &::after {
     background-color: var(--accent-bg-light);
@@ -31,11 +38,25 @@
   }
 }
 
+.__meetings {
+  @include for-sm {
+    flex-direction: column;
+  }
+}
+
 .__meeting-item {
   font-size: 24px;
   font-weight: 700;
   text-align: center;
   max-width: 264px;
+  @include for-sm {
+    max-width: 320px;
+    margin: 0 auto 50px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .__img {
     height: 208px;
     display: flex;

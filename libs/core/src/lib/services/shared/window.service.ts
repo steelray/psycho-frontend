@@ -16,27 +16,27 @@ export class WindowService {
   ) { }
 
   public get navigator(): any {
-    return this._platformWindow.navigator;
+    return this._platformWindow?.navigator;
   }
 
   public get location(): any {
-    return this._platformWindow.location;
+    return this._platformWindow?.location;
   }
 
   public get process(): any {
-    return this._platformWindow.process;
+    return this._platformWindow?.process;
   }
 
   public get require(): any {
-    return this._platformWindow.require;
+    return this._platformWindow?.require;
   }
 
   public get history(): any {
-    return this._platformWindow.history;
+    return this._platformWindow?.history;
   }
 
   public get localStorage(): any {
-    return this._platformWindow.localStorage;
+    return this._platformWindow?.localStorage;
   }
 
   public alert(msg: any): Promise<void> {

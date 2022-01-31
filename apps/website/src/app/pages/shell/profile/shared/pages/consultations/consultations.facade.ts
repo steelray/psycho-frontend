@@ -107,7 +107,7 @@ export class ConsultationsFacade extends WithDestroy() {
     )
   }
 
-  onConsultationSelect(consultation: IClientConsultation): void {
+  onConsultationSelect(consultation: IClientConsultation | null): void {
     if (consultation?.status === CONSULTATION_STATUS.STARTED) {
       this._startTimer$.next();
     }

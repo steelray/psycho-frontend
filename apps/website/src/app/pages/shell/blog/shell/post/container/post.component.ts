@@ -14,10 +14,12 @@ export class PostComponent {
   readonly post$ = this.facade.post$;
   readonly newArticles$ = this.blogFacade.newArticles$;
   readonly categories$ = this.blogFacade.categories$;
+  readonly sidebarAds$ = this.blogFacade.sidebarAds$;
   constructor(
     private readonly facade: PostFacade,
     private readonly blogFacade: BlogFacade
-  ) { }
+  ) {
+  }
 
 
 

@@ -12,8 +12,7 @@ import { CarouselComponent, OwlOptions, SlideModel, SlidesOutputData } from 'ngx
 export class RelatedPostsComponent {
   @Input() posts: Post[] = [];
   readonly customOptions: OwlOptions = {
-    items: 3,
-    margin: 35,
+    margin: 0,
     startPosition: 1,
     loop: true,
     mouseDrag: true,
@@ -23,6 +22,15 @@ export class RelatedPostsComponent {
     navSpeed: 700,
     nav: false,
     navText: ['', ''],
-    center: true
+    center: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      767: {
+        items: 3,
+        margin: 35
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-<psycho-blog-header  [categories]="categories"></psycho-blog-header>
+<psycho-blog-header *ngIf="showCategoriesNav;else lineTempl"  [categories]="categories"></psycho-blog-header>
 <div class="blog-content">
   <div class="container d-flex __content">
     <div class="blog-content__main">
@@ -10,12 +10,14 @@
   </div>
 
   <psycho-blog-description *ngIf="isMainPage"></psycho-blog-description>
-  
-  <div class="container">
-    <div class="related-posts" *ngIf="relatedPosts">
+  <div class="container" *ngIf="relatedPosts && relatedPosts?.length">
+    <div class="related-posts">
       <div class="title-2">Вам также может понравится</div>
       <psycho-related-posts [posts]="relatedPosts"></psycho-related-posts>
     </div>
   </div>
 
 </div>
+<ng-template #lineTempl>
+  <div class="line"></div>
+</ng-template>

@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: block;
   background: var(--white);
@@ -14,6 +15,9 @@
     margin: 0 auto;
     height: 0;
     z-index: 0;
+    @include for-sm {
+      display: none;
+    }
     .__img {
       position: absolute;
       height: 971px;
@@ -48,14 +52,29 @@
 
 .title-1 {
   margin-bottom: 60px;
+  @include for-sm {
+    margin-bottom: 33px;
+  }
 }
 
 .__subjects {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  psycho-subject-item {
+  @include for-sm {
+    flex-direction: column;
+  }
+  > a {
     margin-bottom: 22px;
     width: calc(25% - 15px);
+    display: block;
+    color: var(--default-font-color);
+    text-decoration: none;
+    @include for-sm {
+      width: 100%;
+    }
+    psycho-subject-item {
+      height: 100%;
+    }
   }
 }

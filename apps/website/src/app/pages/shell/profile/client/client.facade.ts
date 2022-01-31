@@ -40,20 +40,27 @@ export class ClientFacade extends WithDestroy() {
     return of([
       {
         title: 'Мои вопросы',
+        subtitle: 'Вопросы',
         value: ['/profile/client/consultations/express'],
         img: 'chat'
       },
       {
         title: 'Консультации 50 мин',
+        subtitle: 'Консультации',
         value: ['/profile/client/consultations/full'],
         img: 'video'
       },
       {
         title: 'Мои психологи',
+        subtitle: 'Психологи',
         value: ['/profile/client/psychologists'],
         img: 'favourite'
       },
     ]);
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   onNewSession(): void {

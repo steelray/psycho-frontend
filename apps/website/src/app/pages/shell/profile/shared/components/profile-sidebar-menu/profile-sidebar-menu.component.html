@@ -1,9 +1,29 @@
 <ul>
   <li *ngFor="let item of menuItems" routerLinkActive="active">
-    <a [routerLink]="item.value">
+    <a mat-ripple [routerLink]="item.value">
       <mat-icon *ngIf="item.img as icon" [svgIcon]="icon"></mat-icon>
       {{item.title}}
       <span *ngIf="item.subtitle">{{item.subtitle}}</span>
     </a>
   </li>
+  <li class="__mob">
+    <button mat-ripple  [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+      <span>Настройки</span>
+    </button>
+  </li>
 </ul>
+<mat-menu #menu="matMenu">
+  <a mat-menu-item [routerLink]="['/profile']">
+    <mat-icon>person</mat-icon>
+    Профиль
+  </a>
+  <a mat-menu-item routerLink="support">
+    <mat-icon svgIcon="help"></mat-icon>
+    Поддержка
+  </a>
+  <button mat-menu-item routerLink="support" (click)="onLogout()">
+    <mat-icon svgIcon="logout"></mat-icon>
+    Выход
+  </button>
+</mat-menu>

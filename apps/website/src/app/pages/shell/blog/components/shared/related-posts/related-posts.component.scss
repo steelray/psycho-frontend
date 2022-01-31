@@ -1,7 +1,12 @@
+@import "mixins";
+
 psycho-related-posts {
   display: block;
   .owl-item {
     transition: transform 0.3s;
+    @include for-sm {
+      transform: scale(1) !important;
+    }
     &:not(.center) {
       transform: scale(0.9);
     }
@@ -15,6 +20,9 @@ psycho-related-posts {
       margin-top: 0;
       .owl-dot {
         margin: 0 4px;
+        @include for-sm {
+          margin: 0;
+        }
         span {
           width: 22px;
           height: 22px;

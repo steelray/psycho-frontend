@@ -20,6 +20,9 @@ export class ConsultationsComponent {
   readonly intervieweesOnline$ = this.facade.intervieweesOnline$;
   readonly userRoles = CONSULTATION_USER_ROLE;
   readonly timer$ = this.facade.timer$;
+  readonly chatExpanded$ = this.selectedConsultation$.pipe(
+    map(res => !!res)
+  )
   constructor(
     private readonly facade: ConsultationsFacade
   ) {
@@ -49,6 +52,9 @@ export class ConsultationsComponent {
     this.facade.takeToWork(consultation);
   }
 
+  onChatHide(): void {
+    this.facade.onConsultationSelect(null);
+  }
 
   get includesVideoChat$(): Observable<boolean> {
     return this.facade.formatRoute$.pipe(

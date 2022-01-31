@@ -1,3 +1,13 @@
-:host {
-  display: block;
+@import "mixins";
+psycho-auth {
+  psycho-greeting-block {
+    .__content {
+      padding-bottom: 50px !important;
+      @include for-sm {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
 }

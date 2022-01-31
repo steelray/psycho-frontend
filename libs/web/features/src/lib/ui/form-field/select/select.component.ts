@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { ISelectOption } from '@psycho/core';
 import { compareArrays } from '@psycho/utils';
@@ -10,7 +10,7 @@ import { BaseFormFieldComponent } from '../../../base';
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent extends BaseFormFieldComponent implements OnInit {
+export class SelectComponent extends BaseFormFieldComponent implements OnChanges {
   @Input() options!: ISelectOption[];
   @Input() prompt!: string;
   @Input() translateOptions = false;
@@ -20,22 +20,14 @@ export class SelectComponent extends BaseFormFieldComponent implements OnInit {
     return index;
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-
-    if (this.options) {
-      let activeOption = null;
-      if (this.control.value && Array.isArray(this.control.value)) {
-        activeOption = this.options.find(option => compareArrays(this.control.value, option.value));
-      } else if (this.control.value) {
-        activeOption = this.options.find(option => option.value === this.control.value);
-      }
-      if (activeOption) {
-        this.control.setValue(activeOption.value, { emitEvent: false });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes?.options?.currentValue) {
+      const selected = changes?.options?.currentValue?.find((item: any) => item?.isSelected);
+      if (selected) {
+        this.control.setValue(selected.value)
       }
     }
   }
-
 
   onSelect(event: MatSelectChange): void {
     this.selected.emit(event.value);

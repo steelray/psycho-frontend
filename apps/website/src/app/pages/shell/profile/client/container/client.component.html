@@ -5,7 +5,7 @@
 >
   <ng-container *ngIf="registrationCompleted$ | async" sidebar>
     <psycho-profile-sidebar-header [user]="userData"></psycho-profile-sidebar-header>
-    <psycho-profile-sidebar-menu [menuItems]="menuItems$ | async"></psycho-profile-sidebar-menu>
+    <psycho-profile-sidebar-menu [menuItems]="menuItems$ | async" (logout)="onLogout()"></psycho-profile-sidebar-menu>
     <div class="__new-seans">
       <button (click)="onNewSession()" mat-button size="medium">Новая запись</button>
     </div>

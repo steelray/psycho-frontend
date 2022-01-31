@@ -1,57 +1,113 @@
+@import "mixins";
+
 :host {
   display: block;
   position: relative;
   z-index: 2;
-  background: var(--light-gray-bg);
+  background: var(--white);
 }
 
 .__header {
-  margin-top: -465px;
-  max-width: 466px;
   position: relative;
   z-index: 2;
-  float: right;
+  padding-top: 87px;
+  padding-bottom: 87px;
+  margin-bottom: 120px;
+  @include for-sm {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-bottom: 0;
+  }
   .title-1 {
-    margin-bottom: 40px;
+    margin-bottom: 47px;
   }
   .__btns {
+    @include for-sm {
+      flex-direction: column;
+    }
     > * {
-      width: 312px;
+      width: 243px;
       text-align: center;
       margin-bottom: 30px;
       display: block;
       padding-top: 19.5px;
       padding-bottom: 19.5px;
+      box-shadow: 3px 21px 50px rgba(118, 96, 220, 0.15);
+      border-radius: 8px;
+      background: var(--white);
+      border: none;
+      margin-left: 10px;
+      margin-right: 10px;
+      @include for-sm {
+        margin: 0 auto 16px;
+      }
     }
+  }
+}
+
+.__bottom-wave {
+  position: absolute;
+  height: 120px;
+  background: url(/assets/img/wave-9.jpg) no-repeat center top;
+  bottom: 100%;
+  @include for-sm {
+    display: none;
+  }
+  &::after,
+  &::before {
+    background: var(--accent-bg-light);
+    content: "";
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
+  &::before {
+    right: 100%;
+    height: 50px;
+  }
+  &::after {
+    left: 100%;
+    height: 78px;
   }
 }
 
 .__body {
-  .flex-1 {
-    min-width: 529px;
-    padding-top: 150px;
-    button,
-    a {
-      margin-left: 70px;
-      width: 360px;
-      max-width: 100%;
-      text-align: center;
+  position: relative;
+  background: var(--accent-bg-light);
+  padding-top: 110px;
+  @include for-sm {
+    padding: 80px 0;
+    .container {
+      flex-direction: column;
     }
   }
-  img {
-    margin-top: -240px;
-    transform: translate(50px, 0);
+  .flex-1 {
+    margin-right: 0;
+    padding-top: 50px;
+    @include for-sm {
+      padding-top: 0;
+      flex: none;
+    }
+  }
+  .__img {
+    width: 800px;
+    margin-top: -147px;
+    margin-right: -100px;
+    @include for-sm {
+      width: auto;
+      margin-top: 0;
+      margin-right: -50px;
+    }
   }
 }
 
 .__calmness {
-  width: 529px;
-  height: 329px;
-  background: url(/assets/img/wave-10.png) no-repeat;
-  display: flex;
-  align-items: flex-end;
-  font-size: 32px;
-  font-weight: 700;
-  padding: 0 0 50px 70px;
-  margin-bottom: 47px;
+  font-size: 60px;
+  font-style: italic;
+  line-height: 64px;
+  margin-bottom: 34px;
+  @include for-sm {
+    font-size: 40px;
+    line-height: 1.2;
+  }
 }

@@ -9,10 +9,11 @@ import { IPostCategory, Post } from '@psycho/core';
 })
 export class BlogLayoutComponent implements OnInit {
   @Input() categories: IPostCategory[] = [];
-  @Input() relatedPosts: Post[] = [];
+  @Input() relatedPosts: Post[] | null | undefined = [];
   @Input() isMainPage = false;
   @Input() newArticles: Post[] = [];
   @Input() sidebarAds: string[] = [];
+  @Input() showCategoriesNav = true;
   constructor() { }
 
   ngOnInit(): void {

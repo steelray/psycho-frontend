@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'psycho-profile-chat-layout',
@@ -6,4 +6,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./profile-chat-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileChatLayoutComponent { }
+export class ProfileChatLayoutComponent {
+  @Input() chatExpanded = false;
+  @Output() hideChat = new EventEmitter();
+
+  onBack(): void {
+    this.hideChat.emit();
+  }
+}

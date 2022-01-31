@@ -60,8 +60,6 @@
         [class.__empty]="true" 
         placeholder="Напишиите вопрос"
         [disabled]="consultation?.status !== statusEnum.STARTED"
-        heightAdjust 
-        [maxHeight]='200'
         [(ngModel)]="message"></textarea>
       <button 
         [class.disabled]="consultation?.status !== statusEnum.STARTED"

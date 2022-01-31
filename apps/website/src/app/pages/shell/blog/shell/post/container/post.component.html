@@ -1,9 +1,14 @@
 <psycho-blog-layout
+  *ngIf="post$ | async as post"
   [newArticles]="$any(newArticles$ | async)"
   [categories]="$any(categories$ | async)"
+  [relatedPosts]="post?.related_posts"
+  [sidebarAds]="$any(sidebarAds$ | async)"
+  [showCategoriesNav]="!!post.author"
 >
 
-  <ng-container *ngIf="post$ | async as post">
+
+  <ng-container>
     <psycho-breadcrumbs [items]="breadcrumbs$ | async"></psycho-breadcrumbs>
   
     <h1 class="title-1">{{post.title}}</h1>
@@ -20,7 +25,7 @@
           {{post.author | fio}}
         </div>
         <div class="post-reading-time">
-          <mat-icon svgIcon="time"></mat-icon> 
+          <img src="/assets/img/clock.png"> 
           <p>
             На чтение
           </p>

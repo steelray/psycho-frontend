@@ -1,3 +1,5 @@
+@import "mixins";
+
 :host {
   display: block;
 }
@@ -6,6 +8,9 @@
   text-align: center;
   padding-left: 33px;
   padding-right: 20px;
+  @include for-sm {
+    display: none;
+  }
   button {
     width: 100%;
     text-align: center;
@@ -16,4 +21,7 @@
 
 psycho-profile-sidebar-menu {
   margin-bottom: 25px;
+}
+psycho-profile-sidebar-header {
+  display: none;
 }

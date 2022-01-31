@@ -1,3 +1,5 @@
+@import "mixins";
+
 button,
 a {
   &.mat-button {
@@ -7,9 +9,6 @@ a {
     line-height: 1;
     font-size: 16px;
     font-weight: 700;
-    span {
-      font-size: 16px;
-    }
   }
   &.mat-button-base {
     span {
@@ -24,6 +23,9 @@ a {
     line-height: 1;
     border-radius: 6px;
     font-weight: 600;
+    &:not(.no-shadow) {
+      box-shadow: 0px 16px 17px rgba(118, 96, 220, 0.15) !important;
+    }
   }
   &[size="large"] {
     padding: 28px 45px;
@@ -34,5 +36,17 @@ a {
     padding: 21px 35px;
     font-size: 19px;
     font-weight: 700;
+  }
+  &[size="sm-small"] {
+    @include for-sm {
+      padding: 12px 25px;
+      font-size: 14px;
+    }
+    span {
+      font-size: 16px;
+      @include for-sm {
+        font-size: 14px;
+      }
+    }
   }
 }

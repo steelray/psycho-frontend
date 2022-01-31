@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule, Optional, SkipSelf } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID, NgModule, Optional, PLATFORM_ID, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { throwIfAlreadyLoaded } from '@psycho/utils';
 import {
@@ -8,7 +8,7 @@ import {
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import localeRu from '@angular/common/locales/ru';
-import { registerLocaleData } from '@angular/common';
+import { isPlatformServer, registerLocaleData } from '@angular/common';
 import { PlatformWindowToken } from '@psycho/core';
 registerLocaleData(localeRu, 'ru');
 // bring in custom web services here...
@@ -17,8 +17,21 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 // factories
 
 
-function winFactory(): any {
-  return window;
+function winFactory(isServerService: IsServerService): any {
+  return isServerService.isServer ? null : window;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+class IsServerService {
+  constructor(
+    @Inject(PLATFORM_ID) private readonly platformId: string
+  ) { }
+
+  get isServer(): boolean {
+    return isPlatformServer(this.platformId);
+  }
 }
 
 
@@ -29,6 +42,7 @@ function winFactory(): any {
       {
         provide: PlatformWindowToken,
         useFactory: winFactory,
+        deps: [IsServerService]
       },
       {
         provide: HTTP_INTERCEPTORS,

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, GuestGuardService } from '@psycho/core';
 import { PagesComponent } from './container/pages.component';
+import { PostResolver } from './shell/blog/shell/post/post.resolver';
+import { PageNotFoundComponent } from './shell/not-found/page-not-found.component';
 
 const ROUTES: Routes = [
   {
@@ -31,10 +33,16 @@ const ROUTES: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: ':slug',
-        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule)
+        path: '404',
+        component: PageNotFoundComponent
       },
-
+      {
+        path: ':slug',
+        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
+        resolve: {
+          post: PostResolver
+        }
+      },
     ]
   }
 ];
