@@ -1,12 +1,22 @@
+@import "mixins";
+
 :host {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -6px;
+  margin: 0;
+  padding: 0 25px;
+  @include for-sm {
+    padding: 0 15px;
+  }
   > div {
     width: calc(20% - 12px);
     margin: 0 6px 12px;
     cursor: pointer;
     position: relative;
+    @include for-sm {
+      width: 100%;
+      margin: 0 0 12px;
+    }
     &::before {
       z-index: 1;
       position: absolute;

@@ -56,7 +56,7 @@ export class SeoService {
     const additionItems: INameValue[] = [
       {
         name: 'og:url',
-        value: this.window.location.href,
+        value: this.window?.location?.href,
       },
       {
         name: 'og:site_name',

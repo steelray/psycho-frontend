@@ -12,7 +12,7 @@ export class ChatApiService extends ApiService {
     page?: number,
     limit?: number
   }): Observable<any[]> {
-    return this.post('chat-messages', params);
+    return this.post('chat/messages', params);
   }
 
   startMeeting(consultationId: number): Observable<any> {

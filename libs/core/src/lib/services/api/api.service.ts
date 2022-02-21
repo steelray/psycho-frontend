@@ -16,7 +16,7 @@ export class ApiService {
   constructor(
     public http: HttpClient,
     public httpErrorService: HttpErrorService,
-    @Inject(ENVIRONMENTS) private env: IEnvironment,
+    @Inject(ENVIRONMENTS) public env: IEnvironment,
   ) { }
 
   public get<Response>(

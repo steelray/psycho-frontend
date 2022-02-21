@@ -1,12 +1,19 @@
 <header class="header">
   <div class="container d-flex align-items-center justify-content-between ">
+    <button *ngIf="userData" class="header-menu-toggle" (click)="onMenuToggle()" mat-ripple [class.active]="menuOpened">
+      <span></span>
+    </button>
     <a [routerLink]="'/'" class="logo"></a>
     <div *ngIf="menuItems" class="header__menu" [class.active]="menuOpened">
       <a *ngFor="let item of menuItems" [routerLink]="item.url" (click)="onMenuToggle()" routerLinkActive="active">{{item.label}}</a>
       <a class="__mob" (click)="onMenuToggle()" *ngIf="userData" [routerLink]="['/profile']" routerLinkActive="active">
         Мой профиль
       </a>
-
+      <a *ngIf="isProfilePage" class="__support-btn" (click)="onMenuToggle()" [routerLink]="supportLink" >
+        <mat-icon svgIcon="help"></mat-icon>
+        Поддержка
+      </a>
+      <div class="hr"></div>
       <ng-container *ngIf="!isHomePage">
         <div class="blog-nets">
           <a mat-icon-button href="#">
@@ -21,6 +28,11 @@
         </div>
         <a mat-raised-button color="primary" class="__begin-btn" [routerLink]="['/auth', 'signup']">Начать терапию</a>
       </ng-container>
+
+      <div class="__links-for-mob">
+        <a *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
+      </div>
+
     </div>
     <a *ngIf="!userData && !isAuthPage;" [routerLink]="['/auth/login']" mat-raised-button color="primary" class="no-shadow" size="sm-small">Войти</a>
 
@@ -48,8 +60,11 @@
     </ng-container>
 
 
-    <button class="header-menu-toggle" (click)="onMenuToggle()" mat-ripple [class.active]="menuOpened">
+    <button *ngIf="!userData" class="header-menu-toggle" (click)="onMenuToggle()" mat-ripple [class.active]="menuOpened">
       <span></span>
+    </button>
+    <button *ngIf="userData" class="logout-btn" (click)="onLogout()" mat-ripple [class.active]="menuOpened">
+      <mat-icon svgIcon="logout"></mat-icon>
     </button>
   </div>
 </header>

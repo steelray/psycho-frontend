@@ -1,11 +1,18 @@
 <ng-container *ngIf="psychologist">
-  <div class="__top d-flex align-items-start">
+  <div class="__top">
     <psycho-picture class="__img" [origin]='psychologist.avatar' [alt]="psychologist | fio"></psycho-picture>
     <div class="__text">
+      <div class="__for-mob-details">
+        <ng-container *ngTemplateOutlet="details" ></ng-container>
+      </div>
       <ng-content></ng-content>
     </div>
   </div>
   <div class="__bottom">
+    <ng-container *ngTemplateOutlet="details" ></ng-container>
+  </div>
+
+  <ng-template #details>
     <psycho-rating-stars [value]="$any(psychologist.rating)"></psycho-rating-stars>
     <div class="__name">{{psychologist | fio}}</div>
     <div class="__details d-flex  align-items-center justify-content-between">
@@ -21,5 +28,5 @@
         <button mat-button (click)="onChoose(psychologist.id)">{{isChoosed ? 'Отмена' : 'Выбрать' }}</button>
       </ng-container>
     </div>
-  </div>
+  </ng-template>
 </ng-container>

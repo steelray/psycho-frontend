@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CONSULTATION_FORM_ROUTE, CONSULTATION_USER_ROLE, IClientConsultation, IUser } from '@psycho/core';
+import { CONSULTATION_FORMAT, CONSULTATION_FORM_ROUTE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser } from '@psycho/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConsultationsFacade } from '../consultations.facade';
@@ -19,10 +19,15 @@ export class ConsultationsComponent {
   readonly receiver$ = this.facade.receiver$;
   readonly intervieweesOnline$ = this.facade.intervieweesOnline$;
   readonly userRoles = CONSULTATION_USER_ROLE;
-  readonly timer$ = this.facade.timer$;
+  readonly formats = CONSULTATION_FORMAT;
+  readonly userAuthData$ = this.facade.userAuthData$;
   readonly chatExpanded$ = this.selectedConsultation$.pipe(
     map(res => !!res)
-  )
+  );
+  readonly selectedConsultationPaymentStatus$ = this.facade.selectedConsultationPaymentStatus$;
+  readonly rolesEnum = CONSULTATION_USER_ROLE;
+  readonly statusEnum = CONSULTATION_STATUS;
+  readonly videoIsSwitching$ = this.facade.videoIsSwitching$;
   constructor(
     private readonly facade: ConsultationsFacade
   ) {
@@ -54,6 +59,14 @@ export class ConsultationsComponent {
 
   onChatHide(): void {
     this.facade.onConsultationSelect(null);
+  }
+
+  onGetMessagesHistory(): void {
+    this.facade.updateMessagesHistory();
+  }
+
+  onVideoSwitch(consultation: IClientConsultation): void {
+    this.facade.startVideoChat(consultation);
   }
 
   get includesVideoChat$(): Observable<boolean> {

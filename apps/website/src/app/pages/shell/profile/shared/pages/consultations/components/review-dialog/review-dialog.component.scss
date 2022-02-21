@@ -1,0 +1,22 @@
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.__comment-block {
+  psycho-rating-stars {
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  ::ng-deep {
+    textarea {
+      height: 130px;
+      border: 1px solid var(--main-color);
+      border-radius: 6px;
+    }
+  }
+}

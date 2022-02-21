@@ -6,24 +6,10 @@
       <span *ngIf="item.subtitle">{{item.subtitle}}</span>
     </a>
   </li>
-  <li class="__mob">
-    <button mat-ripple  [matMenuTriggerFor]="menu">
-      <mat-icon>settings</mat-icon>
-      <span>Настройки</span>
-    </button>
+  <li class="__mob"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <a [routerLink]="['/profile']" mat-ripple>
+      <mat-icon svgIcon="user"></mat-icon>
+      <span>Профиль</span>
+    </a>
   </li>
 </ul>
-<mat-menu #menu="matMenu">
-  <a mat-menu-item [routerLink]="['/profile']">
-    <mat-icon>person</mat-icon>
-    Профиль
-  </a>
-  <a mat-menu-item routerLink="support">
-    <mat-icon svgIcon="help"></mat-icon>
-    Поддержка
-  </a>
-  <button mat-menu-item routerLink="support" (click)="onLogout()">
-    <mat-icon svgIcon="logout"></mat-icon>
-    Выход
-  </button>
-</mat-menu>

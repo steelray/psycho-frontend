@@ -27,7 +27,6 @@ export class ChatService {
   constructor(
     private readonly authService: AuthService,
     private readonly chatApiService: ChatApiService,
-    private readonly ws: WSService,
     private readonly windowService: WindowService
   ) {
   }
@@ -48,15 +47,6 @@ export class ChatService {
       receiver_id: receiverId,
       page,
       limit
-    })
-  }
-
-  onMessageSend(message: string, ownerId: number, consultationId: number): void {
-    this.ws.sendMessage({
-      message,
-      command: WS_COMMANDS.SEND_MESSAGE,
-      user: ownerId,
-      consultation: consultationId
     })
   }
 

@@ -1,50 +1,61 @@
-<mat-stepper linear #stepper>
-  <mat-step 
-    label="Выберите формат"
-    [stepControl]="formatForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-format [form]="formatForm"></psycho-client-profile-form-format>
-    <button mat-raised-button color="primary" [disabled]="formatForm.invalid" matStepperNext>Далее</button>
-  </mat-step>
-  <mat-step 
-    label="Выберите тему"
-    [stepControl]="subjectsForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
-    <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
-  </mat-step>
-  <mat-step 
-    label="Выбрите специалиста"
-    [stepControl]="specialistForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
-    <button  *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
-    <button  *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="specialistForm.invalid">Записаться</button>
-  </mat-step>
-  <mat-step 
-    *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS"
-    label="Выберите время"
-    [stepControl]="datetimeForm"
-    [editable]="isEditable">
-    <psycho-client-profile-form-datetime
-      [scheduleForm]="scheduleForm"
-      [datetimeForm]="datetimeForm"
-      [psychologist]="$any(selectedPsychologist$ | async)"
-      [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
-      <div class="d-flex justify-content-center">
-        <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Записаться</button>
-      </div>
-  </mat-step>
-  <mat-step 
-    label="Условия оплаты"
-    [editable]="false">
-      <psycho-client-profile-form-payment-conditions
-        [psychologist]="$any(selectedPsychologist$ | async)"
-        [datetime]="datetimeForm.get('datetime')?.value"
-        [format]="formatForm.get('format')?.value"></psycho-client-profile-form-payment-conditions>
-        <div class="d-flex justify-content-center">
-          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Оплатить</a>
-        </div>
-  </mat-step>
+<div class="container">
+  <mat-stepper linear #stepper>
+    <mat-step 
+      label="Выберите формат"
+      [stepControl]="formatForm"
+      [editable]="isEditable">
+      <psycho-client-profile-form-format [form]="formatForm"></psycho-client-profile-form-format>
+      <button mat-raised-button color="primary" [disabled]="formatForm.invalid" matStepperNext>Далее</button>
+   
 
-</mat-stepper>
+    </mat-step>
+    <mat-step 
+      label="Выберите тему"
+      [stepControl]="subjectsForm"
+      [editable]="isEditable">
+      <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
+      <button  *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" >Записаться</button>
+      <button  *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
+    </mat-step>
+    <ng-container *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS">
+      <mat-step 
+        label="Выберите специалиста"
+        [stepControl]="specialistForm"
+        [editable]="isEditable">
+        <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
+        <button  mat-raised-button color="primary" [disabled]="specialistForm.invalid" matStepperNext>Далее</button>
+      </mat-step>
+      <mat-step 
+        label="Выберите время"
+        [stepControl]="datetimeForm"
+        [editable]="isEditable">
+        <psycho-client-profile-form-datetime
+          [scheduleForm]="scheduleForm"
+          [datetimeForm]="datetimeForm"
+          [psychologist]="$any(selectedPsychologist$ | async)"
+          [schedule]="$any(selectedPsychologistGroupedSchedule$ | async)"></psycho-client-profile-form-datetime>
+          <div class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="datetimeForm.invalid">Записаться</button>
+          </div>
+      </mat-step>
+    </ng-container>
+    <mat-step 
+      label="Условия оплаты"
+      [editable]="false">
+        <ng-container *ngIf="newConsultation$ | async as consultation">
+          <psycho-client-profile-form-payment-conditions
+            *ngIf="consultation?.format !== formats.FORMAT_EXPRESS;else expressPaymentText"
+            [psychologist]="$any(selectedPsychologist$ | async)"
+            [datetime]="$any(consultation?.schedule?.datetime)"
+            [format]="$any(consultation.format)"></psycho-client-profile-form-payment-conditions>
+          <div class="d-flex justify-content-center">
+            <psycho-payment-btn [consultationId]="$any(consultation?.id)"></psycho-payment-btn>
+          </div>
+        </ng-container>
+    </mat-step>
+  
+  </mat-stepper>
+</div>
+<ng-template #expressPaymentText>
+  <div class="__payment-conds">После оплаты дежурный психолог ответит вам в течение 10-15 минут в рабочее время с 8 до 22:00 по мск</div>
+</ng-template>

@@ -1,9 +1,12 @@
-<psycho-greeting-block>
+<psycho-greeting-block class="main-page">
   <p class="__note">
     <mat-icon svgIcon="lock"></mat-icon>
     Анонимно и конфиденциально
   </p>
   <h1>Консультация <br>психолога <span class="primary">онлайн</span></h1>
+  <div class="__mob-img">
+    <img src="/assets/img/entire-bg-mob.webp" alt="">
+  </div>
   <div class="__cards">
     <div class="__card d-flex">
       <div>
@@ -11,7 +14,7 @@
           Полноценная онлайн консультация <br>
           с психологом 
         </div>
-        <p>Видео-консультация, телефон или чат.</p>
+        <p>видео или чат консультация на выбор.</p>
       </div>
       <div>
         <div class="__card-price __with-time">
@@ -33,7 +36,7 @@
         </div>
       </div>
     </div>
-    <a href="#" mat-raised-button color="primary">Записаться на консультацию</a>
+    <a [routerLink]="['/auth/signup']" mat-raised-button color="primary">Записаться на консультацию</a>
   </div>
 </psycho-greeting-block>
 <div class="__footer">

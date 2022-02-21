@@ -1,3 +1,5 @@
+@import "mixins";
+
 :host {
   display: block;
   ::ng-deep {
@@ -11,6 +13,9 @@
         height: 340px;
         display: flex;
         flex-direction: column;
+        @include for-sm {
+          height: auto;
+        }
       }
     }
   }
@@ -19,11 +24,19 @@ psycho-psychologist-card {
   &:not(:last-child) {
     margin-bottom: 55px;
   }
+  .__inn {
+    @include for-sm {
+      flex-direction: column;
+    }
+  }
 }
 .__slogan {
   font-weight: 600;
   max-width: 260px;
   margin-bottom: 25px;
+  @include for-sm {
+    margin: 0 auto 20px;
+  }
 }
 
 .__btns {
@@ -31,8 +44,14 @@ psycho-psychologist-card {
   flex: 1;
   min-width: 0;
   margin-right: 20px;
+  @include for-sm {
+    margin: 0;
+  }
   > * {
     min-width: 260px;
+    @include for-sm {
+      margin: 0 auto 9px;
+    }
     &:not(:last-child) {
       margin-bottom: 9px;
     }
@@ -46,7 +65,11 @@ psycho-psychologist-card {
   width: 360px;
   padding: 10px 25px 25px;
   background: #efefef;
-  height: 440px;
+  height: 340px;
+  @include for-sm {
+    height: auto;
+    width: 100%;
+  }
   .__close {
     margin-right: -12px;
     color: var(--main-color);

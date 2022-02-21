@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientGuard, CompleteRegistrationGuard } from '@psycho/core';
 import { ClientComponent } from './container/client.component';
+import { PaymentSuccessComponent } from './shell/payment-success/payment-success.component';
 
 const routes: Routes = [
   {
@@ -18,11 +19,7 @@ const routes: Routes = [
         loadChildren: () => import('./shell/client-profile-form/client-profile-form.module').then(m => m.ClientProfileFormModule),
         canActivate: [CompleteRegistrationGuard]
       },
-      {
-        path: 'new-session',
-        loadChildren: () => import('./shell/new-session/new-session.module').then(m => m.NewSessionModule),
-        canActivate: [ClientGuard]
-      },
+
       {
         path: 'psychologists',
         loadChildren: () => import('./shell/client-psychologists/client-psychologists.module').then(m => m.ClientPsychologistsModule),
@@ -36,8 +33,17 @@ const routes: Routes = [
         path: 'consultations',
         loadChildren: () => import('../shared/pages/consultations/consultations.module').then(m => m.ConsultationsModule)
       },
+      {
+        path: 'payment-success',
+        component: PaymentSuccessComponent
+      }
     ]
-  }
+  },
+  {
+    path: 'new-session',
+    loadChildren: () => import('./shell/new-session/new-session.module').then(m => m.NewSessionModule),
+    canActivate: [ClientGuard]
+  },
 ];
 
 @NgModule({

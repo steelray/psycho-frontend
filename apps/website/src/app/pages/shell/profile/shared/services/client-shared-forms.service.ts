@@ -43,5 +43,14 @@ export class ClientSharedFormsService {
     });
   }
 
+  get reviewForm(): FormGroup {
+    return this.fb.group({
+      psychologist_id: [null, RxwebValidators.required()],
+      rating: [null, RxwebValidators.required()],
+      review: [null, RxwebValidators.required()],
+      consultation_id: [null]
+    })
+  }
+
 
 }

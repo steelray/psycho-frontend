@@ -12,20 +12,21 @@
     [editable]="isEditable">
     <psycho-client-profile-form-questions [form]="commonQuestionsForm" [yearsOptions]="yearsOptions"></psycho-client-profile-form-questions>
   
-    <button *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="commonQuestionsForm.invalid">Завершить регистрацию</button>
+    
   
-    <button *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="commonQuestionsForm.invalid" matStepperNext>Далее</button>
+    <button  mat-raised-button color="primary" [disabled]="commonQuestionsForm.invalid" matStepperNext>Далее</button>
+  </mat-step>
+  <mat-step 
+    label="Выберите тему"
+    [stepControl]="subjectsForm"
+    [editable]="isEditable">
+    <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
+    <button *ngIf="formatForm.get('format')?.value === formats.FORMAT_EXPRESS" mat-raised-button color="primary" (click)="onCompleteRegistration(stepper)" [disabled]="commonQuestionsForm.invalid">Завершить регистрацию</button>
+    <button *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS" mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
   </mat-step>
   <ng-container *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS">
     <mat-step 
-      label="Выберите тему"
-      [stepControl]="subjectsForm"
-      [editable]="isEditable">
-      <psycho-client-profile-form-subjects *ngIf="subjects$ | async as subjects" [form]="subjectsForm" [subjects]="subjects"></psycho-client-profile-form-subjects>
-      <button mat-raised-button color="primary" [disabled]="subjectsForm.invalid" matStepperNext>Далее</button>
-    </mat-step>
-    <mat-step 
-      label="Выбрите специалиста"
+      label="Выберите специалиста"
       [stepControl]="specialistForm"
       [editable]="isEditable">
       <psycho-client-profile-form-psychologists [form]="specialistForm" [psychologists]="psychologists$ | async"></psycho-client-profile-form-psychologists>
@@ -48,12 +49,19 @@
   <mat-step 
     label="Условия оплаты"
     [editable]="false">
+    <ng-container *ngIf="newConsultation$ | async as consultation">
       <psycho-client-profile-form-payment-conditions
+        *ngIf="formatForm.get('format')?.value !== formats.FORMAT_EXPRESS;else expressPaymentText"
+
         [psychologist]="$any(selectedPsychologist$ | async)"
         [datetime]="datetimeForm.get('datetime')?.value"></psycho-client-profile-form-payment-conditions>
-        <div class="d-flex justify-content-center">
-          <a href="//yookassa.ru/" mat-raised-button color="primary" matStepperNext>Оплатить</a>
+        <div class="d-flex justify-content-center" >
+          <psycho-payment-btn [consultationId]="$any(consultation?.id)"></psycho-payment-btn>
         </div>
+    </ng-container>
   </mat-step>
 
 </mat-stepper>
+<ng-template #expressPaymentText>
+  <div class="__payment-conds">После оплаты дежурный психолог ответит вам в течение 10-15 минут в рабочее время с 8 до 22:00 по мск</div>
+</ng-template>

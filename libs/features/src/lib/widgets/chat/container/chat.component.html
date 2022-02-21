@@ -1,5 +1,4 @@
 <ng-container *ngIf="consultation">
-  {{consultation.id}}
   <ng-container *ngIf="userData$ | async as userData">
     <div class="__header d-flex align-items-center justify-content-between">
       <div class="__title">{{$any(receiver) | fio}}</div>
@@ -16,7 +15,9 @@
         </button>
       </div>
       <button 
-        class="__rounded" mat-icon-button  *ngIf="includesVideoChat && (consultation?.status === statusEnum.STARTED || consultation?.status === statusEnum.WAITING)" (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
+        class="__rounded" mat-icon-button  
+        *ngIf="includesVideoChat && (consultation?.status === statusEnum.STARTED || consultation?.status === statusEnum.WAITING)" 
+        (click)="onVideoSwitch()" [class.active]="videoDialogIsOpened">
         <mat-icon svgIcon="video"></mat-icon>
       </button>
     </div>
@@ -56,20 +57,27 @@
       </ng-container>
     </div>
     <div class="__footer d-flex align-items-end">
-      <textarea 
-        [class.__empty]="true" 
-        placeholder="Напишиите вопрос"
-        [disabled]="consultation?.status !== statusEnum.STARTED"
-        [(ngModel)]="message"></textarea>
-      <button 
-        [class.disabled]="consultation?.status !== statusEnum.STARTED"
-        mat-icon-button 
-        handleChatScroll 
-        target=".__body"
-        (click)="onSubmit($any(userData?.id))" 
-      >
-        <mat-icon svgIcon="send"></mat-icon>
-      </button>
+      <ng-container *ngIf="consultation?.status === statusEnum.COMPLETED;else fieldBtnTemp">
+        <div class="__consultation-completed">
+          Сеанс завершён
+        </div>
+      </ng-container>
+      <ng-template #fieldBtnTemp>
+        <textarea 
+          [class.__empty]="true" 
+          placeholder="Напишите вопрос"
+          [disabled]="consultation?.status !== statusEnum.STARTED"
+          [(ngModel)]="message"></textarea>
+        <button 
+          [class.disabled]="consultation?.status !== statusEnum.STARTED"
+          mat-icon-button 
+          handleChatScroll 
+          target=".__body"
+          (click)="onSubmit($any(userData?.id))" 
+        >
+          <mat-icon svgIcon="send"></mat-icon>
+        </button>
+      </ng-template>
     </div>
   </ng-container>
 </ng-container>

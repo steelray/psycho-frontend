@@ -1,7 +1,6 @@
 <div class="container">
   <div class="d-flex __inner">
     <div class="__img">
-      <!-- <img src="/assets/img/trusted-spec.png" alt=""> -->
       <psycho-picture origin="/assets/img/trusted-spec.png" webp="/assets/img/trusted-spec.webp"></psycho-picture>
     </div>
     <div class="__desc">
@@ -12,7 +11,7 @@
         <li><strong>Все консультации строго конфиденциальны,</strong> поэтому всё о чём вы нам расскажете останется только между нами. Будьте уверены!</li>
       </ul>
       <div class="text-right">
-        <button mat-raised-button color="primary">Записаться на консультацию</button>
+        <a [routerLink]="['/auth/signup']" mat-raised-button color="primary">Записаться на консультацию</a>
       </div>
     </div>
   </div>

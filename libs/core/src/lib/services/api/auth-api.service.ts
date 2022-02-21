@@ -25,14 +25,18 @@ export class AuthApiService extends ApiService {
     return this.post(`${this.controller}/signup`, body);
   }
 
-  resetPassword(code: string | number, password: string): Observable<any> {
-    return this.put(`${this.controller}/reset-password`, { code, password })
+  resetPassword(phone: number): Observable<IUserAuthData> {
+    return this.post(`${this.controller}/reset-password`, { phone })
+  }
+
+  resetPasswordRequest(code: string | number, password: string, repeat_password: string): Observable<any> {
+    return this.post(`${this.controller}/reset-password-request`, { code, password, repeat_password })
   }
 
   uploadAvatar(image: File, userToken: string): Promise<any> {
     const formData = new FormData();
     formData.append('image', image);
-    return axios.post(`http://server.zarland.ru/api/auth/upload-avatar`, formData, this.fileUploadHeaders(userToken));
+    return axios.post(`${this.env.apiEndpoint}/auth/upload-avatar`, formData, this.fileUploadHeaders(userToken));
   }
 
   setEmail(body: { email: string }): Observable<boolean> {

@@ -1,3 +1,4 @@
+@import "mixins";
 :host {
   display: block;
   ::ng-deep {
@@ -7,9 +8,18 @@
     .mat-icon-button {
       width: 60px;
       height: 60px;
+      @include for-sm {
+        height: 46px;
+        width: 46px;
+      }
     }
     .mat-calendar-header {
       margin-top: 100px;
+      @include for-sm {
+        margin-top: 0;
+        padding: 0;
+        margin-bottom: 30px;
+      }
     }
     .mat-calendar-table-header th {
       font-size: 20px;
@@ -27,6 +37,9 @@
     .mat-calendar-content {
       padding: 60px 0 0;
       position: relative;
+      @include for-sm {
+        padding-top: 30px;
+      }
     }
     .mat-calendar-body {
       .mat-calendar-body-label {
@@ -41,6 +54,9 @@
         font-size: 20px;
         font-weight: 600;
         color: var(--base-font-color);
+        @include for-sm {
+          font-size: 16px;
+        }
       }
     }
     .mat-calendar-body-cell-content {
@@ -67,29 +83,45 @@
   position: relative;
   max-width: 700px;
 
+  @include for-sm {
+    margin: 0 -20px;
+  }
+
   .__labels {
     position: absolute;
     bottom: 50px;
     left: 32px;
+    @include for-sm {
+      position: static;
+    }
     > div {
       position: relative;
       display: flex;
       align-items: center;
       font-size: 20px;
       font-weight: 600;
+      @include for-sm {
+        font-size: 14px;
+        font-weight: 400;
+      }
       &:not(:last-child) {
         margin-bottom: 15px;
       }
       &::before {
         width: 90px;
         height: 40px;
+        min-width: 90px;
         margin-right: 12px;
         border-radius: 6px;
         content: "";
+        @include for-sm {
+          width: 35px;
+          height: 23px;
+        }
       }
       &.__exist {
         &::before {
-          background: var(--accent-bg-medium);
+          background: #90ee90;
         }
       }
       &.__free {
@@ -107,6 +139,9 @@
   border-radius: 6px;
   padding: 25px;
   margin: 25px;
+  @include for-sm {
+    margin: 0 -20px;
+  }
   .__date-title {
     font-weight: 600;
     margin-bottom: 20px;
@@ -179,6 +214,9 @@
 .__note {
   font-weight: 600;
   font-size: 20px;
+  @include for-sm {
+    font-size: 14px;
+  }
   &::before {
     height: 40px;
     width: 100px;

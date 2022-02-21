@@ -12,26 +12,41 @@ import { FormFieldModule } from '@psycho/web/features';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ChatWidgetModule } from '../../../../libs/features/src/lib/widgets/chat/chat.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MetrikaModule } from 'ng-yandex-metrika';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 
+const IMPORTS = [
+  WebCoreModule,
+  BrowserModule.withServerTransition({ appId: 'serverApp' }),
+  CoreSharedModules,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  LazyLoadImageModule,
+  FormFieldModule,
+  NgxMaskModule.forRoot(maskConfig),
+  MatSnackBarModule,
+  ChatWidgetModule,
+];
+
+if (environment.production) {
+  IMPORTS.push(
+    MetrikaModule.forRoot(
+      {
+        id: 73117528,
+        webvisor: true,
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true
+      }, // CounterConfig | CounterConfig[]
+    ))
+}
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    WebCoreModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    CoreSharedModules,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    LazyLoadImageModule,
-    FormFieldModule,
-    NgxMaskModule.forRoot(maskConfig),
-    MatSnackBarModule,
-    ChatWidgetModule
-
-  ],
+  imports: IMPORTS,
   providers: [
     {
       provide: ENVIRONMENTS,

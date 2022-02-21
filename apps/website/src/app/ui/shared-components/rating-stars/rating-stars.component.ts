@@ -6,17 +6,12 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input, OnInit
   styleUrls: ['./rating-stars.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingStarsComponent implements OnInit {
+export class RatingStarsComponent {
   @Input() value: number = 0;
   @Input() totalStars = 5;
   @Input() size = '30px';
   @Input() readonly = true;
   @Output() rated = new EventEmitter();
-
-  ngOnInit(): void {
-    console.log(this.totalStars);
-
-  }
 
 
   onRate(rate: any): void {

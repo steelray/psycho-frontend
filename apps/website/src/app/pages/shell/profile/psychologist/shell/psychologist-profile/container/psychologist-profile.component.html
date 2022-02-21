@@ -31,7 +31,6 @@
   <div class="__form bordered-fields">
     <div class="form-field d-flex align-items-end">
       <psycho-input label="Ваша почта" [control]="$any(emailForm.get('email'))"></psycho-input>
-      <button [disabled]="emailForm.invalid" (click)="onEmailChange()" mat-raised-button color="primary">Сохранить</button>
     </div>
     <ng-container *ngIf="changePassword$ | async">
       <div class="form-field d-flex align-items-end">
@@ -50,7 +49,7 @@
 
   <div class="hr"></div>
   <div class="d-flex justify-content-end __mb-20">
-    <button mat-raised-button color="primary" size="medium">Запрос на смну личных данных</button>
+    <button mat-raised-button color="primary" size="medium">Запрос на смену личных данных</button>
   </div>
   <div class="__card">
     <div class="__title">Образование</div>

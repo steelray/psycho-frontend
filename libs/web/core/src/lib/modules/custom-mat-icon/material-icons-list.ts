@@ -63,6 +63,10 @@ const commonIcons: IMatIcon[] = [
     src
   },
   {
+    name: 'video-open',
+    src
+  },
+  {
     name: 'favourite',
     src
   },
@@ -88,6 +92,10 @@ const commonIcons: IMatIcon[] = [
   },
   {
     name: 'logout',
+    src
+  },
+  {
+    name: 'user',
     src
   }
 ];

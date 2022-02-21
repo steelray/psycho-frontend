@@ -1,11 +1,18 @@
-<div 
-  *ngFor="let subject of subjects$ | async;trackBy: trackByFn" 
-  (click)="onSelect(subject.id)"
-  [class.selected]="subject.isSelected"
->
-  <psycho-subject-item 
-    mat-ripple
-    [subject]="subject"
-    [iconMode]="true"></psycho-subject-item>
-</div>
-<button mat-raised-button color="primary" (click)="onSubmit()" size="medium">Сохранить</button>
+<mat-dialog-content>
+  <div class="__inner">
+    <div 
+      *ngFor="let subject of subjects$ | async;trackBy: trackByFn" 
+      (click)="onSelect(subject.id)"
+      [class.selected]="subject.isSelected"
+    >
+      <psycho-subject-item 
+        mat-ripple
+        [subject]="subject"
+        [iconMode]="true"></psycho-subject-item>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onSubmit()" size="medium">Сохранить</button>
+
+</mat-dialog-actions>

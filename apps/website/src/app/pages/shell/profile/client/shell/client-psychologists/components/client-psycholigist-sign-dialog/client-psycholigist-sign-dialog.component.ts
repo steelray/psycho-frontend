@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CONSULTATION_FORMAT, CONSULTATION_FORMAT_PRICE, IGroupedScheduleTime, IPsychologist, ISubject, WindowService } from '@psycho/core';
+import { CONSULTATION_FORMAT, CONSULTATION_FORMAT_PRICE, IClientConsultation, IGroupedScheduleTime, IPsychologist, ISubject, WindowService } from '@psycho/core';
 import { monthsOptions, yearOptions } from '@psycho/utils';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class ClientPsycholigistSignDialogComponent {
   readonly monthsOptions = monthsOptions();
   readonly yearOptions = yearOptions();
   readonly schedule$ = this.facade.getGroupedSchedule$(this.psychologist.id);
-
+  newConsultation: IClientConsultation | null = null;
   selectedFormat!: CONSULTATION_FORMAT;
   selectedSubject!: ISubject;
   constructor(
@@ -55,17 +55,20 @@ export class ClientPsycholigistSignDialogComponent {
     let nextStep = this.steps.DATETIME_SELECT;
 
     if (currentStep === this.steps.DATETIME_SELECT || (this.selectedFormat === this.formats.FORMAT_EXPRESS)) {
-      await this.facade.createConsultation(
+      this.newConsultation = await this.facade.createConsultation(
         this.selectedFormat,
-        this.data.subject.id,
+        this.data?.subject?.id,
         this.datetimeForm.value?.schedule_id,
         this.psychologist.id
       );
+      this.datetimeForm.reset();
       nextStep = this.steps.SUCCESS
     }
 
     if (currentStep === this.steps.SUCCESS) {
-      this.windowService.location.href = 'https://yookassa.ru/';
+      if (this.newConsultation) {
+        this.facade.payment(this.newConsultation?.id);
+      }
     }
     this.currentSignStep$.next(nextStep);
   }

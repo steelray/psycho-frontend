@@ -24,21 +24,25 @@ export class PsychologistFacade {
     return of([
       {
         title: 'Экспресс-консультации',
+        subtitle: 'Экспресс',
         value: ['/profile/psychologist/consultations/express'],
         img: 'chat'
       },
       {
         title: 'Консультации 50 мин',
+        subtitle: '50 мин',
         value: ['/profile/psychologist/consultations/full'],
         img: 'video'
       },
       {
         title: 'Задать расписание',
+        subtitle: 'Расписание',
         value: ['/profile/psychologist/set-schedule'],
         img: 'favourite'
       },
       {
         title: 'Финансы',
+        subtitle: 'Финансы',
         value: ['/profile/psychologist/finances'],
         img: 'favourite'
       },

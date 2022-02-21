@@ -1,4 +1,4 @@
-import { Component, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
 import { IMenuItem } from '@psycho/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
@@ -7,7 +7,8 @@ import { PagesFacade } from '../pages.facade';
 @Component({
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss'],
-  providers: [PagesFacade]
+  providers: [PagesFacade],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PagesComponent {
   readonly mainMenu$: Observable<IMenuItem[]> = this.facade.mainMenu$;

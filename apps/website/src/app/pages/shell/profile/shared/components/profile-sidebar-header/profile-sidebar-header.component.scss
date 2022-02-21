@@ -1,5 +1,9 @@
+@import "mixins";
 :host {
   display: block;
+  @include for-sm {
+    display: none;
+  }
   > a {
     display: flex;
     align-items: center;

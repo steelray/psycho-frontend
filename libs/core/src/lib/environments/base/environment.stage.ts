@@ -3,6 +3,7 @@ import { IEnvironment } from '../environment.interface';
 import { environmentBase } from './environment.base';
 
 export const environmentStage = deepMerge(environmentBase, {
-  apiEndpoint: 'http://server.zarland.ru/api',
+  apiEndpoint: 'https://server.zarland.ru/api',
+  wsEndpoint: 'https://zarland.ru/',
   production: true
 } as IEnvironment);

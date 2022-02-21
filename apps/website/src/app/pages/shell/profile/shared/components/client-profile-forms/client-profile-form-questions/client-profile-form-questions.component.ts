@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ISelectOption } from '@psycho/core';
 
@@ -6,7 +6,8 @@ import { ISelectOption } from '@psycho/core';
   selector: 'psycho-client-profile-form-questions',
   templateUrl: './client-profile-form-questions.component.html',
   styleUrls: ['./client-profile-form-questions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class ClientProfileFormQuestionsComponent {
   @Input() form!: FormGroup;

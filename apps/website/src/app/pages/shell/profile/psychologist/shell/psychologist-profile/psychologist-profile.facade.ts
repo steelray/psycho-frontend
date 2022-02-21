@@ -25,6 +25,7 @@ export class PsychologistProfileFacade extends WithDestroy() {
     private readonly subjectApiService: SubjectApiService
   ) {
     super();
+    this.emailForm.disable();
   }
 
   get subjects$(): Observable<ISubject[]> {
@@ -83,10 +84,6 @@ export class PsychologistProfileFacade extends WithDestroy() {
       this.snackbar.success('Ваш пароль обновлен');
       this.changePassword$.next(false);
     });
-  }
-
-  onEmailChange(): void {
-    this.authApiService.setEmail(this.emailForm.value).subscribe(() => this.snackbar.success('Ваш email обновлен'));
   }
 
   updateSlogan(slogan: string): Observable<IPsychologist> {

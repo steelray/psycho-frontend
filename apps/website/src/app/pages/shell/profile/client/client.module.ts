@@ -10,12 +10,14 @@ import { ClientNewSessionDialogComponent } from './components/client-new-session
 import { PipesModule, UIModule } from '@psycho/features';
 import { SharedComponentsModule } from 'apps/website/src/app/ui/shared-components/shared-components.module';
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
+import { PaymentSuccessComponent } from './shell/payment-success/payment-success.component';
 
 
 @NgModule({
   declarations: [
     ClientComponent,
-    ClientNewSessionDialogComponent
+    ClientNewSessionDialogComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     CoreSharedModules,

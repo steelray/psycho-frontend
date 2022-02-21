@@ -30,7 +30,7 @@
 
 <div *ngIf="parentFormatSelected">
   <p class="p">
-    Выбрите, каким способом вам удобно получить консультацию
+    Выберите, каким способом вам удобно получить консультацию
   </p>
   <div  class="__cards-mini d-flex flex-wrap align-items-center">
     <div [class.selected]="selectedFormat === formats.FORMAT_FULL_VIDEO" (click)="onFormatSelect(formats.FORMAT_FULL_VIDEO)" mat-ripple class="__card d-flex flex-column">

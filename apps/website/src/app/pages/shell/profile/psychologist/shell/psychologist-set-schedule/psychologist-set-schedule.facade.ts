@@ -4,7 +4,7 @@ import { momentWithUTC, WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import * as moment from 'moment';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, finalize, map, pairwise, shareReplay, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, finalize, map, shareReplay, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 export interface IHour {
   unix: number;
@@ -34,8 +34,6 @@ export class PsychologistSetScheduleFacade extends WithDestroy() {
   ) {
     super();
   }
-
-
 
   get selectedDateSchedule$(): Observable<IPsychologistSchedule[]> {
     return combineLatest([

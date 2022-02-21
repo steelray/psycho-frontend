@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService, ClientApiService, IUserAuthData } from '@psycho/core';
+import { AuthService, ClientApiService, IClientConsultation, IUserAuthData } from '@psycho/core';
+import { WithDestroy } from '@psycho/utils';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { startWith, takeUntil, tap } from 'rxjs/operators';
 import { ClientProfileFormsService } from '../../../shared/components/client-profile-forms/client-profile-forms.service';
 
 @Injectable()
-export class ClientProfileFormFacade {
+export class ClientProfileFormFacade extends WithDestroy() {
   readonly yearsOptions = this.clientProfileFormsService.yearsOptions;
   readonly subjects$ = this.clientProfileFormsService.subjects$;
   readonly psychologists$ = this.clientProfileFormsService.psychologists$;
@@ -27,7 +28,25 @@ export class ClientProfileFormFacade {
     private readonly clientProfileFormsService: ClientProfileFormsService,
     private readonly fb: FormBuilder,
     private readonly authService: AuthService
-  ) { }
+  ) {
+    super();
+    this.commonQuestionsForm.get('subscribe')?.valueChanges.pipe(
+      startWith(false),
+      takeUntil(this.destroy$)
+    ).subscribe(res => {
+      if (res) {
+        this.commonQuestionsForm.get('email')?.setValidators([
+          RxwebValidators.email(),
+          RxwebValidators.required()
+        ]);
+      } else {
+        this.commonQuestionsForm.get('email')?.setValidators([
+          RxwebValidators.email()
+        ]);
+      }
+      this.commonQuestionsForm.get('email')?.updateValueAndValidity();
+    })
+  }
 
 
 
@@ -47,17 +66,16 @@ export class ClientProfileFormFacade {
           RxwebValidators.required()
         ]],
         email: [null, [
-          RxwebValidators.required(),
           RxwebValidators.email()
         ]],
-        subscribe: [true]
+        subscribe: [false]
       });
     }
     return this._commonQuestionsForm;
   }
 
 
-  onCompleteRegistration(): Observable<boolean> {
+  onCompleteRegistration(): Observable<IClientConsultation> {
     const data = this.collectFormsData();
     return this.clientApiService.completeRegistration(data).pipe(
       tap(data => {

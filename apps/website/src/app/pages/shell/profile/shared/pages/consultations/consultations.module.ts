@@ -10,12 +10,19 @@ import { FormFieldModule } from '@psycho/web/features';
 import { ChatWidgetModule, PipesModule, UIModule } from '@psycho/features';
 import { TakeToWorkConfirmDialogComponent } from './components/take-to-work-confirm-dialog/take-to-work-confirm-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MaterialIconCustomizeModule } from '@psycho/web/core';
+import { ReviewDialogComponent } from './components/review-dialog/review-dialog.component';
+import { SharedComponentsModule } from 'apps/website/src/app/ui/shared-components/shared-components.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChatModule } from 'apps/website/src/app/ui/widgets/chat/chat.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
   declarations: [
     ConsultationsComponent,
-    TakeToWorkConfirmDialogComponent
+    TakeToWorkConfirmDialogComponent,
+    ReviewDialogComponent
   ],
   imports: [
     CoreSharedModules,
@@ -28,7 +35,12 @@ import { MatButtonModule } from '@angular/material/button';
     ChatWidgetModule,
     PipesModule,
     UIModule,
-    MatButtonModule
+    MatButtonModule,
+    MaterialIconCustomizeModule,
+    SharedComponentsModule,
+    MatDialogModule,
+    ChatModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ConsultationsModule { }

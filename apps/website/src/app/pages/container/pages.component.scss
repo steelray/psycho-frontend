@@ -1,0 +1,7 @@
+@import "mixins";
+#main {
+  min-height: 100vh;
+  @include for-sm {
+    min-height: 0;
+  }
+}

@@ -8,6 +8,8 @@ export class AuthFacade {
   readonly loginForm = this.authService.loginForm;
   readonly psychologistLoginForm = this.authService.psychologistLoginForm;
   readonly signupForm = this.authService.signupForm;
+  readonly passwordResetForm = this.authService.passwordResetForm;
+  readonly passwordResetRequestForm = this.authService.passwordResetRequestForm;
 
   constructor(
     private readonly authApiService: AuthApiService,
@@ -49,6 +51,23 @@ export class AuthFacade {
       return of(null);
     }
     return this.authApiService.signup(this.signupForm.value).pipe(
+      filter(data => !!data),
+      tap(data => this.authService.saveUserData(data))
+    );
+  }
+
+  resetPassword(phone: number): Observable<IUserAuthData> {
+    return this.authApiService.resetPassword(phone).pipe(
+      tap(res => this.authService.saveUserData(res))
+    );
+  }
+
+  resetPasswordRequest(): Observable<any> {
+    if (this.passwordResetRequestForm.invalid) {
+      return of(null);
+    }
+    const { code, password, repeat_password } = this.passwordResetRequestForm.value;
+    return this.authApiService.resetPasswordRequest(code, password, repeat_password).pipe(
       filter(data => !!data),
       tap(data => this.authService.saveUserData(data))
     );

@@ -16,6 +16,8 @@
       <div class="__education" [class.expanded]="psychologist.id === expandedText">
         <strong>Образование</strong>
         <div [innerHTML]="psychologist.education | safe:'html'"></div>
+        <strong>О специалисте</strong>
+        <div [innerHTML]="psychologist.description | safe:'html'"></div>
       </div>
     
       <a href="#" (click)="expandEducationText($event, psychologist.id)" class="__more" >

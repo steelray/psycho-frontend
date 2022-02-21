@@ -6,10 +6,17 @@
   border-radius: 6px;
   @include for-sm {
     margin: 0 -20px;
+    min-height: calc(100vh - (70px + 45px));
   }
   ::ng-deep {
     .mat-tab-header {
       margin-bottom: 15px;
+      @include for-sm {
+        margin-top: -15px;
+        background: #8c95d6;
+        padding: 9px 0;
+        margin-bottom: 0;
+      }
     }
     .mat-tab-nav-bar,
     .mat-tab-header {
@@ -19,6 +26,9 @@
       .mat-tab-labels {
         padding: 0 15px;
         justify-content: space-between;
+        @include for-sm {
+          justify-content: flex-start;
+        }
       }
     }
     .mat-ink-bar {
@@ -35,6 +45,12 @@
       font-size: var(--base-font-color);
       border: none;
       font-weight: 600;
+      @include for-sm {
+        line-height: 27px;
+        height: 27px;
+        font-size: 16px;
+        margin-right: 9px;
+      }
       &-active {
         color: var(--base-font-color);
         background-color: var(--accent-bg-light);
@@ -64,9 +80,10 @@
   flex: 1;
   min-width: 0;
   padding: 20px;
+  position: relative;
   @include for-sm {
     position: relative;
-    padding-top: 70px;
+    padding-top: 0;
   }
 }
 .__mob-back-btn {
@@ -77,9 +94,9 @@
     left: 0;
     display: block;
     border-radius: 0;
-    background: var(--main-color);
+    background: none;
     color: var(--white);
     width: 60px;
-    height: 60px;
+    height: 62px;
   }
 }

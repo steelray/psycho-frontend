@@ -11,8 +11,8 @@
           Полноценная онлайн консультация <br>
           с психологом 
         </div>
-        <p>Видео-консультация, телефон или чат.</p>
-        <a class="__btn" href="#" mat-raised-button color="primary">Записаться на консультацию</a>
+        <p>видео или чат консультация на выбор.</p>
+        <a class="__btn" [routerLink]="['/auth/signup']" mat-raised-button color="primary">Записаться на консультацию</a>
 
       </div>
       <div>
@@ -28,7 +28,7 @@
           Экспресс-консультация 
         </div>
         <p>Ответ на один срочный вопрос в чат </p>
-        <a class="__btn" href="#" mat-raised-button color="primary">Записаться на консультацию</a>
+        <a class="__btn" [routerLink]="['/auth/signup']" mat-raised-button color="primary">Записаться на консультацию</a>
       </div>
       <div>
         <div class="__card-price">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <button class="__for-mob" mat-raised-button color="primary">Записаться на консультацию</button>
+    <a [routerLink]="['/auth/signup']" class="__for-mob" mat-raised-button color="primary">Записаться на консультацию</a>
 
   </div>
 

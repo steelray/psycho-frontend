@@ -45,8 +45,12 @@ export class ConsultationApiService extends ApiService {
     return this.post(`${this.controller}/take-to-work/${id}`);
   }
 
-  createConsultation(body: IClientConsultationCreateBody): Observable<boolean> {
-    return this.post(`${this.controller}/create-consultation`, body);
+  createConsultation(body: IClientConsultationCreateBody): Observable<IClientConsultation> {
+    return this.post(`${this.controller}/create-consultation?expand=schedule`, body);
+  }
+
+  getConsultationPaymentStatus(id: number): Observable<string> {
+    return this.get(`${this.controller}/payment-status/${id}`);
   }
 
 } 

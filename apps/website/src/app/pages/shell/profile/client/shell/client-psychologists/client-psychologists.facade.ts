@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ClientApiService, ConsultationApiService, CONSULTATION_FORMAT, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService } from '@psycho/core';
+import { ClientApiService, ConsultationApiService, CONSULTATION_FORMAT, IClientConsultation, IGroupedSchedule, IPsychologist, IPsychologistSchedule, PsychologistApiService, WindowService } from '@psycho/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import * as moment from 'moment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { filter, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { ClientSharedFormsService } from '../../../shared/services/client-shared-forms.service';
 
 export enum CLIENT_PSYCHOLOGIST_SIGN_STEPS {
@@ -30,7 +30,8 @@ export class ClientPsychologistsFacade {
     private readonly fb: FormBuilder,
     private readonly psychologistApiService: PsychologistApiService,
     private readonly formsService: ClientSharedFormsService,
-    private readonly consultationApiService: ConsultationApiService
+    private readonly consultationApiService: ConsultationApiService,
+    private readonly window: WindowService
   ) { }
 
   get myPsychologists$(): Observable<IPsychologist[]> {
@@ -46,6 +47,14 @@ export class ClientPsychologistsFacade {
 
   onSign(id: number): Observable<any> {
     return of();
+  }
+
+  payment(consultationId: number): void {
+    this.clientApiService.payment(consultationId).pipe(
+      filter(res => !!res)
+    ).subscribe(res => {
+      this.window.location.href = res;
+    });
   }
 
   get signForm(): FormGroup {
@@ -83,11 +92,7 @@ export class ClientPsychologistsFacade {
 
   get commentForm(): FormGroup {
     if (!this._commentForm) {
-      this._commentForm = this.fb.group({
-        psychologist_id: [null, RxwebValidators.required()],
-        rating: [null, RxwebValidators.required()],
-        review: [null, RxwebValidators.required()]
-      })
+      this._commentForm = this.formsService.reviewForm;
     }
     return this._commentForm;
   }
@@ -96,7 +101,7 @@ export class ClientPsychologistsFacade {
     return this.scheduleForm.valueChanges.pipe(
       startWith(this.defaultDatetimeValue())
     ).pipe(
-      switchMap(res => this.psychologistApiService.getMonthSchedule(res.year, res.month + 1, psychologistId).pipe(
+      switchMap(res => this.psychologistApiService.getMonthSchedule(res.year, res.month + 1, psychologistId, true).pipe(
       )),
       map(res => {
         const arr: IGroupedSchedule[] = [];
@@ -123,7 +128,7 @@ export class ClientPsychologistsFacade {
     );
   }
 
-  createConsultation(format: CONSULTATION_FORMAT, subject_id: number, schedule_id: number, psychologist_id: number): Promise<any> {
+  createConsultation(format: CONSULTATION_FORMAT, subject_id: number, schedule_id: number, psychologist_id: number): Promise<IClientConsultation> {
     return this.consultationApiService.createConsultation({
       subject_id,
       schedule_id,

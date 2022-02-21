@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CONSULTATION_FORMAT } from '@psycho/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewChecked, OnChanges, SimpleChanges } from '@angular/core';
+import { CONSULTATION_FORMAT, IClientConsultation } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
+import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NewSessionFacade } from '../new-session.facade';
 
@@ -11,7 +12,7 @@ import { NewSessionFacade } from '../new-session.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NewSessionFacade]
 })
-export class NewSessionComponent extends WithDestroy() {
+export class NewSessionComponent extends WithDestroy() implements OnChanges, AfterViewChecked {
   readonly formatForm = this.facade.formatForm;
   readonly subjectsForm = this.facade.subjectsForm;
   readonly specialistForm = this.facade.specialistForm;
@@ -23,6 +24,7 @@ export class NewSessionComponent extends WithDestroy() {
   readonly selectedPsychologist$ = this.facade.selectedPsychologist$;
   readonly selectedPsychologistGroupedSchedule$ = this.facade.selectedPsychologistGroupedSchedule$;
   readonly formats = CONSULTATION_FORMAT;
+  readonly newConsultation$ = new BehaviorSubject<IClientConsultation | null>(null);
   isEditable = true;
   isSaving = false;
 
@@ -33,12 +35,22 @@ export class NewSessionComponent extends WithDestroy() {
     super();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('checked');
+
+  }
+
   onCompleteRegistration(stepper: any): void {
     this.isSaving = true;
     this.facade.sign().pipe(
       takeUntil(this.destroy$)
-    ).subscribe(() => {
+    ).subscribe(newConsultation => {
       stepper.next();
+      this.newConsultation$.next(newConsultation);
       this.isEditable = false;
       this.isSaving = false;
       this.cdRef.detectChanges();

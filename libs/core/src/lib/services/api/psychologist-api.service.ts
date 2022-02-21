@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IPsychologist, IPsychologistSchedule, IPsychologistSearchParams } from '../../interfaces/psychologist.interface';
 import { Injectable } from '@angular/core';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { CONSULTATION_FORMAT, IClientConsultation, ISubject } from '@psycho/core';
+import { ISubject } from '@psycho/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +13,22 @@ export class PsychologistApiService extends ApiService {
   private _profileData$!: Observable<IPsychologist> | null; // client data cache
   private readonly _updateProfileData$ = new BehaviorSubject<null>(null);
   fetchAll(params?: IPsychologistSearchParams): Observable<IPsychologist[]> {
+    if (params) {
+      params['expand'] = 'description,education';
+    }
     return this.get(this.controller, { params });
   }
 
   fetchOne(id: number): Observable<IPsychologist> {
-    return this.get(`${this.controller}/${id}`);
+    return this.get(`${this.controller}/${id}?expand=description,education`);
   }
 
-  getMonthSchedule(year: number, month: number, psychologistId: number): Observable<IPsychologistSchedule[]> {
-    return this.get(`${this.controller}/get-month-schedule/${year}/${month}/${psychologistId}`);
+  getMonthSchedule(year: number, month: number, psychologistId: number, onlyFree = false): Observable<IPsychologistSchedule[]> {
+    const params: any = {};
+    if (onlyFree) {
+      params['onlyFree'] = true;
+    }
+    return this.get(`${this.controller}/get-month-schedule/${year}/${month}/${psychologistId}`, { params });
   }
 
   getSchedule(psychologistId: number, start?: string, end?: string): Observable<IPsychologistSchedule[]> {
@@ -31,6 +38,7 @@ export class PsychologistApiService extends ApiService {
 
 
   getProfile(): Observable<IPsychologist> {
+    return this.get<IPsychologist>(`${this.controller}/profile?expand=description,education`);
     return this._updateProfileData$.pipe(
       switchMap(() => {
         if (!this._profileData$) {
@@ -62,7 +70,7 @@ export class PsychologistApiService extends ApiService {
   }
 
   removeTimeFromSchedule(unix: number): Observable<boolean> {
-    return this.delete(`${this.controller}/remove-time-from-schedule/${unix}`)
+    return this.post(`${this.controller}/remove-time-from-schedule`, { unix })
   }
 
 }

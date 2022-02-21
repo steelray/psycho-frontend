@@ -1,4 +1,4 @@
-<ng-container *ngIf="psychologist">
+<ng-container *ngIf="psychologist && isFullChat">
   <div class="h4 bold">Условия оплаты</div>
   <div class="__card d-flex">
     <div class="__img">
@@ -15,6 +15,5 @@
     <div class="h4">Дата и время сессии:</div>
     <div *ngIf="datetime">{{datetime |  date:'d MMM, EEEE HH:mm'}}</div>
   </ng-container>
-
-
 </ng-container>
+<psycho-payment-text *ngIf="format === formats.FORMAT_EXPRESS" [price]="price" [format]="format"></psycho-payment-text>

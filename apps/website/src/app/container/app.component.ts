@@ -6,6 +6,7 @@ import { AuthService, HttpErrorService, ScriptService, SeoService, WindowService
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
 import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { SocketService } from '../ui/widgets/chat/shared/services/socket.service';
 
 @Component({
   selector: 'psycho-root',
@@ -18,7 +19,7 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
   constructor(
     @Self() private readonly snackbar: SnackbarService,
     private readonly errorService: HttpErrorService,
-    private readonly ws: WSService,
+    private readonly socketService: SocketService,
     private readonly authService: AuthService,
     private readonly seoService: SeoService,
     protected readonly router: Router,
@@ -39,17 +40,9 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
 
     this.authService.userData$.pipe(
       filter(data => !!data),
-      switchMap(data => this.ws.afterOpen$.pipe(
-        filter(res => !!res),
-        tap(() => {
-          return this.ws.sendMessage({
-            command: WS_COMMANDS.REGISTER,
-            user: data?.id as number
-          });
-        })
-      )),
       takeUntil(this.destroy$)
     ).subscribe(res => {
+      this.socketService.initIoConnection(res?.token as string);
       this.scriptService.load('zoom1', 'zoom2', 'zoom3', 'zoom4', 'zoom5', 'zoom6').then(data => {
         console.log('script loaded ', data);
       }).catch(error => console.log(error));
@@ -69,7 +62,6 @@ export class AppComponent extends WithDestroy() implements OnDestroy {
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
-    this.ws.onComplete();
   }
 
   getSeo(): void {

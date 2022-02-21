@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IGroupedSchedule, IGroupedScheduleTime, IPsychologist, ISelectOption } from '@psycho/core';
 import { generateYears, monthsList, monthsOptions, yearOptions } from '@psycho/utils';
@@ -9,7 +9,7 @@ import { generateYears, monthsList, monthsOptions, yearOptions } from '@psycho/u
   styleUrls: ['./client-profile-form-datetime.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientProfileFormDatetimeComponent {
+export class ClientProfileFormDatetimeComponent implements OnChanges {
   @Input() scheduleForm!: FormGroup;
   @Input() psychologist!: IPsychologist;
   @Input() schedule!: IGroupedSchedule[];
@@ -20,6 +20,11 @@ export class ClientProfileFormDatetimeComponent {
   onSelect(time: IGroupedScheduleTime): void {
     this.datetimeForm.get('schedule_id')?.setValue(time.id);
     this.datetimeForm.get('datetime')?.setValue(time.time);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+
   }
 
 }

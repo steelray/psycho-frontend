@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { IMenuItem } from '@psycho/core';
+import { IMenuItem, IUserAuthData } from '@psycho/core';
 
 @Component({
   selector: 'psycho-header',
@@ -9,9 +9,11 @@ import { IMenuItem } from '@psycho/core';
 })
 export class HeaderComponent {
   @Input() menuItems!: IMenuItem[];
-  @Input() userData: any;
+  @Input() userData!: IUserAuthData | null;
   @Input() isHomePage = false;
   @Input() isAuthPage = false;
+  @Input() isProfilePage = false;
+  @Input() linkItems!: IMenuItem[];
   @Output() logout = new EventEmitter();
 
   menuOpened = false;
@@ -22,5 +24,9 @@ export class HeaderComponent {
 
   onMenuToggle(): void {
     this.menuOpened = !this.menuOpened;
+  }
+
+  get supportLink(): string {
+    return `/profile/${this.userData?.is_client ? 'client' : 'psychologist'}/support`;
   }
 }

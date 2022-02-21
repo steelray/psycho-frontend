@@ -1,11 +1,19 @@
+@import "mixins";
+
 :host {
   display: flex;
   margin: 0 -15px;
+  @include for-sm {
+    flex-direction: column;
+  }
 }
 
 .__col {
   width: 50%;
   padding: 0 15px;
+  @include for-sm {
+    width: 100%;
+  }
   h4 {
     font-size: 22px;
     margin-bottom: 18px;
@@ -26,6 +34,9 @@
   min-width: 370px;
   display: inline-block;
   font-weight: 400;
+  @include for-sm {
+    min-width: 100%;
+  }
   li {
     &:not(:last-child) {
       margin-bottom: 20px;
@@ -54,4 +65,7 @@
       color: var(--white);
     }
   }
+}
+.__selects {
+  flex-direction: column;
 }

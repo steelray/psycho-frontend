@@ -13,6 +13,7 @@ import { PsychologistProfileSloganChangeDialogComponent } from './components/psy
 import { MaterialIconCustomizeModule } from '@psycho/web/core';
 import { SharedComponentsModule } from '../../../../../../ui/shared-components/shared-components.module';
 import { PsychologistProfileSubjectsUpdateDialogComponent } from './components/psychologist-profile-subjects-update-dialog/psychologist-profile-subjects-update-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PsychologistProfileSubjectsUpdateDialogComponent } from './components/p
     MatTableModule,
     PsychologistProfileRoutingModule,
     MaterialIconCustomizeModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    MatDialogModule
   ]
 })
 export class PsychologistProfileModule { }

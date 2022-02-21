@@ -4,7 +4,7 @@
       <ng-container [ngSwitch]="step">
         <ng-container *ngSwitchCase="steps.FORMAT_SELECT">
           <p class="p">
-            Выбрите, каким способом вам удобно получить консультацию
+            Выберите, каким способом вам удобно получить консультацию
           </p>
           <div  class="__cards d-flex flex-wrap align-items-center justify-content-between">
             <div [class.selected]="selectedFormat === formats.FORMAT_FULL_VIDEO" (click)="onFormatSelect(formats.FORMAT_FULL_VIDEO)" mat-ripple class="__card d-flex flex-column">

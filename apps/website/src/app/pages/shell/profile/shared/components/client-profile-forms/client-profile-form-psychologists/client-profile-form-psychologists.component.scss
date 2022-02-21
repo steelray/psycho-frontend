@@ -1,3 +1,5 @@
+@import "mixins";
+
 :host {
   display: block;
 }
@@ -11,6 +13,7 @@
   overflow: hidden;
   &.expanded {
     max-height: none;
+    overflow: visible;
   }
   ::ng-deep {
     * {
@@ -32,8 +35,15 @@
 }
 
 .__grid {
+  @include for-sm {
+    flex-direction: column;
+  }
   > * {
     width: calc(50% - 25px);
     margin-bottom: 35px;
+    @include for-sm {
+      width: 100%;
+      margin-bottom: 25px;
+    }
   }
 }

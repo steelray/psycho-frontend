@@ -27,6 +27,7 @@ export function app(): express.Express {
 
   const server = express();
   const distFolder = environment.production ? join(process.cwd(), 'browser') : 'dist/website/browser';
+  // const distFolder = 'dist/website/browser';
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   const template = fs
     .readFileSync(path.join(distFolder, 'index.html'))

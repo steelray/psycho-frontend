@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ChangeDetectionStrategy, Input, OnInit, AfterViewChecked, OnChanges, SimpleChanges, Inject, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService, ConsultationApiService, CONSULTATION_STATUS, CONSULTATION_USER_ROLE, IClientConsultation, IUser, WindowService, WSService, WS_RESPONSE_TYPE } from '@psycho/core';
 import { findBinary, WithDestroy } from '@psycho/utils';
 import * as moment from 'moment';
@@ -9,7 +10,7 @@ import { IChat, IChatMessage } from '../interfaces/chat.interface';
 import { ChatService } from '../services/chat.service';
 
 @Component({
-  selector: 'psycho-chat',
+  selector: 'psycho-chat-old',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -47,6 +48,7 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
     private readonly ws: WSService,
     private windowService: WindowService,
     @Inject(DOCUMENT) private readonly document: Document,
+    private readonly snackbar: MatSnackBar,
     private readonly cdRef: ChangeDetectorRef) {
     super();
   }
@@ -118,7 +120,7 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
   onSubmit(ownerId: number): void {
     if (this.message) {
       this.pushMessageToCurrentList(this.message, ownerId);
-      this.chatService.onMessageSend(this.message, ownerId, this.consultationId as number)
+      // this.chatService.onMessageSend(this.message, ownerId, this.consultationId as number)
       this.message = '';
     }
   }
@@ -138,11 +140,17 @@ export class ChatComponent extends WithDestroy() implements OnInit, OnChanges, A
   async onVideoSwitch(): Promise<void> {
     this.videoDialogIsOpened = !this.videoDialogIsOpened;
 
+    if (this.userRole === CONSULTATION_USER_ROLE.ROLE_CLIENT && this.consultation?.status === CONSULTATION_STATUS.WAITING) {
+      this.snackbar.open('Консультация еще не началась.')
+      return;
+    }
+
     if (this.videoDialogIsOpened) {
       of('').pipe(
         switchMap(() => {
           if (this.consultation?.status === CONSULTATION_STATUS.WAITING) {
-            return this.consultationApiService.startConsultation(this.consultationId);
+            this.onConsultationStart();
+            // return this.consultationApiService.startConsultation(this.consultationId);
           }
           return of(true);
         }),

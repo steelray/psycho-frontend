@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { ISetPsychologistRatingBody } from '../../interfaces/client.interface';
+import { ISetPsychologistRatingBody, IClientConsultation } from '../../interfaces/client.interface';
 import { IPsychologist, ISubject, IUser } from '../../interfaces';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class ClientApiService extends ApiService {
     this._updateClientData$.next(null);
   }
 
-  completeRegistration(data: any): Observable<boolean> {
+  completeRegistration(data: any): Observable<IClientConsultation> {
     return this.post(`${this.controller}/complete-registration`, data);
   }
 
@@ -41,6 +41,14 @@ export class ClientApiService extends ApiService {
 
   getLastConsultationPsychologist(): Observable<{ psychologist: IPsychologist, subject: ISubject }> {
     return this.get(`${this.controller}/get-my-psychologist`);
+  }
+
+  payment(consultationId: number): Observable<string> {
+    return this.post(`${this.controller}/payment/${consultationId}`);
+  }
+
+  paymentInfo(paymentId: number): Observable<string> {
+    return this.get(`${this.controller}/payment-info?InvId=${paymentId}`);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ClientApiService, ConsultationApiService } from '@psycho/core';
+import { AfterViewChecked, Injectable, OnChanges, SimpleChanges } from '@angular/core';
+import { ClientApiService, ConsultationApiService, IClientConsultation } from '@psycho/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ClientProfileFormsService } from '../../../shared/components/client-profile-forms/client-profile-forms.service';
 
 @Injectable()
@@ -24,9 +25,20 @@ export class NewSessionFacade {
   ) { }
 
 
-  sign(): Observable<boolean> {
+  sign(): Observable<IClientConsultation> {
     const data = this.collectFormsData();
-    return this.consultationApiService.createConsultation(data);
+    return this.consultationApiService.createConsultation(data).pipe(
+      // tap(() => this.resetForms())
+    );
+  }
+
+
+
+  private resetForms(): void {
+    this.formatForm.reset();
+    this.subjectsForm.reset();
+    this.specialistForm.reset();
+    this.datetimeForm.reset();
   }
 
   private collectFormsData(): any {

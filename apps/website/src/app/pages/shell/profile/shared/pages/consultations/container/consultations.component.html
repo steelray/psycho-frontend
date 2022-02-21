@@ -11,9 +11,18 @@
     <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: pastConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>
 
-  {{timer$ | async}}
-  
-  <psycho-chat 
+  <!-- {{selectedConsultationPaymentStatus$ | async}} -->
+  <!-- <ng-container *ngIf="selectedConsultation$ | async">
+    <ng-container [ngSwitch]="selectedConsultationPaymentStatus$ | async">
+      <ng-container *ngSwitchCase="'succeeded'">
+        <psycho-go-btns></psycho-go-btns>
+      </ng-container>
+      <ng-container *ngSwitchDefault>Консультация не оплачена</ng-container>
+    </ng-container>
+  </ng-container> -->
+
+
+  <!-- <psycho-chat-old 
     *ngIf="selectedConsultation$ | async as selectedConsultation" 
     (endConsultation)="onConsultationEnd()"
     (startConsultation)="onConsultationStart()"
@@ -22,8 +31,44 @@
     [userRole]="userRole"
     [includesVideoChat]="$any(includesVideoChat$ | async)"
     [showEndChatButton]="showEndChatButton"
-  ></psycho-chat>
-
+  ></psycho-chat-old> -->
+  <ng-container *ngIf="selectedConsultation$ | async as selectedConsultation">
+      <ng-container *ngIf="receiver$ | async as receiver">
+        <div class="chat-header">
+          <div class="chat-header-btns d-flex align-items-center justify-content-end">
+          <ng-container  *ngIf="userRole === userRoles.ROLE_PSYCHOLOGIST">
+            <button 
+              *ngIf="selectedConsultation.status === statusEnum.STARTED"
+              mat-button
+              color="primary"
+              (click)="onConsultationEnd()"
+              >Завершить чат</button>
+              <button *ngIf="selectedConsultation.status === statusEnum.WAITING" mat-icon-button class="__rounded" (click)="onConsultationStart()">
+                <mat-icon svgIcon="chat"></mat-icon>
+              </button>
+            </ng-container>
+            <button 
+              *ngIf="selectedConsultation.status !== statusEnum.COMPLETED"
+              (click)="onVideoSwitch(selectedConsultation)"
+              class="__rounded" mat-icon-button>
+              <mat-icon svgIcon="video"></mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="__subtitle" *ngIf="userRole === rolesEnum.ROLE_CLIENT && selectedConsultation.status === statusEnum.WAITING">Ваша консультация начнётся {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date}} в {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date:'HH:mm'}}. Пожалуйста, не опаздывайте!</div>
+        <psycho-chat
+          [receiver]="receiver"
+          [userAuthData]="$any(userAuthData$ | async)"
+          [consultation]="$any(selectedConsultation)"
+        ></psycho-chat>
+      </ng-container>
+  </ng-container>
+  <div class="video-switching-preloader" *ngIf="videoIsSwitching$ | async">
+    <div>
+      Подождите, подключаемся к видео чату...
+    </div>
+    <mat-spinner></mat-spinner>
+  </div>
 
 </psycho-profile-chat-layout>
 
@@ -33,6 +78,15 @@
     (click)="onSelect(consultation)"
     [class.active]="(selectedConsultation$ | async)?.id === consultation.id"  
   >
+    <div class="__item-top-details d-flex justify-content-end">
+      <div class="__ics">
+        <mat-icon *ngIf="consultation.format === formats.FORMAT_FULL_VIDEO" svgIcon="video-open"></mat-icon>
+        <mat-icon *ngIf="consultation.format === formats.FORMAT_FULL_CHAT" svgIcon="time"></mat-icon>
+      </div>
+      <div *ngIf="consultation?.schedule" class="__time">
+        {{(consultation?.schedule?.datetime * 1000) | date:'yyyy.MM.dd HH:mm'}}
+      </div>
+    </div>
     <div  class="__item-header d-flex align-items-center">
       <ng-container *ngIf="consultation?.client as user;else psychologist" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
       <ng-template #psychologist>
@@ -44,7 +98,7 @@
     </div>
     <div class="__item-btns d-flex">
       <a  class="__btn" href="#" (click)="onShowInfo($event, consultation)" mat-button>Подробнее</a>
-      <a  class="__btn" href="#" 
+      <a  class="__btn __take" href="#" 
         *ngIf="!consultation?.is_taken && userRole === userRoles.ROLE_PSYCHOLOGIST" 
         (click)="onTakeToWork($event, consultation)" 
         mat-button>Взять в работу</a>
@@ -59,3 +113,4 @@
   </ng-container>
   <div class="__item-name">{{$any(user) | fio}}</div>
 </ng-template>
+

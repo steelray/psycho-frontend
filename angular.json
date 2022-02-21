@@ -416,7 +416,8 @@
           "options": {
             "routes": [
               "/"
-            ]
+            ],
+            "guessRoutes": false
           },
           "configurations": {
             "production": {

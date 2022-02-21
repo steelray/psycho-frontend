@@ -1,9 +1,15 @@
+@import "mixins";
+
 :host {
   display: block;
   .__top {
     margin-bottom: 10px;
     background: var(--medium-gray-bg);
     border-radius: 6px;
+    overflow: hidden;
+    @include for-sm {
+      padding-top: 20px;
+    }
   }
   .__img {
     position: relative;
@@ -15,6 +21,9 @@
     padding: 25px;
     flex: 1;
     min-width: 0;
+    @include for-sm {
+      padding: 15px 20px;
+    }
   }
 
   psycho-rating-stars {
@@ -29,11 +38,47 @@
   .__details {
     font-size: 17px;
     margin-bottom: 22px;
+    @include for-sm {
+      flex-direction: column;
+      font-size: 15px;
+      align-items: flex-start;
+    }
     span {
       margin-right: 35px;
     }
     mat-icon {
       margin-right: 12px;
+    }
+  }
+  psycho-picture {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    @include for-sm {
+      float: none;
+      margin: 0 auto 20px;
+    }
+  }
+}
+.__for-mob-details {
+  display: none;
+  @include for-sm {
+    display: block;
+    button {
+      display: none;
+    }
+  }
+}
+.__bottom {
+  @include for-sm {
+    > * {
+      display: none;
+    }
+    .__details {
+      display: block;
+      > *:not(button) {
+        display: none;
+      }
     }
   }
 }

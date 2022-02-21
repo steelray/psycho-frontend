@@ -1,0 +1,13 @@
+.__go-btn {
+  margin: 25px 0;
+  a {
+    margin-right: 10px;
+    color: var(--white);
+    &.ws {
+      background: #25d366;
+    }
+    &.tg {
+      background: #0088cc;
+    }
+  }
+}

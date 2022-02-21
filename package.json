@@ -44,6 +44,7 @@
     "moment": "^2.29.1",
     "ng-lazyload-image": "^9.1.0",
     "ng-starrating": "^1.0.20",
+    "ng-yandex-metrika": "^6.0.0",
     "ng2-flatpickr": "^9.0.0",
     "ngx-device-detector": "^3.0.0",
     "ngx-mask": "^12.0.0",
@@ -51,6 +52,7 @@
     "ngx-pagination": "^5.1.1",
     "ngx-spinner": "^12.0.0",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^4.4.1",
     "tslib": "^2.0.0",
     "validator": "^13.6.0",
     "zone.js": "~0.11.4"

@@ -1,0 +1,14 @@
+<ng-container *ngIf="status$ | async as status">
+  <ng-container [ngSwitch]="status">
+    <ng-container *ngSwitchCase="'canceled'">
+      Оплата отменена.
+    </ng-container>
+    <ng-container *ngSwitchCase="'pending'">
+      Оплата еще не прошла. Попробуйте обновить страницу позже
+    </ng-container>
+    <ng-container *ngSwitchCase="'succeeded'">
+      <!-- <psycho-go-btns></psycho-go-btns> -->
+      Оплата прошла успешно! Перейти в <a [routerLink]="['/profile/client/consultations']">список консултации</a>
+    </ng-container>
+  </ng-container>
+</ng-container>

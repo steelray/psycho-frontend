@@ -43,9 +43,6 @@ export class PsychologistProfileComponent {
     }
   }
 
-  onEmailChange(): void {
-    this.facade.onEmailChange();
-  }
 
   onSloganChange(currentSlogan: string): void {
     this.dialog.open(PsychologistProfileSloganChangeDialogComponent, {

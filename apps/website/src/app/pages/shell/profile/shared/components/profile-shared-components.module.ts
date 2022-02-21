@@ -17,6 +17,9 @@ import { ClientInfoDialogComponent } from './client-info-dialog/client-info-dial
 import { PaymentTextComponent } from './payment-text/payment-text.component';
 import { MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
+import { PaymentBtnComponent } from './payment-btn/payment-btn.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { GoBtnsComponent } from './go-btns/go-btns.component';
 
 const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileLayoutComponent,
@@ -26,7 +29,9 @@ const DECLARATIONS: Array<Type<any> | any[]> = [
   ProfileChatLayoutComponent,
   PsychologistInfoComponent,
   ClientInfoDialogComponent,
-  PaymentTextComponent
+  PaymentTextComponent,
+  PaymentBtnComponent,
+  GoBtnsComponent
 ];
 
 
@@ -46,7 +51,8 @@ const DECLARATIONS: Array<Type<any> | any[]> = [
     DirectivesModule,
     MatProgressSpinnerModule,
     MatRippleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ]
 })
 export class ProfileSharedComponentsModule { }

@@ -7,9 +7,19 @@
 
 .__header {
   margin-bottom: 20px;
+  @include for-sm {
+    background: #8c95d6;
+    border-radius: 6px;
+    margin: 0 -20px;
+    padding-left: 65px;
+    color: var(--white);
+  }
   .__title {
     font-size: 24px;
     font-weight: 600;
+    @include for-sm {
+      font-size: 16px;
+    }
   }
   button.__rounded {
     height: 70px;
@@ -21,6 +31,13 @@
     align-items: center;
     justify-content: center;
     margin-left: 15px;
+    @include for-sm {
+      height: 62px;
+      width: 62px;
+      mat-icon {
+        color: var(--white);
+      }
+    }
     &.active {
       background: var(--main-color);
       color: var(--white);
@@ -187,4 +204,14 @@
 
 .__subtitle {
   font-size: 15px;
+}
+
+.__consultation-completed {
+  padding: 20px;
+  width: 100%;
+  background: var(--accent-bg-medium);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
 }

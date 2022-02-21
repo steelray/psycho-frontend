@@ -21,8 +21,7 @@ export class AuthService {
 
   constructor(
     private readonly windowService: WindowService,
-    private readonly fb: FormBuilder,
-    private readonly ws: WSService
+    private readonly fb: FormBuilder
   ) {
   }
 
@@ -60,8 +59,6 @@ export class AuthService {
     if (this.windowService?.localStorage) {
       this.windowService.localStorage.removeItem(this.lsUserDataKey);
       this._userData$.next(null);
-      this.ws.onComplete();
-
     }
   }
 
@@ -100,8 +97,8 @@ export class AuthService {
         phone: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
         code: [null, [
           RxwebValidators.required(),
-          RxwebValidators.maxLength({ value: 6 }),
-          RxwebValidators.minLength({ value: 6 })
+          RxwebValidators.maxLength({ value: 4 }),
+          RxwebValidators.minLength({ value: 4 })
         ]],
         password: [null, [
           RxwebValidators.required(),
@@ -123,6 +120,39 @@ export class AuthService {
       });
     }
     return this._signupForm;
+  }
+
+  get passwordResetForm(): FormGroup {
+    return this.fb.group({
+      phone: [null, [RxwebValidators.required(), RxwebValidators.numeric()]],
+    });
+  }
+
+  get passwordResetRequestForm(): FormGroup {
+    return this.fb.group({
+      code: [null, [
+        RxwebValidators.required(),
+        RxwebValidators.maxLength({ value: 4 }),
+        RxwebValidators.minLength({ value: 4 })
+      ]],
+      password: [null, [
+        RxwebValidators.required(),
+        RxwebValidators.password({
+          validation: {
+            alphabet: true,
+            digit: true,
+            // specialCharacter: true,
+            minLength: 6,
+            maxLength: 16,
+          }
+        })
+      ]],
+      repeat_password: [null, [
+        RxwebValidators.compare({
+          fieldName: 'password'
+        })
+      ]]
+    });
   }
 
 

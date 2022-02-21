@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CONSULTATION_FORMAT } from '@psycho/core';
+import { CONSULTATION_FORMAT, IClientConsultation } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
+import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ClientProfileFormFacade } from '../client-profile-form.facade';
 
@@ -24,6 +25,7 @@ export class ClientProfileFormComponent extends WithDestroy() {
   readonly selectedPsychologist$ = this.facade.selectedPsychologist$;
   readonly selectedPsychologistGroupedSchedule$ = this.facade.selectedPsychologistGroupedSchedule$;
   readonly formats = CONSULTATION_FORMAT;
+  readonly newConsultation$ = new BehaviorSubject<IClientConsultation | null>(null);
   isEditable = true;
   isSaving = false;
 
@@ -38,7 +40,8 @@ export class ClientProfileFormComponent extends WithDestroy() {
     this.isSaving = true;
     this.facade.onCompleteRegistration().pipe(
       takeUntil(this.destroy$)
-    ).subscribe(() => {
+    ).subscribe(newConsultation => {
+      this.newConsultation$.next(newConsultation);
       stepper.next();
       this.isEditable = false;
       this.isSaving = false;

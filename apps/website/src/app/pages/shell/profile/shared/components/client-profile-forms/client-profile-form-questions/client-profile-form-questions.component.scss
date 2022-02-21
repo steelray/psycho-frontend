@@ -1,23 +1,42 @@
-:host {
-  display: block;
-}
-.__col {
-  width: 50%;
-  min-width: 400px;
-}
+@import "mixins";
 
-.form-field {
-  align-items: center;
-  width: calc(50% - 40px);
-  min-width: 450px;
-  margin-bottom: 0;
-  .__label {
-    width: 200px;
-    padding-right: 15px;
-    padding-bottom: 1.25em;
+psycho-client-profile-form-questions {
+  display: block;
+  .__col {
+    width: 50%;
+    min-width: 400px;
+    @include for-sm {
+      width: 100%;
+      min-width: 0;
+    }
   }
-  .__input {
-    flex: 1;
-    min-width: 0;
+
+  .form-field {
+    align-items: center;
+    width: calc(50% - 40px);
+    min-width: 450px;
+    margin-bottom: 0;
+    @include for-sm {
+      width: 100%;
+      min-width: 0;
+      flex-direction: column;
+    }
+    .__label {
+      width: 200px;
+      padding-right: 15px;
+      padding-bottom: 1.25em;
+      @include for-sm {
+        width: 100%;
+        margin-bottom: 5px;
+        padding: 0;
+      }
+    }
+    .__input {
+      flex: 1;
+      min-width: 0;
+      @include for-sm {
+        width: 100%;
+      }
+    }
   }
 }

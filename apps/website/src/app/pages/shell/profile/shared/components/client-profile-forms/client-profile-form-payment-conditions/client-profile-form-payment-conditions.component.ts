@@ -14,4 +14,9 @@ export class ClientProfileFormPaymentConditionsComponent {
   @Input() datetime!: number | null | undefined;
   @Input() format = CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
   readonly formats = CONSULTATION_FORMAT;
+
+
+  get isFullChat(): boolean {
+    return [CONSULTATION_FORMAT.FORMAT_FULL_CHAT, CONSULTATION_FORMAT.FORMAT_FULL_VIDEO].includes(this.format);
+  }
 }

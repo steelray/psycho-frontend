@@ -27,7 +27,6 @@
     </div>
     <div class="footer__note">
       Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: <a [routerLink]="['srocnaa-psihologiceskaa-pomos']">срочная психологическая помощь</a>.
-      
     </div>
     <div class="footer__right">
       <a *ngIf="isHomePage" class="__en" [routerLink]="['/auth', 'login']" [queryParams]="{psychologist: true}" mat-raised-button color="primary" size="medium">Вход для специалистов</a>

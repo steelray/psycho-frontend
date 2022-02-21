@@ -75,7 +75,6 @@ export class ClientProfileFormsService {
       this._psychologists$ = this.subjectsForm.get('subject_id')?.valueChanges.pipe(
         filter(id => !!id),
         switchMap(id => this.psychologistApiService.fetchAll({
-          expand: 'education,description',
           subject_id: id
         }).pipe(
           shareReplay()
@@ -110,7 +109,7 @@ export class ClientProfileFormsService {
           formData.psychologist_id = res[1]?.id;
           return formData;
         }),
-        switchMap(res => this.psychologistApiService.getMonthSchedule(res.year, res.month + 1, res.psychologist_id)),
+        switchMap(res => this.psychologistApiService.getMonthSchedule(res.year, res.month + 1, res.psychologist_id, true)),
         map(res => {
           const arr: IGroupedSchedule[] = [];
           res.forEach((item: IPsychologistSchedule) => {

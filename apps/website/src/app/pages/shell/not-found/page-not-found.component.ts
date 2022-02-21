@@ -21,11 +21,11 @@ export class PageNotFoundComponent implements OnInit {
     @Optional() @Inject(REQUEST) private request: Request,
     @Optional() @Inject(RESPONSE) private response: Response,
     @Inject(PLATFORM_ID) private platformId: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (isPlatformServer(this.platformId)) {
-      this.response.status(404);
+      this.response?.status(404);
     }
   }
 }
