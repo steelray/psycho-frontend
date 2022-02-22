@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISelectOption, Post, PostApiService } from '@psycho/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'any'
@@ -17,9 +17,9 @@ export class PostFacade {
   }
 
   get post$(): Observable<Post> {
-    return this.activatedRoute.data.pipe(
-      tap(data => console.log(data)),
-      map(data => data?.post)
+    return this.activatedRoute.params.pipe(
+      map(params => params.slug),
+      switchMap(slug => this.getPost(slug))
     );
   }
 
@@ -44,10 +44,13 @@ export class PostFacade {
         title: category.title
       })
     }
+    // console.log(post);
+
     items.push({
       value: null,
       title: post.title
-    })
+    });
+
     this._breadcrumbsItems$.next(items);
   }
 

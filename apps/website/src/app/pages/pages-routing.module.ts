@@ -39,9 +39,9 @@ const ROUTES: Routes = [
       {
         path: ':slug',
         loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
-        resolve: {
-          post: PostResolver
-        }
+        // resolve: {
+        //   post: PostResolver
+        // }
       },
     ]
   }

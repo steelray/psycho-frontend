@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@psycho/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HTTP_CODES } from '../../enums';
 import { HttpErrorService } from '../shared/http-error.service';
@@ -42,7 +42,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
 
-        if (error.error instanceof ErrorEvent) {
+        if (error.error instanceof HttpErrorResponse) {
+          console.log('wowwowowowowowowowowowowowo');
+
           // client-side error
           errorMessage = `Error: ${error.error.message}`;
 
@@ -55,10 +57,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.router.navigate(['/']);
             return throwError(errorMessage);
           } else if (error.status === HTTP_CODES.NOT_FOUND) {
-            this.router.navigateByUrl('/404', {
-              skipLocationChange: true,
-            });
-            return throwError(errorMessage);
+            this.router.navigate(['/404'], { skipLocationChange: true });
+            return throwError(null);
+            // return throwError(errorMessage);
           }
 
 
