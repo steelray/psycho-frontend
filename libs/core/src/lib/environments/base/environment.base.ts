@@ -9,6 +9,6 @@ export const environmentBase: IEnvironment = {
   apiEndpoint: 'http://psycho.loc/api',
   // apiEndpoint: 'http://server.zarland.ru/api',
   // apiEndpoint: 'https://server.psychologycorp.ru/api',
-  // wsEndpoint: 'http://localhost:4000'
-  wsEndpoint: 'https://ws.psychologycorp.ru/'
+  wsEndpoint: 'http://localhost:4000'
+  // wsEndpoint: 'https://ws.psychologycorp.ru/'
 };

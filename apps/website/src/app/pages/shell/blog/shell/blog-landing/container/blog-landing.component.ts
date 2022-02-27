@@ -1,9 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IPostCategory, Post } from '@psycho/core';
-import { WithDestroy } from '@psycho/utils';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Post } from '@psycho/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { BlogLandingFacade } from '../blog-landiing.facade';
 
 @Component({
@@ -14,12 +11,12 @@ import { BlogLandingFacade } from '../blog-landiing.facade';
   providers: [BlogLandingFacade]
 })
 export class BlogLandingComponent {
-  category$!: Observable<IPostCategory>; // current category title(if category param isset in route)
   posts$: Observable<Post[] | null> = this.facade.posts$;
   totalCount$ = this.facade.totalCount$;
   page$ = this.facade.currentPage$;
   readonly limit = 13;
   readonly updateList$ = new BehaviorSubject<null>(null);
+  readonly categorySlug$ = this.facade.categorySlug$;
 
   constructor(
     private readonly facade: BlogLandingFacade

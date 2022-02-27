@@ -42,6 +42,12 @@ export class BlogLandingFacade {
     );
   }
 
+  get categorySlug$(): Observable<string> {
+    return this.activatedRoute.params.pipe(
+      map(params => params.category)
+    );
+  }
+
   getCategory(slug: string): Observable<IPostCategory> {
     return this.postApiService.getCategory(slug);
   }

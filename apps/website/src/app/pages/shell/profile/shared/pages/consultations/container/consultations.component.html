@@ -11,57 +11,37 @@
     <ng-container [ngTemplateOutlet]="consultations" [ngTemplateOutletContext]="{$implicit: pastConsultations$ | async, intervieweesOnline: intervieweesOnline}"></ng-container>
   </ng-container>
 
-  <!-- {{selectedConsultationPaymentStatus$ | async}} -->
-  <!-- <ng-container *ngIf="selectedConsultation$ | async">
-    <ng-container [ngSwitch]="selectedConsultationPaymentStatus$ | async">
-      <ng-container *ngSwitchCase="'succeeded'">
-        <psycho-go-btns></psycho-go-btns>
-      </ng-container>
-      <ng-container *ngSwitchDefault>Консультация не оплачена</ng-container>
-    </ng-container>
-  </ng-container> -->
-
-
-  <!-- <psycho-chat-old 
-    *ngIf="selectedConsultation$ | async as selectedConsultation" 
-    (endConsultation)="onConsultationEnd()"
-    (startConsultation)="onConsultationStart()"
-    [receiver]="$any(receiver$ | async)"
-    [consultation]="selectedConsultation"
-    [userRole]="userRole"
-    [includesVideoChat]="$any(includesVideoChat$ | async)"
-    [showEndChatButton]="showEndChatButton"
-  ></psycho-chat-old> -->
+  
   <ng-container *ngIf="selectedConsultation$ | async as selectedConsultation">
-      <ng-container *ngIf="receiver$ | async as receiver">
-        <div class="chat-header">
-          <div class="chat-header-btns d-flex align-items-center justify-content-end">
-          <ng-container  *ngIf="userRole === userRoles.ROLE_PSYCHOLOGIST">
-            <button 
-              *ngIf="selectedConsultation.status === statusEnum.STARTED"
-              mat-button
-              color="primary"
-              (click)="onConsultationEnd()"
-              >Завершить чат</button>
-              <button *ngIf="selectedConsultation.status === statusEnum.WAITING" mat-icon-button class="__rounded" (click)="onConsultationStart()">
-                <mat-icon svgIcon="chat"></mat-icon>
-              </button>
-            </ng-container>
-            <button 
-              *ngIf="selectedConsultation.status !== statusEnum.COMPLETED"
-              (click)="onVideoSwitch(selectedConsultation)"
-              class="__rounded" mat-icon-button>
-              <mat-icon svgIcon="video"></mat-icon>
-            </button>
-          </div>
-        </div>
-        <div class="__subtitle" *ngIf="userRole === rolesEnum.ROLE_CLIENT && selectedConsultation.status === statusEnum.WAITING">Ваша консультация начнётся {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date}} в {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date:'HH:mm'}}. Пожалуйста, не опаздывайте!</div>
-        <psycho-chat
-          [receiver]="receiver"
-          [userAuthData]="$any(userAuthData$ | async)"
-          [consultation]="$any(selectedConsultation)"
-        ></psycho-chat>
-      </ng-container>
+    <div class="chat-header">
+      <div class="chat-header-btns d-flex align-items-center justify-content-end">
+      <ng-container  *ngIf="userRole === userRoles.ROLE_PSYCHOLOGIST">
+        <button 
+          *ngIf="selectedConsultation.status === statusEnum.STARTED"
+          mat-button
+          color="primary"
+          (click)="onConsultationEnd()"
+          >Завершить чат</button>
+          <button *ngIf="selectedConsultation.status === statusEnum.WAITING" mat-icon-button class="__rounded" (click)="onConsultationStart()">
+            <mat-icon svgIcon="chat"></mat-icon>
+          </button>
+        </ng-container>
+        <button 
+          *ngIf="selectedConsultation.status !== statusEnum.COMPLETED && selectedConsultation?.format !== formats.FORMAT_EXPRESS"
+          (click)="onVideoSwitch(selectedConsultation)"
+          class="__rounded" mat-icon-button>
+          <mat-icon svgIcon="video"></mat-icon>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngIf="receiver$ | async as receiver">
+      <div class="__subtitle" *ngIf="userRole === rolesEnum.ROLE_CLIENT && selectedConsultation.status === statusEnum.WAITING">Ваша консультация начнётся {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date}} в {{$any(selectedConsultation?.schedule?.datetime) * 1000 | date:'HH:mm'}}. Пожалуйста, не опаздывайте!</div>
+      <psycho-chat
+        [receiver]="receiver"
+        [userAuthData]="$any(userAuthData$ | async)"
+        [consultation]="$any(selectedConsultation)"
+      ></psycho-chat>
+    </ng-container>
   </ng-container>
   <div class="video-switching-preloader" *ngIf="videoIsSwitching$ | async">
     <div>
@@ -92,7 +72,12 @@
       <ng-template #psychologist>
         <ng-container *ngIf="consultation?.psychologist as user;else noPsychologistYet" [ngTemplateOutlet]="userData" [ngTemplateOutletContext]="{$implicit: user, onlines: onlines}"></ng-container>
         <ng-template #noPsychologistYet>
-          Психолог еще не выбран
+          <div class="d-flex spinner">
+            <span>
+              Ожидайте, психолог ответит вам в течение 10-15 минут
+            </span>
+            <mat-spinner [diameter]="20"></mat-spinner>
+          </div>
         </ng-template>
       </ng-template>
     </div>

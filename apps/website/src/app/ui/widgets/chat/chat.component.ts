@@ -64,7 +64,7 @@ export class ChatComponent implements OnDestroy, AfterViewInit {
     this.socketService.sendMessage({
       message,
       consultation_id: this.consultation?.id,
-      receiver_id: this.receiver.id
+      receiver_id: this.receiver?.id
     })
     this.messageContent = null;
   }

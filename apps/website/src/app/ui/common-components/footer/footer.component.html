@@ -39,8 +39,8 @@
 <div class="footer__bottom">
   <div class="container d-flex justify-content-between align-items-center">
     <div class="copyright">
-      &copy; 2021 Корпорация Психологии: консультации психолога онлайн
+      &copy; {{ year }} Корпорация Психологии: консультации психолога онлайн
     </div>
-    <a *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
+    <a rel="nofollow" *ngFor="let link of linkItems" [routerLink]="link.url">{{link.label}}</a>
   </div>
 </div>

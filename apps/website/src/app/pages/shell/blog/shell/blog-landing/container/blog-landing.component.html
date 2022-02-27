@@ -1,5 +1,5 @@
 <ng-container  *ngIf="posts$ | async as posts">
-  <h1 class="title-1" *ngIf="posts?.length">{{posts[0]?.category?.title}}</h1>
+  <h1 class="title-1" *ngIf="(categorySlug$ | async) && posts?.length">{{posts[0]?.category?.title}}</h1>
   <div class="posts">
     <psycho-post-item-primary 
       *ngFor="let post of posts | paginate: { itemsPerPage: limit, currentPage: $any(page$ | async), totalItems: $any(totalCount$ | async) };let i = index;trackBy: trackByFn"

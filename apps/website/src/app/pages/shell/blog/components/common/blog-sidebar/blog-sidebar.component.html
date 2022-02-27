@@ -1,6 +1,6 @@
 <div *ngIf="ads && ads[0]" [innerHTML]="ads[0] | safe:'html'" class="sb-block-1"></div>
 <div class="new-articles">
-  <h3 class="title-3">Новые статьи</h3>
+  <div class="title-3">Новые статьи</div>
   <psycho-post-item-secondary 
     *ngFor="let article of newArticles;let i = index; trackBy: trackByFn" 
     [post]="article"

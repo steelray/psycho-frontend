@@ -87,6 +87,9 @@ export class ConsultationsFacade extends WithDestroy() {
 
 
   onConsultationSelect(consultation: IClientConsultation | null): void {
+    if (this._selectedConsultation$.getValue()?.id === consultation?.id) {
+      return;
+    }
     if (consultation?.status === CONSULTATION_STATUS.STARTED) {
       this._startTimer$.next();
     }
@@ -175,7 +178,21 @@ export class ConsultationsFacade extends WithDestroy() {
 
   private getMessagesHistory(): void {
     combineLatest([
-      this.receiver$,
+      this.receiver$.pipe(
+        switchMap(res => {
+          if (!res) {
+            return this.selectedConsultation$.pipe(
+              switchMap(consultation => {
+                if (consultation?.format === CONSULTATION_FORMAT.FORMAT_EXPRESS) {
+                  return this.userAuthData$;
+                }
+                return of(null);
+              })
+            );
+          }
+          return of(res);
+        }),
+      ),
       this._messagesPage$
     ]).pipe(
       map(([receiver, page]) => ({ receiver, page })),

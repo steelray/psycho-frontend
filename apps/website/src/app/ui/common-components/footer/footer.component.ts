@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit {
   @Input() linkItems: IMenuItem[] = [];
   @Input() isHomePage = false;
   @Input() contacts!: IContacts;
+  readonly year = new Date().getFullYear();
   constructor() { }
 
   ngOnInit(): void {

@@ -224,3 +224,14 @@
     margin-bottom: 20px;
   }
 }
+.spinner {
+  align-items: flex-end;
+  span {
+    min-width: 0;
+    flex: 1;
+    margin-right: 10px;
+  }
+  mat-spinner {
+    color: var(--white);
+  }
+}
