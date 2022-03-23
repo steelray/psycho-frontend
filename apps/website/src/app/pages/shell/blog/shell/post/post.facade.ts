@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISelectOption, Post, PostApiService } from '@psycho/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -19,7 +19,8 @@ export class PostFacade {
   get post$(): Observable<Post> {
     return this.activatedRoute.params.pipe(
       map(params => params.slug),
-      switchMap(slug => this.getPost(slug))
+      switchMap(slug => this.getPost(slug)),
+
     );
   }
 
@@ -29,9 +30,26 @@ export class PostFacade {
 
   getPost(slug: string): Observable<Post> {
     return this.postApiService.fetchOne(slug).pipe(
+      switchMap(post => {
+        if (post?.author) {
+          return this.updatePostView(post.slug).pipe(
+            map(res => {
+              if (res) {
+                post.views = post.views ? post.views + 1 : 1;
+              }
+              return post;
+            })
+          )
+        }
+        return of(post);
+      }),
       map(post => new Post(post)),
-      tap(post => this.generateBreadcrumbItems(post))
+      tap(post => this.generateBreadcrumbItems(post)),
     );
+  }
+
+  private updatePostView(slug: string): Observable<boolean> {
+    return this.postApiService.updatePostView(slug);
   }
 
   private generateBreadcrumbItems(post: Post): void {

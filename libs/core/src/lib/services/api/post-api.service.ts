@@ -28,4 +28,8 @@ export class PostApiService extends ApiService {
     return this.get(`categories/${slug}`);
   }
 
+  updatePostView(slug: string): Observable<boolean> {
+    return this.post(`${this.controller}/view-count`, { slug });
+  }
+
 }

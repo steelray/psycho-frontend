@@ -2,10 +2,10 @@ import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, PLATFORM_ID, Self } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { AuthService, HttpErrorService, ScriptService, SeoService, WindowService, WSService, WS_COMMANDS } from '@psycho/core';
+import { AuthService, HttpErrorService, ScriptService, SeoService } from '@psycho/core';
 import { WithDestroy } from '@psycho/utils';
 import { SnackbarService } from '@psycho/web/features';
-import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { SocketService } from '../ui/widgets/chat/shared/services/socket.service';
 
 @Component({

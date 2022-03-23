@@ -9,10 +9,11 @@
     padding: 0 15px;
   }
   > div {
-    width: calc(20% - 12px);
+    width: calc(25% - 12px);
     margin: 0 6px 12px;
     cursor: pointer;
     position: relative;
+    font-size: 16px;
     @include for-sm {
       width: 100%;
       margin: 0 0 12px;

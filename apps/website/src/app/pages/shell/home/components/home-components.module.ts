@@ -45,7 +45,8 @@ const COMPONENTS = [
     CarouselModule,
     MatExpansionModule,
     MatRippleModule,
-    UIModule
+    UIModule,
+    PipesModule
   ]
 })
 export class HomeComponentsModule { }

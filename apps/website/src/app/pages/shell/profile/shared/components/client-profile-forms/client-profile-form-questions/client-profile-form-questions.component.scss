@@ -2,6 +2,9 @@
 
 psycho-client-profile-form-questions {
   display: block;
+  form {
+    flex-direction: column;
+  }
   .__col {
     width: 50%;
     min-width: 400px;
@@ -13,18 +16,24 @@ psycho-client-profile-form-questions {
 
   .form-field {
     align-items: center;
-    width: calc(50% - 40px);
+    width: 100%;
     min-width: 450px;
     margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 720px;
     @include for-sm {
       width: 100%;
       min-width: 0;
       flex-direction: column;
     }
     .__label {
-      width: 200px;
-      padding-right: 15px;
-      padding-bottom: 1.25em;
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      span {
+        color: red;
+      }
       @include for-sm {
         width: 100%;
         margin-bottom: 5px;
@@ -34,9 +43,7 @@ psycho-client-profile-form-questions {
     .__input {
       flex: 1;
       min-width: 0;
-      @include for-sm {
-        width: 100%;
-      }
+      width: 100%;
     }
   }
 }

@@ -29,7 +29,7 @@
     <psycho-select
       label="Выберите месяц"
       [control]="$any(scheduleForm.get('month'))"
-      [options]="monthsOptions"></psycho-select>
+      [options]="$any(monthsOptions$ | async)"></psycho-select>
   </div>
   <div class="__days">
     <div class="__field" *ngFor="let item of schedule">

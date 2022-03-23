@@ -6,20 +6,21 @@
       </div>
       <div class="footer__nets">
         <div class="d-flex" *ngIf="contacts">
-          <a [href]="contacts?.facebook | safe:'url'" target="_blank">
+          <a *ngIf="contacts?.facebook" [href]="contacts?.facebook | safe:'url'" target="_blank">
             <img src="/assets/img/fb.png">
           </a>
-          <a [href]="contacts?.vk | safe:'url'" target="_blank">
+          <a *ngIf="contacts?.vk" [href]="contacts?.vk | safe:'url'" target="_blank">
             <img src="/assets/img/vk.png">
           </a>
-          <a [href]="contacts?.twitter | safe:'url'" target="_blank">
+          <a *ngIf="contacts?.twitter" [href]="contacts?.twitter | safe:'url'" target="_blank">
             <img src="/assets/img/tw.png">
           </a>
-          <a [href]="contacts?.telegram | safe:'url'" target="_blank">
+          <a *ngIf="contacts?.telegram" [href]="contacts?.telegram | safe:'url'" target="_blank">
             <img src="/assets/img/tg.png">
           </a>
-          <a [href]="contacts?.instagram | safe:'url'" target="_blank">
-            <img src="/assets/img/inst.png">
+          <a *ngIf="contacts?.instagram" [href]="contacts?.instagram | safe:'url'" target="_blank">
+            <!-- <img src="/assets/img/inst.png"> -->
+            <mat-icon svgIcon="instagram"></mat-icon>
           </a>
         </div>
         

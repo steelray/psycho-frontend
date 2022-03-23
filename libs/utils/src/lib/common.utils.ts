@@ -243,11 +243,16 @@ export function monthsList(format = 'MMM', locale = 'ru'): string[] {
 }
 
 
-export function monthsOptions(): ISelectOption[] {
-  return monthsList().map((m, i) => ({
+export function monthsOptions(actual = false): ISelectOption[] {
+  const res = monthsList().map((m, i) => ({
     value: i,
     title: m
   }));
+  if (actual) {
+    const currentMonth = new Date().getMonth();
+    return res.filter(i => i.value >= currentMonth);
+  }
+  return res;
 }
 
 export function yearOptions(): ISelectOption[] {

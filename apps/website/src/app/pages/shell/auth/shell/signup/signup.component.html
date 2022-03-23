@@ -9,15 +9,15 @@
       <a [routerLink]="['/auth/login']">Войти</a>
     </div>
     <div class="__note">
-      Вводя свой номер, вы принимаете <a href="#">условия пользовательского соглашения</a> , даете согласие на обработку персональных данных
+      Вводя свой номер, вы принимаете <a href="/polzovatelskoe-soglasenie" target="_blank">условия пользовательского соглашения</a>, <a target="_blank" href="/dogovor-oferty-na-konsultacionnye-uslugi"> договор оферты</a>, <a href="/politika-konfidencialnosti" target="_blank">политику конфиденциальности</a> 
     </div>
   </form>
   <div class="reg-desc">
     <div class="__title">Подберем для вас специалиста <br>за 3 простых шага</div>
     <ul class="radio-list">
-      <li>Заполните анкету</li>
-      <li>Выберите терапевта из рекомендованных</li>
-      <li>Запишитесь на подходящее<br> время</li>
+      <li>Выберите формат (чат, видео или экспресс)</li>
+      <li>Выберите тему консультации и терапевта</li>
+      <li>Запишитесь на подходящее время</li>
     </ul>
   </div>
 </div>
@@ -28,7 +28,7 @@
     </p>
     <psycho-input 
       [control]="$any(controls.code)"
-      placeholder="Код из смс"
+      placeholder="Код"
       class="code"></psycho-input>
     <psycho-input 
       [control]="$any(controls.password)"

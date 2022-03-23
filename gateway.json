@@ -1,0 +1,12 @@
+{
+    "name": "psycho-prod",
+    "script": "server/main.js",
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "out_file": ".logs/psycho.log",
+    "error_file": ".logs/psycho_error.log",
+    "interpreter": "node@14.17.6",
+    "autorestart": true,
+    "env": {
+        "NODE_ENV": "production"
+    }
+}

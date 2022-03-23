@@ -52,7 +52,6 @@ export class TelInputComponent extends BaseFormFieldComponent implements OnChang
 
   ngOnInit(): void {
     super.ngOnInit();
-    console.log(this.control);
 
 
     this.control.addValidators(this.phoneNumberValidate.bind(this));

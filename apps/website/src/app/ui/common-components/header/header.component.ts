@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { IMenuItem, IUserAuthData } from '@psycho/core';
+import { IContacts, IMenuItem, IUserAuthData } from '@psycho/core';
 
 @Component({
   selector: 'psycho-header',
@@ -14,6 +14,7 @@ export class HeaderComponent {
   @Input() isAuthPage = false;
   @Input() isProfilePage = false;
   @Input() linkItems!: IMenuItem[];
+  @Input() contacts!: IContacts;
   @Output() logout = new EventEmitter();
 
   menuOpened = false;

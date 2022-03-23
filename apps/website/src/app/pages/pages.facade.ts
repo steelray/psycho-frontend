@@ -80,7 +80,9 @@ export class PagesFacade {
 
   get contacts$(): Observable<IContacts> {
     if (!this._contacts$) {
-      this._contacts$ = this.commonDataApiService.contacts$;
+      this._contacts$ = this.commonDataApiService.contacts$.pipe(
+        shareReplay()
+      );
     }
 
     return this._contacts$;

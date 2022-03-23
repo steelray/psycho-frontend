@@ -16,17 +16,20 @@
       <div class="hr"></div>
       <ng-container *ngIf="!isHomePage">
         <div class="blog-nets">
-          <a mat-icon-button href="#">
-            <mat-icon svgIcon="fb"></mat-icon>
+          <a mat-icon-button target="_blank" [href]="contacts?.vk | safe:'url'">
+            <mat-icon svgIcon="vk"></mat-icon>
           </a>
-          <a mat-icon-button href="#">
+          <a mat-icon-button target="_blank" [href]="contacts?.instagram | safe:'url'">
             <mat-icon svgIcon="instagram"></mat-icon>
           </a>
-          <a mat-icon-button href="#">
+          <a mat-icon-button target="_blank" [href]="contacts?.telegram | safe:'url'">
             <mat-icon svgIcon="tg"></mat-icon>
           </a>
         </div>
-        <a mat-raised-button color="primary" class="__begin-btn" [routerLink]="['/auth', 'signup']">Начать терапию</a>
+        <a *ngIf="!userData;else newSessionBtn" mat-raised-button  (click)="onMenuToggle()"  color="primary" class="__begin-btn" [routerLink]="['/auth', 'signup']">Начать терапию</a>
+        <ng-template #newSessionBtn>
+          <a  mat-raised-button color="primary" class="__begin-btn" (click)="onMenuToggle()" [routerLink]="['/profile/client/new-session']">Новая запись</a>
+        </ng-template>
       </ng-container>
 
       <div class="__links-for-mob">

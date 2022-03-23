@@ -1,10 +1,13 @@
 <div class="container">
-  <div class="psychologists-list">
+  <div class="psychologists-list" #carousel>
     <owl-carousel-o 
-      [options]="customOptions">
-      <ng-template *ngFor="let psychologist of psychologists" carouselSlide>
+      
+      [options]="customOptions"
+      (changed)="onCarouselChange($event)"
+    >
+      <ng-template *ngFor="let psychologist of psychologists;let i = index" carouselSlide>
         
-        <div class="__item d-flex align-items-center">
+        <div class="__item d-flex align-items-center" id="ps-{{i}}">
           <div class="__desc">
             <psycho-rating-stars [value]="$any(psychologist.rating)"></psycho-rating-stars>
             <div class="__name">{{psychologist | fio}}</div>
@@ -20,11 +23,13 @@
                 Диплом
               </span>
             </div>
-            
-            <div class="__subtitle">Основные навыки</div>
+            <div class="__subtitle">Образование</div>
+            <div  class="__education" [innerHTML]="psychologist.education | safe:'html'">
+            </div>
+            <!-- <div class="__subtitle">Основные навыки</div>
             <div *ngIf="psychologist?.subjects?.length" class="__subjects">
               <span *ngFor="let subject of psychologist.subjects" [innerHTML]="subject.title | safe:'html'"></span>
-            </div>
+            </div> -->
           </div>
           <psycho-picture [origin]="psychologist.avatar" [alt]="psychologist | fio" class="__img">
           </psycho-picture>

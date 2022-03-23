@@ -38,7 +38,6 @@
     font-weight: 600;
     font-size: 20px;
     span {
-      border-bottom: 1px dashed var(--base-font-color);
       margin-right: 20px;
     }
   }
@@ -78,6 +77,9 @@
   font-weight: 600;
   cursor: pointer;
   border-bottom: 1px dashed;
+  &:hover {
+    border-bottom-color: transparent;
+  }
   input {
     display: none;
   }
