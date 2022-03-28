@@ -18,9 +18,7 @@ export class PostFacade {
 
   get post$(): Observable<Post> {
     return this.activatedRoute.params.pipe(
-      map(params => params.slug),
-      switchMap(slug => this.getPost(slug)),
-
+      switchMap(params => this.getPost(params?.slug, params?.menu))
     );
   }
 
@@ -28,8 +26,9 @@ export class PostFacade {
     return this._breadcrumbsItems$.asObservable();
   }
 
-  getPost(slug: string): Observable<Post> {
-    return this.postApiService.fetchOne(slug).pipe(
+  getPost(slug: string, menu?: string): Observable<Post> {
+    const params = menu ? { menu } : {};
+    return this.postApiService.fetchOne(slug, params).pipe(
       switchMap(post => {
         if (post?.author) {
           return this.updatePostView(post.slug).pipe(

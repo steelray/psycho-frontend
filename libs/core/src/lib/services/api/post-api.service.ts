@@ -13,10 +13,12 @@ export class PostApiService extends ApiService {
     return this.get(`${this.controller}`, { params, observe: HttpObserve.RESPONSE });
   }
 
-  fetchOne(slug: string, params?: { expand: string }): Observable<IPost> {
+  fetchOne(slug: string, params?: { expand?: string, menu?: string | null }): Observable<IPost> {
     if (!params) {
-      params = { expand: 'content,category,related_posts' };
+      params = {};
     }
+    params = { expand: 'content,category,related_posts', ...params };
+
     return this.get(`page/${slug}`, { params });
   }
 

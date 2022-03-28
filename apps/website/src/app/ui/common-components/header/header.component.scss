@@ -28,6 +28,8 @@
     z-index: 999;
   }
   &__menu {
+    display: flex;
+    white-space: nowrap;
     @include for-sm {
       transform: translate(-120%, 0);
       visibility: hidden;
@@ -42,6 +44,8 @@
       background: #f1eeff;
       z-index: 999;
       transition: transform 0.3s;
+      display: block;
+      white-space: normal;
 
       &.active {
         display: block;
