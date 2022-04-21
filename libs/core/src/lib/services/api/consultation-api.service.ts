@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { CONSULTATION_FORMAT, CONSULTATION_STATUS, CONSULTATION_USER_ROLE } from '../../enums';
+import { CONSULTATION_FORMAT, CONSULTATION_FORMAT_PRICE, CONSULTATION_STATUS, CONSULTATION_USER_ROLE } from '../../enums';
 import { IClientConsultation, IClientConsultationCreateBody } from '../../interfaces';
 import { ApiService } from './api.service';
 
@@ -37,8 +37,8 @@ export class ConsultationApiService extends ApiService {
     return this.post(`${this.controller}/end/${consultationId}`);
   }
 
-  getConsultationPrice(format: 1 | 2 | 3): Observable<number> {
-    return of(format === 1 ? 2490 : 250);
+  getConsultationPrice(format: CONSULTATION_FORMAT): Observable<number> {
+    return of([CONSULTATION_FORMAT.FORMAT_FULL_CHAT, CONSULTATION_FORMAT.FORMAT_FULL_VIDEO].includes(format) ? CONSULTATION_FORMAT_PRICE.FORMT_FULL_PRICE : CONSULTATION_FORMAT_PRICE.FORMT_EXPRESS_PRICE);
   }
 
   takeToWork(id: number): Observable<boolean | any> {

@@ -13,6 +13,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { ChatWidgetModule } from '../../../../libs/features/src/lib/widgets/chat/chat.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MetrikaModule } from 'ng-yandex-metrika';
+import { MainComponent } from './main/main.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -45,7 +46,7 @@ if (environment.production) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MainComponent],
   imports: IMPORTS,
   providers: [
     {

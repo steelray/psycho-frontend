@@ -36,27 +36,27 @@ const ROUTES: Routes = [
         path: '404',
         component: PageNotFoundComponent
       },
-      {
-        path: ':slug',
-        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
-        // resolve: {
-        //   post: PostResolver
-        // }
-      },
-      {
-        path: ':menu/:slug',
-        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
-        // resolve: {
-        //   post: PostResolver
-        // }
-      },
-      {
-        path: ':slug',
-        loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
-        // resolve: {
-        //   post: PostResolver
-        // }
-      },
+      // {
+      //   path: ':slug',
+      //   loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
+      //   // resolve: {
+      //   //   post: PostResolver
+      //   // }
+      // },
+      // {
+      //   path: ':menu/:slug',
+      //   loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
+      //   // resolve: {
+      //   //   post: PostResolver
+      //   // }
+      // },
+      // {
+      //   path: ':slug',
+      //   loadChildren: () => import('./shell/blog/shell/post/post.module').then(m => m.PostModule),
+      //   // resolve: {
+      //   //   post: PostResolver
+      //   // }
+      // },
     ]
   }
 ];

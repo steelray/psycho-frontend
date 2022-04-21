@@ -10,7 +10,7 @@ import { CONSULTATION_FORMAT, IPsychologist } from '@psycho/core';
 })
 export class ClientProfileFormPaymentConditionsComponent {
   @Input() psychologist!: IPsychologist;
-  @Input() price = 2490;
+  @Input() price = 1999;
   @Input() datetime!: number | null | undefined;
   @Input() format = CONSULTATION_FORMAT.FORMAT_FULL_CHAT;
   readonly formats = CONSULTATION_FORMAT;
