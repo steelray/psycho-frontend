@@ -4,7 +4,7 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core';
-import { APP_BASE_HREF, CommonModule } from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
 
 // libs
 import { throwIfAlreadyLoaded } from '@psycho/utils';

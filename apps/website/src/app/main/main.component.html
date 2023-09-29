@@ -1,6 +1,7 @@
 <div id="main">
     <header class="header">
         <div class="container d-flex align-items-center justify-content-between">
+
             <a href="#" class="logo"></a>
             <div class="header__menu">
                 <a href="#">Задать вопрос</a>
@@ -14,8 +15,11 @@
                     <a href="polzovatelskoe-soglasenie" href="/polzovatelskoe-soglasenie" class="ng-star-inserted">Пользовательское соглашение </a>
                     <a href="politika-konfidencialnosti" href="/politika-konfidencialnosti" class="ng-star-inserted">Политика конфиденциальности</a>
                 </div>
-                <a href="#" class="btn btn-primary">Войти</a>
             </div>
+            <a href="#" class="btn btn-primary">Войти</a>
+            <button class="header-menu-toggle">
+                <span></span>
+              </button>
         </div>
     </header>
     <main class="content">
@@ -203,12 +207,426 @@
                         </ul>
                         <div class="text-right">
                             <a href="#" class="btn btn-primary">Записаться на консультацию</a>
-                            <a class="btn" class="__ask-question-btn">Задать вопрос бесплатно</a>
+                            <a class="btn __ask-question-btn">Задать вопрос бесплатно</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="__footer-bg"></div>
         </div>
+        <div class="home-trusted-specs">
+            <div class="container">
+                <div class="psychologists-list">
+                    <div class="specs-carousel owl-carousel">
+
+                        <div class="__item d-flex align-items-center" id="ps-1">
+                            <div class="__desc">
+                                <div class="stars __4.5">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+                                <div class="__name">First Last Middle</div>
+                                <div class="__slogan">“Это текст слогана”
+                                </div>
+                                <div class="__details d-flex  align-items-center">
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00156 3.3999C9.99568 3.3999 10.8016 4.16102 10.8016 5.0999V6.7999H12.6016C13.5957 6.7999 14.4016 7.56102 14.4016 8.4999C14.4016 9.43879 13.5957 10.1999 12.6016 10.1999H10.8016V11.8999C10.8016 12.8388 9.99568 13.5999 9.00156 13.5999C8.00745 13.5999 7.20156 12.8388 7.20156 11.8999V10.1999H5.40156C4.40745 10.1999 3.60156 9.43879 3.60156 8.4999C3.60156 7.56102 4.40745 6.7999 5.40156 6.7999H7.20156V5.0999C7.20156 4.16102 8.00745 3.3999 9.00156 3.3999ZM9.00156 20.3999C9.99568 20.3999 10.8016 21.161 10.8016 22.0999V23.7999H12.6016C13.5957 23.7999 14.4016 24.561 14.4016 25.4999C14.4016 26.4388 13.5957 27.1999 12.6016 27.1999H10.8016V28.8999C10.8016 29.8388 9.99568 30.5999 9.00156 30.5999C8.00745 30.5999 7.20156 29.8388 7.20156 28.8999V27.1999H5.40156C4.40745 27.1999 3.60156 26.4388 3.60156 25.4999C3.60156 24.561 4.40745 23.7999 5.40156 23.7999H7.20156V22.0999C7.20156 21.161 8.00745 20.3999 9.00156 20.3999Z" fill="#B6BDF0"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.6015 3.3999C22.4182 3.3999 23.1325 3.91922 23.3415 4.66489L25.4641 12.2381L31.501 15.5274C32.0582 15.831 32.4015 16.3924 32.4015 16.9999C32.4015 17.6074 32.0582 18.1688 31.501 18.4724L25.4641 21.7617L23.3415 29.3349C23.1325 30.0806 22.4182 30.5999 21.6015 30.5999C20.7848 30.5999 20.0704 30.0806 19.8614 29.3349L17.7388 21.7617L11.7021 18.4724C11.1449 18.1688 10.8016 17.6074 10.8016 16.9999C10.8016 16.3924 11.1449 15.831 11.7021 15.5274L17.7388 12.2381L19.8614 4.66489C20.0704 3.91922 20.7848 3.3999 21.6015 3.3999Z" fill="#B6BDF0"/>
+                                    </svg>
+                              </i>
+                              Опыт работы 3 года
+                            </span>
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="31" height="35" viewBox="0 0 31 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.1121 3.6415C15.7222 3.45283 15.2809 3.45283 14.891 3.6415L4.04099 8.8915C3.47108 9.16726 3.10156 9.79995 3.10156 10.5C3.10156 11.2 3.47108 11.8327 4.04099 12.1085L8.13964 14.0917C8.28868 13.9011 8.47551 13.7458 8.69099 13.6415L14.891 10.6415C15.6778 10.2608 16.589 10.6723 16.9262 11.5607C17.2634 12.449 16.899 13.4778 16.1121 13.8585L11.8849 15.904L14.891 17.3585C15.2809 17.5472 15.7222 17.5472 16.1121 17.3585L26.9621 12.1085C27.532 11.8327 27.9016 11.2 27.9016 10.5C27.9016 9.79995 27.532 9.16726 26.9621 8.8915L16.1121 3.6415Z" fill="#B6BDF0"/>
+                                    <path d="M5.13213 16.4443L7.75156 17.7117V24.8896C7.22027 24.7536 6.6775 24.6518 6.12516 24.5864C5.39702 24.5002 4.82159 23.8505 4.74524 23.0284C4.68328 22.3612 4.65156 21.6843 4.65156 20.9997C4.65156 19.4308 4.81805 17.9051 5.13213 16.4443Z" fill="#B6BDF0"/>
+                                    <path d="M14.4165 29.0019C13.3735 27.8475 12.1717 26.8772 10.8516 26.1364V19.2117L13.6698 20.5754C14.8395 21.1414 16.1636 21.1414 17.3333 20.5754L25.871 16.4443C26.1851 17.9051 26.3516 19.4308 26.3516 20.9997C26.3516 21.6843 26.3198 22.3612 26.2579 23.0284C26.1815 23.8505 25.6061 24.5002 24.878 24.5864C21.6651 24.9667 18.7758 26.5789 16.5866 29.0019C15.9839 29.669 15.0192 29.669 14.4165 29.0019Z" fill="#B6BDF0"/>
+                                    <path d="M9.30156 31.5C10.1576 31.5 10.8516 30.7165 10.8516 29.75V26.1364C9.87717 25.5897 8.83838 25.168 7.75156 24.8896V29.75C7.75156 30.7165 8.44552 31.5 9.30156 31.5Z" fill="#B6BDF0"/>
+                                    </svg>
+                                    
+                              </i>
+                              Диплом
+                            </span>
+                                </div>
+                                <div class="__subtitle">Образование</div>
+                                <div class="__education"> Какой-то текст здесь</div>
+                            </div>
+                            <img class="psycho-picture" src="http://server.mebelsmile.ru/uploads/2022/02/antonina-papura.jpg" alt="">
+                        </div>
+
+                        <div class="__item d-flex align-items-center" id="ps-1">
+                            <div class="__desc">
+                                <div class="stars __4.5">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+                                <div class="__name">First Last Middle</div>
+                                <div class="__slogan">“Это текст слогана”
+                                </div>
+                                <div class="__details d-flex  align-items-center">
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00156 3.3999C9.99568 3.3999 10.8016 4.16102 10.8016 5.0999V6.7999H12.6016C13.5957 6.7999 14.4016 7.56102 14.4016 8.4999C14.4016 9.43879 13.5957 10.1999 12.6016 10.1999H10.8016V11.8999C10.8016 12.8388 9.99568 13.5999 9.00156 13.5999C8.00745 13.5999 7.20156 12.8388 7.20156 11.8999V10.1999H5.40156C4.40745 10.1999 3.60156 9.43879 3.60156 8.4999C3.60156 7.56102 4.40745 6.7999 5.40156 6.7999H7.20156V5.0999C7.20156 4.16102 8.00745 3.3999 9.00156 3.3999ZM9.00156 20.3999C9.99568 20.3999 10.8016 21.161 10.8016 22.0999V23.7999H12.6016C13.5957 23.7999 14.4016 24.561 14.4016 25.4999C14.4016 26.4388 13.5957 27.1999 12.6016 27.1999H10.8016V28.8999C10.8016 29.8388 9.99568 30.5999 9.00156 30.5999C8.00745 30.5999 7.20156 29.8388 7.20156 28.8999V27.1999H5.40156C4.40745 27.1999 3.60156 26.4388 3.60156 25.4999C3.60156 24.561 4.40745 23.7999 5.40156 23.7999H7.20156V22.0999C7.20156 21.161 8.00745 20.3999 9.00156 20.3999Z" fill="#B6BDF0"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.6015 3.3999C22.4182 3.3999 23.1325 3.91922 23.3415 4.66489L25.4641 12.2381L31.501 15.5274C32.0582 15.831 32.4015 16.3924 32.4015 16.9999C32.4015 17.6074 32.0582 18.1688 31.501 18.4724L25.4641 21.7617L23.3415 29.3349C23.1325 30.0806 22.4182 30.5999 21.6015 30.5999C20.7848 30.5999 20.0704 30.0806 19.8614 29.3349L17.7388 21.7617L11.7021 18.4724C11.1449 18.1688 10.8016 17.6074 10.8016 16.9999C10.8016 16.3924 11.1449 15.831 11.7021 15.5274L17.7388 12.2381L19.8614 4.66489C20.0704 3.91922 20.7848 3.3999 21.6015 3.3999Z" fill="#B6BDF0"/>
+                                    </svg>
+                              </i>
+                              Опыт работы 3 года
+                            </span>
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="31" height="35" viewBox="0 0 31 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.1121 3.6415C15.7222 3.45283 15.2809 3.45283 14.891 3.6415L4.04099 8.8915C3.47108 9.16726 3.10156 9.79995 3.10156 10.5C3.10156 11.2 3.47108 11.8327 4.04099 12.1085L8.13964 14.0917C8.28868 13.9011 8.47551 13.7458 8.69099 13.6415L14.891 10.6415C15.6778 10.2608 16.589 10.6723 16.9262 11.5607C17.2634 12.449 16.899 13.4778 16.1121 13.8585L11.8849 15.904L14.891 17.3585C15.2809 17.5472 15.7222 17.5472 16.1121 17.3585L26.9621 12.1085C27.532 11.8327 27.9016 11.2 27.9016 10.5C27.9016 9.79995 27.532 9.16726 26.9621 8.8915L16.1121 3.6415Z" fill="#B6BDF0"/>
+                                    <path d="M5.13213 16.4443L7.75156 17.7117V24.8896C7.22027 24.7536 6.6775 24.6518 6.12516 24.5864C5.39702 24.5002 4.82159 23.8505 4.74524 23.0284C4.68328 22.3612 4.65156 21.6843 4.65156 20.9997C4.65156 19.4308 4.81805 17.9051 5.13213 16.4443Z" fill="#B6BDF0"/>
+                                    <path d="M14.4165 29.0019C13.3735 27.8475 12.1717 26.8772 10.8516 26.1364V19.2117L13.6698 20.5754C14.8395 21.1414 16.1636 21.1414 17.3333 20.5754L25.871 16.4443C26.1851 17.9051 26.3516 19.4308 26.3516 20.9997C26.3516 21.6843 26.3198 22.3612 26.2579 23.0284C26.1815 23.8505 25.6061 24.5002 24.878 24.5864C21.6651 24.9667 18.7758 26.5789 16.5866 29.0019C15.9839 29.669 15.0192 29.669 14.4165 29.0019Z" fill="#B6BDF0"/>
+                                    <path d="M9.30156 31.5C10.1576 31.5 10.8516 30.7165 10.8516 29.75V26.1364C9.87717 25.5897 8.83838 25.168 7.75156 24.8896V29.75C7.75156 30.7165 8.44552 31.5 9.30156 31.5Z" fill="#B6BDF0"/>
+                                    </svg>
+                                    
+                              </i>
+                              Диплом
+                            </span>
+                                </div>
+                                <div class="__subtitle">Образование</div>
+                                <div class="__education"> Какой-то текст здесь</div>
+                            </div>
+                            <img class="psycho-picture" src="http://server.mebelsmile.ru/uploads/2022/02/antonina-papura.jpg" alt="">
+                        </div>
+
+                        <div class="__item d-flex align-items-center" id="ps-1">
+                            <div class="__desc">
+                                <div class="stars __4.5">
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                    <i></i>
+                                </div>
+                                <div class="__name">First Last Middle</div>
+                                <div class="__slogan">“Это текст слогана”
+                                </div>
+                                <div class="__details d-flex  align-items-center">
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00156 3.3999C9.99568 3.3999 10.8016 4.16102 10.8016 5.0999V6.7999H12.6016C13.5957 6.7999 14.4016 7.56102 14.4016 8.4999C14.4016 9.43879 13.5957 10.1999 12.6016 10.1999H10.8016V11.8999C10.8016 12.8388 9.99568 13.5999 9.00156 13.5999C8.00745 13.5999 7.20156 12.8388 7.20156 11.8999V10.1999H5.40156C4.40745 10.1999 3.60156 9.43879 3.60156 8.4999C3.60156 7.56102 4.40745 6.7999 5.40156 6.7999H7.20156V5.0999C7.20156 4.16102 8.00745 3.3999 9.00156 3.3999ZM9.00156 20.3999C9.99568 20.3999 10.8016 21.161 10.8016 22.0999V23.7999H12.6016C13.5957 23.7999 14.4016 24.561 14.4016 25.4999C14.4016 26.4388 13.5957 27.1999 12.6016 27.1999H10.8016V28.8999C10.8016 29.8388 9.99568 30.5999 9.00156 30.5999C8.00745 30.5999 7.20156 29.8388 7.20156 28.8999V27.1999H5.40156C4.40745 27.1999 3.60156 26.4388 3.60156 25.4999C3.60156 24.561 4.40745 23.7999 5.40156 23.7999H7.20156V22.0999C7.20156 21.161 8.00745 20.3999 9.00156 20.3999Z" fill="#B6BDF0"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.6015 3.3999C22.4182 3.3999 23.1325 3.91922 23.3415 4.66489L25.4641 12.2381L31.501 15.5274C32.0582 15.831 32.4015 16.3924 32.4015 16.9999C32.4015 17.6074 32.0582 18.1688 31.501 18.4724L25.4641 21.7617L23.3415 29.3349C23.1325 30.0806 22.4182 30.5999 21.6015 30.5999C20.7848 30.5999 20.0704 30.0806 19.8614 29.3349L17.7388 21.7617L11.7021 18.4724C11.1449 18.1688 10.8016 17.6074 10.8016 16.9999C10.8016 16.3924 11.1449 15.831 11.7021 15.5274L17.7388 12.2381L19.8614 4.66489C20.0704 3.91922 20.7848 3.3999 21.6015 3.3999Z" fill="#B6BDF0"/>
+                                    </svg>
+                              </i>
+                              Опыт работы 3 года
+                            </span>
+                                    <span class="d-flex align-items-center">
+                              <i class="icon">
+                                <svg width="31" height="35" viewBox="0 0 31 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.1121 3.6415C15.7222 3.45283 15.2809 3.45283 14.891 3.6415L4.04099 8.8915C3.47108 9.16726 3.10156 9.79995 3.10156 10.5C3.10156 11.2 3.47108 11.8327 4.04099 12.1085L8.13964 14.0917C8.28868 13.9011 8.47551 13.7458 8.69099 13.6415L14.891 10.6415C15.6778 10.2608 16.589 10.6723 16.9262 11.5607C17.2634 12.449 16.899 13.4778 16.1121 13.8585L11.8849 15.904L14.891 17.3585C15.2809 17.5472 15.7222 17.5472 16.1121 17.3585L26.9621 12.1085C27.532 11.8327 27.9016 11.2 27.9016 10.5C27.9016 9.79995 27.532 9.16726 26.9621 8.8915L16.1121 3.6415Z" fill="#B6BDF0"/>
+                                    <path d="M5.13213 16.4443L7.75156 17.7117V24.8896C7.22027 24.7536 6.6775 24.6518 6.12516 24.5864C5.39702 24.5002 4.82159 23.8505 4.74524 23.0284C4.68328 22.3612 4.65156 21.6843 4.65156 20.9997C4.65156 19.4308 4.81805 17.9051 5.13213 16.4443Z" fill="#B6BDF0"/>
+                                    <path d="M14.4165 29.0019C13.3735 27.8475 12.1717 26.8772 10.8516 26.1364V19.2117L13.6698 20.5754C14.8395 21.1414 16.1636 21.1414 17.3333 20.5754L25.871 16.4443C26.1851 17.9051 26.3516 19.4308 26.3516 20.9997C26.3516 21.6843 26.3198 22.3612 26.2579 23.0284C26.1815 23.8505 25.6061 24.5002 24.878 24.5864C21.6651 24.9667 18.7758 26.5789 16.5866 29.0019C15.9839 29.669 15.0192 29.669 14.4165 29.0019Z" fill="#B6BDF0"/>
+                                    <path d="M9.30156 31.5C10.1576 31.5 10.8516 30.7165 10.8516 29.75V26.1364C9.87717 25.5897 8.83838 25.168 7.75156 24.8896V29.75C7.75156 30.7165 8.44552 31.5 9.30156 31.5Z" fill="#B6BDF0"/>
+                                    </svg>
+                                    
+                              </i>
+                              Диплом
+                            </span>
+                                </div>
+                                <div class="__subtitle">Образование</div>
+                                <div class="__education"> Какой-то текст здесь</div>
+                            </div>
+                            <img class="psycho-picture" src="http://server.mebelsmile.ru/uploads/2022/02/antonina-papura.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-services-price">
+            <div class="container d-flex justify-content-between">
+                <div class="__desk">
+                    <h2 class="title-1">Фиксированная цена на услуги<br> <strong>опытных психологов</strong></h2>
+                    <p>Мы установили единую цену на услуги наших специалистов, а также добавили возможность экспресс-консультаций, для тех кому важно получить быстрый ответ на свой вопрос</p>
+                </div>
+
+                <div class="__cards">
+                    <div class="__card d-flex">
+                        <div>
+                            <div class="__card-title">
+                                Полноценная онлайн-консультация <br> с психологом
+                            </div>
+                            <p>Видео или чат внутри личного кабинета</p>
+                            <a class="btn btn-primary" href="/auth/signup">Записаться на консультацию</a>
+
+                        </div>
+                        <div>
+                            <div class="__card-price __with-time">
+                                1 999 ₽
+                            </div>
+                            <div class="__card-time"><img src="/assets/img/clock.png"> 50 мин</div>
+                        </div>
+                    </div>
+                    <div class="__card d-flex">
+                        <div>
+                            <div class="__card-title">
+                                Экспресс-консультация
+                            </div>
+                            <p>Ответ на один срочный вопрос в чат </p>
+                            <a class="btn btn-primary" href="/auth/signup">Записаться на консультацию</a>
+                        </div>
+                        <div>
+                            <div class="__card-price">
+                                200 ₽
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/auth/signup" class="btn btn-primary __for-mob">Записаться на консультацию</a>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="home-first-meeting">
+            <div class="__top-wave wave-bg"></div>
+            <div class="container">
+                <div class="title-1 text-center"><strong>На первой</strong> <br>встрече Вы:</div>
+                <div class="d-flex justify-content-between __meetings">
+                    <div class="__meeting-item">
+                        <div class="__img">
+                            <img src="/assets/img/first-meeting-1.webp" alt="">
+                        </div>
+                        <div>Установите контакт с психологом</div>
+                    </div>
+                    <div class="__meeting-item">
+                        <div class="__img">
+                            <img src="/assets/img/first-meeting-2.webp" alt="">
+                        </div>
+                        <div>Поймёте, подходит ли вам такой формат</div>
+                    </div>
+                    <div class="__meeting-item">
+                        <div class="__img">
+                            <img src="/assets/img/first-meeting-3.webp" alt="">
+                        </div>
+                        <div>Сформулируете свой запрос</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-how-it-works">
+            <div class="container">
+                <div class="title-1 text-center">Как это работает</div>
+                <div class="__slider d-flex">
+                    <div class="slides-desc">
+                        <div class="__item d-flex active">
+                            <div class="__number">1</div>
+                            <div class="flex-1">
+                                Заполняете анкету, где расскажете, <strong>что вас беспокоит и что вам важно получить</strong> от психолга
+                            </div>
+                        </div>
+                        <div class="__item d-flex">
+                            <div class="__number">2</div>
+                            <div class="flex-1">
+                                <strong>Выбираете специалиста</strong> и удобное время
+                            </div>
+                        </div>
+                        <div class="__item d-flex">
+                            <div class="__number">3</div>
+                            <div class="flex-1">
+                                Оплачиваете сеанс, и общаетесь с психологом внутри личного кабинта и <strong>меняете свою жизнь в лучшую сторону</strong>
+                            </div>
+                        </div>
+                        <div class="__item d-flex">
+                            <div class="__number">4</div>
+                            <div class="flex-1">
+                                <strong>Управляте своими записями из нашего уютного личного кабинта,</strong> а мы вам напомним о вашей встрече за 24 часа и час до начала.
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="how-works-carousel owl-carousel">
+                        <img src="/assets/img/hiw-1.webp" alt="">
+                        <img src="/assets/img/hiw-2.webp" alt="">
+                        <img src="/assets/img/hiw-3.webp" alt="">
+                        <img src="/assets/img/hiw-4.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-chat-options">
+            <div class="__top-wave wave-bg"></div>
+            <div class="container">
+                <h3 class="title-1 text-center"><strong>Занимайтесь когда и где <br>вам удобно​</strong> с любого<br> устройства</h3>
+
+                <div class="online-chat">
+                    <div class="__option __video">
+                        <div class="__title">Видеосвязь</div>
+                        <div>Очная сессия с психологом с любого устройства из личного кабинта</div>
+                    </div>
+                    <div class="__z __zgroup2">
+                        <img src="/assets/img/z3.webp" alt="">
+                        <img src="/assets/img/z3-1.webp" alt="">
+                    </div>
+                    <div class="__option __chat">
+                        <div class="__title">Чат с психологом</div>
+                        <div>Формат для тех, кому проще начинать общение через переписку</div>
+                    </div>
+
+                    <div class="__z __zgroup1">
+                        <img src="/assets/img/z1.webp" alt="">
+                        <img src="/assets/img/z2.webp" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="home-choose-psychologist">
+            <div class="container">
+                <ul class="__list">
+                    <li>
+                        <div class="__title">Не подошел психолог, предложим другого</div>
+                        Так иногда бывает. Предложим такого специалиста, с которым вам будет максимально комфортно
+                    </li>
+                    <li>
+                        <div class="__title">Удобная и безопасная оплата</div>
+                        Без переводов на карту и сомнительных сервисов
+                    </li>
+                    <li>
+                        <div class="__title">Справедливая и понятная цена</div>
+                        Приятная цена за качественную работу
+                    </li>
+                    <li>
+                        <div class="__title">Только лучшие специалисты в своей области</div>
+                        Мы отобрали только тех, кому доврям сами
+                    </li>
+                    <li>
+                        <div class="__title">Напоминам о <br>сессиях</div>
+                        Отправим смс-уведомление за час до консультации
+                    </li>
+                </ul>
+                <div class="__btn">
+                    <a href="/auth/signup" class="btn btn-primary">Подобрать психолога</a>
+                </div>
+            </div>
+        </div>
+        <div class="home-faq">
+            <div class="__bottom-wave wave-bg"></div>
+            <div class="container">
+                <h3 class="title-1 text-center"><strong>Ответы</strong> на<br> популярные вопросы</h3>
+                <ul class="acc">
+                    <li>
+                        <div class="__title">
+                            Some question
+                        </div>
+                        <div class="__body">Some answer</div>
+                    </li>
+                    <li>
+                        <div class="__title">
+                            Some question
+                        </div>
+                        <div class="__body">Some answer</div>
+                    </li>
+                    <li>
+                        <div class="__title">
+                            Some question
+                        </div>
+                        <div class="__body">Some answer</div>
+                    </li>
+                    <li>
+                        <div class="__title">
+                            Some question
+                        </div>
+                        <div class="__body">Some answer</div>
+                    </li>
+                    <li>
+                        <div class="__title">
+                            Some question
+                        </div>
+                        <div class="__body">Some answer</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="home-feedback">
+            <div class="__header">
+                <div class="container">
+                    <h3 class="title-1 text-center"><strong>Остались вопросы?</strong> <br>Мы поможем!</h3>
+
+                    <div class="__btns d-flex justify-content-center">
+                        <a target="_blank" href="#">
+                      Telegram
+                      <img src="/assets/icons/tg.svg" alt="">
+                    </a>
+                        <a target="_blank" href="#">
+                      What'sApp
+                      <img src="/assets/icons/whatsapp.svg" alt="">
+                    </a>
+                        <a href="#">
+                      E-mail
+                      <img src="/assets/icons/email.svg" alt="">
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="__body">
+                <div class="container d-flex">
+
+                    <div class="flex-1">
+                        <div class="__calmness">
+                            Обретите<br> спокойствие <br>и уверенность<br> в себе
+                        </div>
+                        <a href="/auth/signup" class="btn btn-primary">Попробовать</a>
+                    </div>
+                    <img class="__img" src="/assets/img/artwork.webp">
+                </div>
+            </div>
+        </div>
     </main>
+    <footer class="footer">
+        <div class="footer__top">
+            <div class="container d-flex justify-content-between">
+                <div class="footer__left">
+                    <div class="footer__nav d-flex">
+                        <a href="#">Главная</a>
+                        <a href="#">Вакансии</a>
+                        <a href="#">Контакты</a>
+                    </div>
+                    <div class="footer__nets">
+                        <a href="#">
+                            <img src="/assets/img/fb.png">
+                        </a>
+                        <a href="#">
+                            <img src="/assets/img/vk.png">
+
+                        </a>
+                        <a href="#">
+                            <img src="/assets/img/tg.png">
+
+                        </a>
+
+                    </div>
+                </div>
+                <div class="footer__note">
+                    Внимание! Если вам срочно необходима психологическая помощь, а также в ситуациях угрожающих жизни и здоровью, мы рекомендуем обратиться в эти важные организации: <a [routerLink]="['srocnaa-psihologiceskaa-pomos']">срочная психологическая помощь</a>.
+                </div>
+                <div class="footer__right">
+                    <a class="__en" href="#" class="btn btn-primary">Вход для специалистов</a>
+                    <!-- <div class="text-center">
+                  <a href="#">Написать в техподдержку</a>
+                </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="copyright">
+                    &copy; 2022 Корпорация Психологии: консультации психолога онлайн
+                </div>
+                <a rel="nofollow" href="#">Политика 1</a>
+                <a rel="nofollow" href="#">Политика 2</a>
+            </div>
+        </div>
+    </footer>
 </div>
